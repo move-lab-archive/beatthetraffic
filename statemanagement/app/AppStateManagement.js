@@ -186,8 +186,67 @@ const initialState = fromJS({
       sources: {
         hd: "https://player.vimeo.com/external/243127419.hd.mp4?s=94619d6df70f65fe39a398a9ef3b30ae0bc44fc8"
       }
+    },{
+      name: "stuttgart4-level1",
+      city: "stuttgart4",
+      level: 1,
+      levelName: "Stuttgart STR.",
+      videoFPS: 30,
+      videoMobileOffset: {
+        x: 0,
+        y: 0
+      },
+      trackerAndDetectionsFPS: 30,
+      disappearAreas: [],
+      originalResolution: {
+        w: 1920,
+        h: 1080
+      },
+      sources: {
+        hd: "https://player.vimeo.com/external/243126877.hd.mp4?s=c213044718117590f662d759c6c8e9f517586d0d&profile_id=174"
+      }
+    },{
+      // Reuse previous one as we do not have original one for this level
+      name: "stuttgart3-level2",
+      city: "stuttgart4",
+      level: 2,
+      levelName: "Reused STR.",
+      videoFPS: 30,
+      videoMobileOffset: {
+        x: 0,
+        y: 0
+      },
+      trackerAndDetectionsFPS: 30,
+      disappearAreas: [],
+      originalResolution: {
+        w: 1920,
+        h: 1080
+      },
+      sources: {
+        hd: "https://player.vimeo.com/external/243127320.hd.mp4?s=f83879f38019ce04a55c6082730aab558e821dc4"
+      }
+    },{
+      // Reuse previous one as we do not have original one for this level
+      name: "stuttgart4-level3",
+      city: "stuttgart4",
+      level: 3,
+      levelName: "Stuttgart STR.",
+      videoFPS: 30,
+      videoMobileOffset: {
+        x: 0,
+        y: 0
+      },
+      trackerAndDetectionsFPS: 30,
+      disappearAreas: [],
+      originalResolution: {
+        w: 1920,
+        h: 1080
+      },
+      sources: {
+        hd: "https://player.vimeo.com/external/243128510.hd.mp4?s=108ac74d6fa81ec02610f50fd407cbe478da0554&profile_id=174"
+      }
     }
-  ],
+  ]
 });
 
 // Actions
