@@ -361,7 +361,7 @@ export default connect((state) => {
     isObjectTrackerDataFetched: state.objectTracker.get('fetched'),
     isPlaying: state.video.get('isPlaying'),
     isAtBeggining: state.video.get('isAtBeggining'),
-    averageImgSrc: getAverageImgPath(selectedVideo.get('name'), selectedVideo.get('vimeoId')),
+    averageImgSrc: getAverageImgPath(selectedVideo.get('name')),
     soundEnabled: state.settings.get('soundEnabled'),
     originalResolution: selectedVideo.get('originalResolution').toJS(),
     killedItems: state.game.get('killedItems'),

@@ -17,9 +17,11 @@ import Landing from './Landing';
 import Title from '../shared/Title';
 import VideoSelector from '../shared/VideoSelector';
 
-import { updateSettings } from '../../statemanagement/app/SettingsStateManagement';
+import { setClientRendering } from '../../statemanagement/app/SettingsStateManagement';
 
-import { selectDefaultVideo } from '../../statemanagement/app/AppStateManagement';
+import { fetchRemainingData } from '../../statemanagement/app/AppStateManagement';
+
+import { updateUrlToMatchLevelAndCity } from '../../statemanagement/app/GameStateManagement';
 
 import { initViewportListeners } from '../../statemanagement/app/ViewportStateManagement';
 
@@ -34,15 +36,17 @@ class GamePage extends React.Component {
       clientSide: false,
       landingAnimFinished: false
     };
-
-    props.dispatch(updateSettings({ showDebugUI: false }));
-    props.dispatch(selectDefaultVideo());
   }
 
   componentDidMount() {
     require('smoothscroll-polyfill').polyfill();
-    this.props.dispatch(initViewportListeners());
+    this.props.dispatch(setClientRendering());
     this.setState({ clientSide : true});
+    this.props.dispatch(initViewportListeners());
+
+    // Load client side things
+    this.props.dispatch(fetchRemainingData());
+    this.props.dispatch(updateUrlToMatchLevelAndCity());
 
     if(this.props.levelNb === 1) {
       // Trick because the landing animation run without javascript so we have

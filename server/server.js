@@ -10,11 +10,12 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  server.get('/level/:level', (req, res) => {
+  server.get('/:city/level/:level', (req, res) => {
     return app.render(req, res, '/', {
-      level: req.params.level
+      city: req.params.city,
+      level: parseInt(req.params.level, 10)
     })
-  })
+  });
 
   server.get('*', (req, res) => {
     return handle(req, res)

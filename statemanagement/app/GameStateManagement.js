@@ -1,8 +1,9 @@
 import { fromJS } from 'immutable';
 import axios from 'axios';
+import Router from 'next/router';
 
 import { playVideo, pauseVideo, resetVideo } from './VideoStateManagement';
-import { selectVideo } from './AppStateManagement';
+import { selectVideoForLevel, selectCity } from './AppStateManagement';
 
 import SoundsManager from './SoundsManager';
 
@@ -136,17 +137,50 @@ export function setCurrentLevel(level) {
   }
 }
 
+export function loadCity(city, level = 1) {
+  return (dispatch, getState) => {
+    // Select city
+    dispatch(selectCity(city));
+    dispatch(loadLevel(level));
+
+    // Update url 
+    // TODO maybe refactor later and have a URL manager file
+    if(!getState().settings.get('isServerRendering')) {
+      Router.push(
+        "/",
+        `/${city}/level/${level}`,
+        { shallow: true }
+      );
+    }
+  }
+}
+
 export function loadLevel(level) {
   return (dispatch, getState) => {
 
-    const video = getState().app.get('availableVideos').find((video) => 
-                    video.get('level') === level
-                  );
-
     // Select video for that level
-    dispatch(selectVideo(video.get('name')));
-
+    dispatch(selectVideoForLevel(level))
     dispatch(setCurrentLevel(level));
+
+    // Update url
+    // TODO maybe refactor later and have a URL manager file
+    if(!getState().settings.get('isServerRendering')) {
+      Router.push(
+        "/",
+        `/${getState().app.get('selectedCity')}/level/${level}`,
+        { shallow: true }
+      );
+    }
+  }
+}
+
+export function updateUrlToMatchLevelAndCity() {
+  return (dispatch, getState) => {
+    Router.push(
+      "/",
+      `/${getState().app.get('selectedCity')}/level/${getState().game.get('currentLevel')}`,
+      { shallow: true }
+    );
   }
 }
 

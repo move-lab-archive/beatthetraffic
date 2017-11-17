@@ -4,10 +4,14 @@ import axios from 'axios';
 import { fetchRawDetections } from './RawDetectionsStateManagement';
 import { fetchObjectTracker } from './ObjectTrackerStateManagement';
 import { setVideoSrc } from './VideoStateManagement';
-import { resetScore } from './GameStateManagement';
 
 // Initial state
 const initialState = fromJS({
+  availableCities: [
+    "stuttgart1",
+    "stuttgart2"
+  ],
+  selectedCity: "stuttgart1",
   availableVideos: [{
       name: "stuttgart1-level1",
       city: "stuttgart1",
@@ -20,7 +24,6 @@ const initialState = fromJS({
       },
       trackerAndDetectionsFPS: 25,
       disappearAreas: [{"x":0,"y":420,"w":640,"h":300}],
-      vimeoId: "237563941",
       sound: "sound1",
       originalResolution: {
         w: 1280,
@@ -42,7 +45,6 @@ const initialState = fromJS({
       },
       trackerAndDetectionsFPS: 25,
       disappearAreas: [{"x":285,"y":338,"w":188,"h":138},{"x":156,"y":970,"w":476,"h":113.99999999999999},{"x":960,"y":965,"w":548,"h":118},{"x":1580.14,"y":311.86,"w":84,"h":94},{"x":362,"y":425,"w":196,"h":106}],
-      vimeoId: "235911346",
       sound: "sound2",
       originalResolution: {
         w: 1920,
@@ -58,6 +60,7 @@ const initialState = fromJS({
 
 // Actions
 const SELECT_VIDEO = 'App/SELECT_VIDEO'
+const SELECT_CITY = 'App/SELECT_CITY'
 
 let pathStatic = '/static/detections';
 
@@ -77,9 +80,30 @@ export function getFirstFrameImgPath(videoName) {
   return `${pathStatic}/${videoName}/firstframe.jpg`;
 }
 
-export function selectDefaultVideo() {
+export function selectCity(name) {
   return (dispatch, getState) => {
-    dispatch(selectVideo(getState().app.get('selectedVideo')));
+    dispatch({
+      type: SELECT_CITY,
+      payload: name
+    });
+
+    // Maybe here there will be assets to pre-load 
+    // but beware of the SSR, look at selectVideo()
+  }
+}
+
+export function selectVideoForLevel(level) {
+  return (dispatch, getState) => {
+
+    console.log(level);
+
+    const city = getState().app.get('selectedCity');
+
+    const videoToSelect = getState().app.get('availableVideos').find((video) => {
+      return (video.get('city') === city && video.get('level') === level)
+    });
+
+    dispatch(selectVideo(videoToSelect.get('name')));
   }
 }
 
@@ -99,18 +123,36 @@ export function selectVideo(name) {
       // Set video src
       dispatch(setVideoSrc(videoSelected.getIn(['sources','hd'])));
 
-      // Fetch detection and object tracking data
-      dispatch(fetchRawDetections(getRawDetectionPath(videoSelected.get('name'), videoSelected.get('vimeoId'))));
-      dispatch(fetchObjectTracker(getTrackerDataPath(videoSelected.get('name'), videoSelected.get('vimeoId'))));
+      // Fetch detection and object tracking data associated with the video
+      // WARN: it executes only on client, we don't want to await for this MBs of data
+      //       and include when in the bundle with the app on SSR
+      if(!getState().settings.get('isServerRendering')) {
+        dispatch(fetchRawDetections(getRawDetectionPath(videoSelected.get('name'))));
+        dispatch(fetchObjectTracker(getTrackerDataPath(videoSelected.get('name'))));
+      }
     });
   }
 }
 
+// This action is only executed on first load when we render the javascript on the client
+// It fetchs things that aren't included in the pre-ssr-render
+export function fetchRemainingData() {
+  return (dispatch, getState) => {
+
+    const videoSelectedName = getState().app.get('selectedVideo');
+
+    dispatch(fetchRawDetections(getRawDetectionPath(videoSelectedName)));
+    dispatch(fetchObjectTracker(getTrackerDataPath(videoSelectedName)));
+  }
+}
+
 // Reducer
-export default function SettingsReducer(state = initialState, action = {}) {
+export default function AppReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SELECT_VIDEO:
       return state.set('selectedVideo', action.payload)
+    case SELECT_CITY:
+      return state.set('selectedCity', action.payload)
     default:
       return state;
   }

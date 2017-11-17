@@ -4,9 +4,10 @@ import SoundsManager from './SoundsManager';
 
 // Initial state
 const initialState = fromJS({
-  showDebugUI: true,
+  showDebugUI: false,
   darkMode: false,
-  soundEnabled: true
+  soundEnabled: false,
+  isServerRendering: true
 });
 
 // Actions
@@ -15,10 +16,18 @@ const UPDATE_SETTINGS = 'Settings/UPDATE'
 const SOUND_ON = 'Settings/SOUND_ON';
 const SOUND_OFF = 'Settings/SOUND_OFF';
 
+const SET_CLIENT_RENDERING = 'Settings/SET_CLIENT_RENDERING';
+
 export function updateSettings(newSettings) {
   return {
     type: UPDATE_SETTINGS,
     payload: newSettings
+  }
+}
+
+export function setClientRendering() {
+  return {
+    type: SET_CLIENT_RENDERING
   }
 }
 
@@ -53,6 +62,8 @@ export default function SettingsReducer(state = initialState, action = {}) {
       return state.set('soundEnabled', true)
     case SOUND_OFF:
       return state.set('soundEnabled', false)
+    case SET_CLIENT_RENDERING:
+      return state.set('isServerRendering', false)
     default:
       return state;
   }

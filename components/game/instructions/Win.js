@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Link from 'next/link';
 
 import Button from '../../shared/Button';
 

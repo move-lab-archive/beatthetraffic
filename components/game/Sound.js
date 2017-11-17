@@ -9,6 +9,13 @@ class Sound extends Component {
     super(props);
 
     this.toggleSound = this.toggleSound.bind(this);
+
+    // Init
+    if(props.soundEnabled) {
+      props.dispatch(turnSoundOn());
+    } else {
+      props.dispatch(turnSoundOff());
+    }
   }
 
   toggleSound() {

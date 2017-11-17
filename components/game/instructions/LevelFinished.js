@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Button from '../../shared/Button';
 import SoundsManager from '../../../statemanagement/app/SoundsManager';
 
+import { loadLevel } from '../../../statemanagement/app/GameStateManagement';
+
 class LevelFinished extends Component {
 
   componentDidMount() {
@@ -20,20 +22,21 @@ class LevelFinished extends Component {
         <div className="message">
           You finished level {this.props.currentLevel} with {this.props.score} ⭐️ !
         </div>
-        <Link 
+        {/* <Link 
           href={{ 
             pathname: '/', 
             query: { level: this.props.currentLevel + 1 }
           }} 
           prefetch
           as="/level/2"
-        >
+        > */}
           <Button
             title={`Next level`}
             large
             transparent
+            onClick={() => this.props.dispatch(loadLevel(this.props.currentLevel + 1))}
           />
-        </Link>
+        {/* </Link> */}
         <style jsx>{`
           .instructions-level-finished {
             display: flex;

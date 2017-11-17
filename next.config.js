@@ -2,19 +2,20 @@ module.exports = {
   exportPathMap: function() {
     return {
       '/': { page: '/' },
-      '/level/1': { 
+      '/stuttgart1/level/1': { 
         page: '/',
         query: {
+          city: "stuttgart1",
           level: 1
         } 
       },
-      '/level/2': { 
+      '/stuttgart1/level/2': { 
         page: '/',
         query: {
+          city: "stuttgart1",
           level: 2
         }  
       },
-      '/benchmarkiou': { page: '/benchmark' },
       '/webgl': { page: '/webgl' },
     }
   }

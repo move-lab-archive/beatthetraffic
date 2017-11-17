@@ -15,9 +15,9 @@ import GameInstructions from '../game/GameInstructions';
 
 import VideoSelector from '../shared/VideoSelector';
 
-import { updateSettings } from '../../statemanagement/app/SettingsStateManagement';
+import { updateSettings, setClientRendering } from '../../statemanagement/app/SettingsStateManagement';
 
-import { selectVideo, selectDefaultVideo, getAverageImgPath } from '../../statemanagement/app/AppStateManagement';
+import { selectVideo, getAverageImgPath } from '../../statemanagement/app/AppStateManagement';
 
 import { initViewportListeners } from '../../statemanagement/app/ViewportStateManagement';
 
@@ -29,7 +29,8 @@ class WebGLPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(selectVideo("1_prototype_video"));
+    this.props.dispatch(setClientRendering());
+    this.props.dispatch(selectVideo("stuttgart1-level2"));
     this.props.dispatch(initViewportListeners());
   }
 
@@ -110,7 +111,7 @@ export default connect((state) => {
 
   return {
     isGamePlaying: state.game.get('isPlaying'),
-    averageImgSrc: getAverageImgPath(selectedVideo.get('name'), selectedVideo.get('vimeoId')),
+    averageImgSrc: getAverageImgPath(selectedVideo.get('name')),
     darkMode: state.settings.get('darkMode')
   }
 })(WebGLPage);
