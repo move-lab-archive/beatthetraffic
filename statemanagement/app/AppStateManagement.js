@@ -9,7 +9,8 @@ import { resetScore } from './GameStateManagement';
 // Initial state
 const initialState = fromJS({
   availableVideos: [{
-      name: "level_1",
+      name: "stuttgart1-level1",
+      city: "stuttgart1",
       level: 1,
       levelName: "HAUPTSTÄTTER STR.",
       videoFPS: 25,
@@ -30,7 +31,8 @@ const initialState = fromJS({
         hd: "https://player.vimeo.com/external/237563941.hd.mp4?s=521162fbd4ba420ea6a2d04dcdf123c0a74a23e4"
       }
     },{
-      name: "1_prototype_video",
+      name: "stuttgart1-level2",
+      city: "stuttgart1",
       level: 2,
       levelName: "MOOVEL STR.",
       videoFPS: 25,
@@ -49,89 +51,9 @@ const initialState = fromJS({
       sources: {
         hd: "https://player.vimeo.com/external/235911346.hd.mp4?s=079f01de35d181dbef705e7ec51da623b2f78de3"
       }
-    },{
-      name: "proto_1_4k30FPS",
-      level: 100,
-      levelName: "MOOVEL STR.",
-      disappearAreas: [],
-      videoFPS: 29.97,
-      videoMobileOffset: {
-        x: 0,
-        y: 0
-      },
-      trackerAndDetectionsFPS: 29.97,
-      sound: "sound2",
-      originalResolution: {
-        w: 3840,
-        h: 2160
-      },
-      vimeoId: "238905577",
-      sources: {
-        hd: "https://player.vimeo.com/external/238905577.hd.mp4?s=e89408bce32f1b4b3f395f2fd047cb047247449c&profile_id=174"
-      }
-    },{
-      name: "proto_1_HD30FPS",
-      level: 101,
-      levelName: "MOOVEL STR.",
-      videoFPS: 29.97,
-      videoMobileOffset: {
-        x: 0,
-        y: 0
-      },
-      trackerAndDetectionsFPS: 29.97,
-      sound: "sound2",
-      disappearAreas: [],
-      originalResolution: {
-        w: 1920,
-        h: 1080
-      },
-      vimeoId: "238905758",
-      sources: {
-        hd: "https://player.vimeo.com/external/238905758.hd.mp4?s=631c74c879b9684e8761256e19310d877ef0a5fa&profile_id=174"
-      }
-    },{
-      name: "proto_2_HD30FPS",
-      level: 102,
-      levelName: "MOOVEL STR.",
-      disappearAreas: [],
-      videoFPS: 29.97,
-      videoMobileOffset: {
-        x: 0,
-        y: 0
-      },
-      trackerAndDetectionsFPS: 29.97,
-      sound: "sound2",
-      originalResolution: {
-        w: 1920,
-        h: 1080
-      },
-      vimeoId: "238905843",
-      sources: {
-        hd: "https://player.vimeo.com/external/238905843.hd.mp4?s=ef2e9c5c6cf726dd870e92bc4f065e5cb65af844&profile_id=174"
-      }
-    },{
-      name: "proto_2_HD60FPS",
-      level: 103,
-      levelName: "MOOVEL STR.",
-      videoFPS: 29.97,
-      videoMobileOffset: {
-        x: 0,
-        y: 0
-      },
-      trackerAndDetectionsFPS: 59.94,
-      sound: "sound2",
-      disappearAreas: [],
-      originalResolution: {
-        w: 1920,
-        h: 1080
-      },
-      vimeoId: "238905908",
-      sources: {
-        hd: "https://player.vimeo.com/external/238905908.hd.mp4?s=ca778d566b109d295cb28e3e6042115cc2f10493&profile_id=174"
-      }
     }
   ],
-  selectedVideo: "level_1"
+  selectedVideo: "stuttgart1-level1"
 });
 
 // Actions
