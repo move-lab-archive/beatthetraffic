@@ -17,7 +17,7 @@ const initialState = fromJS({
   isPlaying: false,
   finished: false,
   failed: false,
-  nbTotalLevel: 2
+  nbTotalLevel: 3
 });
 
 // Actions
