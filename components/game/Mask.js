@@ -20,6 +20,9 @@ const canvasResolution = {
 
 const initialState = {
   masks: [],
+  carsNotMasked: [],
+  carrots: [],
+  bananas: [],
   puffAnimations: [],
   scoreAnimations: []
 }
@@ -96,8 +99,8 @@ class Mask extends PureComponent {
             return objectTrackerDataForThisFrame.find((objectTracked) => objectTracked.id === objectMasked.id)
           });
           
-          objectTrackerDataForThisFrame.map((objectTracked) => {
-
+          objectTrackerDataForThisFrame = objectTrackerDataForThisFrame.map((objectTracked) => {
+            
             let objectTrackedScaled = scaleDetection(objectTracked, canvasResolution, this.props.originalResolution);
             let potentialObjectToMask = {
               idDisplay: objectTrackedScaled.idDisplay,
@@ -133,8 +136,18 @@ class Mask extends PureComponent {
                           x: click.xReal,
                           y: click.yReal,
                           id: potentialObjectToMask.id
+                        }],
+                        carrots: [...this.state.carrots, {
+                          x: click.xReal,
+                          y: click.yReal,
+                          w: potentialObjectToMask.w,
+                          h: potentialObjectToMask.h,
+                          id: potentialObjectToMask.id
                         }]
                       });
+                      // TODO push some carrot
+
+
                       this.props.dispatch(incrementScore());
                       this.props.dispatch(addKilledItem(potentialObjectToMask.id));
                       // Play puff sound
@@ -142,10 +155,33 @@ class Mask extends PureComponent {
                     }
                 });
               }
-            }            
+            }
+            
+            // Return the object scaled without enlarging for
+            // the mask
+            return {
+              id: objectTrackedScaled.id,
+              x: objectTrackedScaled.x - objectTrackedScaled.w/2,
+              y: objectTrackedScaled.y - objectTrackedScaled.h/2,
+              w: objectTrackedScaled.w,
+              h: objectTrackedScaled.h
+            }
           });
           this.clicksRecorded = [];
-          this.setState({ masks: objectsMaskedUpdated });
+          // Get object tracked NOT masked
+          let carsNotMasked = objectTrackerDataForThisFrame.filter((objectTracked) => { 
+            if(objectsMaskedUpdated.find((maskedObject) => maskedObject.id === objectTracked.id)) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+          console.log(carsNotMasked.length);
+          this.setState({ 
+            masks: objectsMaskedUpdated,
+            carsNotMasked
+          });
+          
           window.itemsMasked = objectsMaskedUpdated;
         }
 
@@ -283,7 +319,7 @@ class Mask extends PureComponent {
           ></rect>
           {this.state.masks.map((mask) =>
             <image
-              key={mask.id} 
+              key={`${mask.id}-unicorn`}
               x={mask.x + mask.w / 2 - this.getUnicornSize(mask) / 2}
               y={mask.y + mask.h / 2 - this.getUnicornSize(mask) / 2}
               width={this.getUnicornSize(mask)}
@@ -291,8 +327,32 @@ class Mask extends PureComponent {
               xlinkHref="/static/assets/icons/icon-unicorn.svg"
             />
           )}
+          {this.state.carrots.map((carrot) => 
+            <image
+              key={`carrot-${carrot.id}`} 
+              x={carrot.x}
+              y={carrot.y}
+              width={this.getUnicornSize(carrot)}
+              height={this.getUnicornSize(carrot)}
+              xlinkHref="/static/assets/icons/icon-carrot.svg"
+              mask="url(#myMask)"
+            />
+          )}
           <defs>
             <Clippath masks={this.state.masks} />
+            <mask id="myMask">
+              <rect width="100%" height="100%" fill="white"/>
+              {this.state.carsNotMasked.map((mask) =>
+                <rect
+                  key={`mask-${mask.id}`}
+                  x={mask.x}
+                  y={mask.y}
+                  width={mask.w}
+                  height={mask.h}
+                  fill="black"
+                ></rect>
+              )}
+            </mask>
           </defs>
         </svg>
         {this.state.puffAnimations.map((puffAnimation) => 
