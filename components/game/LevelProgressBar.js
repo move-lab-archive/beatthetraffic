@@ -6,9 +6,9 @@ class LevelProgressBar extends PureComponent {
   constructor(props) {
     super(props)
 
-    this.state = {
-      currentTime: 0
-    }
+    // TODO adapt if all level are not the same time
+    this.currentTime = 0;
+    this.progressByLevel = 1 / props.nbTotalLevel; 
 
     this.monitorProgress = this.monitorProgress.bind(this);
   }
@@ -19,20 +19,23 @@ class LevelProgressBar extends PureComponent {
 
   monitorProgress() {
     if(window.currentTime &&
-      window.currentTime !== this.state.currentTime) {
-      this.setState({
-        currentTime: window.currentTime
-      });
+      window.currentTime !== this.currentTime) {
+      const progressInLevel = window.currentTime / this.props.totalDuration || 0;
+      const progressOffset = this.progressByLevel * (this.props.currentLevel - 1);
+      this.el.style.transform = `scaleX(${progressOffset + progressInLevel * this.progressByLevel})`;
+      this.currentTime = window.currentTime;
     }
     requestAnimationFrame(this.monitorProgress)
   }
 
   render() {
 
-    const progress = this.state.currentTime / this.props.totalDuration || 0;
-
     return (
       <div className="progress-bar">
+        <div 
+          className="progress-bar-content" 
+          ref={(el) => this.el = el}
+        />
         <style jsx>{`
           .progress-bar {
             position: fixed;
@@ -44,7 +47,7 @@ class LevelProgressBar extends PureComponent {
             z-index: 1;
           }
 
-          .progress-bar:after {
+          .progress-bar-content {
             content: '';
             position: absolute;
             top: 0;
@@ -54,15 +57,9 @@ class LevelProgressBar extends PureComponent {
             background-color: #FFFE4A;
             will-change: transform;
             transform-origin: 0 0;
+            transform: scale(0);
           } 
         `}</style>
-        <style jsx>{`
-          // Dynamic style are separated for better runtime perf
-          .progress-bar:after {
-            transform: scaleX(${progress});
-          }
-        `}
-        </style>
       </div>
     );
   }
@@ -70,6 +67,8 @@ class LevelProgressBar extends PureComponent {
 
 export default connect((state) => {
   return {
-    totalDuration: Math.trunc(state.video.get('duration'))
+    totalDuration: Math.trunc(state.video.get('duration')),
+    currentLevel: state.game.get('currentLevel'),
+    nbTotalLevel: state.game.get('nbTotalLevel')
   }
 })(LevelProgressBar);
