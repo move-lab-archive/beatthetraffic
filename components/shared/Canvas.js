@@ -251,6 +251,7 @@ class Canvas extends Component {
             position: absolute;
             top:0;
             left:0;
+            pointer-events: none;
           }
           .canvas {
             display: block;

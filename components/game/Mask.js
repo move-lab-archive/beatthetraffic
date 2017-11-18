@@ -1,9 +1,11 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { TweenMax } from 'gsap';
 
 import Clippath from './Clippath';
 import PuffAnimation from './PuffAnimation';
 import ScoreAnimation from './ScoreAnimation';
+
 
 import { scaleDetection, isInsideSomeAreas } from '../../utils/resolution';
 
@@ -176,7 +178,7 @@ class Mask extends PureComponent {
               return true;
             }
           });
-          console.log(carsNotMasked.length);
+          // console.log(carsNotMasked.length);
           this.setState({ 
             masks: objectsMaskedUpdated,
             carsNotMasked
@@ -289,6 +291,21 @@ class Mask extends PureComponent {
     }
   }
 
+  collectCarrot(id) {
+    console.log(id);
+    this.setState({
+      carrots: this.state.carrots.filter((carrot) => carrot.id !== id)
+    })
+    
+    // this.anim = TweenMax.to(this.el, 1,{
+    //   top: "9rem", 
+    //   left: "2rem",
+    //   opacity: 0.1,
+    //   onComplete: () => this.props.removeScoreAnimation(this.props.id)
+    // });
+    // this.anim.play();
+  }
+
   render() {
 
     const pollutionOverlayStyle = this.getPollutionOverlayStyle();
@@ -336,6 +353,7 @@ class Mask extends PureComponent {
               height={this.getUnicornSize(carrot)}
               xlinkHref="/static/assets/icons/icon-carrot.svg"
               mask="url(#myMask)"
+              onClick={this.collectCarrot.bind(this, carrot.id)}
             />
           )}
           <defs>
@@ -364,7 +382,7 @@ class Mask extends PureComponent {
             removePuffAnimation={this.removePuffAnimation}
           />
         )}
-        {this.state.scoreAnimations.map((scoreAnimation) => 
+        {/* {this.state.scoreAnimations.map((scoreAnimation) => 
           <ScoreAnimation
             key={scoreAnimation.id}
             id={scoreAnimation.id}
@@ -372,7 +390,7 @@ class Mask extends PureComponent {
             y={scoreAnimation.y}
             removeScoreAnimation={this.removeScoreAnimation}
           />
-        )}
+        )} */}
         <style jsx>{`
           .mask-container {
             width: 100%;
