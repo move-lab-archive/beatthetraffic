@@ -5,6 +5,7 @@ import { TweenMax } from 'gsap';
 import Clippath from './Clippath';
 import PuffAnimation from './PuffAnimation';
 import ScoreAnimation from './ScoreAnimation';
+import Carrot from './Carrot';
 
 
 import { scaleDetection, isInsideSomeAreas } from '../../utils/resolution';
@@ -46,6 +47,7 @@ class Mask extends PureComponent {
     this.cleanClickRecorder = this.cleanClickRecorder.bind(this);
     this.removePuffAnimation = this.removePuffAnimation.bind(this);
     this.removeScoreAnimation = this.removeScoreAnimation.bind(this);
+    this.collectCarrot = this.collectCarrot.bind(this);
   }
 
   componentDidMount() {
@@ -345,15 +347,14 @@ class Mask extends PureComponent {
             />
           )}
           {this.state.carrots.map((carrot) => 
-            <image
+            <Carrot
+              id={carrot.id}
               key={`carrot-${carrot.id}`} 
               x={carrot.x}
               y={carrot.y}
-              width={this.getUnicornSize(carrot)}
-              height={this.getUnicornSize(carrot)}
-              xlinkHref="/static/assets/icons/icon-carrot.svg"
-              mask="url(#myMask)"
-              onClick={this.collectCarrot.bind(this, carrot.id)}
+              w={this.getUnicornSize(carrot)}
+              h={this.getUnicornSize(carrot)}
+              removeCarrot={this.collectCarrot}
             />
           )}
           <defs>
