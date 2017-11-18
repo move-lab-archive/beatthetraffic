@@ -1,18 +1,24 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { TweenMax } from 'gsap';
 
-class Carrot extends PureComponent {
+class Carrot extends Component {
   
   componentDidMount() {
-    // TODO anim 3d
+    // TODO HERE ANIM TO ROTATE ASSET 3D
+    // const anim = TweenMax.to(this.el, 1,{
+    //   rotation:360,
+    //   transformOrigin:"50% 50%",
+    //   repeat:-1
+    // });
+    // anim.play();
   }
 
-  // shouldComponentUpdate() {
-  //   return true;
-  // }
+  shouldComponentUpdate() {
+    return false;
+  }
 
   collectCarrot() {
-    this.anim = TweenMax.to(this.el, 1,{
+    const anim = TweenMax.to(this.el, 1,{
       attr: {
         x: 0,
         y: 0
@@ -20,7 +26,7 @@ class Carrot extends PureComponent {
       opacity: 0.1,
       onComplete: () => this.props.removeCarrot(this.props.id)
     });
-    this.anim.play();
+    anim.play();
   }
 
   render() {

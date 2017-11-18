@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { TweenMax } from 'gsap';
 
@@ -30,7 +30,7 @@ const initialState = {
   scoreAnimations: []
 }
 
-class Mask extends PureComponent {
+class Mask extends Component {
 
   constructor(props) {
     super(props);
@@ -294,18 +294,9 @@ class Mask extends PureComponent {
   }
 
   collectCarrot(id) {
-    console.log(id);
     this.setState({
       carrots: this.state.carrots.filter((carrot) => carrot.id !== id)
     })
-    
-    // this.anim = TweenMax.to(this.el, 1,{
-    //   top: "9rem", 
-    //   left: "2rem",
-    //   opacity: 0.1,
-    //   onComplete: () => this.props.removeScoreAnimation(this.props.id)
-    // });
-    // this.anim.play();
   }
 
   render() {
