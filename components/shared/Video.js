@@ -148,12 +148,14 @@ class Video extends Component {
     let newCurrentFrame = Math.round(this.videoEl.currentTime * this.props.videoFPS)
     if(window.currentFrame !== newCurrentFrame) {
       window.currentFrame = newCurrentFrame;
-
+      window.currentTime = this.videoEl.currentTime;
       // Dispatch current time each second
-      let newCurrentTime = Math.trunc(this.videoEl.currentTime);
-      if(this.props.currentTime !== newCurrentTime) {
-        this.props.dispatch(updateCurrentTime(newCurrentTime));
-      }
+      // No dispatch, redux is too slow and trigger too much re-rendering 
+      // computation
+      // let newCurrentTime = Math.trunc(this.videoEl.currentTime);
+      // if(this.props.currentTime !== newCurrentTime) {
+      //   this.props.dispatch(updateCurrentTime(newCurrentTime));
+      // }
     }
     requestAnimationFrame(this.monitorFrames);
   }

@@ -1,11 +1,35 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-class LevelProgressBar extends Component {
+class LevelProgressBar extends PureComponent {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      currentTime: 0
+    }
+
+    this.monitorProgress = this.monitorProgress.bind(this);
+  }
+
+  componentDidMount() {
+    this.monitorProgress();
+  }
+
+  monitorProgress() {
+    if(window.currentTime &&
+      window.currentTime !== this.state.currentTime) {
+      this.setState({
+        currentTime: window.currentTime
+      });
+    }
+    requestAnimationFrame(this.monitorProgress)
+  }
 
   render() {
 
-    const progress = this.props.currentTime / this.props.totalDuration || 0;
+    const progress = this.state.currentTime / this.props.totalDuration || 0;
 
     return (
       <div className="progress-bar">
@@ -29,11 +53,6 @@ class LevelProgressBar extends Component {
             height: 100%;
             background-color: #FFFE4A;
             will-change: transform;
-            // a bit hacky as we only update the current time each second
-            // there is delay when we pause, the good way to do it would be to 
-            // wrap this in request animation frame and pick the currentTime of
-            // the video
-            transition: transform 1s linear;
             transform-origin: 0 0;
           } 
         `}</style>
@@ -51,7 +70,6 @@ class LevelProgressBar extends Component {
 
 export default connect((state) => {
   return {
-    totalDuration: Math.trunc(state.video.get('duration')),
-    currentTime: state.video.get('currentTime')
+    totalDuration: Math.trunc(state.video.get('duration'))
   }
 })(LevelProgressBar);
