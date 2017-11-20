@@ -206,7 +206,6 @@ class Video extends Component {
 
           .video {
             display: block;
-            will-change: transform;
             position: absolute;
             top:0;
             left:0;

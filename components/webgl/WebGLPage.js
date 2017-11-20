@@ -81,7 +81,6 @@ class WebGLPage extends React.Component {
           }
           .canvas {
             display: block;
-            will-change: transform;
             position: absolute;
             top:0;
             left:0;
