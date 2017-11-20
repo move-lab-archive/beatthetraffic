@@ -64,6 +64,7 @@ class Mask extends Component {
 
     // init global var
     window.itemsMasked = [];
+    window.itemsToCollect = [];
   }
 
   componentWillReceiveProps(nextProps) {
@@ -131,30 +132,38 @@ class Mask extends Component {
                     click.y <= potentialObjectToMask.y + potentialObjectToMask.h - ENLARGE_SIZE) {
                       console.log(`${potentialObjectToMask.idDisplay} clicked !`)
                       objectsMaskedUpdated.push(potentialObjectToMask);
-                      this.setState({
-                        puffAnimations: [...this.state.puffAnimations, {
-                          x: click.xReal,
-                          y: click.yReal,
-                          id: potentialObjectToMask.id
-                        }],
-                        scoreAnimations: [...this.state.scoreAnimations, {
-                          x: click.xReal,
-                          y: click.yReal,
-                          id: potentialObjectToMask.id
-                        }],
-                        carrots: [...this.state.carrots, {
-                          x: click.xReal,
-                          y: click.yReal,
-                          w: potentialObjectToMask.w,
-                          h: potentialObjectToMask.h,
-                          id: potentialObjectToMask.id
-                        }]
-                      });
+                      // this.setState({
+                      //   puffAnimations: [...this.state.puffAnimations, {
+                      //     x: click.xReal,
+                      //     y: click.yReal,
+                      //     id: potentialObjectToMask.id
+                      //   }],
+                      //   scoreAnimations: [...this.state.scoreAnimations, {
+                      //     x: click.xReal,
+                      //     y: click.yReal,
+                      //     id: potentialObjectToMask.id
+                      //   }],
+                      //   carrots: [...this.state.carrots, {
+                      //     x: click.xReal,
+                      //     y: click.yReal,
+                      //     w: potentialObjectToMask.w,
+                      //     h: potentialObjectToMask.h,
+                      //     id: potentialObjectToMask.id
+                      //   }]
+                      // });
                       // TODO push some carrot
+                      window.itemsToCollect =  [
+                        ...window.itemsToCollect, {
+                        type: "carrot",
+                        x: click.xReal,
+                        y: click.yReal,
+                        w: potentialObjectToMask.w,
+                        h: potentialObjectToMask.h,
+                        id: potentialObjectToMask.id
+                      }];
 
-
-                      this.props.dispatch(incrementScore());
-                      this.props.dispatch(addKilledItem(potentialObjectToMask.id));
+                      // this.props.dispatch(incrementScore());
+                      // this.props.dispatch(addKilledItem(potentialObjectToMask.id));
                       // Play puff sound
                       SoundsManager.playSound("carhit");
                     }
@@ -182,10 +191,10 @@ class Mask extends Component {
             }
           });
           // console.log(carsNotMasked.length);
-          this.setState({ 
-            masks: objectsMaskedUpdated,
-            carsNotMasked
-          });
+          // this.setState({ 
+          //   masks: objectsMaskedUpdated,
+          //   carsNotMasked
+          // });
           
           window.itemsMasked = objectsMaskedUpdated;
         }

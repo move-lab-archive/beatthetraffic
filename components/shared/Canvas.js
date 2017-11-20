@@ -40,6 +40,11 @@ class Canvas extends Component {
   componentDidMount() {
     // init global var
     window.itemsMasked = [];
+    window.itemsToCollect = [];
+
+    // Preload image
+    this.imgCarrot = new Image();
+    this.imgCarrot.src = "/static/assets/icons/icon-carrot.svg";
   }
 
   drawRawDetections(context, detections) {
@@ -114,6 +119,15 @@ class Canvas extends Component {
         y: objectTrackedScaled.y
       }
 
+      // Clear react if there is a carrot of stuff 
+      // Maybe better to check when drawing
+      context.clearRect(
+        objectTrackedScaled.x - objectTrackedScaled.w / 2,
+        objectTrackedScaled.y - objectTrackedScaled.h / 2,
+        objectTrackedScaled.w,
+        objectTrackedScaled.h,
+      );
+
       context.beginPath();
       context.arc(
         bboxCenter.x,
@@ -124,6 +138,8 @@ class Canvas extends Component {
         false
       );
       context.fill();
+
+      
 
       // If bbox area is more than 0.8% of canvas area, display the target
       if(bboxAreaPercentageOfCanvas > 0.8) {
@@ -192,6 +208,17 @@ class Canvas extends Component {
     });
   }
 
+  getAssetSize(mask) {
+    const maskArea = mask.w * mask.h;
+    return Math.sqrt(maskArea / 30);
+  }
+
+  drawCarrots(context) {
+    window.itemsToCollect.forEach((item) => {
+      context.drawImage(this.imgCarrot, item.x, item.y, this.getAssetSize(item), this.getAssetSize(item));
+    })
+  }
+
   clearCanvas() {
     this.canvasContext.clearRect(0, 0, 1280, 720);
   }
@@ -215,6 +242,8 @@ class Canvas extends Component {
       if(this.props.showDebugUI && objectTrackerDataForThisFrame) {
         this.drawObjectTrackerData(this.canvasContext, objectTrackerDataForThisFrame);
       }
+
+      this.drawCarrots(this.canvasContext);
 
       // Draw tracker ui data
       if(objectTrackerDataForThisFrame) {
