@@ -14,6 +14,7 @@ class PollutionLevel extends PureComponent {
       currentPollutionPercentage < 50) {
      // Speed up sound when pollution is superior to 50% for the first time
      console.log('Speed up sound')
+     // todo transition ?
      SoundsManager.changePlaybackRate('main', 1.2);
    }
 
@@ -21,7 +22,9 @@ class PollutionLevel extends PureComponent {
        currentPollutionPercentage < 80) {
       // Trigger alert playing when pollution is superior to 80% for the first time
       console.log('Play alert sound')
+      SoundsManager.playSound('transition-normal-alert');
       SoundsManager.playSound('alert');
+      
     }
   }
 

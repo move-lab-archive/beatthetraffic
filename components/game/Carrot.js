@@ -28,6 +28,7 @@ class Carrot extends Component {
   }
 
   collectCarrot() {
+    this.props.collectCarrot();
     const anim = TweenMax.to(this.el, 1,{
       attr: {
         x: 0,

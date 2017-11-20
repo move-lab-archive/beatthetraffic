@@ -10,6 +10,7 @@ class Gameover extends Component {
 
   componentDidMount() {
     SoundsManager.playSound('youlose');
+    SoundsManager.playSound('youloseloop');
   }
 
   render() {

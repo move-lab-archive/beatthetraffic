@@ -14,18 +14,36 @@ class SoundsManager {
     this.addSound("ambient","intro", "/static/assets/sounds/intro.mp3");
     
     setTimeout(() => {
-      this.addSound("ambient", "main", "/static/assets/sounds/main.mp3", {
+      this.addSound("ambient", "main_level1", "/static/assets/sounds/main_level1.mp3", {
+        loop: true
+      });
+      this.addSound("ambient", "main_level2", "/static/assets/sounds/main_level2.mp3", {
+        loop: true
+      });
+      this.addSound("ambient", "main_level3", "/static/assets/sounds/main_level3.mp3", {
         loop: true
       });
       this.addSound("ambient", "nextlevel", "/static/assets/sounds/nextlevel.mp3");
       this.addSound("punctual", "popA", "/static/assets/sounds/popA.mp3");
       this.addSound("punctual", "popB", "/static/assets/sounds/popB.mp3");
-      this.addSound("punctual", "puffA", "/static/assets/sounds/puffA.mp3");
-      this.addSound("ambient", "youlose", "/static/assets/sounds/youlose.mp3");
-      this.addSound("ambient", "youwin", "/static/assets/sounds/youwina.mp3");
+      this.addSound("punctual", "carhit", "/static/assets/sounds/carhit.mp3");
+      this.addSound("punctual", "carmissed", "/static/assets/sounds/carmissed.mp3");
+      this.addSound("punctual", "youwin", "/static/assets/sounds/youwin.mp3");
+      this.addSound("punctual", "youlose", "/static/assets/sounds/youlose.mp3");
+      this.addSound("punctual", "transition-alert-normal", "/static/assets/sounds/transition-alert-normal.mp3");
+      this.addSound("punctual", "transition-normal-alert", "/static/assets/sounds/transition-normal-alert.mp3");
+      
+      this.addSound("ambient", "youloseloop", "/static/assets/sounds/youloseloop.mp3",{
+        loop: true
+      });
+      this.addSound("ambient", "youwinloop", "/static/assets/sounds/youwinloop.mp3",{
+        loop: true
+      });
       this.addSound("ambient", "alert", "/static/assets/sounds/alert.mp3", {
         loop: true
       });
+
+      this.addSound("punctual", "win-point-withitem", "/static/assets/sounds/win-point-withitem.mp3");
     }, 1000);
   }
 

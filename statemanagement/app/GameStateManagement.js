@@ -75,11 +75,11 @@ export function startLevel() {
     const currentPollutionPercentage = 
       getState().game.get('missedItems').size * 100 / getState().game.get('maxMissed');
     if(currentPollutionPercentage < 50) {
-      SoundsManager.playSound('main');
+      SoundsManager.playSound(`main_level${getState().game.get('currentLevel')}`);
     }
     else if(currentPollutionPercentage >= 50 &&
        currentPollutionPercentage < 80) {
-      SoundsManager.playSound('main', 1.2);
+      SoundsManager.playSound(`main_level${getState().game.get('currentLevel')}`, 1.2);
     } else {
       SoundsManager.playSound('alert');
     }

@@ -11,6 +11,7 @@ class Win extends Component {
 
   componentDidMount() {
     SoundsManager.playSound('youwin');
+    SoundsManager.playSound('youwinloop');
   }
 
   render() {

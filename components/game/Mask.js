@@ -48,6 +48,7 @@ class Mask extends Component {
     this.removePuffAnimation = this.removePuffAnimation.bind(this);
     this.removeScoreAnimation = this.removeScoreAnimation.bind(this);
     this.collectCarrot = this.collectCarrot.bind(this);
+    this.removeCarrot = this.removeCarrot.bind(this);
   }
 
   componentDidMount() {
@@ -155,7 +156,7 @@ class Mask extends Component {
                       this.props.dispatch(incrementScore());
                       this.props.dispatch(addKilledItem(potentialObjectToMask.id));
                       // Play puff sound
-                      SoundsManager.playSound("puffA");
+                      SoundsManager.playSound("carhit");
                     }
                 });
               }
@@ -202,8 +203,10 @@ class Mask extends Component {
           if(!this.props.killedItems.includes(itemDisappearing.id)) {
             console.log(`Frame ${window.currentFrame}, ${itemDisappearing.idDisplay} missed:`);
             this.props.dispatch(addMissedItem(itemDisappearing.id));
+            SoundsManager.playSound('carmissed');
           }
         });
+        
         
         
       }
@@ -293,11 +296,17 @@ class Mask extends Component {
     }
   }
 
-  collectCarrot(id) {
+  removeCarrot(id) {
     this.setState({
       carrots: this.state.carrots.filter((carrot) => carrot.id !== id)
     })
   }
+
+  collectCarrot() {
+    SoundsManager.playSound('win-point-withitem');
+    this.props.dispatch(incrementScore());
+  }
+
 
   render() {
 
@@ -346,7 +355,8 @@ class Mask extends Component {
                 y={carrot.y}
                 w={this.getUnicornSize(carrot)}
                 h={this.getUnicornSize(carrot)}
-                removeCarrot={this.collectCarrot}
+                removeCarrot={this.removeCarrot}
+                collectCarrot={this.collectCarrot}
               />
             </g>
           )}
