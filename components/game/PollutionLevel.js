@@ -15,7 +15,7 @@ class PollutionLevel extends PureComponent {
      // Speed up sound when pollution is superior to 50% for the first time
      console.log('Speed up sound')
      // todo transition ?
-     SoundsManager.changePlaybackRate('main', 1.2);
+     SoundsManager.changePlaybackRate(`main_level${this.props.currentLevel}`, 1.2);
    }
 
     if(nextPollutionPercentage >= 80 &&
@@ -118,6 +118,7 @@ export default connect((state) => {
   return {
     score: state.game.get('score'),
     nbMissed: state.game.get('missedItems').size,
-    maxMissed: state.game.get('maxMissed')
+    maxMissed: state.game.get('maxMissed'),
+    currentLevel: state.game.get('currentLevel')
   }
 })(PollutionLevel);
