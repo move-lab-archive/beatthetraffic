@@ -39,18 +39,8 @@ class Canvas extends Component {
     window.itemsMasked = [];
   }
 
-  drawRawDetections(context, detections) {
-    context.strokeStyle = "red";
-    context.lineWidth = 40; // draw the rectangle bigger than the bounding box
-    context.fillStyle = "red";
-    detections.map((detection) => {
-      let scaledDetection = scaleDetection(detection, canvasResolution, this.props.originalResolution);
-      let x = scaledDetection.x - scaledDetection.w / 2;
-      let y = scaledDetection.y - scaledDetection.h / 2;
-      context.fillRect(x, y, scaledDetection.w, scaledDetection.h);
-      context.strokeRect(x, y, scaledDetection.w, scaledDetection.h);
-      // context.fillText(scaledDetection.name, x, y-10);
-    });
+  shouldComponentUpdate() {
+    return false;
   }
 
   drawObjectTrackerData(context, objectTrackerData) {
@@ -65,79 +55,6 @@ class Canvas extends Component {
       // context.fillText(objectTrackedScaled.idDisplay,x + objectTrackedScaled.w / 2 - 20,y + objectTrackedScaled.h / 2);
       context.fillRect(x, y, objectTrackedScaled.w, objectTrackedScaled.h);
       context.strokeRect(x, y, objectTrackedScaled.w, objectTrackedScaled.h);
-    });
-  }
-
-  drawTrackerUIData(context, objectTrackerDataForThisFrame) {
-    context.globalAlpha = 1;
-
-    const SQUARE_SIZE = 40;
-    const SQUARE_BORDER = 2;
-    const FOOT_LENGTH = 25;
-    const FOOT_TICKNESS = 4;
-    const FOOT_CIRCLE_RADIUS = 5;
-
-    objectTrackerDataForThisFrame.filter((objectTracked) => {
-      return (
-        !window.itemsMasked.find((itemMasked) => itemMasked.id === objectTracked.id) &&
-        objectTracked.isZombie !== true &&
-        ItemsToDisplay.indexOf(objectTracked.name) > -1
-      )
-    }).map((objectTracked) => {
-      let objectTrackedScaled = scaleDetection(objectTracked, canvasResolution, this.props.originalResolution);
-
-
-      // Set params
-      context.strokeStyle = "#E3E3E3";
-      context.fillStyle = "#00CCFF";
-      context.lineWidth = 2;
-
-      // Draw circle
-      let circle = {
-        x: objectTrackedScaled.x,
-        y: objectTrackedScaled.y - 20
-      }
-
-      context.beginPath();
-      context.arc(circle.x,circle.y, FOOT_CIRCLE_RADIUS, 0, 2 * Math.PI, false);
-      context.fill();
-
-      // Draw foot
-      let foot = {
-        x: circle.x - FOOT_TICKNESS / 2,
-        y: circle.y - FOOT_LENGTH - FOOT_CIRCLE_RADIUS,
-        w: FOOT_TICKNESS,
-        h: FOOT_LENGTH
-      }
-
-      context.fillStyle = "#FFFFFF";
-      context.fillRect(foot.x, foot.y, foot.w, foot.h);
-
-      // Draw square
-      let square = {
-        x: circle.x - SQUARE_SIZE / 2,
-        y: circle.y - SQUARE_SIZE - FOOT_LENGTH,
-        w: SQUARE_SIZE,
-        h: SQUARE_SIZE
-      }
-
-      
-      // context.fillRect(square.x, square.y, square.w, square.h);
-      // context.strokeRect(square.x, square.y, square.w, square.h);
-
-      // Draw emotji
-      context.font = "18px sans-serif";
-      context.textAlign="center"; 
-      context.textBaseline = "middle";
-      let icon = "🚗";
-      if(objectTrackedScaled.name === "truck") {
-        icon = "🚚️️️";
-      } else if(objectTrackedScaled.name === "bicycle") {
-        icon = "🚴";
-      } else if(objectTrackedScaled.name === "motorbike") {
-        icon = "️️🏍️";
-      }
-      context.fillText(icon, square.x + square.w / 2, square.y + square.h/2);
     });
   }
 
@@ -158,6 +75,9 @@ class Canvas extends Component {
       // Draw debug objectTracker data
       let objectTrackerDataForThisFrame = this.props.objectTrackerData[currentDetectionOrTrackingFrame];
       if(objectTrackerDataForThisFrame) {
+        objectTrackerDataForThisFrame = objectTrackerDataForThisFrame.filter((objectTracked) => {
+          return window.itemsMasked.find((itemMasked) => itemMasked.id === objectTracked.id)
+        })
         this.drawObjectTrackerData(this.canvasContext, objectTrackerDataForThisFrame);
       }
 

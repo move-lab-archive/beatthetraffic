@@ -6,6 +6,8 @@ import { Bus } from "gl-react";
 
 import Loading from '../shared/Loading'; 
 import Canvas from './Canvas'; 
+import CanvasUI from '../shared/Canvas';
+import Mask from '../game/Mask';
 import SettingsControl from '../shared/SettingsControl';
 import BackgroundSubtraction from './BackgroundSubtraction';
 import Darkmode from './Darkmode';
@@ -39,6 +41,8 @@ class WebGLPage extends React.Component {
       <div className="landing-page">
         <SettingsControl />
         <VideoSelector />
+        <CanvasUI />
+        <Mask />
         <div className="canvas-container">
           <Surface 
             width={1280}
@@ -81,7 +85,7 @@ class WebGLPage extends React.Component {
             position: absolute;
             top:0;
             left:0;
-            z-index: 2;
+            z-index: 1;
           }
 
           @media (min-aspect-ratio: 16/9) {
