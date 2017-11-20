@@ -152,15 +152,25 @@ class Mask extends Component {
                       //   }]
                       // });
                       // TODO push some carrot
-                      window.itemsToCollect =  [
-                        ...window.itemsToCollect, {
+
+                      const newItem = {
                         type: "carrot",
                         x: click.xReal,
                         y: click.yReal,
-                        w: potentialObjectToMask.w,
-                        h: potentialObjectToMask.h,
-                        id: potentialObjectToMask.id
-                      }];
+                        w: this.getUnicornSize(potentialObjectToMask),
+                        h: this.getUnicornSize(potentialObjectToMask),
+                        id: potentialObjectToMask.id,
+                        isCollectable: false
+                      }
+
+                      setTimeout(() => {
+                        newItem.isCollectable = true
+                      }, 500);
+
+                      window.itemsToCollect =  [
+                        ...window.itemsToCollect,
+                        newItem
+                      ];
 
                       // this.props.dispatch(incrementScore());
                       // this.props.dispatch(addKilledItem(potentialObjectToMask.id));

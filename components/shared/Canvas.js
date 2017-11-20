@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { TweenMax } from 'gsap';
 
 import { scaleDetection } from '../../utils/resolution';
 
@@ -17,6 +18,10 @@ class Canvas extends Component {
     this.lastFrameDrawn = -1;
     this.loopUpdateCanvas = this.loopUpdateCanvas.bind(this);
     this.isUpdatingCanvas = false;
+    this.clicksRecorded = [];
+    this.initClickRecorder = this.initClickRecorder.bind(this);
+    this.cleanClickRecorder = this.cleanClickRecorder.bind(this);
+    this.recordClick = this.recordClick.bind(this);
   }
 
   // TODO IMPLEMENT COMPONENT UNMOUNT TO CLEAN UP STUFF
@@ -45,6 +50,21 @@ class Canvas extends Component {
     // Preload image
     this.imgCarrot = new Image();
     this.imgCarrot.src = "/static/assets/icons/icon-carrot.svg";
+
+    this.initClickRecorder();
+  }
+
+  componentWillUnmount() {
+    this.cleanClickRecorder();
+  }
+
+  initClickRecorder() {
+    window.document.body.addEventListener("click", this.recordClick);
+    window.document.body.addEventListener("touchstart", this.recordClick);
+  }
+
+  cleanClickRecorder() {
+    window.document.body.removeEventListener("click", this.recordClick);
   }
 
   drawRawDetections(context, detections) {
@@ -208,16 +228,62 @@ class Canvas extends Component {
     });
   }
 
-  getAssetSize(mask) {
-    const maskArea = mask.w * mask.h;
-    return Math.sqrt(maskArea / 30);
+  recordClick(event) {
+    let coordinates = {
+      x: event.pageX,
+      y: event.pageY
+    };
+
+    // Ignore Chrome mobile touchstart event
+    if(coordinates.x === undefined) {
+      return;
+    }
+
+    let width, height; 
+
+    // Map coordinates to canvas coordinates
+    if(window.innerWidth / window.innerHeight < 16/9) {
+      width = window.innerHeight * 1280 / 720;
+      height = window.innerHeight;
+    } else {
+      width = window.innerWidth;
+      height = window.innerWidth * 720 / 1280;
+    }
+
+    coordinates = {
+      x: coordinates.x * 1280 / width,
+      y: coordinates.y * 720 / height,
+      xReal: coordinates.x,
+      yReal: coordinates.y
+    }
+
+    this.clicksRecorded.push(coordinates);
+  }
+
+  collectCarrot(itemToCollect) {
+    // let item = itemToCollect;
+    TweenMax.to(itemToCollect, 1,{
+      x: 0,
+      y: 0,
+      opacity: 0.1,
+      onComplete: () => {
+        // TODO REMOVE item from itemsToCollect
+        window.itemsToCollect = window.itemsToCollect.filter((item) => item.id != itemToCollect.id)
+        console.log(window.itemsToCollect.length);
+      }
+    });
+    
   }
 
   drawCarrots(context) {
     window.itemsToCollect.forEach((item) => {
-      context.drawImage(this.imgCarrot, item.x, item.y, this.getAssetSize(item), this.getAssetSize(item));
+      context.drawImage(this.imgCarrot, item.x, item.y, item.w, item.h);
     })
   }
+
+  // drawItemCollectionAnimationFrame(item) {
+  //   this.canvasContext.drawImage(this.imgCarrot, item.x, item.y, item.w, item.h);
+  // }
 
   clearCanvas() {
     this.canvasContext.clearRect(0, 0, 1280, 720);
@@ -228,6 +294,23 @@ class Canvas extends Component {
        this.lastFrameDrawn !== window.currentFrame) {
 
       this.canvasContext.clearRect(0, 0, 1280, 720);
+
+      if(this.clicksRecorded.length > 0) {
+        this.clicksRecorded.forEach((click) => {
+          window.itemsToCollect.forEach((itemToCollect) => {
+            if(
+              itemToCollect.isCollectable &&
+              click.x >= itemToCollect.x &&
+              click.x <= itemToCollect.x + itemToCollect.w &&
+              click.y >= itemToCollect.y &&
+              click.y <= itemToCollect.y + itemToCollect.h) {
+              this.collectCarrot(itemToCollect);
+            }
+          });
+        });
+      }
+
+      this.clicksRecorded = [];
 
       const currentDetectionOrTrackingFrame = window.currentFrame * this.props.ratioVideoTrackerFPS;
 
