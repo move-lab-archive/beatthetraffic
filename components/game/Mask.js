@@ -338,15 +338,17 @@ class Mask extends Component {
             />
           )}
           {this.state.carrots.map((carrot) => 
-            <Carrot
-              id={carrot.id}
-              key={`carrot-${carrot.id}`} 
-              x={carrot.x}
-              y={carrot.y}
-              w={this.getUnicornSize(carrot)}
-              h={this.getUnicornSize(carrot)}
-              removeCarrot={this.collectCarrot}
-            />
+            <g mask="url(#myMask)">
+              <Carrot
+                id={carrot.id}
+                key={`carrot-${carrot.id}`} 
+                x={carrot.x}
+                y={carrot.y}
+                w={this.getUnicornSize(carrot)}
+                h={this.getUnicornSize(carrot)}
+                removeCarrot={this.collectCarrot}
+              />
+            </g>
           )}
           <defs>
             <Clippath masks={this.state.masks} />
