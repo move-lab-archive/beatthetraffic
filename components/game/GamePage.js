@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Video from './video/Video'
+import VideoOverlayUI from './video-overlay-ui/VideoOverlayUI'
 import Sound from './ui/Sound'
 import GameIndicators from './ui/GameIndicators'
 import GameInstructions from './ui/GameInstructions'
@@ -20,10 +21,13 @@ import { updateUrlToMatchLevelAndCity } from '../../statemanagement/app/GameStat
 import { initViewportListeners } from '../../statemanagement/app/ViewportStateManagement'
 
 import SoundsManager from '../../statemanagement/app/SoundsManager'
+import GameTempStateManager from '../../statemanagement/app/GameTempStateManager'
 
 class GamePage extends React.Component {
   constructor (props) {
     super(props)
+
+    this.recordClick = this.recordClick.bind(this)
 
     this.state = {
       clientSide: false,
@@ -36,6 +40,7 @@ class GamePage extends React.Component {
     this.props.dispatch(setClientRendering())
     this.setState({ clientSide: true })
     this.props.dispatch(initViewportListeners())
+    this.initClickRecorder()
 
     // Load client side things
     this.props.dispatch(fetchRemainingData())
@@ -61,6 +66,10 @@ class GamePage extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    this.cleanClickRecorder()
+  }
+
   hideLanding () {
     // reset scroll
     window.scroll(0, 0)
@@ -80,6 +89,49 @@ class GamePage extends React.Component {
     SoundsManager.playSound('intro')
   }
 
+  initClickRecorder () {
+    window.document.body.addEventListener('click', this.recordClick)
+    window.document.body.addEventListener('touchstart', this.recordClick)
+  }
+
+  cleanClickRecorder () {
+    window.document.body.removeEventListener('click', this.recordClick)
+  }
+
+  recordClick (event) {
+    // TODO Dynamic canvas width / height
+
+    let coordinates = {
+      x: event.pageX,
+      y: event.pageY
+    }
+
+    // Ignore Chrome mobile touchstart event
+    if (coordinates.x === undefined) {
+      return
+    }
+
+    let width, height
+
+    // Map coordinates to canvas coordinates
+    if (window.innerWidth / window.innerHeight < 16 / 9) {
+      width = window.innerHeight * 1280 / 720
+      height = window.innerHeight
+    } else {
+      width = window.innerWidth
+      height = window.innerWidth * 720 / 1280
+    }
+
+    coordinates = {
+      x: coordinates.x * 1280 / width,
+      y: coordinates.y * 720 / height,
+      xReal: coordinates.x,
+      yReal: coordinates.y
+    }
+
+    GameTempStateManager.recordClickOrTouch(coordinates)
+  }
+
   render () {
     return (
       <div className='landing-page'>
@@ -96,7 +148,7 @@ class GamePage extends React.Component {
           <div>
             {!this.props.isGamePlaying && <GameInstructions />}
             <GameIndicators />
-            {/* <Canvas /> */}
+            <VideoOverlayUI />
             <Sound />
             {/* <Mask /> */}
             <Video />

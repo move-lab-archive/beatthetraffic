@@ -6,7 +6,11 @@ const initialState = fromJS({
   listenersInitialized: false,
   deviceOrientation: 'none',
   isFullscreen: false,
-  isFullscreenAvailable: false
+  isFullscreenAvailable: false,
+  canvasResolution: {
+    w: 1280,
+    h: 720
+  }
 })
 
 // Actions

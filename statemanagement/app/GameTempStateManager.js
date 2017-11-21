@@ -5,13 +5,58 @@
 */
 
 const initialState = {
-  listOfItemMasked: [],
+  currentFrame: 0,
+  currentTime: 0,
+  itemMasked: [],
+  itemsToCollect: [],
   clickRecordedBuffer: []
 }
 
 class GameTempStateManager {
   constructor () {
     this.state = initialState
+  }
+
+  getClicksBuffer () {
+    return this.state.clickRecordedBuffer
+  }
+
+  getItemsToCollect () {
+    return this.state.itemsToCollect
+  }
+
+  getItemsMasked () {
+    return this.state.itemMasked
+  }
+
+  getCurrentFrame () {
+    return this.state.currentFrame
+  }
+
+  getCurrentTime () {
+    return this.state.currentTime
+  }
+
+  setCurrentFrame (newCurrentFrame) {
+    this.state.currentFrame = newCurrentFrame
+  }
+
+  setCurrentTime (newCurrentTime) {
+    this.state.currentTime = newCurrentTime
+  }
+
+  removeItemToCollect (idToRemove) {
+    this.state.itemsToCollect = this.state.itemsToCollect.filter(
+      item => item.id !== idToRemove
+    )
+  }
+
+  recordClickOrTouch (clickData) {
+    this.state.clickRecordedBuffer.push(clickData)
+  }
+
+  resetClickBuffer () {
+    this.state.clickRecordedBuffer = []
   }
 
   reset () {
