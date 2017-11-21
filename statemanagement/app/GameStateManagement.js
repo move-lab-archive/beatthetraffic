@@ -25,6 +25,7 @@ const INCREMENT_SCORE = 'Game/INCREMENT_SCORE'
 const RESET_SCORE = 'Game/RESET_SCORE'
 
 const ADD_MISSED_ITEM = 'Game/ADD_MISSED_ITEM'
+const REMOVE_MISSED_ITEM = 'Game/REMOVE_MISSED_ITEM'
 const ADD_KILLED_ITEM = 'Game/ADD_KILLED_ITEM'
 
 const START_LEVEL = 'Game/START_LEVEL'
@@ -62,13 +63,21 @@ export function addMissedItem () {
   }
 }
 
+export function removeMissedItem () {
+  return {
+    type: REMOVE_MISSED_ITEM
+  }
+}
+
 export function collectItem (itemCollected) {
   return (dispatch, getState) => {
-    // TODO DEPENDING ON TYPE OF ITEM
-    // => Increment score
-    // => lower smoke bar by removing a missed item (turn missed item to a counter to anonymise data)
-
-    dispatch(incrementScore())
+    if (itemCollected.type === 'banana' || itemCollected.type === 'carrot') {
+      dispatch(incrementScore())
+      SoundsManager.playSound('win-point-withitem')
+    } else {
+      dispatch(removeMissedItem())
+      // TODO special sound
+    }
   }
 }
 
@@ -214,6 +223,8 @@ export default function GameReducer (state = initialState, action = {}) {
       return state.set('score', 0)
     case ADD_MISSED_ITEM:
       return state.set('nbItemsMissed', state.get('nbItemsMissed') + 1)
+    case REMOVE_MISSED_ITEM:
+      return state.set('nbItemsMissed', state.get('nbItemsMissed') - 1)
     case ADD_KILLED_ITEM:
       return state.update('killedItems', killedItems =>
         killedItems.push(action.payload)

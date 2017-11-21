@@ -49,6 +49,12 @@ class VideoOverlayUI extends Component {
     // Preload image
     this.imgCarrot = new Image()
     this.imgCarrot.src = '/static/assets/icons/icon-carrot.svg'
+
+    this.imgTree = new Image()
+    this.imgTree.src = '/static/assets/icons/icon-tree.svg'
+
+    this.imgBanana = new Image()
+    this.imgBanana.src = '/static/assets/icons/icon-banana.svg'
   }
 
   drawRawDetections (context, detections) {
@@ -249,13 +255,13 @@ class VideoOverlayUI extends Component {
 
   drawCollectableItems () {
     GameTempStateManager.getItemsToCollect().forEach(item => {
-      this.canvasContext.drawImage(
-        this.imgCarrot,
-        item.x,
-        item.y,
-        item.w,
-        item.h
-      )
+      let img = this.imgTree
+      if (item.type === 'carrot') {
+        img = this.imgCarrot
+      } else if (item.type === 'banana') {
+        img = this.imgBanana
+      }
+      this.canvasContext.drawImage(img, item.x, item.y, item.w, item.h)
     })
   }
 
@@ -268,11 +274,16 @@ class VideoOverlayUI extends Component {
     return Math.floor(Math.sqrt(maskArea / 10))
   }
 
+  getItemType () {
+    const types = ['carrot', 'banana', 'tree']
+    return types[Math.floor(Math.random() * types.length)]
+  }
+
   addCollectableItem (clickInfo, objectMaskedThatOutputObject) {
     const itemSize = this.getItemSize(objectMaskedThatOutputObject)
 
     const newItem = {
-      type: 'carrot',
+      type: this.getItemType(),
       x: clickInfo.xReal,
       y: clickInfo.yReal,
       w: itemSize,
