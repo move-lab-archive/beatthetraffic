@@ -5,17 +5,26 @@
   that brings performance down, and we don't care of immutability
 */
 
-const initialState = {
-  currentFrame: 0,
-  currentTime: 0,
-  itemMasked: [],
-  itemsToCollect: [],
-  clickRecordedBuffer: []
-}
-
 class GameTempStateManager {
   constructor () {
-    this.state = initialState
+    this.state = {
+      currentFrame: 0,
+      currentTime: 0,
+      itemMasked: [],
+      itemsToCollect: [],
+      clickRecordedBuffer: []
+    }
+  }
+
+  reset () {
+    console.log('Reset game temp state')
+    this.state = {
+      currentFrame: 0,
+      currentTime: 0,
+      itemMasked: [],
+      itemsToCollect: [],
+      clickRecordedBuffer: []
+    }
   }
 
   getClicksBuffer () {
@@ -70,11 +79,6 @@ class GameTempStateManager {
 
   resetClickBuffer () {
     this.state.clickRecordedBuffer = []
-  }
-
-  reset () {
-    console.log('Reset game temp state')
-    this.state = initialState
   }
 }
 

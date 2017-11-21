@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import raf from 'raf'
 
 import Clippath from './svgmasking/Clippath'
+import SmokeSVGOverlay from './svgmasking/SmokeSVGOverlay'
 
 import { enlargeBbox } from '../../../utils/resolution'
 
@@ -61,9 +62,6 @@ class SVGMasking extends Component {
           }
         }
       )
-
-      console.log(maskedItemsThisFrame.length)
-
       this.setState({ masks: maskedItemsThisFrame })
     }
     raf(this.loopUpdateMasks.bind(this))
@@ -89,8 +87,6 @@ class SVGMasking extends Component {
   }
 
   render () {
-    const pollutionOverlayStyle = this.getPollutionOverlayStyle()
-
     return (
       <div className='mask-container'>
         <svg
@@ -107,14 +103,7 @@ class SVGMasking extends Component {
             height='720px'
             clipPath='url(#svgPath)'
           />
-          <rect
-            x='0'
-            y='0'
-            fill={pollutionOverlayStyle.pollutionFillColor}
-            fillOpacity={pollutionOverlayStyle.pollutionOpacity}
-            width='1280'
-            height='720'
-          />
+          <SmokeSVGOverlay />
           {/* {this.state.masks.map(mask => (
             <image
               key={`${mask.id}-unicorn`}

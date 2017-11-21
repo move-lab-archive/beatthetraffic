@@ -11,7 +11,7 @@ import GameTempStateManager from './GameTempStateManager'
 const initialState = fromJS({
   score: 0,
   killedItems: [],
-  missedItems: [],
+  nbItemsMissed: 0,
   maxMissed: 20,
   currentLevel: 1,
   isPlaying: false,
@@ -45,19 +45,17 @@ export function resetScore () {
   }
 }
 
-export function addMissedItem (id) {
+export function addMissedItem () {
   return (dispatch, getState) => {
     dispatch({
-      type: ADD_MISSED_ITEM,
-      payload: id
+      type: ADD_MISSED_ITEM
     })
 
     SoundsManager.playSound('carmissed')
 
     // Check is we haven't failed the level
     if (
-      getState().game.get('missedItems').size >=
-      getState().game.get('maxMissed')
+      getState().game.get('nbItemsMissed') >= getState().game.get('maxMissed')
     ) {
       dispatch(failedLevel())
     }
@@ -93,7 +91,7 @@ export function startLevel () {
     // TODO Maybe move to the dispatch of the UI, so we keep consistent
     // that all sound triggering are done from the views
     const currentPollutionPercentage =
-      getState().game.get('missedItems').size *
+      getState().game.get('nbItemsMissed') *
       100 /
       getState().game.get('maxMissed')
     if (currentPollutionPercentage < 50) {
@@ -215,9 +213,7 @@ export default function GameReducer (state = initialState, action = {}) {
     case RESET_SCORE:
       return state.set('score', 0)
     case ADD_MISSED_ITEM:
-      return state.update('missedItems', missedItems =>
-        missedItems.push(action.payload)
-      )
+      return state.set('nbItemsMissed', state.get('nbItemsMissed') + 1)
     case ADD_KILLED_ITEM:
       return state.update('killedItems', killedItems =>
         killedItems.push(action.payload)

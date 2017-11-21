@@ -35,8 +35,7 @@ module.exports = {
       ...getCity('stuttgart1'),
       ...getCity('stuttgart2'),
       ...getCity('stuttgart3'),
-      ...getCity('stuttgart4'),
-      '/webgl': { page: '/webgl' }
+      ...getCity('stuttgart4')
     }
   }
 }

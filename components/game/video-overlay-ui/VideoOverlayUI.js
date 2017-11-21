@@ -353,7 +353,7 @@ class VideoOverlayUI extends Component {
 
       itemsMissedThisFrame.forEach(itemMissed => {
         console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
-        this.props.dispatch(addMissedItem(itemMissed.id))
+        this.props.dispatch(addMissedItem())
       })
 
       /*

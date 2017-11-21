@@ -7,6 +7,10 @@ export function updateMasking (
   canvasResolution,
   originalResolution
 ) {
+  if (!objectTrackerDataForThisFrame) {
+    return []
+  }
+
   let objectsMaskedToUpdate = GameTempStateManager.getItemsMasked()
   let objectsMaskedUpdated = []
   let objectsAvailableToBeMasked = []

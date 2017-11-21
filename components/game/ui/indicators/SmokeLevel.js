@@ -115,7 +115,7 @@ class SmokeLevel extends PureComponent {
 export default connect(state => {
   return {
     score: state.game.get('score'),
-    nbMissed: state.game.get('missedItems').size,
+    nbMissed: state.game.get('nbItemsMissed'),
     maxMissed: state.game.get('maxMissed'),
     currentLevel: state.game.get('currentLevel')
   }
