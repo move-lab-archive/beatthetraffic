@@ -9,6 +9,7 @@ import GameInstructions from './ui/GameInstructions'
 import GameProgressBar from './ui/GameProgressBar'
 import LevelName from './ui/LevelName'
 import Landing from './ui/Landing'
+import SVGMasking from './masking/SVGMasking'
 
 import SettingsControl from '../shared/SettingsControl'
 
@@ -150,7 +151,7 @@ class GamePage extends React.Component {
             <GameIndicators />
             <VideoOverlayUI />
             <Sound />
-            {/* <Mask /> */}
+            <SVGMasking />
             <Video />
             <LevelName />
             <GameProgressBar />

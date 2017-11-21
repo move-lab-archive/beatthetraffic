@@ -64,6 +64,16 @@ export function addMissedItem (id) {
   }
 }
 
+export function collectItem (itemCollected) {
+  return (dispatch, getState) => {
+    // TODO DEPENDING ON TYPE OF ITEM
+    // => Increment score
+    // => lower smoke bar by removing a missed item (turn missed item to a counter to anonymise data)
+
+    dispatch(incrementScore())
+  }
+}
+
 export function addKilledItem (id) {
   return (dispatch, getState) => {
     dispatch({

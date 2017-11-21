@@ -11,7 +11,8 @@ import detectMissedItemsThisFrame from './detectMissedItems'
 
 import {
   addKilledItem,
-  addMissedItem
+  addMissedItem,
+  collectItem
 } from '../../../statemanagement/app/GameStateManagement'
 
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
@@ -235,7 +236,7 @@ class VideoOverlayUI extends Component {
   }
 
   collectItem (itemToCollect) {
-    // let item = itemToCollect;
+    this.props.dispatch(collectItem(itemToCollect))
     TweenMax.to(itemToCollect, 1, {
       x: 0,
       y: 0,
