@@ -3,11 +3,19 @@ import { connect } from 'react-redux'
 import { TweenMax } from 'gsap'
 import raf from 'raf'
 
-import { scaleDetection } from '../../../utils/resolution'
+import { scaleDetection, isInsideArea } from '../../../utils/resolution'
 
 import { updateMasking } from '../masking/masking'
 
+import detectMissedItemsThisFrame from './detectMissedItems'
+
+import {
+  addKilledItem,
+  addMissedItem
+} from '../../../statemanagement/app/GameStateManagement'
+
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
 class VideoOverlayUI extends Component {
@@ -226,7 +234,7 @@ class VideoOverlayUI extends Component {
       })
   }
 
-  collectCarrot (itemToCollect) {
+  collectItem (itemToCollect) {
     // let item = itemToCollect;
     TweenMax.to(itemToCollect, 1, {
       x: 0,
@@ -238,18 +246,48 @@ class VideoOverlayUI extends Component {
     })
   }
 
-  drawCarrots (context) {
+  drawCollectableItems () {
     GameTempStateManager.getItemsToCollect().forEach(item => {
-      context.drawImage(this.imgCarrot, item.x, item.y, item.w, item.h)
+      this.canvasContext.drawImage(
+        this.imgCarrot,
+        item.x,
+        item.y,
+        item.w,
+        item.h
+      )
     })
   }
 
-  // drawItemCollectionAnimationFrame(item) {
-  //   this.canvasContext.drawImage(this.imgCarrot, item.x, item.y, item.w, item.h);
-  // }
-
   clearCanvas () {
     this.canvasContext.clearRect(0, 0, 1280, 720)
+  }
+
+  getItemSize (mask) {
+    const maskArea = mask.w * mask.h
+    return Math.floor(Math.sqrt(maskArea / 10))
+  }
+
+  addCollectableItem (clickInfo, objectMaskedThatOutputObject) {
+    const itemSize = this.getItemSize(objectMaskedThatOutputObject)
+
+    const newItem = {
+      type: 'carrot',
+      x: clickInfo.xReal,
+      y: clickInfo.yReal,
+      w: itemSize,
+      h: itemSize,
+      id: objectMaskedThatOutputObject.id,
+      isCollectable: false
+    }
+
+    // Wait a bit before making it collectable
+    // if not people can just double click when
+    // making the car disappear
+    setTimeout(() => {
+      newItem.isCollectable = true
+    }, 500)
+
+    GameTempStateManager.addCollectableItem(newItem)
   }
 
   loopUpdateCanvas () {
@@ -266,7 +304,6 @@ class VideoOverlayUI extends Component {
       let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
 
       // Update masks
-      // TODO
       const remainingPotentialObjectToMask = updateMasking(
         objectTrackerDataForThisFrame,
         this.props.canvasResolution,
@@ -277,44 +314,46 @@ class VideoOverlayUI extends Component {
       if (GameTempStateManager.getClicksBuffer().length > 0) {
         // For each click
         GameTempStateManager.getClicksBuffer().forEach(click => {
+          // See if it will make a car dissapear with this click
+          // for each remainingPotentialObjectToMask
+          remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
+            if (isInsideArea(potentialObjectToMask, click)) {
+              console.log(`${potentialObjectToMask.idDisplay} clicked !`)
+              GameTempStateManager.addMaskedItem(potentialObjectToMask)
+              // Output item to collect
+              this.addCollectableItem(click, potentialObjectToMask)
+              // Dispatch killed item notification
+              this.props.dispatch(addKilledItem(potentialObjectToMask.id))
+            }
+          })
+
           // See if it can collect items
           // TODO collect only one item with one click
           GameTempStateManager.getItemsToCollect().forEach(itemToCollect => {
             if (
               itemToCollect.isCollectable &&
-              click.x >= itemToCollect.x &&
-              click.x <= itemToCollect.x + itemToCollect.w &&
-              click.y >= itemToCollect.y &&
-              click.y <= itemToCollect.y + itemToCollect.h
+              isInsideArea(itemToCollect, click)
             ) {
-              this.collectCarrot(itemToCollect)
-            }
-          })
-
-          // See if it will make a car dissapear
-          // for each remainingPotentialObjectToMask
-          // TODO do a helper for checking if a point is inside a bbox
-          remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
-            if (
-              click.x >= potentialObjectToMask.x &&
-              click.x <= potentialObjectToMask.x + potentialObjectToMask.w &&
-              click.y >= potentialObjectToMask.y &&
-              click.y <= potentialObjectToMask.y + potentialObjectToMask.h
-            ) {
-              console.log(`${potentialObjectToMask.idDisplay} clicked !`)
-              GameTempStateManager.addMaskedItem(potentialObjectToMask)
-              // TODO ADD ITEM TO COLLECT
-              // this.addItemToCollect(click, potentialObjectToMask)
-              // this.props.dispatch(incrementScore())
-              // this.props.dispatch(addKilledItem(potentialObjectToMask.id))
-              // // Play puff sound
-              // SoundsManager.playSound('carhit')
+              this.collectItem(itemToCollect)
             }
           })
         })
       }
 
       GameTempStateManager.resetClickBuffer()
+
+      // Handle Items missed this frame
+      const itemsMissedThisFrame = detectMissedItemsThisFrame(
+        frame,
+        this.props.objectTrackerData,
+        this.props.allowedDisappearAreas,
+        this.props.alreadyKilledItems
+      )
+
+      itemsMissedThisFrame.forEach(itemMissed => {
+        console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
+        this.props.dispatch(addMissedItem(itemMissed.id))
+      })
 
       /*
         Draw things for this frame
@@ -334,7 +373,7 @@ class VideoOverlayUI extends Component {
         )
       }
 
-      this.drawCarrots(this.canvasContext)
+      this.drawCollectableItems(this.canvasContext)
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
@@ -420,6 +459,8 @@ export default connect(state => {
     showDebugUI: state.settings.get('showDebugUI'),
     originalResolution: selectedVideo.get('originalResolution').toJS(),
     canvasResolution: state.viewport.get('canvasResolution').toJS(),
-    ratioVideoTrackerFPS
+    ratioVideoTrackerFPS,
+    allowedDisappearAreas: selectedVideo.get('disappearAreas').toJS(),
+    alreadyKilledItems: state.game.get('killedItems')
   }
 })(VideoOverlayUI)

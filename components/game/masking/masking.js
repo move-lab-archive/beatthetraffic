@@ -2,9 +2,6 @@ import GameTempStateManager from '../../../statemanagement/app/GameTempStateMana
 
 import { scaleDetection } from '../../../utils/resolution'
 
-// Enlarge YOLO detection bbox constant
-const ENLARGE_SIZE = 25
-
 export function updateMasking (
   objectTrackerDataForThisFrame,
   canvasResolution,
@@ -31,15 +28,13 @@ export function updateMasking (
         originalResolution
       )
 
-      // Compute the potential object to mask data
-      // Enlarge mask to mask better
       let potentialObjectToMask = {
         idDisplay: objectTrackedScaled.idDisplay,
         id: objectTrackedScaled.id,
-        x: objectTrackedScaled.x - objectTrackedScaled.w / 2 - ENLARGE_SIZE,
-        y: objectTrackedScaled.y - objectTrackedScaled.h / 2 - ENLARGE_SIZE,
-        w: objectTrackedScaled.w + ENLARGE_SIZE * 2,
-        h: objectTrackedScaled.h + ENLARGE_SIZE * 2
+        x: objectTrackedScaled.x - objectTrackedScaled.w / 2,
+        y: objectTrackedScaled.y - objectTrackedScaled.h / 2,
+        w: objectTrackedScaled.w,
+        h: objectTrackedScaled.h
       }
 
       // If this is one of the objects we are already masking

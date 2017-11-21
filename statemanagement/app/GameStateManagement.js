@@ -52,6 +52,8 @@ export function addMissedItem (id) {
       payload: id
     })
 
+    SoundsManager.playSound('carmissed')
+
     // Check is we haven't failed the level
     if (
       getState().game.get('missedItems').size >=
@@ -63,9 +65,14 @@ export function addMissedItem (id) {
 }
 
 export function addKilledItem (id) {
-  return {
-    type: ADD_KILLED_ITEM,
-    payload: id
+  return (dispatch, getState) => {
+    dispatch({
+      type: ADD_KILLED_ITEM,
+      payload: id
+    })
+    dispatch(incrementScore())
+    SoundsManager.playSound()
+    SoundsManager.playSound('carhit')
   }
 }
 

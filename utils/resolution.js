@@ -21,6 +21,15 @@ export function scaleArea (area, finalResolution, originalResolution) {
   }
 }
 
+export function enlargeBbox (bbox, enlargeSize) {
+  return {
+    x: bbox.x - enlargeSize,
+    y: bbox.y - enlargeSize,
+    w: bbox.w + enlargeSize * 2,
+    h: bbox.h + enlargeSize * 2
+  }
+}
+
 export function isInsideArea (area, point) {
   const xMin = area.x
   const xMax = area.x + area.w

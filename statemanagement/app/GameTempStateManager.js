@@ -1,7 +1,8 @@
 /*
+  STORE outside redux
   Here goes things that change on each requestAnimationFrame ticks
-  we do not want to put that in the redux store as it gives an overhead
-  that brings performance down
+  we do not want to put that in the redux store as it cause an overhead
+  that brings performance down, and we don't care of immutability
 */
 
 const initialState = {
@@ -51,6 +52,10 @@ class GameTempStateManager {
 
   addMaskedItem (maskedItem) {
     this.state.itemMasked.push(maskedItem)
+  }
+
+  addCollectableItem (item) {
+    this.state.itemsToCollect.push(item)
   }
 
   removeItemToCollect (idToRemove) {
