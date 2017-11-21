@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull'
 
-import Button from '../../shared/Button'
-import Loading from '../../shared/Loading'
-import AskLandscapeAnimation from '../../shared/AskLandscapeAnimation'
+import Button from '../../../shared/Button'
+import Loading from '../../../shared/Loading'
+import AskLandscapeAnimation from '../../../shared/AskLandscapeAnimation'
 
-import { startLevel } from '../../../statemanagement/app/GameStateManagement'
+import { startLevel } from '../../../../statemanagement/app/GameStateManagement'
 
 class LevelBeginning extends Component {
   render () {

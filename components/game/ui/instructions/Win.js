@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '../../shared/Button'
+import Button from '../../../shared/Button'
 
-import { retry } from '../../../statemanagement/app/GameStateManagement'
+import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
-import SoundsManager from '../../../statemanagement/app/SoundsManager'
+import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
 class Win extends Component {
   componentDidMount () {

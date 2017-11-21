@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Button from '../../shared/Button'
-import SoundsManager from '../../../statemanagement/app/SoundsManager'
+import Button from '../../../shared/Button'
+import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
-import { loadLevel } from '../../../statemanagement/app/GameStateManagement'
+import { loadLevel } from '../../../../statemanagement/app/GameStateManagement'
 
 class LevelFinished extends Component {
   componentDidMount () {

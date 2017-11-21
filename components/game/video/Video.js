@@ -6,9 +6,9 @@ import {
   setVideoReady,
   setVideoEnded,
   firstFrameLoaded
-} from '../../statemanagement/app/VideoStateManagement'
+} from '../../../statemanagement/app/VideoStateManagement'
 
-import { getFirstFrameImgPath } from '../../statemanagement/app/AppStateManagement'
+import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
 class Video extends Component {
   constructor (props) {
