@@ -5,7 +5,10 @@ import raf from 'raf'
 
 import { scaleDetection } from '../../../utils/resolution'
 
+import { updateMasking } from '../masking/masking'
+
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
 class VideoOverlayUI extends Component {
   constructor (props) {
@@ -254,8 +257,23 @@ class VideoOverlayUI extends Component {
       // Clear previous frame
       this.canvasContext.clearRect(0, 0, 1280, 720)
 
-      // Handle user actions
+      // Get current frame of the tracker
+      // (sometimes it can be diffrent from the video framerate)
+      const frame =
+        GameTempStateManager.getCurrentFrame() * this.props.ratioVideoTrackerFPS
 
+      // Get data from tracker
+      let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
+
+      // Update masks
+      // TODO
+      const remainingPotentialObjectToMask = updateMasking(
+        objectTrackerDataForThisFrame,
+        this.props.canvasResolution,
+        this.props.originalResolution
+      )
+
+      // Handle user actions
       if (GameTempStateManager.getClicksBuffer().length > 0) {
         // For each click
         GameTempStateManager.getClicksBuffer().forEach(click => {
@@ -274,16 +292,33 @@ class VideoOverlayUI extends Component {
           })
 
           // See if it will make a car dissapear
-          // Add items to mask
-          // TODO
+          // for each remainingPotentialObjectToMask
+          // TODO do a helper for checking if a point is inside a bbox
+          remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
+            if (
+              click.x >= potentialObjectToMask.x &&
+              click.x <= potentialObjectToMask.x + potentialObjectToMask.w &&
+              click.y >= potentialObjectToMask.y &&
+              click.y <= potentialObjectToMask.y + potentialObjectToMask.h
+            ) {
+              console.log(`${potentialObjectToMask.idDisplay} clicked !`)
+              GameTempStateManager.addMaskedItem(potentialObjectToMask)
+              // TODO ADD ITEM TO COLLECT
+              // this.addItemToCollect(click, potentialObjectToMask)
+              // this.props.dispatch(incrementScore())
+              // this.props.dispatch(addKilledItem(potentialObjectToMask.id))
+              // // Play puff sound
+              // SoundsManager.playSound('carhit')
+            }
+          })
         })
       }
 
       GameTempStateManager.resetClickBuffer()
 
-      // currentDetectionOrTrackingFrame
-      const frame =
-        GameTempStateManager.getCurrentFrame() * this.props.ratioVideoTrackerFPS
+      /*
+        Draw things for this frame
+      */
 
       // Draw debug raw detections data
       let rawDetectionsForThisFrame = this.props.rawDetections[frame]
@@ -292,7 +327,6 @@ class VideoOverlayUI extends Component {
       }
 
       // Draw debug objectTracker data
-      let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
       if (this.props.showDebugUI && objectTrackerDataForThisFrame) {
         this.drawObjectTrackerData(
           this.canvasContext,

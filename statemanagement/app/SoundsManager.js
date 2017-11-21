@@ -1,3 +1,4 @@
+/* global Howler */
 import { Howl } from 'howler'
 
 class SoundsManager {

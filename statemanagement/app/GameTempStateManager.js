@@ -45,6 +45,14 @@ class GameTempStateManager {
     this.state.currentTime = newCurrentTime
   }
 
+  setCurrentMaskedItems (maskedItems) {
+    this.state.itemMasked = maskedItems
+  }
+
+  addMaskedItem (maskedItem) {
+    this.state.itemMasked.push(maskedItem)
+  }
+
   removeItemToCollect (idToRemove) {
     this.state.itemsToCollect = this.state.itemsToCollect.filter(
       item => item.id !== idToRemove
