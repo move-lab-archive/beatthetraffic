@@ -22,12 +22,7 @@ const canvasResolution = {
 }
 
 const initialState = {
-  masks: [],
-  carsNotMasked: [],
-  carrots: [],
-  bananas: [],
-  puffAnimations: [],
-  scoreAnimations: []
+  masks: []
 }
 
 class Mask extends Component {
@@ -43,12 +38,9 @@ class Mask extends Component {
     this.lastFrameDrawn = -1;
     this.loopUpdateMasks = this.loopUpdateMasks.bind(this);
     this.recordClick = this.recordClick.bind(this);
+    this.addItemToCollect = this.addItemToCollect.bind(this);
     this.initClickRecorder = this.initClickRecorder.bind(this);
     this.cleanClickRecorder = this.cleanClickRecorder.bind(this);
-    this.removePuffAnimation = this.removePuffAnimation.bind(this);
-    this.removeScoreAnimation = this.removeScoreAnimation.bind(this);
-    this.collectCarrot = this.collectCarrot.bind(this);
-    this.removeCarrot = this.removeCarrot.bind(this);
   }
 
   componentDidMount() {
@@ -132,79 +124,22 @@ class Mask extends Component {
                     click.y <= potentialObjectToMask.y + potentialObjectToMask.h - ENLARGE_SIZE) {
                       console.log(`${potentialObjectToMask.idDisplay} clicked !`)
                       objectsMaskedUpdated.push(potentialObjectToMask);
-                      // this.setState({
-                      //   puffAnimations: [...this.state.puffAnimations, {
-                      //     x: click.xReal,
-                      //     y: click.yReal,
-                      //     id: potentialObjectToMask.id
-                      //   }],
-                      //   scoreAnimations: [...this.state.scoreAnimations, {
-                      //     x: click.xReal,
-                      //     y: click.yReal,
-                      //     id: potentialObjectToMask.id
-                      //   }],
-                      //   carrots: [...this.state.carrots, {
-                      //     x: click.xReal,
-                      //     y: click.yReal,
-                      //     w: potentialObjectToMask.w,
-                      //     h: potentialObjectToMask.h,
-                      //     id: potentialObjectToMask.id
-                      //   }]
-                      // });
-                      // TODO push some carrot
 
-                      const newItem = {
-                        type: "carrot",
-                        x: click.xReal,
-                        y: click.yReal,
-                        w: this.getUnicornSize(potentialObjectToMask),
-                        h: this.getUnicornSize(potentialObjectToMask),
-                        id: potentialObjectToMask.id,
-                        isCollectable: false
-                      }
-
-                      setTimeout(() => {
-                        newItem.isCollectable = true
-                      }, 500);
-
-                      window.itemsToCollect =  [
-                        ...window.itemsToCollect,
-                        newItem
-                      ];
-
-                      // this.props.dispatch(incrementScore());
-                      // this.props.dispatch(addKilledItem(potentialObjectToMask.id));
+                      this.addItemToCollect(click, potentialObjectToMask);
+                      this.props.dispatch(incrementScore());
+                      this.props.dispatch(addKilledItem(potentialObjectToMask.id));
                       // Play puff sound
                       SoundsManager.playSound("carhit");
                     }
                 });
               }
             }
-            
-            // Return the object scaled without enlarging for
-            // the mask
-            return {
-              id: objectTrackedScaled.id,
-              x: objectTrackedScaled.x - objectTrackedScaled.w/2,
-              y: objectTrackedScaled.y - objectTrackedScaled.h/2,
-              w: objectTrackedScaled.w,
-              h: objectTrackedScaled.h
-            }
           });
           this.clicksRecorded = [];
-          // Get object tracked NOT masked
-          let carsNotMasked = objectTrackerDataForThisFrame.filter((objectTracked) => { 
-            if(objectsMaskedUpdated.find((maskedObject) => maskedObject.id === objectTracked.id)) {
-              return false;
-            } else {
-              return true;
-            }
+
+          this.setState({ 
+            masks: objectsMaskedUpdated
           });
-          // console.log(carsNotMasked.length);
-          // this.setState({ 
-          //   masks: objectsMaskedUpdated,
-          //   carsNotMasked
-          // });
           
           window.itemsMasked = objectsMaskedUpdated;
         }
@@ -231,6 +166,27 @@ class Mask extends Component {
       }
     }
     requestAnimationFrame(this.loopUpdateMasks.bind(this));
+  }
+
+  addItemToCollect(clickInfo, objectMaskedThatOutputObject) {
+    const newItem = {
+      type: "carrot",
+      x: clickInfo.xReal,
+      y: clickInfo.yReal,
+      w: this.getUnicornSize(objectMaskedThatOutputObject),
+      h: this.getUnicornSize(objectMaskedThatOutputObject),
+      id: objectMaskedThatOutputObject.id,
+      isCollectable: false
+    }
+
+    setTimeout(() => {
+      newItem.isCollectable = true
+    }, 500);
+
+    window.itemsToCollect =  [
+      ...window.itemsToCollect,
+      newItem
+    ];
   }
 
   recordClick(event) {
@@ -293,7 +249,7 @@ class Mask extends Component {
 
   getUnicornSize(mask) {
     const maskArea = mask.w * mask.h;
-    return Math.sqrt(maskArea / 30);
+    return Math.floor(Math.sqrt(maskArea / 30));
   }
 
   getPollutionOverlayStyle() {
@@ -365,55 +321,10 @@ class Mask extends Component {
               xlinkHref="/static/assets/icons/icon-unicorn.svg"
             />
           )}
-          {this.state.carrots.map((carrot) => 
-            <g mask="url(#myMask)">
-              <Carrot
-                id={carrot.id}
-                key={`carrot-${carrot.id}`} 
-                x={carrot.x}
-                y={carrot.y}
-                w={this.getUnicornSize(carrot)}
-                h={this.getUnicornSize(carrot)}
-                removeCarrot={this.removeCarrot}
-                collectCarrot={this.collectCarrot}
-              />
-            </g>
-          )}
           <defs>
             <Clippath masks={this.state.masks} />
-            <mask id="myMask">
-              <rect width="100%" height="100%" fill="white"/>
-              {this.state.carsNotMasked.map((mask) =>
-                <rect
-                  key={`mask-${mask.id}`}
-                  x={mask.x}
-                  y={mask.y}
-                  width={mask.w}
-                  height={mask.h}
-                  fill="black"
-                ></rect>
-              )}
-            </mask>
           </defs>
         </svg>
-        {this.state.puffAnimations.map((puffAnimation) => 
-          <PuffAnimation
-            key={puffAnimation.id}
-            id={puffAnimation.id}
-            x={puffAnimation.x}
-            y={puffAnimation.y}
-            removePuffAnimation={this.removePuffAnimation}
-          />
-        )}
-        {/* {this.state.scoreAnimations.map((scoreAnimation) => 
-          <ScoreAnimation
-            key={scoreAnimation.id}
-            id={scoreAnimation.id}
-            x={scoreAnimation.x}
-            y={scoreAnimation.y}
-            removeScoreAnimation={this.removeScoreAnimation}
-          />
-        )} */}
         <style jsx>{`
           .mask-container {
             width: 100%;
@@ -421,6 +332,7 @@ class Mask extends Component {
             position: absolute;
             top:0;
             left:0;
+            will-change: auto;
           }
           .average-img {
             position: absolute;

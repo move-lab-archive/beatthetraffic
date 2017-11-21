@@ -1,6 +1,5 @@
-import { fromJS } from 'immutable';
-import axis from 'axios';
-import SoundsManager from './SoundsManager';
+import { fromJS } from 'immutable'
+import SoundsManager from './SoundsManager'
 
 // Initial state
 const initialState = fromJS({
@@ -8,53 +7,51 @@ const initialState = fromJS({
   darkMode: false,
   soundEnabled: false,
   isServerRendering: true
-});
+})
 
 // Actions
 const UPDATE_SETTINGS = 'Settings/UPDATE'
 
-const SOUND_ON = 'Settings/SOUND_ON';
-const SOUND_OFF = 'Settings/SOUND_OFF';
+const SOUND_ON = 'Settings/SOUND_ON'
+const SOUND_OFF = 'Settings/SOUND_OFF'
 
-const SET_CLIENT_RENDERING = 'Settings/SET_CLIENT_RENDERING';
+const SET_CLIENT_RENDERING = 'Settings/SET_CLIENT_RENDERING'
 
-export function updateSettings(newSettings) {
+export function updateSettings (newSettings) {
   return {
     type: UPDATE_SETTINGS,
     payload: newSettings
   }
 }
 
-export function setClientRendering() {
+export function setClientRendering () {
   return {
     type: SET_CLIENT_RENDERING
   }
 }
 
-export function turnSoundOn() {
+export function turnSoundOn () {
   return (dispatch, getState) => {
-    
-    SoundsManager.unMuteAll();
+    SoundsManager.unMuteAll()
 
     dispatch({
       type: SOUND_ON
-    });
+    })
   }
 }
 
-export function turnSoundOff() {
+export function turnSoundOff () {
   return (dispatch, getState) => {
-    
-    SoundsManager.muteAll();
+    SoundsManager.muteAll()
 
     dispatch({
       type: SOUND_OFF
-    });
+    })
   }
 }
 
 // Reducer
-export default function SettingsReducer(state = initialState, action = {}) {
+export default function SettingsReducer (state = initialState, action = {}) {
   switch (action.type) {
     case UPDATE_SETTINGS:
       return state.merge(action.payload)
@@ -65,6 +62,6 @@ export default function SettingsReducer(state = initialState, action = {}) {
     case SET_CLIENT_RENDERING:
       return state.set('isServerRendering', false)
     default:
-      return state;
+      return state
   }
 }

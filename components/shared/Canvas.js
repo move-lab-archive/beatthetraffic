@@ -269,7 +269,7 @@ class Canvas extends Component {
       onComplete: () => {
         // TODO REMOVE item from itemsToCollect
         window.itemsToCollect = window.itemsToCollect.filter((item) => item.id != itemToCollect.id)
-        console.log(window.itemsToCollect.length);
+        // console.log(window.itemsToCollect.length);
       }
     });
     

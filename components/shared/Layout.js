@@ -1,25 +1,32 @@
-import { Component } from 'react';
+import React, { Component } from 'react'
 import Head from 'next/head'
 
 class Layout extends Component {
-  
-  recordFirstPaint() {
-    return {__html: '<script>window.firstPaint = new Date().getTime()</script>'};
+  recordFirstPaint () {
+    return {
+      __html: '<script>window.firstPaint = new Date().getTime()</script>'
+    }
   }
 
-  render() { 
+  render () {
     return (
       <div>
         <Head>
           <title>Traffic Cam</title>
           <meta charSet='utf-8' />
-          <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1" />
-          <link href="https://fonts.googleapis.com/css?family=Geo|Quantico:700" rel="stylesheet" />
+          <meta
+            name='viewport'
+            content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
+          />
+          <link
+            href='https://fonts.googleapis.com/css?family=Geo|Quantico:700'
+            rel='stylesheet'
+          />
         </Head>
         {this.props.children}
         <div dangerouslySetInnerHTML={this.recordFirstPaint()} />
         <style jsx>{`
-          :global(html,body) {
+          :global(html, body) {
             height: 100%;
             width: 100%;
             margin: 0;
@@ -27,19 +34,23 @@ class Layout extends Component {
             left: 0;
             top: 0;
             font-family: 'Quantico', sans-serif;
-            background-color: #262626;          
+            background-color: #262626;
           }
 
           :global(html) {
-            font-size: 62.5%; 
+            font-size: 62.5%;
           }
 
           @media (max-width: 450px) {
-            :global(html) { font-size: 50%; }
+            :global(html) {
+              font-size: 50%;
+            }
           }
 
           @media (max-height: 400px) {
-            :global(html) { font-size: 50%; }
+            :global(html) {
+              font-size: 50%;
+            }
           }
 
           :global(body) {
@@ -67,8 +78,8 @@ class Layout extends Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
- 
-export default Layout;
+
+export default Layout

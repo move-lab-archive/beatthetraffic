@@ -1,40 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { turnSoundOn, turnSoundOff } from '../../statemanagement/app/SettingsStateManagement';
+import {
+  turnSoundOn,
+  turnSoundOff
+} from '../../statemanagement/app/SettingsStateManagement'
 
 class Sound extends Component {
+  constructor (props) {
+    super(props)
 
-  constructor(props) {
-    super(props);
-
-    this.toggleSound = this.toggleSound.bind(this);
+    this.toggleSound = this.toggleSound.bind(this)
 
     // Init
-    if(props.soundEnabled) {
-      props.dispatch(turnSoundOn());
+    if (props.soundEnabled) {
+      props.dispatch(turnSoundOn())
     } else {
-      props.dispatch(turnSoundOff());
+      props.dispatch(turnSoundOff())
     }
   }
 
-  toggleSound() {
-    if(this.props.soundEnabled) {
-      this.props.dispatch(turnSoundOff());
+  toggleSound () {
+    if (this.props.soundEnabled) {
+      this.props.dispatch(turnSoundOff())
     } else {
-      this.props.dispatch(turnSoundOn());
+      this.props.dispatch(turnSoundOn())
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // Prefetch sound on / off image depending on enabled / disabled
-    const soundOn = new Image();
-    soundOn.src = `/static/assets/icons/icon-sound-${this.props.soundEnabled ? 'off' : 'on'}.svg`;
+    const soundOn = new Image()
+    soundOn.src = `/static/assets/icons/icon-sound-${
+      this.props.soundEnabled ? 'off' : 'on'
+    }.svg`
   }
 
-  render() {
+  render () {
     return (
-      <div 
+      <div
         className={`audio-button ${this.props.soundEnabled ? 'on' : 'off'}`}
         onClick={this.toggleSound}
       >
@@ -56,7 +60,6 @@ class Sound extends Component {
 
           .audio-button.on {
             background-image: url(/static/assets/icons/icon-sound-on.svg);
-            
           }
 
           .audio-button.off {
@@ -64,12 +67,12 @@ class Sound extends Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default connect((state) => {
+export default connect(state => {
   return {
     soundEnabled: state.settings.get('soundEnabled')
   }
-})(Sound);
+})(Sound)

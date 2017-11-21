@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class AskLandscapeAnimation extends Component {
-
-  render() {
+  render () {
     return (
-      <div className="icon">
+      <div className='icon'>
         📱
         <style jsx>{`
           .icon {
@@ -16,20 +15,20 @@ class AskLandscapeAnimation extends Component {
           }
 
           @keyframes spin {
-            0% { 
-              transform: rotate(0deg); 
+            0% {
+              transform: rotate(0deg);
             }
             30% {
-              transform: rotate(90deg); 
+              transform: rotate(90deg);
             }
             100% {
-              transform: rotate(90deg); 
+              transform: rotate(90deg);
             }
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default AskLandscapeAnimation;
+export default AskLandscapeAnimation

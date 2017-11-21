@@ -1,12 +1,11 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import NoSSR from 'react-no-ssr'
+import raf from 'raf'
 
 import {
   setVideoReady,
   setVideoEnded,
-  firstFrameLoaded,
-  updateCurrentTime
+  firstFrameLoaded
 } from '../../statemanagement/app/VideoStateManagement'
 
 import { getFirstFrameImgPath } from '../../statemanagement/app/AppStateManagement'
@@ -165,7 +164,7 @@ class Video extends Component {
       //   this.props.dispatch(updateCurrentTime(newCurrentTime));
       // }
     }
-    requestAnimationFrame(this.monitorFrames)
+    raf(this.monitorFrames)
   }
 
   componentWillUnmount () {

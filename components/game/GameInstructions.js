@@ -1,39 +1,29 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
-import LevelBeginning from './instructions/LevelBeginning';
-import LevelFinished from './instructions/LevelFinished';
-import Gameover from './instructions/Gameover';
-import Win from './instructions/Win';
+import LevelBeginning from './instructions/LevelBeginning'
+import LevelFinished from './instructions/LevelFinished'
+import Gameover from './instructions/Gameover'
+import Win from './instructions/Win'
 
 class GameInstructions extends PureComponent {
-
-  render() {
+  render () {
     return (
-      <div 
-        className="game-instructions"
-      >
+      <div className='game-instructions'>
         {!this.props.isPlaying &&
-         !this.props.failed &&
-         !this.props.finished &&
-          <LevelBeginning />
-        }
+          !this.props.failed &&
+          !this.props.finished && <LevelBeginning />}
         {!this.props.isPlaying &&
-         !this.props.failed &&
-         this.props.finished &&
-         this.props.currentLevel < this.props.nbTotalLevel  &&
-          <LevelFinished />
-        }
+          !this.props.failed &&
+          this.props.finished &&
+          this.props.currentLevel < this.props.nbTotalLevel && (
+            <LevelFinished />
+          )}
         {!this.props.isPlaying &&
-         !this.props.failed &&
-         this.props.finished &&
-         this.props.currentLevel === this.props.nbTotalLevel &&
-          <Win />
-        }
-        {!this.props.isPlaying &&
-          this.props.failed &&
-          <Gameover />
-        }
+          !this.props.failed &&
+          this.props.finished &&
+          this.props.currentLevel === this.props.nbTotalLevel && <Win />}
+        {!this.props.isPlaying && this.props.failed && <Gameover />}
         <style jsx>{`
           .game-instructions {
             position: fixed;
@@ -46,12 +36,11 @@ class GameInstructions extends PureComponent {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default connect((state) => {
-
+export default connect(state => {
   return {
     isPlaying: state.game.get('isPlaying'),
     failed: state.game.get('failed'),
@@ -59,4 +48,4 @@ export default connect((state) => {
     currentLevel: state.game.get('currentLevel'),
     nbTotalLevel: state.game.get('nbTotalLevel')
   }
-})(GameInstructions);
+})(GameInstructions)

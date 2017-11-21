@@ -27,7 +27,7 @@ export default connect((state) => {
 
   const selectedVideo = state.app.get('availableVideos').find((video) => {
     return video.get('name') === state.app.get('selectedVideo')
-  });
+  })
 
   return {
     levelName: selectedVideo.get('levelName'),

@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import PollutionLevel from './PollutionLevel';
-import Score from './Score';
+import PollutionLevel from './PollutionLevel'
+import Score from './Score'
 
 class GameIndicators extends Component {
-
-  render() {
+  render () {
     return (
-      <div 
-        className="game-indicators"
-      >
+      <div className='game-indicators'>
         <Score />
         <PollutionLevel />
         <style jsx>{`
@@ -23,8 +20,8 @@ class GameIndicators extends Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default GameIndicators;
+export default GameIndicators

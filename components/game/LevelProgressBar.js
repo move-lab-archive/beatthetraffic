@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { TweenLite } from 'gsap';
 
 class LevelProgressBar extends PureComponent {
 
@@ -15,6 +16,7 @@ class LevelProgressBar extends PureComponent {
 
   componentDidMount() {
     this.monitorProgress();
+    TweenLite.set(this.el, {scaleX: 0});
   }
 
   monitorProgress() {
@@ -22,7 +24,8 @@ class LevelProgressBar extends PureComponent {
       window.currentTime !== this.currentTime) {
       const progressInLevel = window.currentTime / this.props.totalDuration || 0;
       const progressOffset = this.progressByLevel * (this.props.currentLevel - 1);
-      this.el.style.transform = `scaleX(${progressOffset + progressInLevel * this.progressByLevel})`;
+      const progress = progressOffset + progressInLevel * this.progressByLevel;
+      TweenLite.set(this.el, {scaleX: progress})
       this.currentTime = window.currentTime;
     }
     requestAnimationFrame(this.monitorProgress)
@@ -45,6 +48,7 @@ class LevelProgressBar extends PureComponent {
             height: 0.8rem;
             background-color: #262626;
             z-index: 1;
+            will-change: transform;
           }
 
           .progress-bar-content {
@@ -55,9 +59,7 @@ class LevelProgressBar extends PureComponent {
             width: 100%;
             height: 100%;
             background-color: #FFFE4A;
-            will-change: transform;
             transform-origin: 0 0;
-            transform: scale(0);
           } 
         `}</style>
       </div>

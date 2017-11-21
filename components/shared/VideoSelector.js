@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { selectVideo } from '../../statemanagement/app/AppStateManagement';
+import { selectVideo } from '../../statemanagement/app/AppStateManagement'
 
 class VideoSelector extends Component {
-
-  constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
+  constructor (props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
   }
 
-  onChange(event) {
-    window.scrollTo(0,0);
-    this.props.dispatch(selectVideo(event.target.value));
+  onChange (event) {
+    window.scrollTo(0, 0)
+    this.props.dispatch(selectVideo(event.target.value))
   }
 
-  render() {
+  render () {
     return (
-      <div className="video-selector">
+      <div className='video-selector'>
         <select
-          name="video"
+          name='video'
           value={this.props.selectedVideo}
           onChange={this.onChange}
         >
-          {this.props.availableVideos.map((availableVideo) => 
+          {this.props.availableVideos.map(availableVideo => (
             <option
-              key={availableVideo.get('name')} 
+              key={availableVideo.get('name')}
               value={availableVideo.get('name')}
             >
               {availableVideo.get('name')}
             </option>
-          )}
+          ))}
         </select>
         <style jsx>{`
           .video-selector {
@@ -41,13 +40,13 @@ class VideoSelector extends Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default connect((state) => {
+export default connect(state => {
   return {
     selectedVideo: state.app.get('selectedVideo'),
     availableVideos: state.app.get('availableVideos')
   }
-})(VideoSelector);
+})(VideoSelector)
