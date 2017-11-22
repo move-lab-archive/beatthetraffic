@@ -1,4 +1,4 @@
-import { TweenLite } from 'gsap'
+import { TweenLite, TweenMax } from 'gsap'
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
 
 class CollectableItem {
@@ -11,12 +11,14 @@ class CollectableItem {
     this.opacity = opacity
     this.id = id
     this.isCollectable = false
+    this.currentFrame = 0
 
     // Wait a bit before making it collectable
     // if not people can just double click when
     // making the car disappear
     setTimeout(() => {
       this.isCollectable = true
+      this.animate()
     }, 500)
   }
 
@@ -32,7 +34,12 @@ class CollectableItem {
   }
 
   animate () {
-    // TODO change animate img object
+    const anim = TweenMax.to(this, 2, {
+      currentFrame: 18,
+      ease: SteppedEase.config(18),
+      repeat: -1
+    }).play()
+    anim.play()
   }
 }
 

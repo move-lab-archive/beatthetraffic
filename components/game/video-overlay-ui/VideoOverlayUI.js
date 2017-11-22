@@ -242,7 +242,7 @@ class VideoOverlayUI extends Component {
       CollectableItems.drawFrameOnCanvas(
         this.canvasContext,
         item.type,
-        0,
+        item.currentFrame,
         item.x,
         item.y,
         item.w,
@@ -259,7 +259,7 @@ class VideoOverlayUI extends Component {
   // Todo have min / max size
   getItemSize (mask) {
     const maskArea = mask.w * mask.h
-    return Math.floor(Math.sqrt(maskArea / 7))
+    return Math.floor(Math.sqrt(maskArea / 4));
   }
 
   getItemType () {
