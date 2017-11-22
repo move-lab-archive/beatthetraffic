@@ -49,12 +49,18 @@ class VideoOverlayUI extends Component {
     // Preload image
     this.imgCarrot = new Image()
     this.imgCarrot.src = '/static/assets/icons/icon-carrot.svg'
+    this.imgCarrot.width = 42
+    this.imgCarrot.height = 41
 
     this.imgTree = new Image()
     this.imgTree.src = '/static/assets/icons/icon-tree.svg'
+    this.imgTree.width = 39
+    this.imgTree.height = 54
 
     this.imgBanana = new Image()
     this.imgBanana.src = '/static/assets/icons/icon-banana.svg'
+    this.imgBanana.width = 29
+    this.imgBanana.height = 45
   }
 
   drawRawDetections (context, detections) {
@@ -261,7 +267,16 @@ class VideoOverlayUI extends Component {
       } else if (item.type === 'banana') {
         img = this.imgBanana
       }
-      this.canvasContext.drawImage(img, item.x, item.y, item.w, item.h)
+      this.canvasContext.globalAlpha = item.opacity || 1
+      // TODO need to scale object on the larger edge, for now height
+      this.canvasContext.drawImage(
+        img,
+        item.x,
+        item.y,
+        Math.floor(item.h * img.width / img.height),
+        item.h
+      )
+      this.canvasContext.globalAlpha = 1
     })
   }
 
@@ -269,9 +284,10 @@ class VideoOverlayUI extends Component {
     this.canvasContext.clearRect(0, 0, 1280, 720)
   }
 
+  // Todo have min / max size
   getItemSize (mask) {
     const maskArea = mask.w * mask.h
-    return Math.floor(Math.sqrt(maskArea / 10))
+    return Math.floor(Math.sqrt(maskArea / 7))
   }
 
   getItemType () {
@@ -336,6 +352,7 @@ class VideoOverlayUI extends Component {
               this.addCollectableItem(click, potentialObjectToMask)
               // Dispatch killed item notification
               this.props.dispatch(addKilledItem(potentialObjectToMask.id))
+              // TODO Add puff animation
             }
           })
 
