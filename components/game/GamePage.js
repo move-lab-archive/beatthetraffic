@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Video from './video/Video'
-import GameEngine from './engine/GameEngine'
+import GameEngine from './core/GameEngine'
 import Sound from './ui/Sound'
 import GameIndicators from './ui/GameIndicators'
 import GameInstructions from './ui/GameInstructions'

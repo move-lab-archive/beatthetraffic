@@ -2,17 +2,22 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import raf from 'raf'
 
-import { scaleDetection, isInsideArea } from '../../../utils/resolution'
+import { isInsideArea } from '../../../utils/resolution'
 
 import { updateMasking } from '../masking/masking'
 
 import detectMissedItemsThisFrame from './utils/detectMissedItems'
+
 import CollectableItem from './models/CollectableItem'
 import CollectableItemsEngine, {
   COLLECTABLE_TYPES
-} from './CollectableItemsEngine'
-import PuffAnimationsEngine from './PuffAnimationsEngine'
+} from './engines/CollectableItemsEngine'
+
+import PuffAnimationsEngine from './engines/PuffAnimationsEngine'
 import PuffAnimation from './models/PuffAnimation'
+
+import DebugTrackerEngine from './engines/DebugTrackerEngine'
+import TrackerUIEngine from './engines/TrackerUIEngine'
 
 import {
   addKilledItem,
@@ -49,192 +54,9 @@ class GameEngine extends Component {
   }
 
   componentDidMount () {
+    // Rendering engine that have offscreen canvas to init on client
     CollectableItemsEngine.init()
     PuffAnimationsEngine.init()
-  }
-
-  drawRawDetections (context, detections) {
-    context.strokeStyle = '#f00'
-    context.lineWidth = 5
-    context.font = '15px Arial'
-    context.fillStyle = '#f00'
-    detections.map(detection => {
-      let scaledDetection = scaleDetection(
-        detection,
-        this.props.canvasResolution,
-        this.props.originalResolution
-      )
-      let x = scaledDetection.x - scaledDetection.w / 2
-      let y = scaledDetection.y - scaledDetection.h / 2
-      context.strokeRect(x, y, scaledDetection.w, scaledDetection.h)
-      context.fillText(scaledDetection.name, x, y - 10)
-    })
-  }
-
-  drawObjectTrackerData (context, objectTrackerData) {
-    context.globalAlpha = 1
-    context.strokeStyle = 'blue'
-    context.lineWidth = 5
-    context.font = '30px Arial'
-    context.fillStyle = 'blue'
-    objectTrackerData.map(objectTracked => {
-      let objectTrackedScaled = scaleDetection(
-        objectTracked,
-        this.props.canvasResolution,
-        this.props.originalResolution
-      )
-      if (objectTrackedScaled.isZombie) {
-        context.fillStyle = `rgba(255, 153, 0, ${
-          objectTrackedScaled.zombieOpacity
-        })`
-        context.strokeStyle = `rgba(255, 153, 0, ${
-          objectTrackedScaled.zombieOpacity
-        })`
-      } else {
-        context.fillStyle = 'blue'
-        context.strokeStyle = 'blue'
-      }
-      let x = objectTrackedScaled.x - objectTrackedScaled.w / 2
-      let y = objectTrackedScaled.y - objectTrackedScaled.h / 2
-      context.strokeRect(
-        x + 5,
-        y + 5,
-        objectTrackedScaled.w - 10,
-        objectTrackedScaled.h - 10
-      )
-      context.fillText(
-        objectTrackedScaled.idDisplay,
-        x + objectTrackedScaled.w / 2 - 20,
-        y + objectTrackedScaled.h / 2
-      )
-    })
-  }
-
-  computeCircleRadius (bboxArea) {
-    return Math.sqrt(bboxArea / 100)
-  }
-
-  computeCornerLength (bboxArea) {
-    return Math.sqrt(bboxArea / 50)
-  }
-
-  drawTrackerUIData (context, objectTrackerDataForThisFrame) {
-    objectTrackerDataForThisFrame
-      .filter(objectTracked => {
-        return (
-          !GameEngineStateManager.getItemsMasked().find(
-            itemMasked => itemMasked.id === objectTracked.id
-          ) && objectTracked.isZombie !== true
-        )
-      })
-      .map(objectTracked => {
-        let objectTrackedScaled = scaleDetection(
-          objectTracked,
-          this.props.canvasResolution,
-          this.props.originalResolution
-        )
-
-        // Set params
-        context.strokeStyle = '#4EFFFF'
-        context.fillStyle = '#4EFFFF'
-        context.lineWidth = 2
-        context.globalAlpha = 1
-
-        const bboxArea = objectTrackedScaled.w * objectTrackedScaled.h
-        const canvasArea =
-          this.props.canvasResolution.w * this.props.canvasResolution.h
-        const bboxAreaPercentageOfCanvas = bboxArea * 100 / canvasArea
-
-        // Draw circle with dynamic radius depending on Bbox size
-        let bboxCenter = {
-          x: objectTrackedScaled.x,
-          y: objectTrackedScaled.y
-        }
-
-        // Clear react if there is a carrot of stuff
-        // Maybe better to check when drawing
-        context.clearRect(
-          objectTrackedScaled.x - objectTrackedScaled.w / 2,
-          objectTrackedScaled.y - objectTrackedScaled.h / 2,
-          objectTrackedScaled.w,
-          objectTrackedScaled.h
-        )
-
-        context.beginPath()
-        context.arc(
-          bboxCenter.x,
-          bboxCenter.y,
-          this.computeCircleRadius(bboxArea),
-          0,
-          2 * Math.PI,
-          false
-        )
-        context.fill()
-
-        // If bbox area is more than 0.8% of canvas area, display the target
-        if (bboxAreaPercentageOfCanvas > 0.8) {
-          // Shortcut to objectTrackedScaled to avoid writing 1000 lines of code
-          const obj = objectTrackedScaled
-
-          // Compute target corner relative size
-          const cornerLength = this.computeCornerLength(bboxArea)
-          const cornerTickness = cornerLength / 3
-
-          // Draw target
-          // Top right
-          context.fillRect(
-            obj.x + obj.w / 2,
-            obj.y - obj.h / 2,
-            cornerTickness,
-            cornerLength
-          )
-          context.fillRect(
-            obj.x + obj.w / 2 - cornerLength + cornerTickness,
-            obj.y - obj.h / 2,
-            cornerLength,
-            cornerTickness
-          )
-          // Top left
-          context.fillRect(
-            obj.x - obj.w / 2,
-            obj.y - obj.h / 2,
-            cornerTickness,
-            cornerLength
-          )
-          context.fillRect(
-            obj.x - obj.w / 2,
-            obj.y - obj.h / 2,
-            cornerLength,
-            cornerTickness
-          )
-          // Bottom left
-          context.fillRect(
-            obj.x - obj.w / 2,
-            obj.y + obj.h / 2 - cornerLength + cornerTickness,
-            cornerTickness,
-            cornerLength
-          )
-          context.fillRect(
-            obj.x - obj.w / 2,
-            obj.y + obj.h / 2,
-            cornerLength,
-            cornerTickness
-          )
-          // Bottom right
-          context.fillRect(
-            obj.x + obj.w / 2,
-            obj.y + obj.h / 2 - cornerLength + cornerTickness,
-            cornerTickness,
-            cornerLength
-          )
-          context.fillRect(
-            obj.x + obj.w / 2 - cornerLength + cornerTickness,
-            obj.y + obj.h / 2,
-            cornerLength,
-            cornerTickness
-          )
-        }
-      })
   }
 
   collectItem (itemToCollect) {
@@ -304,7 +126,8 @@ class GameEngine extends Component {
       // Get current frame of the tracker
       // (sometimes it can be diffrent from the video framerate)
       const frame =
-        GameEngineStateManager.getCurrentFrame() * this.props.ratioVideoTrackerFPS
+        GameEngineStateManager.getCurrentFrame() *
+        this.props.ratioVideoTrackerFPS
 
       // Get data from tracker
       let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
@@ -374,20 +197,6 @@ class GameEngine extends Component {
         Draw things for this frame
       */
 
-      // Draw debug raw detections data
-      let rawDetectionsForThisFrame = this.props.rawDetections[frame]
-      if (this.props.showDebugUI && rawDetectionsForThisFrame) {
-        this.drawRawDetections(this.canvasContext, rawDetectionsForThisFrame)
-      }
-
-      // Draw debug objectTracker data
-      if (this.props.showDebugUI && objectTrackerDataForThisFrame) {
-        this.drawObjectTrackerData(
-          this.canvasContext,
-          objectTrackerDataForThisFrame
-        )
-      }
-
       // Draw collectable items state
       this.drawCollectableItems(this.canvasContext)
 
@@ -396,9 +205,32 @@ class GameEngine extends Component {
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
-        this.drawTrackerUIData(
+        TrackerUIEngine.drawTrackerUIData(
           this.canvasContext,
-          objectTrackerDataForThisFrame
+          objectTrackerDataForThisFrame,
+          this.props.canvasResolution,
+          this.props.originalResolution
+        )
+      }
+
+      // Draw debug raw detections data
+      let rawDetectionsForThisFrame = this.props.rawDetections[frame]
+      if (this.props.showDebugUI && rawDetectionsForThisFrame) {
+        DebugTrackerEngine.drawRawDetections(
+          this.canvasContext,
+          rawDetectionsForThisFrame,
+          this.props.canvasResolution,
+          this.props.originalResolution
+        )
+      }
+
+      // Draw debug objectTracker data
+      if (this.props.showDebugUI && objectTrackerDataForThisFrame) {
+        DebugTrackerEngine.drawObjectTrackerData(
+          this.canvasContext,
+          objectTrackerDataForThisFrame,
+          this.props.canvasResolution,
+          this.props.originalResolution
         )
       }
 

@@ -29,8 +29,7 @@ class CollectableItem {
       y: 0,
       opacity: 0.1,
       onComplete: () => {
-        this.anim.kill()
-        GameEngineStateManager.removeItemToCollect(this.id)
+        this.destroy()
       }
     })
   }
@@ -42,6 +41,11 @@ class CollectableItem {
       repeat: -1
     })
     this.anim.play()
+  }
+
+  destroy () {
+    this.anim.kill()
+    GameEngineStateManager.removeItemToCollect(this.id)
   }
 }
 

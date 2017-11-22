@@ -1,6 +1,6 @@
 import { TweenLite } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
-import PuffAnimationsEngine from '../PuffAnimationsEngine'
+import PuffAnimationsEngine from '../engines/PuffAnimationsEngine'
 
 class PuffAnimation {
   constructor (x, y, size, id) {
@@ -19,12 +19,15 @@ class PuffAnimation {
       currentFrame: PuffAnimationsEngine.getNbFrames(),
       ease: SteppedEase.config(PuffAnimationsEngine.getNbFrames()),
       onComplete: () => {
-        this.anim.kill()
-        // TODO MOVE OUTSIDE, shouldn't know how to remove itself
-        GameEngineStateManager.removePuffAnimation(this.id)
+        this.destroy()
       }
     })
     this.anim.play()
+  }
+
+  destroy () {
+    this.anim.kill()
+    GameEngineStateManager.removePuffAnimation(this.id)
   }
 }
 
