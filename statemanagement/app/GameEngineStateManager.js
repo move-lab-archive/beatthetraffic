@@ -5,7 +5,7 @@
   that brings performance down, and we don't care of immutability
 */
 
-class GameTempStateManager {
+class GameEngineStateManager {
   constructor () {
     this.state = {
       currentFrame: 0,
@@ -98,6 +98,6 @@ class GameTempStateManager {
   }
 }
 
-const GameTempStateManagerInstance = new GameTempStateManager()
+const GameEngineStateManagerInstance = new GameEngineStateManager()
 
-export default GameTempStateManagerInstance
+export default GameEngineStateManagerInstance

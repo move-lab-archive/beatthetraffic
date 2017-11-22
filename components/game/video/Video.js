@@ -10,7 +10,7 @@ import {
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 class Video extends Component {
   constructor (props) {
@@ -155,9 +155,9 @@ class Video extends Component {
     let newCurrentFrame = Math.round(
       this.videoEl.currentTime * this.props.videoFPS
     )
-    if (GameTempStateManager.getCurrentFrame() !== newCurrentFrame) {
-      GameTempStateManager.setCurrentFrame(newCurrentFrame)
-      GameTempStateManager.setCurrentTime(this.videoEl.currentTime)
+    if (GameEngineStateManager.getCurrentFrame() !== newCurrentFrame) {
+      GameEngineStateManager.setCurrentFrame(newCurrentFrame)
+      GameEngineStateManager.setCurrentTime(this.videoEl.currentTime)
     }
     raf(this.monitorFrames)
   }

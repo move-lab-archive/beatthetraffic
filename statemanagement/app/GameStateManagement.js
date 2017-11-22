@@ -5,7 +5,7 @@ import { playVideo, pauseVideo, resetVideo } from './VideoStateManagement'
 import { selectVideoForLevel, selectCity } from './AppStateManagement'
 
 import SoundsManager from './SoundsManager'
-import GameTempStateManager from './GameTempStateManager'
+import GameEngineStateManager from './GameEngineStateManager'
 
 // Initial state
 const initialState = fromJS({
@@ -96,7 +96,7 @@ export function addKilledItem (id) {
 
 export function startLevel () {
   return (dispatch, getState) => {
-    GameTempStateManager.reset()
+    GameEngineStateManager.reset()
 
     // TODO Maybe move to the dispatch of the UI, so we keep consistent
     // that all sound triggering are done from the views

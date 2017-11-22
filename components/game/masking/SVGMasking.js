@@ -9,7 +9,7 @@ import { enlargeBbox } from '../../../utils/resolution'
 
 import { getAverageImgPath } from '../../../statemanagement/app/AppStateManagement'
 
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 const ENLARGE_SIZE = 25
 
@@ -52,9 +52,9 @@ class SVGMasking extends Component {
   }
 
   loopUpdateMasks () {
-    if (this.lastFrameDrawn !== GameTempStateManager.getCurrentFrame()) {
-      this.lastFrameDrawn = GameTempStateManager.getCurrentFrame()
-      const maskedItemsThisFrame = GameTempStateManager.getItemsMasked().map(
+    if (this.lastFrameDrawn !== GameEngineStateManager.getCurrentFrame()) {
+      this.lastFrameDrawn = GameEngineStateManager.getCurrentFrame()
+      const maskedItemsThisFrame = GameEngineStateManager.getItemsMasked().map(
         mask => {
           return {
             ...mask,

@@ -1,5 +1,5 @@
 import { TweenLite, TweenMax } from 'gsap'
-import GameTempStateManager from '../../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 
 class CollectableItem {
   constructor (type, x, y, w, h, opacity = 1, id) {
@@ -30,7 +30,7 @@ class CollectableItem {
       opacity: 0.1,
       onComplete: () => {
         this.anim.kill()
-        GameTempStateManager.removeItemToCollect(this.id)
+        GameEngineStateManager.removeItemToCollect(this.id)
       }
     })
   }

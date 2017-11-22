@@ -1,4 +1,4 @@
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 import { scaleDetection } from '../../../utils/resolution'
 
@@ -11,7 +11,7 @@ export function updateMasking (
     return []
   }
 
-  let objectsMaskedToUpdate = GameTempStateManager.getItemsMasked()
+  let objectsMaskedToUpdate = GameEngineStateManager.getItemsMasked()
   let objectsMaskedUpdated = []
   let objectsAvailableToBeMasked = []
 
@@ -58,7 +58,7 @@ export function updateMasking (
   )
 
   // Update objects masked
-  GameTempStateManager.setCurrentMaskedItems(objectsMaskedUpdated)
+  GameEngineStateManager.setCurrentMaskedItems(objectsMaskedUpdated)
 
   return objectsAvailableToBeMasked
 }

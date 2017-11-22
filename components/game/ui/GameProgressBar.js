@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { TweenLite } from 'gsap'
 import raf from 'raf'
 
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 class GameProgressBar extends PureComponent {
   constructor (props) {
@@ -22,14 +22,14 @@ class GameProgressBar extends PureComponent {
   }
 
   monitorProgress () {
-    if (GameTempStateManager.getCurrentTime() !== this.currentTime) {
+    if (GameEngineStateManager.getCurrentTime() !== this.currentTime) {
       const progressInLevel =
-        GameTempStateManager.getCurrentTime() / this.props.totalDuration || 0
+        GameEngineStateManager.getCurrentTime() / this.props.totalDuration || 0
       const progressOffset =
         this.progressByLevel * (this.props.currentLevel - 1)
       const progress = progressOffset + progressInLevel * this.progressByLevel
       TweenLite.set(this.el, { scaleX: progress })
-      this.currentTime = GameTempStateManager.getCurrentTime()
+      this.currentTime = GameEngineStateManager.getCurrentTime()
     }
     raf(this.monitorProgress)
   }

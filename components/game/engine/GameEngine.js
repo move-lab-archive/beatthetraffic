@@ -20,7 +20,7 @@ import {
   collectItem
 } from '../../../statemanagement/app/GameStateManagement'
 
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 class GameEngine extends Component {
   constructor (props) {
@@ -122,7 +122,7 @@ class GameEngine extends Component {
     objectTrackerDataForThisFrame
       .filter(objectTracked => {
         return (
-          !GameTempStateManager.getItemsMasked().find(
+          !GameEngineStateManager.getItemsMasked().find(
             itemMasked => itemMasked.id === objectTracked.id
           ) && objectTracked.isZombie !== true
         )
@@ -242,7 +242,7 @@ class GameEngine extends Component {
   }
 
   drawCollectableItems () {
-    GameTempStateManager.getItemsToCollect().forEach(collectableItem => {
+    GameEngineStateManager.getItemsToCollect().forEach(collectableItem => {
       this.canvasContext.globalAlpha = collectableItem.opacity
       CollectableItemsEngine.drawFrameOnCanvas(
         this.canvasContext,
@@ -253,7 +253,7 @@ class GameEngine extends Component {
   }
 
   drawPuffAnimations () {
-    GameTempStateManager.getPuffAnimations().forEach(puffAnimation => {
+    GameEngineStateManager.getPuffAnimations().forEach(puffAnimation => {
       PuffAnimationsEngine.drawFrameOnCanvas(this.canvasContext, puffAnimation)
     })
   }
@@ -293,18 +293,18 @@ class GameEngine extends Component {
       objectMaskedThatOutputObject.id
     )
 
-    GameTempStateManager.addCollectableItem(newItem)
+    GameEngineStateManager.addCollectableItem(newItem)
   }
 
   loopUpdateCanvas () {
-    if (this.lastFrameDrawn !== GameTempStateManager.getCurrentFrame()) {
+    if (this.lastFrameDrawn !== GameEngineStateManager.getCurrentFrame()) {
       // Clear previous frame
       this.canvasContext.clearRect(0, 0, 1280, 720)
 
       // Get current frame of the tracker
       // (sometimes it can be diffrent from the video framerate)
       const frame =
-        GameTempStateManager.getCurrentFrame() * this.props.ratioVideoTrackerFPS
+        GameEngineStateManager.getCurrentFrame() * this.props.ratioVideoTrackerFPS
 
       // Get data from tracker
       let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
@@ -317,21 +317,21 @@ class GameEngine extends Component {
       )
 
       // Handle user actions
-      if (GameTempStateManager.getClicksBuffer().length > 0) {
+      if (GameEngineStateManager.getClicksBuffer().length > 0) {
         // For each click
-        GameTempStateManager.getClicksBuffer().forEach(click => {
+        GameEngineStateManager.getClicksBuffer().forEach(click => {
           // See if it will make a car dissapear with this click
           // for each remainingPotentialObjectToMask
           remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
             if (isInsideArea(potentialObjectToMask, click)) {
               console.log(`${potentialObjectToMask.idDisplay} clicked !`)
-              GameTempStateManager.addMaskedItem(potentialObjectToMask)
+              GameEngineStateManager.addMaskedItem(potentialObjectToMask)
               // Output item to collect
               this.addCollectableItem(click, potentialObjectToMask)
               // Dispatch killed item notification
               this.props.dispatch(addKilledItem(potentialObjectToMask.id))
               // Add puff animation
-              GameTempStateManager.addPuffAnimation(
+              GameEngineStateManager.addPuffAnimation(
                 new PuffAnimation(
                   click.x,
                   click.y,
@@ -344,7 +344,7 @@ class GameEngine extends Component {
 
           // See if it can collect items
           // TODO collect only one item with one click
-          GameTempStateManager.getItemsToCollect().forEach(itemToCollect => {
+          GameEngineStateManager.getItemsToCollect().forEach(itemToCollect => {
             if (
               itemToCollect.isCollectable &&
               isInsideArea(itemToCollect, click)
@@ -355,7 +355,7 @@ class GameEngine extends Component {
         })
       }
 
-      GameTempStateManager.resetClickBuffer()
+      GameEngineStateManager.resetClickBuffer()
 
       // Handle Items missed this frame
       const itemsMissedThisFrame = detectMissedItemsThisFrame(
@@ -402,7 +402,7 @@ class GameEngine extends Component {
         )
       }
 
-      this.lastFrameDrawn = GameTempStateManager.getCurrentFrame()
+      this.lastFrameDrawn = GameEngineStateManager.getCurrentFrame()
     }
     raf(this.loopUpdateCanvas.bind(this))
   }

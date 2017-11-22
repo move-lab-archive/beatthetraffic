@@ -22,7 +22,7 @@ import { updateUrlToMatchLevelAndCity } from '../../statemanagement/app/GameStat
 import { initViewportListeners } from '../../statemanagement/app/ViewportStateManagement'
 
 import SoundsManager from '../../statemanagement/app/SoundsManager'
-import GameTempStateManager from '../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../statemanagement/app/GameEngineStateManager'
 
 class GamePage extends React.Component {
   constructor (props) {
@@ -130,7 +130,7 @@ class GamePage extends React.Component {
       y: coordinates.y * canvas.h / height
     }
 
-    GameTempStateManager.recordClickOrTouch(coordinates)
+    GameEngineStateManager.recordClickOrTouch(coordinates)
   }
 
   render () {

@@ -1,5 +1,5 @@
 import { TweenLite } from 'gsap'
-import GameTempStateManager from '../../../../statemanagement/app/GameTempStateManager'
+import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 import PuffAnimationsEngine from '../PuffAnimationsEngine'
 
 class PuffAnimation {
@@ -21,7 +21,7 @@ class PuffAnimation {
       onComplete: () => {
         this.anim.kill()
         // TODO MOVE OUTSIDE, shouldn't know how to remove itself
-        GameTempStateManager.removePuffAnimation(this.id)
+        GameEngineStateManager.removePuffAnimation(this.id)
       }
     })
     this.anim.play()
