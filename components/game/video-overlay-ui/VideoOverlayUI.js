@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TweenMax } from 'gsap'
 import raf from 'raf'
 
 import { scaleDetection, isInsideArea } from '../../../utils/resolution'
@@ -8,6 +7,7 @@ import { scaleDetection, isInsideArea } from '../../../utils/resolution'
 import { updateMasking } from '../masking/masking'
 
 import detectMissedItemsThisFrame from './detectMissedItems'
+import CollectableItem from './CollectableItem'
 
 import {
   addKilledItem,
@@ -249,14 +249,6 @@ class VideoOverlayUI extends Component {
 
   collectItem (itemToCollect) {
     this.props.dispatch(collectItem(itemToCollect))
-    TweenMax.to(itemToCollect, 1, {
-      x: 0,
-      y: 0,
-      opacity: 0.1,
-      onComplete: () => {
-        GameTempStateManager.removeItemToCollect(itemToCollect.id)
-      }
-    })
   }
 
   drawCollectableItems () {
@@ -298,24 +290,16 @@ class VideoOverlayUI extends Component {
       h: itemSize
     }
 
-    const newItem = {
-      type: this.getItemType(),
-      img: img,
-      x: clickInfo.x - size.w,
-      y: clickInfo.y - size.h,
-      w: size.w,
-      h: size.h,
-      opacity: 1,
-      id: objectMaskedThatOutputObject.id,
-      isCollectable: false
-    }
-
-    // Wait a bit before making it collectable
-    // if not people can just double click when
-    // making the car disappear
-    setTimeout(() => {
-      newItem.isCollectable = true
-    }, 500)
+    const newItem = new CollectableItem(
+      this.getItemType(),
+      img,
+      clickInfo.x - size.w,
+      clickInfo.y - size.h,
+      size.w,
+      size.h,
+      1,
+      objectMaskedThatOutputObject.id
+    )
 
     GameTempStateManager.addCollectableItem(newItem)
   }
