@@ -2,9 +2,8 @@ import { TweenLite } from 'gsap'
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
 
 class CollectableItem {
-  constructor (type, img, x, y, w, h, opacity = 1, id) {
+  constructor (type, x, y, w, h, opacity = 1, id) {
     this.type = type
-    this.img = img
     this.x = x
     this.y = y
     this.w = w

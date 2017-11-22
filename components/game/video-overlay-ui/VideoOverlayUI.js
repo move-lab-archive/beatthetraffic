@@ -8,6 +8,7 @@ import { updateMasking } from '../masking/masking'
 
 import detectMissedItemsThisFrame from './detectMissedItems'
 import CollectableItem from './CollectableItem'
+import CollectableItems, { COLLECTABLE_TYPES } from './CollectableItems'
 
 import {
   addKilledItem,
@@ -16,8 +17,6 @@ import {
 } from '../../../statemanagement/app/GameStateManagement'
 
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
-
-import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
 class VideoOverlayUI extends Component {
   constructor (props) {
@@ -46,21 +45,7 @@ class VideoOverlayUI extends Component {
   }
 
   componentDidMount () {
-    // Preload image
-    this.imgCarrot = new Image()
-    this.imgCarrot.src = '/static/assets/icons/icon-carrot.svg'
-    this.imgCarrot.width = 42
-    this.imgCarrot.height = 41
-
-    this.imgTree = new Image()
-    this.imgTree.src = '/static/assets/icons/icon-tree.svg'
-    this.imgTree.width = 39
-    this.imgTree.height = 54
-
-    this.imgBanana = new Image()
-    this.imgBanana.src = '/static/assets/icons/icon-banana.svg'
-    this.imgBanana.width = 29
-    this.imgBanana.height = 45
+    CollectableItems.init()
   }
 
   drawRawDetections (context, detections) {
@@ -254,7 +239,15 @@ class VideoOverlayUI extends Component {
   drawCollectableItems () {
     GameTempStateManager.getItemsToCollect().forEach(item => {
       this.canvasContext.globalAlpha = item.opacity
-      this.canvasContext.drawImage(item.img, item.x, item.y, item.w, item.h)
+      CollectableItems.drawFrameOnCanvas(
+        this.canvasContext,
+        item.type,
+        0,
+        item.x,
+        item.y,
+        item.w,
+        item.h
+      )
       this.canvasContext.globalAlpha = 1
     })
   }
@@ -270,7 +263,8 @@ class VideoOverlayUI extends Component {
   }
 
   getItemType () {
-    const types = ['carrot', 'banana', 'tree']
+    // TODO add logic depending on game situation
+    const types = Object.values(COLLECTABLE_TYPES)
     return types[Math.floor(Math.random() * types.length)]
   }
 
@@ -278,21 +272,13 @@ class VideoOverlayUI extends Component {
     const itemSize = this.getItemSize(objectMaskedThatOutputObject)
     const itemType = this.getItemType()
 
-    let img = this.imgTree
-    if (itemType === 'carrot') {
-      img = this.imgCarrot
-    } else if (itemType === 'banana') {
-      img = this.imgBanana
-    }
-
     const size = {
-      w: Math.floor(itemSize * img.width / img.height),
+      w: itemSize,
       h: itemSize
     }
 
     const newItem = new CollectableItem(
-      this.getItemType(),
-      img,
+      itemType,
       clickInfo.x - size.w,
       clickInfo.y - size.h,
       size.w,
