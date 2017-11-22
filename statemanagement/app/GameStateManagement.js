@@ -77,7 +77,7 @@ export function collectItem (itemToCollect) {
       SoundsManager.playSound('win-point-withitem')
     } else {
       dispatch(removeMissedItem())
-      // TODO special sound
+      // TODO special sound recover smoke
     }
   }
 }
@@ -89,7 +89,6 @@ export function addKilledItem (id) {
       payload: id
     })
     dispatch(incrementScore())
-    SoundsManager.playSound()
     SoundsManager.playSound('carhit')
   }
 }
