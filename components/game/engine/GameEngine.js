@@ -6,9 +6,13 @@ import { scaleDetection, isInsideArea } from '../../../utils/resolution'
 
 import { updateMasking } from '../masking/masking'
 
-import detectMissedItemsThisFrame from './detectMissedItems'
-import CollectableItem from './CollectableItem'
-import CollectableItems, { COLLECTABLE_TYPES } from './CollectableItems'
+import detectMissedItemsThisFrame from './utils/detectMissedItems'
+import CollectableItem from './models/CollectableItem'
+import CollectableItemsEngine, {
+  COLLECTABLE_TYPES
+} from './CollectableItemsEngine'
+import PuffAnimationsEngine from './PuffAnimationsEngine'
+import PuffAnimation from './models/PuffAnimation'
 
 import {
   addKilledItem,
@@ -18,7 +22,7 @@ import {
 
 import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
 
-class VideoOverlayUI extends Component {
+class GameEngine extends Component {
   constructor (props) {
     super(props)
     this.lastFrameDrawn = -1
@@ -45,7 +49,8 @@ class VideoOverlayUI extends Component {
   }
 
   componentDidMount () {
-    CollectableItems.init()
+    CollectableItemsEngine.init()
+    PuffAnimationsEngine.init()
   }
 
   drawRawDetections (context, detections) {
@@ -237,18 +242,19 @@ class VideoOverlayUI extends Component {
   }
 
   drawCollectableItems () {
-    GameTempStateManager.getItemsToCollect().forEach(item => {
-      this.canvasContext.globalAlpha = item.opacity
-      CollectableItems.drawFrameOnCanvas(
+    GameTempStateManager.getItemsToCollect().forEach(collectableItem => {
+      this.canvasContext.globalAlpha = collectableItem.opacity
+      CollectableItemsEngine.drawFrameOnCanvas(
         this.canvasContext,
-        item.type,
-        item.currentFrame,
-        item.x,
-        item.y,
-        item.w,
-        item.h
+        collectableItem
       )
       this.canvasContext.globalAlpha = 1
+    })
+  }
+
+  drawPuffAnimations () {
+    GameTempStateManager.getPuffAnimations().forEach(puffAnimation => {
+      PuffAnimationsEngine.drawFrameOnCanvas(this.canvasContext, puffAnimation)
     })
   }
 
@@ -259,7 +265,7 @@ class VideoOverlayUI extends Component {
   // Todo have min / max size
   getItemSize (mask) {
     const maskArea = mask.w * mask.h
-    return Math.floor(Math.sqrt(maskArea / 4));
+    return Math.floor(Math.sqrt(maskArea / 4))
   }
 
   getItemType () {
@@ -324,7 +330,15 @@ class VideoOverlayUI extends Component {
               this.addCollectableItem(click, potentialObjectToMask)
               // Dispatch killed item notification
               this.props.dispatch(addKilledItem(potentialObjectToMask.id))
-              // TODO Add puff animation
+              // Add puff animation
+              GameTempStateManager.addPuffAnimation(
+                new PuffAnimation(
+                  click.x,
+                  click.y,
+                  90,
+                  potentialObjectToMask.id
+                )
+              )
             }
           })
 
@@ -374,7 +388,11 @@ class VideoOverlayUI extends Component {
         )
       }
 
+      // Draw collectable items state
       this.drawCollectableItems(this.canvasContext)
+
+      // Draw puff animations
+      this.drawPuffAnimations(this.canvasContext)
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
@@ -471,4 +489,4 @@ export default connect(state => {
     allowedDisappearAreas: selectedVideo.get('disappearAreas').toJS(),
     alreadyKilledItems: state.game.get('killedItems')
   }
-})(VideoOverlayUI)
+})(GameEngine)

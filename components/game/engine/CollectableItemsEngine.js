@@ -11,7 +11,7 @@ export const COLLECTABLE_TYPES = {
   TREE: 'tree'
 }
 
-export class CollectableItems {
+class CollectableItemsEngine {
   constructor () {
     this.offscreenCanvas = {}
     this.sprites = {}
@@ -73,38 +73,23 @@ export class CollectableItems {
     }
   }
 
-  drawFrameOnCanvas (
-    contextToDrawOn,
-    collectableType,
-    frameNb,
-    destinationX,
-    destinationY,
-    destinationWidth,
-    destinationHeight
-  ) {
+  drawFrameOnCanvas (contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(frameNb, collectableType)
+    const sourceData = this.getFrameData(item.currentFrame, item.type)
     contextToDrawOn.drawImage(
-      this.offscreenCanvas[collectableType],
+      this.offscreenCanvas[item.type],
       sourceData.x,
       sourceData.y,
       sourceData.width,
       sourceData.height,
-      destinationX,
-      destinationY,
-      destinationWidth,
-      destinationHeight
+      item.x,
+      item.y,
+      item.w,
+      item.h
     )
-    // console.log(
-    //   `drawImage(${collectableType},${sourceData.x},${sourceData.y},${
-    //     sourceData.width
-    //   },${sourceData.height},${destinationX},${destinationY},${
-    //     destinationWidth
-    //   },${destinationHeight})`
-    // )
   }
 }
 
-const CollectableItemsInstance = new CollectableItems()
+const CollectableItemsEngineInstance = new CollectableItemsEngine()
 
-export default CollectableItemsInstance
+export default CollectableItemsEngineInstance

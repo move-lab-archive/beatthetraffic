@@ -12,7 +12,8 @@ class GameTempStateManager {
       currentTime: 0,
       itemMasked: [],
       itemsToCollect: [],
-      clickRecordedBuffer: []
+      clickRecordedBuffer: [],
+      puffAnimations: []
     }
   }
 
@@ -23,7 +24,8 @@ class GameTempStateManager {
       currentTime: 0,
       itemMasked: [],
       itemsToCollect: [],
-      clickRecordedBuffer: []
+      clickRecordedBuffer: [],
+      puffAnimations: []
     }
   }
 
@@ -37,6 +39,10 @@ class GameTempStateManager {
 
   getItemsMasked () {
     return this.state.itemMasked
+  }
+
+  getPuffAnimations () {
+    return this.state.puffAnimations
   }
 
   getCurrentFrame () {
@@ -63,12 +69,22 @@ class GameTempStateManager {
     this.state.itemMasked.push(maskedItem)
   }
 
+  addPuffAnimation (puffAnimation) {
+    this.state.puffAnimations.push(puffAnimation)
+  }
+
   addCollectableItem (item) {
     this.state.itemsToCollect.push(item)
   }
 
   removeItemToCollect (idToRemove) {
     this.state.itemsToCollect = this.state.itemsToCollect.filter(
+      item => item.id !== idToRemove
+    )
+  }
+
+  removePuffAnimation (idToRemove) {
+    this.state.puffAnimations = this.state.puffAnimations.filter(
       item => item.id !== idToRemove
     )
   }

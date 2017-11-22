@@ -1,4 +1,4 @@
-import { isInsideSomeAreas } from '../../../utils/resolution'
+import { isInsideSomeAreas } from '../../../../utils/resolution'
 
 const MIN_ACTIVE_FRAMES = 60
 

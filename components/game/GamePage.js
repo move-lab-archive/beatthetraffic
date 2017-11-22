@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Video from './video/Video'
-import VideoOverlayUI from './video-overlay-ui/VideoOverlayUI'
+import GameEngine from './engine/GameEngine'
 import Sound from './ui/Sound'
 import GameIndicators from './ui/GameIndicators'
 import GameInstructions from './ui/GameInstructions'
@@ -149,7 +149,7 @@ class GamePage extends React.Component {
           <div>
             {!this.props.isGamePlaying && <GameInstructions />}
             <GameIndicators />
-            <VideoOverlayUI />
+            <GameEngine />
             <Sound />
             <SVGMasking />
             <Video />

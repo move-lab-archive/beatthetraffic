@@ -1,5 +1,5 @@
 import { TweenLite, TweenMax } from 'gsap'
-import GameTempStateManager from '../../../statemanagement/app/GameTempStateManager'
+import GameTempStateManager from '../../../../statemanagement/app/GameTempStateManager'
 
 class CollectableItem {
   constructor (type, x, y, w, h, opacity = 1, id) {
