@@ -100,14 +100,16 @@ class GamePage extends React.Component {
   }
 
   recordClick (event) {
-    // TODO Dynamic canvas width / height
-
     let coordinates = {
       x: event.pageX,
       y: event.pageY
     }
 
+    const canvas = this.props.canvasResolution
+
+    // A bit hacky
     // Ignore Chrome mobile touchstart event
+    // we detect touchstart for safari compat
     if (coordinates.x === undefined) {
       return
     }
@@ -116,18 +118,16 @@ class GamePage extends React.Component {
 
     // Map coordinates to canvas coordinates
     if (window.innerWidth / window.innerHeight < 16 / 9) {
-      width = window.innerHeight * 1280 / 720
+      width = window.innerHeight * canvas.w / canvas.h
       height = window.innerHeight
     } else {
       width = window.innerWidth
-      height = window.innerWidth * 720 / 1280
+      height = window.innerWidth * canvas.h / canvas.w
     }
 
     coordinates = {
-      x: coordinates.x * 1280 / width,
-      y: coordinates.y * 720 / height,
-      xReal: coordinates.x,
-      yReal: coordinates.y
+      x: coordinates.x * canvas.w / width,
+      y: coordinates.y * canvas.h / height
     }
 
     GameTempStateManager.recordClickOrTouch(coordinates)
@@ -170,6 +170,7 @@ export default connect(state => {
   return {
     isGamePlaying: state.game.get('isPlaying'),
     levelNb: selectedVideo.get('level'),
-    videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS()
+    videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS(),
+    canvasResolution: state.viewport.get('canvasResolution').toJS()
   }
 })(GamePage)

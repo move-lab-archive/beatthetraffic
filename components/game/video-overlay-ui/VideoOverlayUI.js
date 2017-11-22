@@ -261,21 +261,8 @@ class VideoOverlayUI extends Component {
 
   drawCollectableItems () {
     GameTempStateManager.getItemsToCollect().forEach(item => {
-      let img = this.imgTree
-      if (item.type === 'carrot') {
-        img = this.imgCarrot
-      } else if (item.type === 'banana') {
-        img = this.imgBanana
-      }
-      this.canvasContext.globalAlpha = item.opacity || 1
-      // TODO need to scale object on the larger edge, for now height
-      this.canvasContext.drawImage(
-        img,
-        item.x,
-        item.y,
-        Math.floor(item.h * img.width / img.height),
-        item.h
-      )
+      this.canvasContext.globalAlpha = item.opacity
+      this.canvasContext.drawImage(item.img, item.x, item.y, item.w, item.h)
       this.canvasContext.globalAlpha = 1
     })
   }
@@ -297,13 +284,28 @@ class VideoOverlayUI extends Component {
 
   addCollectableItem (clickInfo, objectMaskedThatOutputObject) {
     const itemSize = this.getItemSize(objectMaskedThatOutputObject)
+    const itemType = this.getItemType()
+
+    let img = this.imgTree
+    if (itemType === 'carrot') {
+      img = this.imgCarrot
+    } else if (itemType === 'banana') {
+      img = this.imgBanana
+    }
+
+    const size = {
+      w: Math.floor(itemSize * img.width / img.height),
+      h: itemSize
+    }
 
     const newItem = {
       type: this.getItemType(),
-      x: clickInfo.xReal,
-      y: clickInfo.yReal,
-      w: itemSize,
-      h: itemSize,
+      img: img,
+      x: clickInfo.x - size.w,
+      y: clickInfo.y - size.h,
+      w: size.w,
+      h: size.h,
+      opacity: 1,
       id: objectMaskedThatOutputObject.id,
       isCollectable: false
     }
