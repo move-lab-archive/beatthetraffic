@@ -18,8 +18,9 @@ class CollectableItem {
     // making the car disappear
     setTimeout(() => {
       this.isCollectable = true
-      this.animate()
     }, 500)
+
+    this.animate()
   }
 
   collect () {
@@ -28,18 +29,19 @@ class CollectableItem {
       y: 0,
       opacity: 0.1,
       onComplete: () => {
+        this.anim.kill()
         GameTempStateManager.removeItemToCollect(this.id)
       }
     })
   }
 
   animate () {
-    const anim = TweenMax.to(this, 2, {
+    this.anim = TweenMax.to(this, 1, {
       currentFrame: 18,
       ease: SteppedEase.config(18),
       repeat: -1
-    }).play()
-    anim.play()
+    })
+    this.anim.play()
   }
 }
 
