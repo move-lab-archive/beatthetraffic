@@ -4,11 +4,11 @@ import { initStore } from '../statemanagement/store'
 import withRedux from 'next-redux-wrapper'
 
 import Layout from '../components/shared/Layout'
-import AboutPage from '../components/about/AboutPage'
+import ScorePage from '../components/score/ScorePage'
 
 import { loadCity } from '../statemanagement/app/GameStateManagement'
 
-class About extends React.Component {
+class HighScore extends React.Component {
   static getInitialProps ({ store, query, isServer }) {
     const city = query.city || store.getState().app.get('selectedCity')
     const level = query.level || 1
@@ -27,10 +27,10 @@ class About extends React.Component {
   render () {
     return (
       <Layout>
-        <AboutPage onClose={() => this.navigateToGame()} />
+        <ScorePage onClose={() => this.navigateToGame()} />
       </Layout>
     )
   }
 }
 
-export default withRedux(initStore)(About)
+export default withRedux(initStore)(HighScore)

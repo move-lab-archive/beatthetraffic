@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 
 import ButtonClose from '../../../shared/ButtonClose'
+import SocialShareButtons from '../../../shared/SocialShareButtons'
 
 import AboutPage from '../../../about/AboutPage'
+import ScorePage from '../../../score/ScorePage'
 
 import { hideMenu } from '../../../../statemanagement/app/AppStateManagement'
 
@@ -54,12 +56,24 @@ class Menu extends Component {
     }
 
     if (
-      this.props.url.query.page === 'about' &&
+      this.props.url.query.show === 'menu' &&
+      newProps.url.query.page === 'score'
+    ) {
+      console.log('show score page from menu')
+      this.setState({
+        showScore: true
+      })
+    }
+
+    if (
+      (this.props.url.query.page === 'about' ||
+        this.props.url.query.page === 'score') &&
       newProps.url.query.page === undefined
     ) {
-      console.log('hide about page from menu')
+      console.log('hide about or score page from menu')
       this.setState({
-        showAbout: false
+        showAbout: false,
+        showScore: false
       })
     }
 
@@ -79,7 +93,17 @@ class Menu extends Component {
     })
   }
 
+  showScore () {
+    Router.push('/?show=menu&page=score', `/highscore`, {
+      shallow: true
+    })
+  }
+
   hideAbout () {
+    window.history.back()
+  }
+
+  hideScore () {
     window.history.back()
   }
 
@@ -89,12 +113,16 @@ class Menu extends Component {
         className={`menu-page ${this.props.showMenu ? 'visible' : 'hidden'}`}
       >
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
-        <div className='link'>SHARE</div>
         <div className='link' onClick={() => this.showAbout()}>
           ABOUT
         </div>
-        <div className='link'>SCORE</div>
+        <div className='link' onClick={() => this.showScore()}>
+          SCORE
+        </div>
+        <div className='link'>SHARE</div>
+        <SocialShareButtons />
         {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
+        {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
         <style jsx>{`
           .menu-page {
             position: fixed;

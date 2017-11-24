@@ -33,6 +33,7 @@ module.exports = {
     return {
       '/': { page: '/' },
       '/about': { page: '/about' },
+      '/highscore': { page: '/highscore' },
       ...getCity('stuttgart1'),
       ...getCity('stuttgart2'),
       ...getCity('stuttgart3'),
