@@ -50,7 +50,6 @@ class Sound extends Component {
             z-index: 6;
             width: 4.4rem;
             height: 4.4rem;
-            transform: will-change;
             cursor: pointer;
             border-radius: 0.2rem;
             background-repeat: no-repeat;

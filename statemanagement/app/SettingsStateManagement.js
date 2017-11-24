@@ -5,13 +5,14 @@ import SoundsManager from './SoundsManager'
 const initialState = fromJS({
   showDebugUI: false,
   darkMode: false,
-  soundEnabled: true,
+  soundEnabled: false,
   isServerRendering: true
 })
 
 // Actions
 const UPDATE_SETTINGS = 'Settings/UPDATE'
 
+// TODO MOVE SOUND IN APP STATE MANAGEMENT
 const SOUND_ON = 'Settings/SOUND_ON'
 const SOUND_OFF = 'Settings/SOUND_OFF'
 

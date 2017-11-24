@@ -10,6 +10,8 @@ import GameProgressBar from './ui/GameProgressBar'
 import LevelName from './ui/LevelName'
 import Landing from './ui/Landing'
 import Intro from './ui/Intro'
+import Menu from './ui/menu/Menu'
+import MenuBtn from './ui/menu/MenuBtn'
 import SVGMasking from './masking/SVGMasking'
 
 import SettingsControl from '../shared/SettingsControl'
@@ -171,6 +173,8 @@ class GamePage extends React.Component {
             <Video />
             <LevelName />
             <GameProgressBar />
+            <MenuBtn />
+            <Menu />
           </div>
         )}
       </div>

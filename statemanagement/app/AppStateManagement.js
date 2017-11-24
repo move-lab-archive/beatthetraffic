@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 
 import { fetchRawDetections } from './RawDetectionsStateManagement'
 import { fetchObjectTracker } from './ObjectTrackerStateManagement'
-import { setVideoSrc } from './VideoStateManagement'
+import { setVideoSrc, pauseVideo, playVideo } from './VideoStateManagement'
 
 // Initial state
 const initialState = fromJS({
@@ -272,12 +272,15 @@ const initialState = fromJS({
           'https://player.vimeo.com/external/243128510.hd.mp4?s=108ac74d6fa81ec02610f50fd407cbe478da0554&profile_id=174'
       }
     }
-  ]
+  ],
+  showMenu: false
 })
 
 // Actions
 const SELECT_VIDEO = 'App/SELECT_VIDEO'
 const SELECT_CITY = 'App/SELECT_CITY'
+const SHOW_MENU = 'App/SHOW_MENU'
+const HIDE_MENU = 'App/HIDE_MENU'
 
 let pathStatic = '/static/detections'
 
@@ -295,6 +298,28 @@ export function getAverageImgPath (videoName) {
 
 export function getFirstFrameImgPath (videoName) {
   return `${pathStatic}/${videoName}/firstframe.jpg`
+}
+
+export function showMenu () {
+  return (dispatch, getState) => {
+    // Pause video / game
+    dispatch(pauseVideo())
+
+    dispatch({
+      type: SHOW_MENU
+    })
+  }
+}
+
+export function hideMenu () {
+  return (dispatch, getState) => {
+    //  Unpause video / game
+    dispatch(playVideo())
+
+    dispatch({
+      type: HIDE_MENU
+    })
+  }
 }
 
 export function selectCity (name) {
@@ -375,6 +400,10 @@ export default function AppReducer (state = initialState, action = {}) {
       return state.set('selectedVideo', action.payload)
     case SELECT_CITY:
       return state.set('selectedCity', action.payload)
+    case SHOW_MENU:
+      return state.set('showMenu', true)
+    case HIDE_MENU:
+      return state.set('showMenu', false)
     default:
       return state
   }
