@@ -88,6 +88,26 @@ class CollectableItemsEngine {
       item.h
     )
   }
+
+  // TODO RENAME drawExplosionAnimationFrameOnCanvas
+  drawStarsAnimationsFrameOnCanvas (contextToDrawOn, starsAnimation) {
+    const sourceData = this.getFrameData(starsAnimation.currentFrame, 'banana')
+    starsAnimation.dots.map(dot => {
+      contextToDrawOn.globalAlpha = dot.opacity
+      contextToDrawOn.drawImage(
+        this.offscreenCanvas['banana'],
+        sourceData.x,
+        sourceData.y,
+        sourceData.width,
+        sourceData.height,
+        dot.x,
+        dot.y,
+        dot.width,
+        dot.height
+      )
+      contextToDrawOn.globalAlpha = 1
+    })
+  }
 }
 
 const CollectableItemsEngineInstance = new CollectableItemsEngine()

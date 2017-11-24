@@ -1,6 +1,7 @@
-import { TweenLite, TimelineLite } from 'gsap'
+import { TweenMax, TweenLite, TimelineLite } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 
+// TODO rename to explosion animation
 class StarsAnimation {
   constructor (x, y, id) {
     this.x = x
@@ -35,14 +36,15 @@ class StarsAnimation {
         x: this.x + Math.cos(dot.angle) * dot.length,
         y: this.y + Math.sin(dot.angle) * dot.length,
         width: dot.size,
-        height: dot.size
+        height: dot.size,
+        opacity: 1
       })
       // this is where we do the animation...
       this.timeline.to(
         dot,
         0.3 + Math.random(),
         {
-          opacity: 0,
+          opacity: 1,
           x: this.x + Math.cos(dot.angle) * dot.length * 6,
           y: this.y + Math.sin(dot.angle) * dot.length * 6
         },

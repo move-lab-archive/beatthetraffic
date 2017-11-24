@@ -1,5 +1,6 @@
 /* global Image */
 
+// Overkill if we render only one frame
 class StarsAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
