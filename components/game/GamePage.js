@@ -174,7 +174,7 @@ class GamePage extends React.Component {
             <LevelName />
             <GameProgressBar />
             <MenuBtn />
-            <Menu />
+            <Menu url={this.props.url} />
           </div>
         )}
       </div>

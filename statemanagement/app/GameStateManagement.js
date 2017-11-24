@@ -179,7 +179,7 @@ export function loadCity (city, level = 1) {
     // Update url
     // TODO maybe refactor later and have a URL manager file
     if (!getState().settings.get('isServerRendering')) {
-      Router.push('/', `/${city}/level/${level}`, { shallow: true })
+      Router.replace(`/`, `/${city}/level/${level}`, { shallow: true })
     }
   }
 }

@@ -32,6 +32,7 @@ module.exports = {
   exportPathMap: function () {
     return {
       '/': { page: '/' },
+      '/about': { page: '/about' },
       ...getCity('stuttgart1'),
       ...getCity('stuttgart2'),
       ...getCity('stuttgart3'),
