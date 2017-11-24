@@ -4,6 +4,8 @@ import Router from 'next/router'
 
 import ButtonClose from '../../../shared/ButtonClose'
 
+import AboutPage from '../../../about/AboutPage'
+
 import { hideMenu } from '../../../../statemanagement/app/AppStateManagement'
 
 class Menu extends Component {
@@ -43,11 +45,42 @@ class Menu extends Component {
 
     if (
       this.props.url.query.show === 'menu' &&
-      newProps.url.show === undefined
+      newProps.url.query.page === 'about'
+    ) {
+      console.log('show about page from menu')
+      this.setState({
+        showAbout: true
+      })
+    }
+
+    if (
+      this.props.url.query.page === 'about' &&
+      newProps.url.query.page === undefined
+    ) {
+      console.log('hide about page from menu')
+      this.setState({
+        showAbout: false
+      })
+    }
+
+    if (
+      this.props.url.query.show === 'menu' &&
+      newProps.url.query.show === undefined
     ) {
       // We exited the menu via backbutton
+      console.log('Exit menu via backbutton')
       this.props.dispatch(hideMenu())
     }
+  }
+
+  showAbout () {
+    Router.push('/?show=menu&page=about', `/about`, {
+      shallow: true
+    })
+  }
+
+  hideAbout () {
+    window.history.back()
   }
 
   render () {
@@ -57,8 +90,11 @@ class Menu extends Component {
       >
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
         <div className='link'>SHARE</div>
-        <div className='link'>ABOUT</div>
+        <div className='link' onClick={() => this.showAbout()}>
+          ABOUT
+        </div>
         <div className='link'>SCORE</div>
+        {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
         <style jsx>{`
           .menu-page {
             position: fixed;
