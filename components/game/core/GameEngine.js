@@ -16,6 +16,9 @@ import CollectableItemsEngine, {
 import PuffAnimationsEngine from './engines/PuffAnimationsEngine'
 import PuffAnimation from './models/PuffAnimation'
 
+import StarsAnimationsEngine from './engines/StarsAnimationsEngine'
+import StarsAnimation from './models/StarsAnimation'
+
 import DebugTrackerEngine from './engines/DebugTrackerEngine'
 import TrackerUIEngine from './engines/TrackerUIEngine'
 
@@ -57,6 +60,7 @@ class GameEngine extends Component {
     // Rendering engine that have offscreen canvas to init on client
     CollectableItemsEngine.init()
     PuffAnimationsEngine.init()
+    StarsAnimationsEngine.init()
   }
 
   collectItem (itemToCollect) {
@@ -77,6 +81,12 @@ class GameEngine extends Component {
   drawPuffAnimations () {
     GameEngineStateManager.getPuffAnimations().forEach(puffAnimation => {
       PuffAnimationsEngine.drawFrameOnCanvas(this.canvasContext, puffAnimation)
+    })
+  }
+
+  drawStarsAnimations () {
+    GameEngineStateManager.getStarsAnimations().forEach(starAnimation => {
+      StarsAnimationsEngine.drawFrameOnCanvas(this.canvasContext, starAnimation)
     })
   }
 
@@ -154,13 +164,17 @@ class GameEngine extends Component {
               // Dispatch killed item notification
               this.props.dispatch(addKilledItem(potentialObjectToMask.id))
               // Add puff animation
-              GameEngineStateManager.addPuffAnimation(
-                new PuffAnimation(
-                  click.x,
-                  click.y,
-                  90,
-                  potentialObjectToMask.id
-                )
+              // GameEngineStateManager.addPuffAnimation(
+              //   new PuffAnimation(
+              //     click.x,
+              //     click.y,
+              //     90,
+              //     potentialObjectToMask.id
+              //   )
+              // )
+
+              GameEngineStateManager.addStarsAnimation(
+                new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
               )
             }
           })
@@ -202,6 +216,9 @@ class GameEngine extends Component {
 
       // Draw puff animations
       this.drawPuffAnimations(this.canvasContext)
+
+      // Draw start animations
+      this.drawStarsAnimations(this.canvasContext)
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {

@@ -13,19 +13,22 @@ class GameEngineStateManager {
       itemMasked: [],
       itemsToCollect: [],
       clickRecordedBuffer: [],
-      puffAnimations: []
+      puffAnimations: [],
+      starsAnimations: []
     }
   }
 
   reset () {
     console.log('Reset game temp state')
+    // TODO CLONE DEEP INITIAL STATE
     this.state = {
       currentFrame: 0,
       currentTime: 0,
       itemMasked: [],
       itemsToCollect: [],
       clickRecordedBuffer: [],
-      puffAnimations: []
+      puffAnimations: [],
+      starsAnimations: []
     }
   }
 
@@ -43,6 +46,10 @@ class GameEngineStateManager {
 
   getPuffAnimations () {
     return this.state.puffAnimations
+  }
+
+  getStarsAnimations () {
+    return this.state.starsAnimations
   }
 
   getCurrentFrame () {
@@ -73,6 +80,10 @@ class GameEngineStateManager {
     this.state.puffAnimations.push(puffAnimation)
   }
 
+  addStarsAnimation (starsAnimation) {
+    this.state.starsAnimations.push(starsAnimation)
+  }
+
   addCollectableItem (item) {
     this.state.itemsToCollect.push(item)
   }
@@ -85,6 +96,12 @@ class GameEngineStateManager {
 
   removePuffAnimation (idToRemove) {
     this.state.puffAnimations = this.state.puffAnimations.filter(
+      item => item.id !== idToRemove
+    )
+  }
+
+  removeStarsAnimation (idToRemove) {
+    this.state.starsAnimations = this.state.starsAnimations.filter(
       item => item.id !== idToRemove
     )
   }
