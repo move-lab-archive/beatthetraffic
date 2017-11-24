@@ -273,7 +273,8 @@ const initialState = fromJS({
       }
     }
   ],
-  showMenu: false
+  showMenu: false,
+  playOnHideMenu: false
 })
 
 // Actions
@@ -281,6 +282,7 @@ const SELECT_VIDEO = 'App/SELECT_VIDEO'
 const SELECT_CITY = 'App/SELECT_CITY'
 const SHOW_MENU = 'App/SHOW_MENU'
 const HIDE_MENU = 'App/HIDE_MENU'
+const PLAY_ON_HIDE_MENU = 'App/PLAY_ON_HIDE_MENU'
 
 let pathStatic = '/static/detections'
 
@@ -302,8 +304,14 @@ export function getFirstFrameImgPath (videoName) {
 
 export function showMenu () {
   return (dispatch, getState) => {
-    // Pause video / game
-    dispatch(pauseVideo())
+    if (getState().video.get('isPlaying')) {
+      // Pause video / game
+      dispatch(pauseVideo())
+      // Set resume video on hide menu
+      dispatch({
+        type: PLAY_ON_HIDE_MENU
+      })
+    }
 
     dispatch({
       type: SHOW_MENU
@@ -313,8 +321,10 @@ export function showMenu () {
 
 export function hideMenu () {
   return (dispatch, getState) => {
-    //  Unpause video / game
-    dispatch(playVideo())
+    if (getState().app.get('playOnHideMenu')) {
+      //  Unpause video / game
+      dispatch(playVideo())
+    }
 
     dispatch({
       type: HIDE_MENU
@@ -403,7 +413,9 @@ export default function AppReducer (state = initialState, action = {}) {
     case SHOW_MENU:
       return state.set('showMenu', true)
     case HIDE_MENU:
-      return state.set('showMenu', false)
+      return state.set('showMenu', false).set('playOnHideMenu', false)
+    case PLAY_ON_HIDE_MENU:
+      return state.set('playOnHideMenu', true)
     default:
       return state
   }

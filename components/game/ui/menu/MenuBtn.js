@@ -13,8 +13,8 @@ class MenuBtn extends Component {
         <style jsx>{`
           .menu-button {
             position: fixed;
-            top: 1.5rem;
-            right: 1rem;
+            top: 3rem;
+            right: 3rem;
             z-index: 6;
             width: 4.4rem;
             height: 4.4rem;
