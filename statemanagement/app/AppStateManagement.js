@@ -304,7 +304,7 @@ export function getFirstFrameImgPath (videoName) {
   return `${pathStatic}/${videoName}/firstframe.jpg`
 }
 
-export function setIntroAnimPlayed() {
+export function setIntroAnimPlayed () {
   return {
     type: SET_INTROANIM_PLAYED
   }

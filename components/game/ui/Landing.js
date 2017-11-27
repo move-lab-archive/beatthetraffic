@@ -4,16 +4,19 @@ import { connect } from 'react-redux'
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
 import Button from '../../shared/Button'
+import Loading from '../../shared/Loading'
 
 class Landing extends Component {
   render () {
     return (
       <div className='game-landing'>
         <div className='text-landing'>
-          Can you defend Stuttgart from heavy traffic?
+          Ready to beat the traffic of Stuttgart ?
         </div>
-        {/* // TODO Loading indicator while not ready to start intro */}
-        <Button title='Start' large onClick={this.props.handleStart} />
+        {!this.props.isGameReadyToPlay && <Loading />}
+        {this.props.isGameReadyToPlay && (
+          <Button title='Start' large onClick={this.props.handleStart} />
+        )}
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -48,7 +51,11 @@ export default connect(state => {
     return video.get('name') === state.app.get('selectedVideo')
   })
 
+  const isGameReadyToPlay =
+    state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
+
   return {
-    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name'))
+    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),
+    isGameReadyToPlay: isGameReadyToPlay
   }
 })(Landing)
