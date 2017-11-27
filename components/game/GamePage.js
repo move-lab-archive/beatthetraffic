@@ -168,7 +168,8 @@ class GamePage extends React.Component {
         {this.state.showIntro && <Intro onFinish={this.handleFinishIntro} />}
         {this.state.clientSide && (
           <div>
-            {!this.props.isGamePlaying && <GameInstructions />}
+            {!this.props.isGamePlaying &&
+              !this.state.showIntro && <GameInstructions />}
             {process.env.NODE_ENV !== 'production' && <SettingsControl />}
             <GameIndicators />
             <GameEngine />
