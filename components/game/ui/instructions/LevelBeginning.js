@@ -9,6 +9,48 @@ import AskLandscapeAnimation from '../../../shared/AskLandscapeAnimation'
 import { startLevel } from '../../../../statemanagement/app/GameStateManagement'
 
 class LevelBeginning extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      timerAutoStart: 5
+    }
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (
+      this.props.isGameReadyToPlay === false &&
+      newProps.isGameReadyToPlay === true &&
+      this.props.introAnimPlayed === true
+    ) {
+      console.log('Start countdown 5s to start level')
+      this.startCountDown()
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.refSetIntervalAutoStart) {
+      clearInterval(this.refSetIntervalAutoStart)
+    }
+  }
+
+  startCountDown () {
+    this.refSetIntervalAutoStart = setInterval(() => {
+      if (this.state.timerAutoStart - 1 === 0) {
+        this.props.dispatch(startLevel())
+        clearInterval(this.refSetIntervalAutoStart)
+      } else {
+        this.setState({
+          timerAutoStart: this.state.timerAutoStart - 1
+        })
+      }
+    }, 1000)
+  }
+
+  manualStart () {
+    this.props.dispatch(startLevel())
+    clearInterval(this.refSetIntervalAutoStart)
+  }
+
   render () {
     return (
       <div className='instructions-level-beginning'>
@@ -37,8 +79,8 @@ class LevelBeginning extends Component {
         )}
         {this.props.isGameReadyToPlay && (
           <Button
-            onClick={() => this.props.dispatch(startLevel())}
-            title='Start'
+            onClick={() => this.manualStart()}
+            title={`Starting in ${this.state.timerAutoStart}s`}
             large
             transparent
           />
@@ -76,6 +118,7 @@ export default connect(state => {
     deviceOrientation: state.viewport.get('deviceOrientation'),
     isFullscreenAvailable: state.viewport.get('isFullscreenAvailable'),
     isFullscreen: state.viewport.get('isFullscreen'),
-    currentLevel: state.game.get('currentLevel')
+    currentLevel: state.game.get('currentLevel'),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(LevelBeginning)

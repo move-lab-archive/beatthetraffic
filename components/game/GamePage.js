@@ -18,7 +18,10 @@ import SettingsControl from '../shared/SettingsControl'
 
 import { setClientRendering } from '../../statemanagement/app/SettingsStateManagement'
 
-import { fetchRemainingData } from '../../statemanagement/app/AppStateManagement'
+import {
+  fetchRemainingData,
+  setIntroAnimPlayed
+} from '../../statemanagement/app/AppStateManagement'
 
 import {
   updateUrlToMatchLevelAndCity,
@@ -42,7 +45,7 @@ class GamePage extends React.Component {
       clientSide: false,
       showLanding: true,
       showIntro: false,
-      playIntroAnim: true
+      playIntroAnim: !props.introAnimPlayed
     }
   }
 
@@ -57,7 +60,7 @@ class GamePage extends React.Component {
     this.props.dispatch(fetchRemainingData())
     this.props.dispatch(updateUrlToMatchLevelAndCity())
 
-    if (this.props.levelNb !== 1) {
+    if (this.props.introAnimPlayed) {
       this.setState({
         playIntroAnim: false
       })
@@ -155,6 +158,7 @@ class GamePage extends React.Component {
     })
 
     this.props.dispatch(startLevel())
+    this.props.dispatch(setIntroAnimPlayed())
   }
 
   render () {
@@ -191,6 +195,7 @@ export default connect(state => {
     isGamePlaying: state.game.get('isPlaying'),
     levelNb: selectedVideo.get('level'),
     videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS(),
-    canvasResolution: state.viewport.get('canvasResolution').toJS()
+    canvasResolution: state.viewport.get('canvasResolution').toJS(),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GamePage)

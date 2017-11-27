@@ -274,7 +274,8 @@ const initialState = fromJS({
     }
   ],
   showMenu: false,
-  playOnHideMenu: false
+  playOnHideMenu: false,
+  introAnimPlayed: false
 })
 
 // Actions
@@ -283,6 +284,7 @@ const SELECT_CITY = 'App/SELECT_CITY'
 const SHOW_MENU = 'App/SHOW_MENU'
 const HIDE_MENU = 'App/HIDE_MENU'
 const PLAY_ON_HIDE_MENU = 'App/PLAY_ON_HIDE_MENU'
+const SET_INTROANIM_PLAYED = 'App/SET_INTROANIM_PLAYED'
 
 let pathStatic = '/static/detections'
 
@@ -300,6 +302,12 @@ export function getAverageImgPath (videoName) {
 
 export function getFirstFrameImgPath (videoName) {
   return `${pathStatic}/${videoName}/firstframe.jpg`
+}
+
+export function setIntroAnimPlayed() {
+  return {
+    type: SET_INTROANIM_PLAYED
+  }
 }
 
 export function showMenu () {
@@ -416,6 +424,8 @@ export default function AppReducer (state = initialState, action = {}) {
       return state.set('showMenu', false).set('playOnHideMenu', false)
     case PLAY_ON_HIDE_MENU:
       return state.set('playOnHideMenu', true)
+    case SET_INTROANIM_PLAYED:
+      return state.set('introAnimPlayed', true)
     default:
       return state
   }

@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class Score extends Component {
-
-  render() {
+  render () {
     return (
-      <div 
-        className="score-container"
-      >
-        <span className="score">{this.props.score}</span>
-        <img className="icon-star" src="/static/assets/icons/icon-star.svg" />
+      <div className='score-container'>
+        <span className='score'>{this.props.score}</span>
+        <img className='icon-star' src='/static/assets/icons/icon-star.svg' />
         <style jsx>{`
           .score-container {
             display: flex;
@@ -30,12 +27,12 @@ class Score extends Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
 
-export default connect((state) => {
+export default connect(state => {
   return {
     score: state.game.get('score')
   }
-})(Score);
+})(Score)

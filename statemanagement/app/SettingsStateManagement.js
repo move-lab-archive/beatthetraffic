@@ -5,7 +5,7 @@ import SoundsManager from './SoundsManager'
 const initialState = fromJS({
   showDebugUI: false,
   darkMode: false,
-  soundEnabled: false,
+  soundEnabled: true,
   isServerRendering: true
 })
 

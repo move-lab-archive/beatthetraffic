@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 import Button from '../../../shared/Button'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
@@ -9,24 +10,17 @@ import { loadLevel } from '../../../../statemanagement/app/GameStateManagement'
 class LevelFinished extends Component {
   componentDidMount () {
     SoundsManager.playSound('nextlevel')
+    this.props.dispatch(loadLevel(this.props.currentLevel + 1))
   }
 
   render () {
     return (
       <div className='instructions-level-finished'>
-        <div className='title'>CONGRAT!</div>
+        {/* <div className='title'>CONGRAT!</div>
         <div className='message'>
           You finished level {this.props.currentLevel} with {this.props.score}{' '}
           ⭐️ !
         </div>
-        {/* <Link
-          href={{
-            pathname: '/',
-            query: { level: this.props.currentLevel + 1 }
-          }}
-          prefetch
-          as="/level/2"
-        > */}
         <Button
           title={`Next level`}
           large
@@ -35,7 +29,6 @@ class LevelFinished extends Component {
             this.props.dispatch(loadLevel(this.props.currentLevel + 1))
           }
         />
-        {/* </Link> */}
         <style jsx>{`
           .instructions-level-finished {
             display: flex;
@@ -54,7 +47,7 @@ class LevelFinished extends Component {
             text-align: center;
             margin-bottom: 1.5rem;
           }
-        `}</style>
+        `}</style> */}
       </div>
     )
   }
