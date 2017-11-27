@@ -25,7 +25,8 @@ import TrackerUIEngine from './engines/TrackerUIEngine'
 import {
   addKilledItem,
   addMissedItem,
-  collectItem
+  collectItem,
+  getSmokeLevel
 } from '../../../statemanagement/app/GameStateManagement'
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
@@ -108,15 +109,9 @@ class GameEngine extends Component {
     return size
   }
 
-  getItemType () {
-    // TODO add logic depending on game situation
-    const types = Object.values(COLLECTABLE_TYPES)
-    return types[Math.floor(Math.random() * types.length)]
-  }
-
-  addCollectableItem (clickInfo, objectMaskedThatOutputObject) {
+  addCollectableItem (clickInfo, objectMaskedThatOutputObject, type) {
     const itemSize = this.getItemSize(objectMaskedThatOutputObject)
-    const itemType = this.getItemType()
+    const itemType = type
 
     const size = {
       w: itemSize,
@@ -134,6 +129,25 @@ class GameEngine extends Component {
     )
 
     GameEngineStateManager.addCollectableItem(newItem)
+  }
+
+  getWhatToOutputFromDisappearingACar () {
+    // Depending on smoke level, decide wheter we output heath helper or points, or nothing
+    let output = null
+
+    if (this.props.smokeLevel < 50) {
+      // Only output bananas or nothing, 20% nothing, 80% banana
+      output = Math.random() < 0.8 ? COLLECTABLE_TYPES.BANANA : null
+    } else if (this.props.smokeLevel >= 50 && this.props.smokeLevel < 80) {
+      // Output banananas or tree
+      output =
+        Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.TREE
+    } else {
+      // Output only trees
+      output = COLLECTABLE_TYPES.TREE
+    }
+
+    return output
   }
 
   loopUpdateCanvas () {
@@ -168,8 +182,6 @@ class GameEngine extends Component {
             if (isInsideArea(potentialObjectToMask, click)) {
               // console.log(`${potentialObjectToMask.idDisplay} clicked !`)
               GameEngineStateManager.addMaskedItem(potentialObjectToMask)
-              // Output item to collect
-              this.addCollectableItem(click, potentialObjectToMask)
               // Dispatch killed item notification
               this.props.dispatch(addKilledItem(potentialObjectToMask.id))
               // Add puff animation
@@ -181,10 +193,22 @@ class GameEngine extends Component {
                   potentialObjectToMask.id
                 )
               )
-              // Add explosion animation
-              GameEngineStateManager.addStarsAnimation(
-                new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
-              )
+
+              const whatObjectToOutput = this.getWhatToOutputFromDisappearingACar()
+
+              if (whatObjectToOutput) {
+                // Add explosion animation
+                GameEngineStateManager.addStarsAnimation(
+                  new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
+                )
+                // Output item to collect
+                this.addCollectableItem(
+                  click,
+                  potentialObjectToMask,
+                  whatObjectToOutput
+                )
+              }
+
               // break from loop
               clickUsed = true
               return false
@@ -359,6 +383,10 @@ export default connect(state => {
     canvasResolution: state.viewport.get('canvasResolution').toJS(),
     ratioVideoTrackerFPS,
     allowedDisappearAreas: selectedVideo.get('disappearAreas').toJS(),
-    alreadyKilledItems: state.game.get('killedItems')
+    alreadyKilledItems: state.game.get('killedItems'),
+    smokeLevel: getSmokeLevel(
+      state.game.get('nbItemsMissed'),
+      state.game.get('maxMissed')
+    )
   }
 })(GameEngine)

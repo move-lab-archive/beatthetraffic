@@ -1,13 +1,17 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
+import { getSmokeLevel } from '../../../../statemanagement/app/GameStateManagement'
+
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
 class SmokeLevel extends PureComponent {
   componentWillReceiveProps (nextProps) {
-    const nextSmokePercentage = nextProps.nbMissed * 100 / nextProps.maxMissed
-    const currentSmokePercentage =
-      this.props.nbMissed * 100 / this.props.maxMissed
+    const nextSmokePercentage = getSmokeLevel(
+      nextProps.nbMissed,
+      nextProps.maxMissed
+    )
+    const currentSmokePercentage = this.props.currentSmokeLevel
 
     /* =======
       Speed up sound logic (when smoke comes up)
@@ -52,7 +56,7 @@ class SmokeLevel extends PureComponent {
   }
 
   getFillColor () {
-    const smokePercentage = this.props.nbMissed * 100 / this.props.maxMissed
+    const smokePercentage = this.props.currentSmokeLevel
     let smokeFillColor
 
     if (smokePercentage < 50) {
@@ -67,7 +71,7 @@ class SmokeLevel extends PureComponent {
   }
 
   render () {
-    const smokePercentage = this.props.nbMissed * 100 / this.props.maxMissed
+    const smokePercentage = this.props.currentSmokeLevel
 
     return (
       <svg
@@ -141,6 +145,10 @@ export default connect(state => {
     score: state.game.get('score'),
     nbMissed: state.game.get('nbItemsMissed'),
     maxMissed: state.game.get('maxMissed'),
-    currentLevel: state.game.get('currentLevel')
+    currentLevel: state.game.get('currentLevel'),
+    currentSmokeLevel: getSmokeLevel(
+      state.game.get('nbItemsMissed'),
+      state.game.get('maxMissed')
+    )
   }
 })(SmokeLevel)

@@ -214,6 +214,11 @@ export function updateUrlToMatchLevelAndCity () {
   }
 }
 
+// Helper, get smoke level
+export function getSmokeLevel (nbMissed, maxMissed) {
+  return nbMissed * 100 / maxMissed
+}
+
 // Reducer
 export default function GameReducer (state = initialState, action = {}) {
   switch (action.type) {
