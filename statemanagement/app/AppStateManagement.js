@@ -12,26 +12,24 @@ const initialState = fromJS({
   selectedVideo: 'stuttgart1-level1',
   availableVideos: [
     {
-      name: 'stuttgart1-level1',
+      name: 'stuttgart2-level3',
       city: 'stuttgart1',
       level: 1,
-      levelName: 'HAUPTSTÄTTER STR.',
-      videoFPS: 25,
+      levelName: 'Stuttgart STR.',
+      videoFPS: 30,
       videoMobileOffset: {
-        x: 230,
+        x: 320,
         y: 0
       },
-      trackerAndDetectionsFPS: 25,
-      disappearAreas: [{ x: 0, y: 420, w: 640, h: 300 }],
-      sound: 'sound1',
+      trackerAndDetectionsFPS: 30,
+      disappearAreas: [{ x: 273.23, y: 641.77, w: 1330, h: 412 }],
       originalResolution: {
-        w: 1280,
-        h: 720
+        w: 1920,
+        h: 1080
       },
       sources: {
-        // hd: "/static/detections/level_1/level_1.mp4",
         hd:
-          'https://player.vimeo.com/external/237563941.hd.mp4?s=521162fbd4ba420ea6a2d04dcdf123c0a74a23e4'
+          'https://player.vimeo.com/external/243128409.hd.mp4?s=ba1bf393bb9da9d3dbe1b36c3ed061fd680584ee'
       }
     },
     {
