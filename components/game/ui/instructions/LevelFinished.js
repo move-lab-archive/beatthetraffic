@@ -10,6 +10,8 @@ import { loadLevel } from '../../../../statemanagement/app/GameStateManagement'
 class LevelFinished extends Component {
   componentDidMount () {
     SoundsManager.playSound('nextlevel')
+    // The youloseloop is for now the quiet loop
+    SoundsManager.playSound('youloseloop')
     this.props.dispatch(loadLevel(this.props.currentLevel + 1))
   }
 

@@ -191,7 +191,7 @@ export function loadLevel (level) {
     dispatch(setCurrentLevel(level))
 
     // Update url
-    // TODO maybe refactor later and have a URL manager file
+    // TODO maybe refactor later and have a URL manager module
     if (!getState().settings.get('isServerRendering')) {
       Router.push(
         '/',

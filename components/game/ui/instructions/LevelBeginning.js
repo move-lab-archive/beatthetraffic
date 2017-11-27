@@ -17,9 +17,22 @@ class LevelBeginning extends Component {
   }
 
   componentWillReceiveProps (newProps) {
+    // Auto play on level loading finished
     if (
       this.props.isGameReadyToPlay === false &&
       newProps.isGameReadyToPlay === true &&
+      this.props.introAnimPlayed === true
+    ) {
+      // console.log('Start countdown 5s to start level')
+      this.startCountDown()
+    }
+  }
+
+  componentDidMount () {
+    // Auto play on reset from gameover
+    if (
+      this.props.isGameReadyToPlay === true &&
+      this.props.gameFailed === false &&
       this.props.introAnimPlayed === true
     ) {
       // console.log('Start countdown 5s to start level')
@@ -119,6 +132,7 @@ export default connect(state => {
     isFullscreenAvailable: state.viewport.get('isFullscreenAvailable'),
     isFullscreen: state.viewport.get('isFullscreen'),
     currentLevel: state.game.get('currentLevel'),
-    introAnimPlayed: state.app.get('introAnimPlayed')
+    introAnimPlayed: state.app.get('introAnimPlayed'),
+    gameFailed: state.game.get('failed')
   }
 })(LevelBeginning)

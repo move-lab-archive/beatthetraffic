@@ -13,6 +13,12 @@ class SmokeLevel extends PureComponent {
     )
     const currentSmokePercentage = this.props.currentSmokeLevel
 
+    // Only tweak sounds if game is playing
+    if (!this.props.isGamePlaying) {
+      // console.log("Game not playing, don't tweak sounds")
+      return
+    }
+
     /* =======
       Speed up sound logic (when smoke comes up)
     ======= */
@@ -149,6 +155,7 @@ export default connect(state => {
     currentSmokeLevel: getSmokeLevel(
       state.game.get('nbItemsMissed'),
       state.game.get('maxMissed')
-    )
+    ),
+    isGamePlaying: state.game.get('isPlaying')
   }
 })(SmokeLevel)
