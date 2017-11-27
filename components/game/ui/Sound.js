@@ -47,7 +47,7 @@ class Sound extends Component {
             position: fixed;
             bottom: 1.5rem;
             right: 1rem;
-            z-index: 6;
+            z-index: 10;
             width: 4.4rem;
             height: 4.4rem;
             cursor: pointer;
