@@ -37,8 +37,6 @@ class SoundsManager {
       }
     )
     this.addSound('ambient', 'nextlevel', '/static/assets/sounds/nextlevel.mp3')
-    this.addSound('punctual', 'popA', '/static/assets/sounds/popA.mp3')
-    this.addSound('punctual', 'popB', '/static/assets/sounds/popB.mp3')
     this.addSound(
       'punctual',
       'healthrecovery',
@@ -105,16 +103,15 @@ class SoundsManager {
     if (this.sounds[soundName]) {
       if (soundToPlay.type === 'ambient') {
         // We can only play on ambient sound at a time
-        // stop crossfade them
+        // stop the current ambientSound
         if (this.currentAmbientSound) {
-          // Fade off
+          // Simply stop() for now, we could fade-off like this
           // this.currentAmbientSound.sound.fade(1, 0, 1000);
-          // TODO IF WE FADE LIKE THAT, we need to make sure to stop the sound
-          // on the end of the fade, if not there is a bug if you load another level and
-          // game over and retry, simply stop for now
+          // but this leads to other bugs as it's async, if something else
+          // happens while fading...
           this.currentAmbientSound.sound.stop()
         }
-        // Fade entry
+        // Fade-in entry
         soundToPlay.sound.seek(0) // if previously not stopped
         soundToPlay.sound.rate(playbackRate)
         soundToPlay.sound.fade(0, 1, 500)
