@@ -56,7 +56,7 @@ class SmokeLevel extends PureComponent {
     let smokeFillColor
 
     if (smokePercentage < 50) {
-      smokeFillColor = '#5BFF86'
+      smokeFillColor = '#FFFF3B'
     } else if (smokePercentage < 80) {
       smokeFillColor = '#FF9E00'
     } else {
