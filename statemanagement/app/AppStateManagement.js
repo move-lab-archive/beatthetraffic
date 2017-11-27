@@ -3,6 +3,7 @@ import { fromJS } from 'immutable'
 import { fetchRawDetections } from './RawDetectionsStateManagement'
 import { fetchObjectTracker } from './ObjectTrackerStateManagement'
 import { setVideoSrc, pauseVideo, playVideo } from './VideoStateManagement'
+import { turnSoundOn, turnSoundOff } from './SettingsStateManagement'
 
 // Initial state
 const initialState = fromJS({
@@ -275,6 +276,7 @@ const initialState = fromJS({
   ],
   showMenu: false,
   playOnHideMenu: false,
+  unmuteOnHideMenu: false,
   introAnimPlayed: false
 })
 
@@ -284,6 +286,8 @@ const SELECT_CITY = 'App/SELECT_CITY'
 const SHOW_MENU = 'App/SHOW_MENU'
 const HIDE_MENU = 'App/HIDE_MENU'
 const PLAY_ON_HIDE_MENU = 'App/PLAY_ON_HIDE_MENU'
+const UNMUTE_ON_HIDE_MENU = 'App/UNMUTE_ON_HIDE_MENU'
+const KEEP_MUTED_ON_HIDE_MENU = 'App/KEEP_MUTED_ON_HIDE_MENU'
 const SET_INTROANIM_PLAYED = 'App/SET_INTROANIM_PLAYED'
 
 let pathStatic = '/static/detections'
@@ -321,6 +325,19 @@ export function showMenu () {
       })
     }
 
+    if (getState().settings.get('soundEnabled')) {
+      // Mute sounds
+      dispatch(turnSoundOff())
+      // Set unmute sound on hide menu
+      dispatch({
+        type: UNMUTE_ON_HIDE_MENU
+      })
+    } else {
+      dispatch({
+        type: KEEP_MUTED_ON_HIDE_MENU
+      })
+    }
+
     dispatch({
       type: SHOW_MENU
     })
@@ -332,6 +349,10 @@ export function hideMenu () {
     if (getState().app.get('playOnHideMenu')) {
       //  Unpause video / game
       dispatch(playVideo())
+    }
+
+    if (getState().app.get('unmuteOnHideMenu')) {
+      dispatch(turnSoundOn())
     }
 
     dispatch({
@@ -424,6 +445,10 @@ export default function AppReducer (state = initialState, action = {}) {
       return state.set('showMenu', false).set('playOnHideMenu', false)
     case PLAY_ON_HIDE_MENU:
       return state.set('playOnHideMenu', true)
+    case UNMUTE_ON_HIDE_MENU:
+      return state.set('unmuteOnHideMenu', true)
+    case KEEP_MUTED_ON_HIDE_MENU:
+      return state.set('unmuteOnHideMenu', false)
     case SET_INTROANIM_PLAYED:
       return state.set('introAnimPlayed', true)
     default:
