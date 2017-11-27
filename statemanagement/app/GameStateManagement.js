@@ -224,7 +224,12 @@ export default function GameReducer (state = initialState, action = {}) {
     case ADD_MISSED_ITEM:
       return state.set('nbItemsMissed', state.get('nbItemsMissed') + 1)
     case REMOVE_MISSED_ITEM:
-      return state.set('nbItemsMissed', state.get('nbItemsMissed') - 1)
+      // Cannot go lower than 0
+      let nbItemsMissed = state.get('nbItemsMissed') - 1
+      if (nbItemsMissed < 0) {
+        nbItemsMissed = 0
+      }
+      return state.set('nbItemsMissed', nbItemsMissed)
     case ADD_KILLED_ITEM:
       return state.update('killedItems', killedItems =>
         killedItems.push(action.payload)
