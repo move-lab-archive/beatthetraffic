@@ -254,6 +254,7 @@ export default function GameReducer (state = initialState, action = {}) {
         .set('isPlaying', false)
         .set('finished', false)
         .set('failed', false)
+        .set('nbItemsMissed', 0) // reset smoke bar
     case RETRY:
       return state.merge(initialState)
     default:

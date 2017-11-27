@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Router from 'next/router'
 
-import Button from '../../../shared/Button'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
 import { loadLevel } from '../../../../statemanagement/app/GameStateManagement'
