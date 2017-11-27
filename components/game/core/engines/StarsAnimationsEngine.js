@@ -5,10 +5,10 @@ class StarsAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 1000,
-      height: 100,
-      src: '/static/assets/sprites/coin-sprite-animation.png',
-      nbFrames: 10
+      width: 1380,
+      height: 76,
+      src: '/static/assets/sprites/stars.png',
+      nbFrames: 18
     }
   }
 

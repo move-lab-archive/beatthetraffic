@@ -58,11 +58,11 @@ class StarsAnimation {
         .to(dot, animationDuration, { opacity: 0, ease: Power4.easeIn }, 0)
         .to(
           dot,
-          animationDuration / 3,
+          animationDuration / 2,
           {
             currentFrame: StarsAnimationsEngine.getNbFrames(),
             ease: SteppedEase.config(StarsAnimationsEngine.getNbFrames()),
-            repeat: 3
+            repeat: 2
           },
           0
         )
