@@ -21,24 +21,24 @@ const SET_FULLSCREEN_STATUS = 'Viewport/SET_FULLSCREEN_STATUS'
 const SET_FULLSCREEN_AVAILABLE = 'Viewport/SET_FULLSCREEN_AVAILABLE'
 
 export function handleOrientationChange (dispatch) {
-  console.log(window.orientation)
+  // console.log(window.orientation)
   if (window.orientation === -90 || window.orientation === 90) {
-    console.log('landscape')
+    // console.log('landscape')
     dispatch(setLandscape())
     // Scroll to bottom ?
     window.scrollTo(0, document.body.scrollHeight)
   } else if (window.orientation !== undefined) {
-    console.log('portrait')
+    // console.log('portrait')
     dispatch(setPortrait())
   }
 }
 
 export function handleFullScreenChange (dispatch) {
   if (screenfull.isFullscreen) {
-    console.log('entering fullscreen')
+    // console.log('entering fullscreen')
     dispatch(setFullScreenStatus(true))
   } else {
-    console.log('leaving fullscreen')
+    // console.log('leaving fullscreen')
     dispatch(setFullScreenStatus(false))
   }
 }
@@ -50,14 +50,14 @@ export function initViewportListeners () {
       dispatch({
         type: INIT_LISTENERS
       })
-      console.log('init orientation change listener')
+      // console.log('init orientation change listener')
       window.addEventListener(
         'orientationchange',
         handleOrientationChange.bind(this, dispatch)
       )
       handleOrientationChange(dispatch)
       if (screenfull.enabled) {
-        console.log('init fullscreen listener')
+        // console.log('init fullscreen listener')
         screenfull.on('change', handleFullScreenChange.bind(this, dispatch))
         dispatch(setFullscreenAvailable())
       }

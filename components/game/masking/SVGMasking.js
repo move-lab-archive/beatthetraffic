@@ -34,19 +34,19 @@ class SVGMasking extends Component {
       nextProps.isObjectTrackerDataFetched === true
     ) {
       if (!this.isUpdatingMasks) {
-        console.log('Start loop update masks')
+        // console.log('Start loop update masks')
         this.isUpdatingMasks = true
         this.loopUpdateMasks()
       }
     }
 
     if (nextProps.selectedVideoName !== this.props.selectedVideoName) {
-      console.log('Changed level, need to clear up masking canvas')
+      // console.log('Changed level, need to clear up masking canvas')
       this.setState(initialState)
     }
 
     if (nextProps.isAtBeggining !== this.props.isAtBeggining) {
-      console.log('Level reset, need to clear up masking canvas')
+      // console.log('Level reset, need to clear up masking canvas')
       this.setState(initialState)
     }
   }

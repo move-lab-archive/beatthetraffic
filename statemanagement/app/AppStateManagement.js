@@ -354,7 +354,7 @@ export function selectCity (name) {
 
 export function selectVideoForLevel (level) {
   return (dispatch, getState) => {
-    console.log(level)
+    // console.log(level)
 
     const city = getState().app.get('selectedCity')
 

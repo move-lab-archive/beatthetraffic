@@ -49,7 +49,7 @@ class Menu extends Component {
       this.props.url.query.show === 'menu' &&
       newProps.url.query.page === 'about'
     ) {
-      console.log('show about page from menu')
+      // console.log('show about page from menu')
       this.setState({
         showAbout: true
       })
@@ -59,7 +59,7 @@ class Menu extends Component {
       this.props.url.query.show === 'menu' &&
       newProps.url.query.page === 'score'
     ) {
-      console.log('show score page from menu')
+      // console.log('show score page from menu')
       this.setState({
         showScore: true
       })
@@ -70,7 +70,7 @@ class Menu extends Component {
         this.props.url.query.page === 'score') &&
       newProps.url.query.page === undefined
     ) {
-      console.log('hide about or score page from menu')
+      // console.log('hide about or score page from menu')
       this.setState({
         showAbout: false,
         showScore: false
@@ -82,7 +82,7 @@ class Menu extends Component {
       newProps.url.query.show === undefined
     ) {
       // We exited the menu via backbutton
-      console.log('Exit menu via backbutton')
+      // console.log('Exit menu via backbutton')
       this.props.dispatch(hideMenu())
     }
   }

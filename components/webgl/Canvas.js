@@ -25,7 +25,7 @@ class Canvas extends Component {
     if(nextProps.isPlaying === true &&
        nextProps.isObjectTrackerDataFetched === true) {
       if(!this.isUpdatingCanvas) {
-        console.log('Start loop update canvas');
+        // console.log('Start loop update canvas');
         this.isUpdatingCanvas = true;
         this.loopUpdateCanvas();
       }
@@ -92,7 +92,7 @@ class Canvas extends Component {
   }
 
   render() { 
-    console.log('render');
+    // console.log('render');
     return (
       <canvas 
         ref={(el) => { 

@@ -44,14 +44,14 @@ class GameEngine extends Component {
       nextProps.isObjectTrackerDataFetched === true
     ) {
       if (!this.isUpdatingCanvas) {
-        console.log('Start loop update canvas')
+        // console.log('Start loop update canvas')
         this.isUpdatingCanvas = true
         this.loopUpdateCanvas()
       }
     }
 
     if (nextProps.isAtBeggining !== this.props.isAtBeggining) {
-      console.log('Level reset, need to clear up canvas')
+      // console.log('Level reset, need to clear up canvas')
       this.clearCanvas()
     }
   }
@@ -161,7 +161,7 @@ class GameEngine extends Component {
           // for each remainingPotentialObjectToMask
           remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
             if (isInsideArea(potentialObjectToMask, click)) {
-              console.log(`${potentialObjectToMask.idDisplay} clicked !`)
+              // console.log(`${potentialObjectToMask.idDisplay} clicked !`)
               GameEngineStateManager.addMaskedItem(potentialObjectToMask)
               // Output item to collect
               this.addCollectableItem(click, potentialObjectToMask)
@@ -207,7 +207,7 @@ class GameEngine extends Component {
       )
 
       itemsMissedThisFrame.forEach(itemMissed => {
-        console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
+        // console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
         this.props.dispatch(addMissedItem())
       })
 

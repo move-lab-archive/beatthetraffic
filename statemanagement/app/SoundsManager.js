@@ -6,8 +6,8 @@ class SoundsManager {
     this.sounds = {}
     this.currentAmbientSound = null
 
-    console.log('Instantiate SoundsManager')
-    console.log('preload game sound')
+    // console.log('Instantiate SoundsManager')
+    // console.log('preload game sound')
     this.addSound('ambient', 'intro', '/static/assets/sounds/intro.mp3')
   }
 
@@ -125,7 +125,7 @@ class SoundsManager {
         this.sounds[soundName].sound.play()
       }
     } else {
-      console.log(`Sound ${soundName} undefined`)
+      // console.log(`Sound ${soundName} undefined`)
     }
   }
 
@@ -133,7 +133,7 @@ class SoundsManager {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.pause()
     } else {
-      console.log(`Sound ${soundName} undefined`)
+      // console.log(`Sound ${soundName} undefined`)
     }
   }
 
@@ -141,7 +141,7 @@ class SoundsManager {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.stop()
     } else {
-      console.log(`Sound ${soundName} undefined`)
+      // console.log(`Sound ${soundName} undefined`)
     }
   }
 
@@ -149,7 +149,7 @@ class SoundsManager {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.rate(newRate)
     } else {
-      console.log(`Sound ${soundName} undefined`)
+      // console.log(`Sound ${soundName} undefined`)
     }
   }
 

@@ -50,6 +50,6 @@ export function isInsideArea (area, point) {
 
 export function isInsideSomeAreas (areas, point, idDisplay) {
   const isInside = areas.some(area => isInsideArea(area, point))
-  console.log(`Run isInsideSomeAreas for ${idDisplay}, returned: ${isInside}`)
+  // console.log(`Run isInsideSomeAreas for ${idDisplay}, returned: ${isInside}`)
   return isInside
 }

@@ -12,7 +12,7 @@ class HighScore extends React.Component {
   static getInitialProps ({ store, query, isServer }) {
     const city = query.city || store.getState().app.get('selectedCity')
     const level = query.level || 1
-    console.log(`Setting city ${city}, level ${level}`)
+    // console.log(`Setting city ${city}, level ${level}`)
     store.dispatch(loadCity(city, level))
   }
 

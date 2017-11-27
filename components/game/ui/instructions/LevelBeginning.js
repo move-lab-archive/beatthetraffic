@@ -22,7 +22,7 @@ class LevelBeginning extends Component {
       newProps.isGameReadyToPlay === true &&
       this.props.introAnimPlayed === true
     ) {
-      console.log('Start countdown 5s to start level')
+      // console.log('Start countdown 5s to start level')
       this.startCountDown()
     }
   }

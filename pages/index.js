@@ -9,10 +9,9 @@ import { loadCity } from '../statemanagement/app/GameStateManagement'
 
 class Index extends React.Component {
   static getInitialProps ({ store, query, isServer }) {
-    console.log('coucou')
     const city = query.city || store.getState().app.get('selectedCity')
     const level = query.level || 1
-    console.log(`Setting city ${city}, level ${level}`)
+    // console.log(`Setting city ${city}, level ${level}`)
     store.dispatch(loadCity(city, level))
   }
 

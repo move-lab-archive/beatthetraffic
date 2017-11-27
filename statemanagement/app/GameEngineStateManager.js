@@ -19,7 +19,7 @@ class GameEngineStateManager {
   }
 
   reset () {
-    console.log('Reset game temp state')
+    // console.log('Reset game temp state')
     // TODO CLONE DEEP INITIAL STATE
     this.state = {
       currentFrame: 0,

@@ -35,14 +35,14 @@ class Video extends Component {
     // We want to re-render the video item if the firstFrameLoaded has loaded
     // to mask the first frame image trick
     if (nextProps.firstFrameLoaded !== this.props.firstFrameLoaded) {
-      console.log('firstFrameLoaded, re-render')
+      // console.log('firstFrameLoaded, re-render')
       return true
     } else if (
       nextProps.src !== this.props.src ||
       nextState.canRenderVideo !== this.state.canRenderVideo
     ) {
       // We want to re-render the video item if the src has changed
-      console.log('Render video')
+      // console.log('Render video')
       setTimeout(() => {
         window.scroll({
           top: this.props.videoMobileOffset.y,
@@ -58,7 +58,7 @@ class Video extends Component {
 
   componentWillReceiveProps (newProps) {
     if (!this.videoEl) {
-      console.log('Video element ref not defined')
+      // console.log('Video element ref not defined')
       return
     }
     // Pilot videoEl from the props changes
@@ -66,7 +66,7 @@ class Video extends Component {
       this.props.isPlaying !== newProps.isPlaying &&
       newProps.isPlaying === true
     ) {
-      console.log('play item')
+      // console.log('play item')
       this.videoEl.play()
     }
 
@@ -83,7 +83,7 @@ class Video extends Component {
   }
 
   handleCanPlay () {
-    console.log('video can play')
+    // console.log('video can play')
     this.props.dispatch(
       setVideoReady({
         duration: this.videoEl.duration
@@ -98,31 +98,31 @@ class Video extends Component {
   }
 
   handlePlay () {
-    console.log('playing')
+    // console.log('playing')
     // If not already monitoring
     if (!this.isMonitoring) {
-      console.log('Start monitoring frames')
+      // console.log('Start monitoring frames')
       this.isMonitoring = true
       this.monitorFrames()
     }
   }
 
   handlePause () {
-    console.log('video paused')
+    // console.log('video paused')
   }
 
   handleEnded () {
-    console.log('video ended')
+    // console.log('video ended')
     this.props.dispatch(setVideoEnded())
   }
 
   handleFirstFrameLoaded () {
-    console.log('fist frame loaded')
+    // console.log('fist frame loaded')
     this.props.dispatch(firstFrameLoaded())
   }
 
   cleanListeners (el) {
-    console.log('Clean previous listeners')
+    // console.log('Clean previous listeners')
     el.removeEventListener('canplay', this.handleCanPlay)
     el.removeEventListener('play', this.handlePlay)
     el.removeEventListener('pause', this.handlePause)
@@ -137,7 +137,7 @@ class Video extends Component {
     }
     this.videoEl = el
     if (this.videoEl) {
-      console.log('registerListeners')
+      // console.log('registerListeners')
       this.videoEl.addEventListener('canplay', this.handleCanPlay)
       this.videoEl.addEventListener('play', this.handlePlay)
       this.videoEl.addEventListener('pause', this.handlePause)
@@ -148,7 +148,7 @@ class Video extends Component {
 
   monitorFrames () {
     if (!this.props.isPlaying || this.isMonitoring === false) {
-      console.log('cancel monitoring')
+      // console.log('cancel monitoring')
       this.isMonitoring = false
       return
     }
