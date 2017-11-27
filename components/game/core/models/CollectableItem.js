@@ -1,5 +1,6 @@
 import { TweenLite, TweenMax } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
+import CollectableItemsEngine from '../engines/CollectableItemsEngine'
 
 class CollectableItem {
   constructor (type, x, y, w, h, opacity = 1, id) {
@@ -36,8 +37,8 @@ class CollectableItem {
 
   animate () {
     this.anim = TweenMax.to(this, 1, {
-      currentFrame: 18,
-      ease: SteppedEase.config(18),
+      currentFrame: CollectableItemsEngine.getNbFrames(this.type),
+      ease: SteppedEase.config(CollectableItemsEngine.getNbFrames(this.type)),
       repeat: -1
     })
     this.anim.play()

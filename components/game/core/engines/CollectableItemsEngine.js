@@ -60,6 +60,10 @@ class CollectableItemsEngine {
     })
   }
 
+  getNbFrames (collectableType) {
+    return this.sprites[collectableType].nbTotalFrame - 1
+  }
+
   /* frame needs to start at 0 */
   getFrameData (frameNb, collectableType) {
     let sprite = this.sprites[collectableType]
