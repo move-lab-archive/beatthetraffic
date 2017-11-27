@@ -98,10 +98,14 @@ class GameEngine extends Component {
     this.canvasContext.clearRect(0, 0, 1280, 720)
   }
 
-  // Todo have min / max size
   getItemSize (mask) {
+    // Compute size depending on bbox area
     const maskArea = mask.w * mask.h
-    return Math.floor(Math.sqrt(maskArea / 4))
+    let size = Math.floor(Math.sqrt(maskArea / 4))
+    // TODO have this dynamic depending on canvas size / sprite image
+    // between 30 and 50 pixel for  now
+    size = Math.min(Math.max(parseInt(size), 30), 50)
+    return size
   }
 
   getItemType () {
