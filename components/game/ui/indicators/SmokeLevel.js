@@ -9,6 +9,10 @@ class SmokeLevel extends PureComponent {
     const currentSmokePercentage =
       this.props.nbMissed * 100 / this.props.maxMissed
 
+    /* =======
+      Speed up sound logic (when smoke comes up)
+    ======= */
+
     if (nextSmokePercentage >= 50 && currentSmokePercentage < 50) {
       // Speed up sound when smoke is superior to 50% for the first time
       console.log('Speed up sound')
@@ -24,6 +28,26 @@ class SmokeLevel extends PureComponent {
       console.log('Play alert sound')
       SoundsManager.playSound('transition-normal-alert')
       SoundsManager.playSound('alert')
+    }
+
+    /* =======
+      Slow down sound logic (when lowering the smoke bar)
+    ======= */
+
+    if (nextSmokePercentage < 50 && currentSmokePercentage >= 50) {
+      // Slow down sound
+      console.log('Slow down sound')
+      SoundsManager.changePlaybackRate(
+        `main_level${this.props.currentLevel}`,
+        1
+      )
+    }
+
+    if (nextSmokePercentage < 80 && currentSmokePercentage >= 80) {
+      // Recovering from alert
+      console.log('Recovering from alert sound')
+      SoundsManager.playSound('transition-alert-normal')
+      SoundsManager.playSound(`main_level${this.props.currentLevel}`, 1.2)
     }
   }
 
