@@ -159,11 +159,12 @@ class GameEngine extends Component {
 
       // Handle user actions
       if (GameEngineStateManager.getClicksBuffer().length > 0) {
+        let clickUsed = false
         // For each click
         GameEngineStateManager.getClicksBuffer().forEach(click => {
           // See if it will make a car dissapear with this click
           // for each remainingPotentialObjectToMask
-          remainingPotentialObjectToMask.forEach(potentialObjectToMask => {
+          remainingPotentialObjectToMask.every(potentialObjectToMask => {
             if (isInsideArea(potentialObjectToMask, click)) {
               // console.log(`${potentialObjectToMask.idDisplay} clicked !`)
               GameEngineStateManager.addMaskedItem(potentialObjectToMask)
@@ -184,19 +185,33 @@ class GameEngine extends Component {
               GameEngineStateManager.addStarsAnimation(
                 new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
               )
+              // break from loop
+              clickUsed = true
+              return false
+            } else {
+              return true
             }
           })
 
-          // See if it can collect items
-          // TODO collect only one item with one click
-          GameEngineStateManager.getItemsToCollect().forEach(itemToCollect => {
-            if (
-              itemToCollect.isCollectable &&
-              isInsideArea(itemToCollect, click)
-            ) {
-              this.collectItem(itemToCollect)
-            }
-          })
+          // See if it can collect items, is click wasn't used to disappear a car
+          if (!clickUsed) {
+            GameEngineStateManager.getItemsToCollect().every(itemToCollect => {
+              if (
+                itemToCollect.isCollectable &&
+                isInsideArea(itemToCollect, click)
+              ) {
+                this.collectItem(itemToCollect)
+                // break from loop
+                clickUsed = true
+                return false
+              } else {
+                return true
+              }
+            })
+          }
+
+          // reset click used
+          clickUsed = false
         })
       }
 
