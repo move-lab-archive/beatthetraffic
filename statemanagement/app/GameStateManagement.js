@@ -77,7 +77,7 @@ export function collectItem (itemToCollect) {
       SoundsManager.playSound('win-point-withitem')
     } else {
       dispatch(removeMissedItem())
-      // TODO special sound recover smoke
+      SoundsManager.playSound('healthrecovery')
     }
   }
 }

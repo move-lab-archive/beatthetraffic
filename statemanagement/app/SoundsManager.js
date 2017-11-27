@@ -39,6 +39,11 @@ class SoundsManager {
     this.addSound('ambient', 'nextlevel', '/static/assets/sounds/nextlevel.mp3')
     this.addSound('punctual', 'popA', '/static/assets/sounds/popA.mp3')
     this.addSound('punctual', 'popB', '/static/assets/sounds/popB.mp3')
+    this.addSound(
+      'punctual',
+      'healthrecovery',
+      '/static/assets/sounds/healthrecovery.mp3'
+    )
     this.addSound('punctual', 'carhit', '/static/assets/sounds/carhit.mp3')
     this.addSound(
       'punctual',
