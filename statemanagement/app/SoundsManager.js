@@ -36,7 +36,11 @@ class SoundsManager {
         loop: true
       }
     )
-    this.addSound('ambient', 'nextlevel', '/static/assets/sounds/nextlevel.mp3')
+    this.addSound(
+      'punctual',
+      'nextlevel',
+      '/static/assets/sounds/nextlevel.mp3'
+    )
     this.addSound(
       'punctual',
       'healthrecovery',
