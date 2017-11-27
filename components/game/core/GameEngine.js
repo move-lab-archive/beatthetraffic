@@ -136,8 +136,8 @@ class GameEngine extends Component {
     let output = null
 
     if (this.props.smokeLevel < 50) {
-      // Only output bananas or nothing, 20% nothing, 80% banana
-      output = Math.random() < 0.8 ? COLLECTABLE_TYPES.BANANA : null
+      // Only output bananas or nothing, 50% nothing, 50% banana
+      output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : null
     } else if (this.props.smokeLevel >= 50 && this.props.smokeLevel < 80) {
       // Output banananas or tree
       output =
