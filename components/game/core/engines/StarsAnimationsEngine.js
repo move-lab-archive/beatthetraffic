@@ -5,10 +5,10 @@ class StarsAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 25,
-      height: 25,
-      src: '/static/assets/icons/icon-star.svg',
-      nbFrames: 1
+      width: 1380,
+      height: 76,
+      src: '/static/assets/sprites/stars.png',
+      nbFrames: 18
     }
   }
 
@@ -35,7 +35,7 @@ class StarsAnimationsEngine {
   }
 
   getNbFrames () {
-    return this.sprite.nbFrames
+    return this.sprite.nbFrames - 1
   }
 
   /* frame needs to start at 0 */
@@ -50,8 +50,8 @@ class StarsAnimationsEngine {
 
   drawFrameOnCanvas (contextToDrawOn, starsAnimation) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(0)
     starsAnimation.dots.map(dot => {
+      let sourceData = this.getFrameData(dot.currentFrame)
       contextToDrawOn.globalAlpha = dot.opacity
       contextToDrawOn.drawImage(
         this.offscreenCanvas,

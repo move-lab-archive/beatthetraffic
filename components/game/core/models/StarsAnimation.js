@@ -1,5 +1,6 @@
 import { TweenMax, TweenLite, TimelineLite } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
+import StarsAnimationsEngine from '../engines/StarsAnimationsEngine'
 
 // TODO rename to explosion animation
 class StarsAnimation {
@@ -7,12 +8,13 @@ class StarsAnimation {
     this.x = x
     this.y = y
     this.id = id
-    this.currentFrame = 0
 
     this.emitterSize = 50
-    this.dotQuantity = 15
-    this.dotSizeMax = 20
-    this.dotSizeMin = 5
+    this.dotQuantity = 10
+    this.dotSizeMax = 30
+    this.dotSizeMin = 10
+
+    this.maxAnimDuration = 0
 
     this.dots = []
 
@@ -25,6 +27,7 @@ class StarsAnimation {
     // create all the dots
     for (let i = 0; i < this.dotQuantity; i++) {
       let dot = {}
+      dot.currentFrame = 0
       dot.size = this.getRandomSize(this.dotSizeMin, this.dotSizeMax)
       dot.angle = Math.random() * Math.PI * 2 // random angle
       // figure out the maximum distance from the center,
@@ -42,19 +45,27 @@ class StarsAnimation {
 
       const animationDuration = 0.3 + Math.random()
 
-      // this is where we do the animation...
       this.timeline
         .to(
           dot,
           animationDuration,
           {
-            opacity: 1,
             x: this.x + Math.cos(dot.angle) * dot.length * 6,
             y: this.y + Math.sin(dot.angle) * dot.length * 6
           },
           0
         )
         .to(dot, animationDuration, { opacity: 0, ease: Power4.easeIn }, 0)
+        .to(
+          dot,
+          animationDuration / 2,
+          {
+            currentFrame: StarsAnimationsEngine.getNbFrames(),
+            ease: SteppedEase.config(StarsAnimationsEngine.getNbFrames()),
+            repeat: 2
+          },
+          0
+        )
       this.dots.push(dot)
     }
   }
@@ -63,7 +74,7 @@ class StarsAnimation {
     return min + Math.random() * (max - min)
   }
 
-  animate (timeline) {
+  animate () {
     this.timeline.play()
   }
 
