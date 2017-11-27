@@ -52,6 +52,7 @@ class StarsAnimationsEngine {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(0)
     starsAnimation.dots.map(dot => {
+      contextToDrawOn.globalAlpha = dot.opacity
       contextToDrawOn.drawImage(
         this.offscreenCanvas,
         sourceData.x,
@@ -64,6 +65,7 @@ class StarsAnimationsEngine {
         dot.height
       )
     })
+    contextToDrawOn.globalAlpha = 1
   }
 }
 

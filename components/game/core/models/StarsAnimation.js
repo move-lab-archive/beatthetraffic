@@ -39,17 +39,22 @@ class StarsAnimation {
         height: dot.size,
         opacity: 1
       })
+
+      const animationDuration = 0.3 + Math.random()
+
       // this is where we do the animation...
-      this.timeline.to(
-        dot,
-        0.3 + Math.random(),
-        {
-          opacity: 1,
-          x: this.x + Math.cos(dot.angle) * dot.length * 6,
-          y: this.y + Math.sin(dot.angle) * dot.length * 6
-        },
-        0
-      )
+      this.timeline
+        .to(
+          dot,
+          animationDuration,
+          {
+            opacity: 1,
+            x: this.x + Math.cos(dot.angle) * dot.length * 6,
+            y: this.y + Math.sin(dot.angle) * dot.length * 6
+          },
+          0
+        )
+        .to(dot, animationDuration, { opacity: 0, ease: Power4.easeIn }, 0)
       this.dots.push(dot)
     }
   }
