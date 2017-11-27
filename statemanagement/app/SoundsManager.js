@@ -45,6 +45,11 @@ class SoundsManager {
     this.addSound('punctual', 'carhit', '/static/assets/sounds/carhit.mp3')
     this.addSound(
       'punctual',
+      'carhitandpopitem',
+      '/static/assets/sounds/carhitandpopitem.mp3'
+    )
+    this.addSound(
+      'punctual',
       'carmissed',
       '/static/assets/sounds/carmissed.mp3'
     )

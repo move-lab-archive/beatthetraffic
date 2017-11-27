@@ -181,19 +181,6 @@ class GameEngine extends Component {
           remainingPotentialObjectToMask.every(potentialObjectToMask => {
             if (isInsideArea(potentialObjectToMask, click)) {
               // console.log(`${potentialObjectToMask.idDisplay} clicked !`)
-              GameEngineStateManager.addMaskedItem(potentialObjectToMask)
-              // Dispatch killed item notification
-              this.props.dispatch(addKilledItem(potentialObjectToMask.id))
-              // Add puff animation
-              GameEngineStateManager.addPuffAnimation(
-                new PuffAnimation(
-                  click.x,
-                  click.y,
-                  90,
-                  potentialObjectToMask.id
-                )
-              )
-
               const whatObjectToOutput = this.getWhatToOutputFromDisappearingACar()
 
               if (whatObjectToOutput) {
@@ -208,6 +195,21 @@ class GameEngine extends Component {
                   whatObjectToOutput
                 )
               }
+
+              GameEngineStateManager.addMaskedItem(potentialObjectToMask)
+              // Dispatch killed item notification
+              this.props.dispatch(
+                addKilledItem(potentialObjectToMask.id, whatObjectToOutput)
+              )
+              // Add puff animation
+              GameEngineStateManager.addPuffAnimation(
+                new PuffAnimation(
+                  click.x,
+                  click.y,
+                  90,
+                  potentialObjectToMask.id
+                )
+              )
 
               // break from loop
               clickUsed = true

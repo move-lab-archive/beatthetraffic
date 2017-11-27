@@ -82,14 +82,18 @@ export function collectItem (itemToCollect) {
   }
 }
 
-export function addKilledItem (id) {
+export function addKilledItem (id, objectToOutput) {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_KILLED_ITEM,
       payload: id
     })
     dispatch(incrementScore())
-    SoundsManager.playSound('carhit')
+    if (!objectToOutput) {
+      SoundsManager.playSound('carhit')
+    } else {
+      SoundsManager.playSound('carhitandpopitem')
+    }
   }
 }
 
