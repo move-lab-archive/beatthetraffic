@@ -18,7 +18,7 @@ const initialState = fromJS({
       levelName: 'Stuttgart STR.',
       videoFPS: 30,
       videoMobileOffset: {
-        x: 320,
+        x: 350,
         y: 0
       },
       trackerAndDetectionsFPS: 30,

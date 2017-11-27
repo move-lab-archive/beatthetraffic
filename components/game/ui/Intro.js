@@ -39,6 +39,7 @@ class Intro extends Component {
             bottom: 0;
             z-index: 10;
             background-image: url('${this.props.srcFirstFrame}');
+            background-position: 350px 0px;
             background-size: cover;
             background-color: #262626;
           }
