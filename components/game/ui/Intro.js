@@ -41,13 +41,13 @@ class Intro extends Component {
             background-image: url('${this.props.srcFirstFrame}');
             background-size: cover;
             background-color: #262626;
-            display: flex;
-            justify-content: center;
-            align-items: center;
           }
 
           .title {
-            position: absolute;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
             font-size: 9rem;
             line-height: 8rem;
             color: yellow;
