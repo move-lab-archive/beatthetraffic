@@ -9,10 +9,10 @@ class StarsAnimation {
     this.y = y
     this.id = id
 
-    this.emitterSize = 80
-    this.dotQuantity = 15
-    this.dotSizeMax = 50
-    this.dotSizeMin = 20
+    this.emitterSize = 50
+    this.dotQuantity = 10
+    this.dotSizeMax = 30
+    this.dotSizeMin = 10
 
     this.maxAnimDuration = 0
 
@@ -50,18 +50,18 @@ class StarsAnimation {
           dot,
           animationDuration,
           {
-            opacity: 0,
             x: this.x + Math.cos(dot.angle) * dot.length * 6,
             y: this.y + Math.sin(dot.angle) * dot.length * 6
           },
           0
         )
+        .to(dot, animationDuration, { opacity: 0, ease: Power4.easeIn }, 0)
         .to(
           dot,
           animationDuration / 3,
           {
-            currentFrame: StarsAnimationsEngine.getNbFrames() - 1,
-            ease: SteppedEase.config(StarsAnimationsEngine.getNbFrames() - 1),
+            currentFrame: StarsAnimationsEngine.getNbFrames(),
+            ease: SteppedEase.config(StarsAnimationsEngine.getNbFrames()),
             repeat: 3
           },
           0

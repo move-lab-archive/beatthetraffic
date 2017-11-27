@@ -35,7 +35,7 @@ class StarsAnimationsEngine {
   }
 
   getNbFrames () {
-    return this.sprite.nbFrames
+    return this.sprite.nbFrames - 1
   }
 
   /* frame needs to start at 0 */
