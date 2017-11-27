@@ -5,10 +5,10 @@ class StarsAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 25,
-      height: 25,
-      src: '/static/assets/icons/icon-star.svg',
-      nbFrames: 1
+      width: 1000,
+      height: 100,
+      src: '/static/assets/sprites/coin-sprite-animation.png',
+      nbFrames: 10
     }
   }
 
@@ -50,8 +50,9 @@ class StarsAnimationsEngine {
 
   drawFrameOnCanvas (contextToDrawOn, starsAnimation) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(0)
     starsAnimation.dots.map(dot => {
+      let sourceData = this.getFrameData(dot.currentFrame)
+      contextToDrawOn.globalAlpha = dot.opacity
       contextToDrawOn.drawImage(
         this.offscreenCanvas,
         sourceData.x,
@@ -64,6 +65,7 @@ class StarsAnimationsEngine {
         dot.height
       )
     })
+    contextToDrawOn.globalAlpha = 1
   }
 }
 
