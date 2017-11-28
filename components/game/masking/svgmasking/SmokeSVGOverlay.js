@@ -1,7 +1,15 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import BezierEasing from 'bezier-easing'
 
 class SmokeSVGOverlay extends PureComponent {
+  constructor (props) {
+    super(props)
+
+    // Can tweak that here easily: http://greweb.me/bezier-easing-editor/example/
+    this.easing = BezierEasing(0.64, 0.12, 0.88, 0.74)
+  }
+
   getPollutionOverlayStyle () {
     const pollutionPercentage = this.props.nbMissed * 100 / this.props.maxMissed
     let pollutionFillColor
@@ -9,7 +17,7 @@ class SmokeSVGOverlay extends PureComponent {
 
     if (pollutionPercentage < 80) {
       pollutionFillColor = '#262626'
-      pollutionOpacity = pollutionPercentage / 100
+      pollutionOpacity = this.easing(pollutionPercentage / 100)
     } else {
       pollutionFillColor = '#FF0000'
       pollutionOpacity = 0.4
