@@ -21,6 +21,13 @@ export function scaleArea (area, finalResolution, originalResolution) {
   }
 }
 
+export function scalePoint (point, finalResolution, originalResolution) {
+  return {
+    x: point.x * finalResolution.w / originalResolution.w,
+    y: point.y * finalResolution.h / originalResolution.h
+  }
+}
+
 export function enlargeBbox (bbox, enlargeSize) {
   return {
     x: bbox.x - enlargeSize,

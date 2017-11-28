@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import raf from 'raf'
 
-import { isInsideArea } from '../../../utils/resolution'
+import { isInsideArea, scalePoint } from '../../../utils/resolution'
 
 import { updateMasking } from '../masking/masking'
 
@@ -257,6 +257,19 @@ class GameEngine extends Component {
       itemsMissedThisFrame.forEach(itemMissed => {
         // console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
         this.props.dispatch(addMissedItem())
+        const centerOfDisapearItem = scalePoint(
+          itemMissed.disappearArea,
+          this.props.canvasResolution,
+          this.props.originalResolution
+        )
+        GameEngineStateManager.addPuffAnimation(
+          new PuffAnimation(
+            centerOfDisapearItem.x,
+            centerOfDisapearItem.y,
+            200,
+            itemMissed.id
+          )
+        )
       })
 
       /*
