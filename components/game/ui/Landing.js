@@ -3,20 +3,51 @@ import { connect } from 'react-redux'
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
-import Button from '../../shared/Button'
-import Loading from '../../shared/Loading'
+import { TweenLite } from 'gsap'
+
+import BtnLanding from './landing/BtnLanding'
+import RightCloud from './landing/RightCloud'
+import LeftCloud from './landing/LeftCloud'
+import Unicorn from './landing/Unicorn'
 
 class Landing extends Component {
+  constructor (props) {
+    super(props)
+
+    this.handleStartGame = this.handleStartGame.bind(this)
+  }
+
+  handleStartGame () {
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
+      scale: 1.2,
+      opacity: 0,
+      delay: 0.3,
+      ease: Power4.easeOut
+    })
+
+    const backgroundOpacityAnimationDuration = 0.4
+
+    TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
+      backgroundColor: 'transparent',
+      delay: 0.5,
+      onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
+    })
+  }
+
   render () {
     return (
       <div className='game-landing'>
-        <div className='text-landing'>
-          Ready to beat the traffic of Stuttgart ?
-        </div>
-        {!this.props.isGameReadyToPlay && <Loading />}
-        {this.props.isGameReadyToPlay && (
-          <Button title='Start' large onClick={this.props.handleStart} />
-        )}
+        <h1 className='landing-headline'>
+          CITIES ARE JAM-PACKED WITH HEAVY TRAFFIC!
+        </h1>
+        <Unicorn />
+        <LeftCloud />
+        <RightCloud />
+        <BtnLanding
+          loaded={this.props.isGameReadyToPlay}
+          onClick={this.handleStartGame}
+        />
+        <div className='change-city'>Change city</div>
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -25,20 +56,49 @@ class Landing extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            background-image: url('${this.props.srcFirstFrame}');
-            background-size: cover;
-            background-color: #262626;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            background-color: #fffe4a;
+            will-change: transform;
           }
 
-          .text-landing {
-            color: white;
-            font-size: 5rem;
-            text-align: center;
-            padding: 2rem;
+          .landing-headline {
+            position: absolute;
+            font-size: 4rem;
+            line-height: 4.7rem;
+            top: 13%;
+            right: -6%;
+            color: black;
+            width: 300px;
+            will-change: transform;
+            z-index: 5;
+            animation: scaleInAnimation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
+
+          .change-city {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 3rem;
+          }
+
+          @media (min-width: 450px) {
+            .landing-headline {
+              right: 20%;
+              top: 20%;
+            }
+          }
+
+          @keyframes scaleInAnimation {
+            0% {
+              transform: scale(0);
+              opacity: 0;
+            }
+            55% {
+              transform: scale(0);
+              opacity: 0;
+            }
+            100% {
+              transform: scale(1);
+              opacity: 1;
+            }
           }
         `}</style>
       </div>

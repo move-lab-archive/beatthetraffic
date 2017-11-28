@@ -1,35 +1,62 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { TweenLite } from 'gsap'
+import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
+
+import LeftCloud from './landing/LeftCloud'
+import RightCloud from './landing/RightCloud'
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
 class Intro extends Component {
   componentDidMount () {
     SoundsManager.playSound('intro')
-    TweenLite.to('.title-1', 0, { opacity: 1, delay: 0.2 })
-    TweenLite.to('.title-1', 0, { opacity: 0, delay: 2 })
-    TweenLite.to('.title-2', 0, { opacity: 1, delay: 2 })
-    TweenLite.to('.title-2', 0, { opacity: 0, delay: 4 })
-    TweenLite.to('.title-3', 0, { opacity: 1, delay: 4 })
-    TweenLite.to('.title-3', 0, { opacity: 0, delay: 6 })
-    TweenLite.to('.title-4', 0, { opacity: 1, delay: 6 })
-    TweenLite.to('.title-4', 0, {
-      opacity: 0,
-      delay: 8,
+
+    const timeline = new TimelineLite({
       onComplete: () => this.props.onFinish()
     })
+
+    timeline
+      .to('.beat', 0, { opacity: 1 })
+      .to('.beat', 0, { opacity: 0 }, '+=2')
+      .to('.the', 0, { opacity: 1 })
+      .to('.the', 0, { opacity: 0 }, '+=2') // 4s in music
+      .to('.traffic', 0, { opacity: 1 })
+      .to('.traffic', 0, { opacity: 0 }, '+=1.8') // 5.8s in music
+      .to('.location', 0, { opacity: 1 })
+      .to('.location', 0, { opacity: 0 }, '+=1.2') // 7s in music
+      .to('.catch', 0, { opacity: 1 })
+      .to('.catch', 0, { opacity: 0 }, '+=0.8') // 7.8s in music
+      .to('.leftcloud', 0.7, {
+        transform: 'translateX(-100%)',
+        ease: Power4.easeOut
+      })
+      .to(
+        '.rightcloud',
+        0.7,
+        {
+          transform: 'translateX(100%)',
+          ease: Power4.easeOut
+        },
+        '-=0.7'
+      )
+
+    timeline.play()
   }
 
   render () {
     return (
       <div className='game-landing'>
-        <div className='title title-1'>BEAT</div>
-        <div className='title title-2'>THE</div>
-        <div className='title title-3'>TRAFFIC</div>
-        <div className='title title-4'>STUTTGART</div>
+        <LeftCloud />
+        <RightCloud />
+        <div className='title beat'>BEAT</div>
+        <div className='title the'>THE</div>
+        <div className='title traffic'>TRAFFIC</div>
+        <div className='title location'>STUTTGART</div>
+        <div className='title catch'>
+          Catch<br />the<br />cars!!!
+        </div>
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -45,7 +72,7 @@ class Intro extends Component {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             font-size: 9rem;
             line-height: 8rem;
             color: yellow;

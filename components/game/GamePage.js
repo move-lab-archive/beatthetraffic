@@ -133,15 +133,26 @@ class GamePage extends React.Component {
     GameEngineStateManager.recordClickOrTouch(coordinates)
   }
 
-  handleStart () {
+  handleStart (delayHideLanding) {
     // Preload game sounds
     SoundsManager.preloadGameSounds()
 
     if (this.state.playIntroAnim) {
-      this.setState({
-        showIntro: true,
-        showLanding: false
-      })
+      if (delayHideLanding) {
+        this.setState({
+          showIntro: true
+        })
+        setTimeout(() => {
+          this.setState({
+            showLanding: false
+          })
+        }, delayHideLanding * 1000)
+      } else {
+        this.setState({
+          showIntro: true,
+          showLanding: false
+        })
+      }
     } else {
       this.setState({
         showIntro: false,

@@ -5,7 +5,7 @@ import SoundsManager from './SoundsManager'
 const initialState = fromJS({
   showDebugUI: false,
   darkMode: false,
-  soundEnabled: process.env.NODE_ENV === 'production', // disable sounds in dev mode by default
+  soundEnabled: process.env.NODE_ENV !== 'production', // disable sounds in dev mode by default
   isServerRendering: true
 })
 
