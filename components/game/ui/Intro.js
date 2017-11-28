@@ -69,6 +69,9 @@ class Intro extends Component {
             bottom: 0;
             z-index: 10;
             background: transparent;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
           }
 
           .title {

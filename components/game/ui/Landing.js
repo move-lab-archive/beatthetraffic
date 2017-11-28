@@ -57,6 +57,9 @@ class Landing extends Component {
             z-index: 10;
             background-color: #fffe4a;
             will-change: transform;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
           }
 
           .landing-headline {

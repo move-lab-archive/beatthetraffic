@@ -187,13 +187,6 @@ class GamePage extends React.Component {
             <Menu url={this.props.url} />
           </div>
         )}
-        <style jsx>{`
-          .landing-page {
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-user-drag: none;
-          }
-        `}</style>
       </div>
     )
   }
