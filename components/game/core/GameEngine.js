@@ -29,6 +29,8 @@ import {
   getSmokeLevel
 } from '../../../statemanagement/app/GameStateManagement'
 
+import { computeVisibleArea } from '../../../statemanagement/app/ViewportStateManagement'
+
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 class GameEngine extends Component {
@@ -248,7 +250,8 @@ class GameEngine extends Component {
         frame,
         this.props.objectTrackerData,
         this.props.allowedDisappearAreas,
-        this.props.alreadyKilledItems
+        this.props.alreadyKilledItems,
+        computeVisibleArea(this.props.originalResolution)
       )
 
       itemsMissedThisFrame.forEach(itemMissed => {

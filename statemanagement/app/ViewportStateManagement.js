@@ -65,6 +65,45 @@ export function initViewportListeners () {
   }
 }
 
+export function computeVisibleArea (resolutionToMap) {
+  const innerWidth = window.innerWidth
+  const innerHeight = window.innerHeight
+
+  const scrollPosition = {
+    x: window.scrollX,
+    y: window.scrollY
+  }
+
+  const visibleArea = {
+    x: scrollPosition.x,
+    w: innerWidth,
+    y: scrollPosition.y,
+    h: innerHeight
+  }
+
+  // Map to resolutionToMap (the video original resolution of detections)
+
+  let width, height
+  if (innerWidth / innerHeight < 16 / 9) {
+    // Height is 100% and there is a scroll on the width
+    width = innerHeight * resolutionToMap.w / resolutionToMap.h
+    height = innerHeight
+  } else {
+    // Width is 100% and there is a scroll on the height
+    width = innerWidth
+    height = innerWidth * resolutionToMap.h / resolutionToMap.w
+  }
+
+  const visibleCanvasArea = {
+    x: visibleArea.x * resolutionToMap.w / width,
+    w: visibleArea.w * resolutionToMap.w / width,
+    y: visibleArea.y * resolutionToMap.h / height,
+    h: visibleArea.h * resolutionToMap.h / height
+  }
+
+  return visibleCanvasArea
+}
+
 export function setLandscape () {
   return {
     type: SET_LANDSCAPE

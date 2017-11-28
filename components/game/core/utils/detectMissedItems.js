@@ -1,4 +1,4 @@
-import { isInsideSomeAreas } from '../../../../utils/resolution'
+import { isInsideSomeAreas, isInsideArea } from '../../../../utils/resolution'
 
 const MIN_ACTIVE_FRAMES = 60
 
@@ -7,7 +7,8 @@ export default function detectMissedItemsThisFrame (
   currentFrame,
   objectTrackerData,
   allowedDisappearAreas,
-  alreadyKilledItems
+  alreadyKilledItems,
+  visibleCanvasAreaScaledToVideoResolution
 ) {
   if (objectTrackerData['general']) {
     const itemsMissedThisFrame = objectTrackerData['general'].filter(
@@ -15,6 +16,10 @@ export default function detectMissedItemsThisFrame (
         objectTracked.disappearFrame === currentFrame && // Disapear this frame
         objectTracked.nbActiveFrame > MIN_ACTIVE_FRAMES && // Have been tracked more than MIN_ACTIVE_FRAMES
         !alreadyKilledItems.includes(objectTracked.id) && // Not already killed
+        isInsideArea(
+          visibleCanvasAreaScaledToVideoResolution,
+          objectTracked.disappearArea
+        ) && // Is inside the current visible part of the canvas
         isInsideSomeAreas(
           allowedDisappearAreas,
           objectTracked.disappearArea,

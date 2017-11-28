@@ -88,6 +88,9 @@ class GamePage extends React.Component {
 
     const canvas = this.props.canvasResolution
 
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+
     // A bit hacky
     // Ignore Chrome mobile touchstart event
     // we detect touchstart for safari compat
@@ -98,12 +101,12 @@ class GamePage extends React.Component {
     let width, height
 
     // Map coordinates to canvas coordinates
-    if (window.innerWidth / window.innerHeight < 16 / 9) {
-      width = window.innerHeight * canvas.w / canvas.h
-      height = window.innerHeight
+    if (innerWidth / innerHeight < 16 / 9) {
+      width = innerHeight * canvas.w / canvas.h
+      height = innerHeight
     } else {
-      width = window.innerWidth
-      height = window.innerWidth * canvas.h / canvas.w
+      width = innerWidth
+      height = innerWidth * canvas.h / canvas.w
     }
 
     coordinates = {
