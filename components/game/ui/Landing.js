@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
-
 import { TweenLite } from 'gsap'
 
 import BtnLanding from './landing/BtnLanding'
@@ -42,8 +40,12 @@ class Landing extends Component {
         <Unicorn />
         <LeftCloud />
         <RightCloud />
+        {/*
+          Allow start when video first frame is loaded
+          the rest will be loaded during the 8s of intro
+        */}
         <BtnLanding
-          loaded={this.props.isGameReadyToPlay}
+          loaded={this.props.isVideoFirstFrameLoaded}
           onClick={this.handleStartGame}
         />
         <div className='change-city'>Change city</div>
@@ -109,15 +111,12 @@ class Landing extends Component {
 }
 
 export default connect(state => {
-  const selectedVideo = state.app.get('availableVideos').find(video => {
-    return video.get('name') === state.app.get('selectedVideo')
-  })
-
   const isGameReadyToPlay =
     state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
 
   return {
-    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),
-    isGameReadyToPlay: isGameReadyToPlay
+    isGameReadyToPlay: isGameReadyToPlay,
+    isVideoReadyToPlay: state.video.get('isReadyToPlay'),
+    isVideoFirstFrameLoaded: state.video.get('firstFrameLoaded')
   }
 })(Landing)

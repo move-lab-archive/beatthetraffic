@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
 import LeftCloud from './landing/LeftCloud'
 import RightCloud from './landing/RightCloud'
-
-import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
 class Intro extends Component {
   constructor (props) {
@@ -113,12 +110,4 @@ class Intro extends Component {
   }
 }
 
-export default connect(state => {
-  const selectedVideo = state.app.get('availableVideos').find(video => {
-    return video.get('name') === state.app.get('selectedVideo')
-  })
-
-  return {
-    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name'))
-  }
-})(Intro)
+export default Intro
