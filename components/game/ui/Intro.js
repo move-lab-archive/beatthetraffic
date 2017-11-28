@@ -10,11 +10,25 @@ import RightCloud from './landing/RightCloud'
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
 class Intro extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      animateOut: false
+    }
+  }
+
   componentDidMount () {
     SoundsManager.playSound('intro')
 
     const timeline = new TimelineLite({
-      onComplete: () => this.props.onFinish()
+      onComplete: () => {
+        const cloudAnimationOutDuration = 1
+        this.setState({
+          animateOut: true
+        })
+        this.props.onFinish(cloudAnimationOutDuration)
+      }
     })
 
     timeline
@@ -28,19 +42,6 @@ class Intro extends Component {
       .to('.location', 0, { opacity: 0 }, '+=1.2') // 7s in music
       .to('.catch', 0, { opacity: 1 })
       .to('.catch', 0, { opacity: 0 }, '+=0.8') // 7.8s in music
-      .to('.leftcloud', 0.7, {
-        transform: 'translateX(-100%)',
-        ease: Power4.easeOut
-      })
-      .to(
-        '.rightcloud',
-        0.7,
-        {
-          transform: 'translateX(100%)',
-          ease: Power4.easeOut
-        },
-        '-=0.7'
-      )
 
     timeline.play()
   }
@@ -48,8 +49,8 @@ class Intro extends Component {
   render () {
     return (
       <div className='game-landing'>
-        <LeftCloud />
-        <RightCloud />
+        <LeftCloud animateOut={this.state.animateOut} />
+        <RightCloud animateOut={this.state.animateOut} />
         <div className='title beat'>BEAT</div>
         <div className='title the'>THE</div>
         <div className='title traffic'>TRAFFIC</div>

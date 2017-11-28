@@ -5,7 +5,10 @@ class LeftCloud extends Component {
     return (
       <div>
         {/* Optimized with https://jakearchibald.github.io/svgomg/ */}
-        <img className='leftcloud' src='/static/assets/landing/leftcloud.svg' />
+        <img
+          className={`leftcloud ${this.props.animateOut ? 'animate-out' : ''}`}
+          src='/static/assets/landing/leftcloud.svg'
+        />
         <style jsx>{`
           .leftcloud {
             position: absolute;
@@ -13,23 +16,22 @@ class LeftCloud extends Component {
             left: 0px;
             width: 70%;
             will-change: transform;
-            // Infortunately not fast enough while
-            // loading and parsing the other JS
-            // Disabling animation for now
-            // TODO remove code
-            // animation: leftcloudAnimation 1.5s
-            //   cubic-bezier(0.075, 0.82, 0.165, 1);
           }
 
-          @keyframes leftcloudAnimation {
+          .animate-out {
+            animation: 2s leftcloudAnimationOut 0s
+              cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
+
+          @keyframes leftcloudAnimationOut {
             0% {
-              transform: translateX(-100%);
+              transform: translateX(0%);
             }
             50% {
               transform: translateX(-100%);
             }
             100% {
-              transform: translateX(0%);
+              transform: translateX(-100%);
             }
           }
 

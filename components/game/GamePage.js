@@ -71,25 +71,6 @@ class GamePage extends React.Component {
     this.cleanClickRecorder()
   }
 
-  // hideLanding () {
-  //   // reset scroll
-  //   window.scroll(0, 0)
-  //   // hide landing
-  //   this.setState({
-  //     landingAnimFinished: true
-  //   })
-  //   // scroll animation
-  //   setTimeout(() => {
-  //     window.scroll({
-  //       top: this.props.videoMobileOffset.y,
-  //       left: this.props.videoMobileOffset.x,
-  //       behavior: 'smooth'
-  //     })
-  //   }, 500)
-  //   // Play intro sound
-  //   SoundsManager.playSound('intro')
-  // }
-
   initClickRecorder () {
     window.document.body.addEventListener('click', this.recordClick)
     window.document.body.addEventListener('touchstart', this.recordClick)
@@ -161,12 +142,25 @@ class GamePage extends React.Component {
     }
   }
 
-  handleFinishIntro () {
-    this.setState({
-      showIntro: false,
-      showLanding: false,
-      playIntroAnim: false
-    })
+  handleFinishIntro (delayHideIntro) {
+    if (delayHideIntro) {
+      this.setState({
+        showLanding: false,
+        playIntroAnim: false
+      })
+
+      setTimeout(() => {
+        this.setState({
+          showIntro: false
+        })
+      }, delayHideIntro * 1000)
+    } else {
+      this.setState({
+        showIntro: false,
+        showLanding: false,
+        playIntroAnim: false
+      })
+    }
 
     this.props.dispatch(startLevel())
     this.props.dispatch(setIntroAnimPlayed())

@@ -18,18 +18,17 @@ class Landing extends Component {
   }
 
   handleStartGame () {
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.5, {
       scale: 1.2,
       opacity: 0,
-      delay: 0.3,
       ease: Power4.easeOut
     })
 
-    const backgroundOpacityAnimationDuration = 0.4
+    const backgroundOpacityAnimationDuration = 0.5
 
     TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
-      backgroundColor: 'transparent',
-      delay: 0.5,
+      opacity: 0, // change to general opacity, background color animation is slower
+      delay: 0.3,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })
   }
