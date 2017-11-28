@@ -4,10 +4,10 @@ class PuffAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 500,
-      height: 100,
-      src: '/static/assets/puff/puff-smoke.svg',
-      nbFrames: 5
+      width: 255,
+      height: 69,
+      src: '/static/assets/puff/v1.svg',
+      nbFrames: 4
     }
   }
 
