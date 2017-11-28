@@ -9,6 +9,9 @@ class RightCloud extends Component {
           className={`rightcloud ${this.props.animateOut ? 'animate-out' : ''}`}
           src='/static/assets/landing/rightcloud.svg'
         />
+        {/* NOTE We can't animate in at first load, browser
+            is busy doing loading & parsing of javascript and it is slow on svg
+        */}
         <style jsx>{`
           .rightcloud {
             position: absolute;

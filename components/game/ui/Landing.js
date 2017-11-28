@@ -27,7 +27,7 @@ class Landing extends Component {
     const backgroundOpacityAnimationDuration = 0.5
 
     TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
-      opacity: 0, // change to general opacity, background color animation is slower
+      opacity: 0, // NOTE: changed to general opacity, background color animation is slower
       delay: 0.3,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })

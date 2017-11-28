@@ -51,10 +51,12 @@ class Intro extends Component {
       <div className='game-landing'>
         <LeftCloud animateOut={this.state.animateOut} />
         <RightCloud animateOut={this.state.animateOut} />
-        <div className='title beat'>BEAT</div>
-        <div className='title the'>THE</div>
-        <div className='title traffic'>TRAFFIC</div>
-        <div className='title location'>STUTTGART</div>
+        <div className='title beat'>Beat</div>
+        <div className='title the'>The</div>
+        <div className='title traffic'>Traffic</div>
+        <div className='title location'>
+          Stutt<br />gart
+        </div>
         <div className='title catch'>
           Catch<br />the<br />cars!!!
         </div>
@@ -81,6 +83,26 @@ class Intro extends Component {
             word-wrap: break-word;
             text-align: center;
             opacity: 0;
+          }
+
+          .beat {
+            font-size: 12rem;
+            color: #ff3bff;
+          }
+          .the {
+            font-size: 15rem;
+          }
+          .traffic {
+            font-size: 10rem;
+            color: #4effff;
+          }
+          .location {
+            font-size: 11rem;
+            color: #ff3bff;
+          }
+          .catch {
+            font-size: 11rem;
+            color: #4effff;
           }
         `}</style>
       </div>
