@@ -109,6 +109,21 @@ export function prefetchImgFirstFrame (videoName) {
   }
 }
 
+export function prefetchNextLevelFirstFrame () {
+  return (dispatch, getState) => {
+    const nextLevel = getState().game.get('currentLevel') + 1
+    const city = getState().app.get('selectedCity')
+
+    const nextLevelVideo = getState()
+      .app.get('availableVideos')
+      .find(video => {
+        return video.get('city') === city && video.get('level') === nextLevel
+      })
+
+    dispatch(prefetchImgFirstFrame(nextLevelVideo.get('name')))
+  }
+}
+
 // Reducer
 export default function VideoReducer (state = initialState, action = {}) {
   switch (action.type) {

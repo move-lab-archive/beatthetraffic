@@ -5,7 +5,8 @@ import raf from 'raf'
 import {
   setVideoReady,
   setVideoEnded,
-  firstFrameLoaded
+  firstFrameLoaded,
+  prefetchNextLevelFirstFrame
 } from '../../../statemanagement/app/VideoStateManagement'
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
@@ -79,6 +80,7 @@ class Video extends Component {
 
     if (this.props.isAtBeggining !== newProps.isAtBeggining) {
       this.videoEl.currentTime = 0
+      this.nextLevelFirstFramePrefetched = false
     }
   }
 
@@ -158,6 +160,15 @@ class Video extends Component {
     if (GameEngineStateManager.getCurrentFrame() !== newCurrentFrame) {
       GameEngineStateManager.setCurrentFrame(newCurrentFrame)
       GameEngineStateManager.setCurrentTime(this.videoEl.currentTime)
+
+      // If currentTime is 10s before end of video, prefetch next level first frame
+      if (
+        !this.nextLevelFirstFramePrefetched &&
+        this.props.duration - this.videoEl.currentTime < 10
+      ) {
+        this.nextLevelFirstFramePrefetched = true
+        this.props.dispatch(prefetchNextLevelFirstFrame())
+      }
     }
     raf(this.monitorFrames)
   }
@@ -250,6 +261,7 @@ export default connect(state => {
     isAtBeggining: state.video.get('isAtBeggining'),
     src: state.video.get('src'),
     currentTime: state.video.get('currentTime'),
+    duration: state.video.get('duration'),
     videoFPS: selectedVideo.get('videoFPS'),
     firstFrameLoaded: state.video.get('firstFrameLoaded'),
     srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),

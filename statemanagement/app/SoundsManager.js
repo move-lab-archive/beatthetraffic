@@ -8,6 +8,7 @@ class SoundsManager {
 
     // console.log('Instantiate SoundsManager')
     // console.log('preload game sound')
+    // Load Intro sound first
     this.addSound('ambient', 'intro', '/static/assets/sounds/intro.mp3')
   }
 
