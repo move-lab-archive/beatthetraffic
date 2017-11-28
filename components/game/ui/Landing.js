@@ -41,11 +41,13 @@ class Landing extends Component {
         <LeftCloud />
         <RightCloud />
         {/*
-          Allow start when video first frame is loaded
-          the rest will be loaded during the 8s of intro
+          Allow start when javascript kicked in
+          and  img first frame is loaded
+          the video can load while we do the 8s anim
+          the "safe" way would be to look at isGameReadyToPlay
         */}
         <BtnLanding
-          loaded={this.props.isVideoFirstFrameLoaded}
+          loaded={this.props.isImgFirstFrameLoaded}
           onClick={this.handleStartGame}
         />
         <div className='change-city'>Change city</div>
@@ -111,12 +113,10 @@ class Landing extends Component {
 }
 
 export default connect(state => {
-  const isGameReadyToPlay =
-    state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
+  // const isGameReadyToPlay =
+  //   state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
 
   return {
-    isGameReadyToPlay: isGameReadyToPlay,
-    isVideoReadyToPlay: state.video.get('isReadyToPlay'),
-    isVideoFirstFrameLoaded: state.video.get('firstFrameLoaded')
+    isImgFirstFrameLoaded: state.video.get('imgFirstFrameLoaded')
   }
 })(Landing)

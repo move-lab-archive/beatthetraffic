@@ -5,7 +5,8 @@ import raf from 'raf'
 import {
   setVideoReady,
   setVideoEnded,
-  firstFrameLoaded
+  firstFrameLoaded,
+  imgFirstFrameLoaded
 } from '../../../statemanagement/app/VideoStateManagement'
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
@@ -83,7 +84,7 @@ class Video extends Component {
   }
 
   handleCanPlay () {
-    // console.log('video can play')
+    console.log('video can play')
     this.props.dispatch(
       setVideoReady({
         duration: this.videoEl.duration
@@ -117,7 +118,7 @@ class Video extends Component {
   }
 
   handleFirstFrameLoaded () {
-    // console.log('fist frame loaded')
+    console.log('first frame loaded')
     this.props.dispatch(firstFrameLoaded())
   }
 
@@ -172,6 +173,17 @@ class Video extends Component {
     this.setState({
       canRenderVideo: true
     })
+
+    // Preload firstframe with image asset
+    // We start the intro animation with just
+    // the first frame loaded and not necesarly the
+    // video
+    const imgFirstFrame = new Image()
+    imgFirstFrame.onload = () => {
+      console.log('img first frame loaded')
+      this.props.dispatch(imgFirstFrameLoaded())
+    }
+    imgFirstFrame.src = this.props.srcFirstFrame
   }
 
   render () {
