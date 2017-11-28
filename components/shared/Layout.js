@@ -73,7 +73,7 @@ class Layout extends Component {
             height: 100%;
           }
 
-          :global(.landing-page) {
+          :global(.main-page) {
             height: 100%;
           }
         `}</style>

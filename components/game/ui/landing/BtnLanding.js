@@ -15,22 +15,45 @@ class BtnLanding extends Component {
       When the game is loaded, it will stop the animation
       And show the button in loaded state
     */
-    this.animationDelay = 1
+    this.animationDelay = 2
     this.animationDuration = 8
 
     this.handleClick = this.handleClick.bind(this)
+
+    this.state = {
+      keepLoading: false
+    }
+  }
+
+  componentDidMount() {
+    const timeSinceAnimationStarted = new Date().getTime() - window.firstPaint
+    // If game isn't ready restart progress bar in time
+    this.timeoutRestartAnimation = setTimeout(() => {
+      if (!this.props.loaded) {
+        this.setState({
+          keepLoading: true
+        })
+      }
+    }, this.animationDuration * 1000 - timeSinceAnimationStarted)
   }
 
   handleClick() {
     if (this.props.loaded) {
+      clearTimeout(this.timeoutRestartAnimation)
       this.props.onClick()
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeoutRestartAnimation)
   }
 
   render() {
     return (
       <div
-        className={`btn-landing ${this.props.loaded ? '' : 'css-animated'}`}
+        className={`btn-landing ${this.props.loaded ? '' : 'loading'} ${
+          this.state.keepLoading && !this.props.loaded ? 'keep-loading' : ''
+        }`}
         onClick={this.handleClick}
       >
         <div className="inner" />
@@ -44,22 +67,27 @@ class BtnLanding extends Component {
             position: absolute;
             width: 190px;
             height: 45px;
-            transform: translateX(-50%) translateY(-50%) translateZ(0);
+            transform: translateX(-50%) translateY(-50%);
             //GPU accelerate
             will-change: transform;
           }
 
-          .css-animated {
+          .loading {
             animation: loaderAnimation ${this.animationDelay}s
               cubic-bezier(0.075, 0.82, 0.165, 1);
           }
 
-          .css-animated .outer {
+          .loading .outer {
             animation: progressBarAnimation ${this.animationDuration}s linear;
           }
 
-          .css-animated .outer h4 {
-            animation: fadeInButtonLabel ${this.animationDuration + 0.3}s;
+          .loading .outer h4 {
+            opacity: 0;
+          }
+
+          .keep-loading .outer {
+            animation: 1s progressBarBounceAnimation;
+            animation-iteration-count: infinite;
           }
 
           .btn-landing .inner {
@@ -78,11 +106,13 @@ class BtnLanding extends Component {
             display: flex;
             justify-content: center;
             align-items: center;
+            transform-origin: 0 0;
           }
 
           .btn-landing .outer h4 {
             font-family: 'Geo', sans-serif;
             font-size: 2rem;
+            transition: opacity 0.5s;
           }
 
           .btn-landing .outer:hover {
@@ -113,25 +143,25 @@ class BtnLanding extends Component {
 
           @keyframes progressBarAnimation {
             0% {
-              width: 0%;
+              transform: scaleX(0);
             }
             25% {
-              width: 0%;
+              transform: scaleX(0);
             }
             100% {
-              width: 100%;
+              transform: scaleX(1);
             }
           }
 
-          @keyframes fadeInButtonLabel {
+          @keyframes progressBarBounceAnimation {
             0% {
-              opacity: 0;
+              transform: scaleX(1);
             }
-            95% {
-              opacity: 0;
+            50% {
+              transform: scaleX(0.95);
             }
             100% {
-              opacity: 1;
+              transform: scaleX(1);
             }
           }
         `}</style>

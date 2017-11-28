@@ -168,7 +168,7 @@ class GamePage extends React.Component {
 
   render () {
     return (
-      <div className='landing-page'>
+      <div className='main-page'>
         {this.state.showLanding && <Landing handleStart={this.handleStart} />}
         {this.state.showIntro && <Intro onFinish={this.handleFinishIntro} />}
         {this.state.clientSide && (
@@ -187,6 +187,13 @@ class GamePage extends React.Component {
             <Menu url={this.props.url} />
           </div>
         )}
+        <style jsx>{`
+          .landing-page {
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+          }
+        `}</style>
       </div>
     )
   }

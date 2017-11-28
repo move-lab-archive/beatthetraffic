@@ -337,9 +337,6 @@ class GameEngine extends Component {
             top: 0;
             left: 0;
             z-index: 2;
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-user-drag: none;
           }
 
           @media (min-aspect-ratio: 16/9) {
