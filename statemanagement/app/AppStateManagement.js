@@ -2,7 +2,12 @@ import { fromJS } from 'immutable'
 
 import { fetchRawDetections } from './RawDetectionsStateManagement'
 import { fetchObjectTracker } from './ObjectTrackerStateManagement'
-import { setVideoSrc, pauseVideo, playVideo } from './VideoStateManagement'
+import {
+  setVideoSrc,
+  pauseVideo,
+  playVideo,
+  prefetchImgFirstFrame
+} from './VideoStateManagement'
 import { turnSoundOn, turnSoundOff } from './SettingsStateManagement'
 
 // Initial state
@@ -384,6 +389,7 @@ export function selectVideoForLevel (level) {
       })
 
     dispatch(selectVideo(videoToSelect.get('name')))
+    dispatch(prefetchImgFirstFrame(videoToSelect.get('name')))
   }
 }
 
@@ -424,8 +430,11 @@ export function selectVideo (name) {
 export function fetchRemainingData () {
   return (dispatch, getState) => {
     const videoSelectedName = getState().app.get('selectedVideo')
-
-    dispatch(fetchRawDetections(getRawDetectionPath(videoSelectedName)))
+    dispatch(prefetchImgFirstFrame(videoSelectedName))
+    // Do not load raw detections in prod
+    if (process.env.NODE_ENV !== 'production') {
+      dispatch(fetchRawDetections(getRawDetectionPath(videoSelectedName)))
+    }
     dispatch(fetchObjectTracker(getTrackerDataPath(videoSelectedName)))
   }
 }

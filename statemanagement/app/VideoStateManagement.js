@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable'
 
 import { levelFinished } from '../../statemanagement/app/GameStateManagement'
+import { getFirstFrameImgPath } from '../../statemanagement/app/AppStateManagement'
 
 // Initial state
 const initialState = fromJS({
@@ -86,6 +87,25 @@ export function updateCurrentTime (time) {
   return {
     type: UPDATE_CURRENTTIME,
     payload: time
+  }
+}
+
+export function prefetchImgFirstFrame (videoName) {
+  return (dispatch, getState) => {
+    // Only execute this code on client
+    if (getState().settings.get('isServerRendering')) {
+      return
+    }
+    // Preload firstframe with image asset
+    // We start the intro animation with just
+    // the first frame loaded and not necesarly the video
+    const srcFirstFrame = getFirstFrameImgPath(videoName)
+
+    let imgFirstFrame = new Image()
+    imgFirstFrame.onload = () => {
+      dispatch(imgFirstFrameLoaded())
+    }
+    imgFirstFrame.src = srcFirstFrame
   }
 }
 
