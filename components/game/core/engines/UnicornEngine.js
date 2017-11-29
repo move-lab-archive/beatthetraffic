@@ -47,10 +47,11 @@ class UnicornEngine {
     return this.sprites.nbTotalFrame - 1
   }
 
-  /* frame needs to start at 0 */
+  /* Associate bearing of the unicorn to a frame */
   getFrameData (bearing) {
-    const frameNb = 0
     let sprite = this.sprite
+    const bearingIn360Deg = 180 + bearing * (180 / Math.PI)
+    const frameNb = Math.round(bearingIn360Deg * sprite.nbTotalFrame / 360)
     const rowNb = Math.floor(frameNb / sprite.nbFramePerRow)
     const columnNb = frameNb % sprite.nbFramePerRow
     return {
