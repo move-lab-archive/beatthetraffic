@@ -55,6 +55,19 @@ export function isInsideArea (area, point) {
   }
 }
 
+export function areAreasOverlapping (area1, area2) {
+  if (
+    area1.x + area1.w < area2.x ||
+    area2.x + area2.w < area1.x ||
+    area1.y + area1.h < area2.y ||
+    area2.y + area2.h < area1.h
+  ) {
+    return false
+  } else {
+    return true
+  }
+}
+
 export function isInsideSomeAreas (areas, point, idDisplay) {
   const isInside = areas.some(area => isInsideArea(area, point))
   // console.log(`Run isInsideSomeAreas for ${idDisplay}, returned: ${isInside}`)

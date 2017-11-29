@@ -27,7 +27,7 @@ const initialState = fromJS({
         y: 0
       },
       trackerAndDetectionsFPS: 30,
-      disappearAreas: [{ x: 273.23, y: 641.77, w: 1330, h: 412 }],
+      disappearAreas: [{ x: 0, y: 641.77, w: 1650, h: 412 }],
       originalResolution: {
         w: 1920,
         h: 1080
