@@ -1,6 +1,6 @@
 /* global Image */
 
-const PATH_TO_ASSETS = '/static/assets/collectableitems'
+const PATH_TO_ASSETS = '/static/assets/sprites'
 
 function getSrc (collectableType) {
   return `${PATH_TO_ASSETS}/${collectableType}.png`
@@ -93,6 +93,7 @@ class CollectableItemsEngine {
     )
   }
 
+  // TODO DELETE IF UNUSED
   // TODO RENAME drawExplosionAnimationFrameOnCanvas
   drawStarsAnimationsFrameOnCanvas (contextToDrawOn, starsAnimation) {
     const sourceData = this.getFrameData(starsAnimation.currentFrame, 'banana')

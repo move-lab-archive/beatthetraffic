@@ -21,6 +21,7 @@ import StarsAnimation from './models/StarsAnimation'
 
 import DebugTrackerEngine from './engines/DebugTrackerEngine'
 import TrackerUIEngine from './engines/TrackerUIEngine'
+import UnicornEngine from './engines/UnicornEngine'
 
 import {
   addKilledItem,
@@ -64,6 +65,7 @@ class GameEngine extends Component {
     CollectableItemsEngine.init()
     PuffAnimationsEngine.init()
     StarsAnimationsEngine.init()
+    UnicornEngine.init()
   }
 
   collectItem (itemToCollect) {
@@ -262,6 +264,8 @@ class GameEngine extends Component {
           this.props.canvasResolution,
           this.props.originalResolution
         )
+
+        // Add a visual clue that we have missed them
         GameEngineStateManager.addPuffAnimation(
           new PuffAnimation(
             centerOfDisapearItem.x,
@@ -284,6 +288,14 @@ class GameEngine extends Component {
 
       // Draw puff animations
       this.drawPuffAnimations(this.canvasContext)
+
+      // Draw unicorns
+      UnicornEngine.drawUnicornsFromTrackerData(
+        this.canvasContext,
+        objectTrackerDataForThisFrame,
+        this.props.canvasResolution,
+        this.props.originalResolution
+      )
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
