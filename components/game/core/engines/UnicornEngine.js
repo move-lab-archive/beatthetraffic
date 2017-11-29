@@ -12,7 +12,9 @@ class UnicornEngine {
       src: '/static/assets/sprites/unicorn.png',
       nbFramePerRow: 8,
       nbRow: 3,
-      nbTotalFrame: 18
+      nbTotalFrame: 18,
+      frameWidth: null,
+      frameHeight: null
     }
   }
 
@@ -59,14 +61,25 @@ class UnicornEngine {
     }
   }
 
-  getUnicornSize (mask) {
+  getUnicornSize (bbox) {
+    let unicorn = {}
     // Compute size depending on bbox area
-    const maskArea = mask.w * mask.h
-    let size = Math.floor(Math.sqrt(maskArea / 4))
+    const bboxArea = bbox.w * bbox.h
+    let size = Math.floor(Math.sqrt(bboxArea / 3))
     // TODO have this dynamic depending on canvas size / sprite image
     // between 30 and 50 pixel for  now
-    size = Math.min(Math.max(parseInt(size), 30), 50)
-    return size
+    size = Math.min(Math.max(parseInt(size), 40), 60)
+
+    // keep proportions
+    if (this.sprite.frameWidth > this.sprite.frameHeight) {
+      unicorn.w = size
+      unicorn.h = this.sprite.frameHeight * size / this.sprite.frameWidth
+    } else {
+      unicorn.w = this.sprite.frameWidth * size / this.sprite.frameHeight
+      unicorn.h = size
+    }
+
+    return unicorn
   }
 
   drawFrameOnCanvas (contextToDrawOn, item) {
@@ -101,12 +114,18 @@ class UnicornEngine {
       })
       .map(objectTracked => {
         // TODO Here getUnicornSize to draw it
-
-        return scaleDetection(
+        let objectScaled = scaleDetection(
           objectTracked,
           canvasResolution,
           originalResolution
         )
+
+        objectScaled = {
+          ...objectScaled,
+          ...this.getUnicornSize(objectScaled)
+        }
+
+        return objectScaled
       })
 
     unicornsToDrawThisFrame.forEach(unicorn => {
