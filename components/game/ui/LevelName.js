@@ -9,12 +9,13 @@ class LevelName extends Component {
         <style jsx>{`
           .level-name {
             position: fixed;
-            bottom: 2rem;
-            left: 2rem;
+            bottom: 2.5rem;
+            left: 2.5rem;
             font-size: 2.2rem;
             font-family: 'Geo', sans-serif;
             color: white;
             z-index: 1;
+            opacity: 0;
           }
         `}</style>
       </div>

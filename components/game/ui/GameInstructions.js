@@ -36,6 +36,7 @@ class GameInstructions extends PureComponent {
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
+            opacity: 0;
           }
         `}</style>
       </div>

@@ -78,6 +78,7 @@ class DebugUI extends Component {
             background-color: white;
             padding: 1rem;
             border-radius: 0.5rem;
+            opacity: 0;
           }
         `}</style>
       </div>

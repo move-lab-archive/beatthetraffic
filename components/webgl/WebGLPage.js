@@ -4,14 +4,14 @@ import { Surface } from "gl-react-dom";
 import { Bus } from "gl-react";
 
 
-import Loading from '../shared/Loading'; 
-import Canvas from './Canvas'; 
+import Loading from '../shared/Loading';
+import Canvas from './Canvas';
 import CanvasUI from '../shared/Canvas';
 import Mask from '../game/Mask';
 import SettingsControl from '../shared/SettingsControl';
 import BackgroundSubtraction from './BackgroundSubtraction';
 import Darkmode from './Darkmode';
-import Video from './Video'; 
+import Video from './Video';
 import GameIndicators from '../game/GameIndicators';
 import GameInstructions from '../game/GameInstructions';
 
@@ -44,7 +44,7 @@ class WebGLPage extends React.Component {
         <CanvasUI />
         <Mask />
         <div className="canvas-container">
-          <Surface 
+          <Surface
             width={1280}
             height={720}
             className="canvas"

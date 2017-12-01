@@ -12,10 +12,11 @@ class GameIndicators extends Component {
         <style jsx>{`
           .game-indicators {
             position: fixed;
-            top: 3rem;
-            left: 3rem;
+            top: 1.4rem;
+            left: 2.6rem;
             z-index: 5;
             transform: will-change;
+            opacity: 0;
           }
         `}</style>
       </div>

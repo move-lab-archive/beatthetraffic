@@ -14,8 +14,9 @@ class LeftCloud extends Component {
             position: absolute;
             bottom: 0px;
             left: 0px;
-            width: 70%;
+            width: 60%;
             will-change: transform;
+            animation: leftcloudAnimateIn 2.5s;
           }
 
           .animate-out {
@@ -32,6 +33,18 @@ class LeftCloud extends Component {
             }
             100% {
               transform: translateX(-100%);
+            }
+          }
+
+          @keyframes leftcloudAnimateIn {
+            0% {
+              transform: translateX(-100%);
+            }
+            70% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(0%);
             }
           }
 

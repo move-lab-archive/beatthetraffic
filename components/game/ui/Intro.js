@@ -3,9 +3,6 @@ import React, { Component } from 'react'
 import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
-import LeftCloud from './landing/LeftCloud'
-import RightCloud from './landing/RightCloud'
-
 class Intro extends Component {
   constructor (props) {
     super(props)
@@ -29,16 +26,19 @@ class Intro extends Component {
     })
 
     timeline
-      .to('.beat', 0, { opacity: 1 })
-      .to('.beat', 0, { opacity: 0 }, '+=2')
+      .to('.beat', 0, { opacity: 1 }, '+=0.5')
+      .to('.beat', 0, { opacity: 0 }, '+=1')
       .to('.the', 0, { opacity: 1 })
-      .to('.the', 0, { opacity: 0 }, '+=2') // 4s in music
+      .to('.the', 0, { opacity: 0 }, '+=1')
       .to('.traffic', 0, { opacity: 1 })
-      .to('.traffic', 0, { opacity: 0 }, '+=1.8') // 5.8s in music
+      .to('.traffic', 0, { opacity: 0 }, '+=1')
       .to('.location', 0, { opacity: 1 })
-      .to('.location', 0, { opacity: 0 }, '+=1.2') // 7s in music
-      .to('.catch', 0, { opacity: 1 })
-      .to('.catch', 0, { opacity: 0 }, '+=0.8') // 7.8s in music
+      .to('.location', 0, { opacity: 0 }, '+=1')
+      .to('.logo', 0, { opacity: 1 })
+      .to('.logo', 0, { opacity: 0 }, '+=1')
+      .to('.catch', 0, { opacity: 1 }, '+=0.85')
+      .to('.catch', 0, { opacity: 0 }, '+=2')
+      .to('.game-indicators, .menu-button, .progress-bar, .level-name, .audio-button', 0.3, { opacity: 1 }, '+=0') // 7.8s in music
 
     timeline.play()
   }
@@ -46,17 +46,16 @@ class Intro extends Component {
   render () {
     return (
       <div className='game-landing'>
-        <LeftCloud animateOut={this.state.animateOut} />
-        <RightCloud animateOut={this.state.animateOut} />
         <div className='title beat'>Beat</div>
         <div className='title the'>The</div>
         <div className='title traffic'>Traffic</div>
         <div className='title location'>
           Stutt<br />gart
         </div>
-        <div className='title catch'>
-          Catch<br />the<br />cars!!!
+        <div className='title logo'>
+          <img src="/static/assets/logo/logo-moovel-white.svg"></img>
         </div>
+        <div className='title catch'>Catch the vehicles!</div>
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -73,7 +72,7 @@ class Intro extends Component {
 
           .title {
             position: fixed;
-            top: 50%;
+            top: 48%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 9rem;
@@ -83,26 +82,25 @@ class Intro extends Component {
             word-wrap: break-word;
             text-align: center;
             opacity: 0;
+            text-transform: uppercase;
           }
 
           .beat {
-            font-size: 12rem;
-            color: #ff3bff;
-          }
-          .the {
             font-size: 15rem;
           }
+          .the {
+            font-size: 19rem;
+          }
           .traffic {
-            font-size: 10rem;
-            color: #4effff;
+            font-size: 9rem;
           }
           .location {
-            font-size: 11rem;
-            color: #ff3bff;
+            font-size: 12rem;
+            line-height: 12rem;
           }
           .catch {
-            font-size: 11rem;
-            color: #4effff;
+            font-size: 8rem;
+            line-height: 8rem;
           }
         `}</style>
       </div>

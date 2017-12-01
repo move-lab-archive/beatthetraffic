@@ -12,15 +12,14 @@ class Layout extends Component {
     return (
       <div>
         <Head>
-          <title>Traffic Cam</title>
+          <title>Beat the traffic - The Game</title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
           <link
-            href='https://fonts.googleapis.com/css?family=Geo|Quantico:700'
-            rel='stylesheet'
+            href="https://fonts.googleapis.com/css?family=Geo|Quantico:400,700" rel="stylesheet"
           />
         </Head>
         {this.props.children}
@@ -34,7 +33,15 @@ class Layout extends Component {
             left: 0;
             top: 0;
             font-family: 'Quantico', sans-serif;
-            background-color: #262626;
+            font-weight: 700;
+            background-color: #FFFE4A;
+            overflow: hidden;
+            cursor: url(../../static/assets/cursor/cursor-dot.png) 2 2, pointer;
+          }
+
+          :global(h4) {
+            font-family: 'Geo', sans-serif;
+            font-weight: 400;
           }
 
           :global(html) {

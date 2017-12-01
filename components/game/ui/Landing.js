@@ -16,19 +16,36 @@ class Landing extends Component {
   }
 
   handleStartGame () {
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.5, {
-      scale: 1.2,
+    TweenLite.to('.game-landing', 0.3, {
+      backgroundColor: "transparent",
+      delay: 0.5
+    })
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
+      scale: 1,
       opacity: 0,
-      ease: Power4.easeOut
+      ease: Power4.easeOut,
+      delay: 0.5
+    })
+    TweenLite.to(".leftcloud", 0.8, {
+      x: "-100%",
+      ease: Power4.easeOut,
+      delay: 1.5
     })
 
     const backgroundOpacityAnimationDuration = 0.5
 
-    TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
-      opacity: 0, // NOTE: changed to general opacity, background color animation is slower
-      delay: 0.3,
+    TweenLite.to(".rightcloud", 0.8, {
+      x: "100%",
+      ease: Power4.easeOut,
+      delay: 1.5,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })
+
+
+  /*  TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
+      //opacity: 0, // NOTE: changed to general opacity, background color animation is slower
+      delay: 1.5,
+    }) */
   }
 
   render () {
@@ -50,7 +67,7 @@ class Landing extends Component {
           loaded={this.props.isImgFirstFrameLoaded}
           onClick={this.handleStartGame}
         />
-        <div className='change-city'>Change city</div>
+        <div className='change-city'><h4>Change city</h4></div>
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -76,13 +93,14 @@ class Landing extends Component {
             width: 300px;
             will-change: transform;
             z-index: 5;
-            animation: scaleInAnimation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
           }
 
           .change-city {
             position: fixed;
-            bottom: 2.5rem;
+            bottom: 1.5rem;
             left: 3rem;
+            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
           }
 
           @media (min-width: 450px) {
@@ -97,8 +115,11 @@ class Landing extends Component {
               transform: scale(0);
               opacity: 0;
             }
-            55% {
+            70% {
               transform: scale(0);
+              opacity: 0;
+            }
+            80% {
               opacity: 0;
             }
             100% {

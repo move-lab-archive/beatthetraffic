@@ -44,10 +44,11 @@ class GameProgressBar extends PureComponent {
             bottom: 0;
             left: 0;
             right: 0;
-            height: 0.8rem;
+            height: 1rem;
             background-color: #262626;
             z-index: 1;
             will-change: transform;
+            opacity: 0;
           }
 
           .progress-bar-content {

@@ -24,7 +24,7 @@ class Unicorn extends Component {
                   fill='#FF3BFF'
                   d='M68.218 38.448l13.69 19.664-3.137 9.338h8.97L97.797 83.3l-14.79 13.297h21.78l5.938 4.18V75.78l-9.318-37.332-22.636-19.46H68.22'
                 />
-                <ellipse
+                <ellipse className="eye"
                   fill='#000'
                   cx='49.554'
                   cy='52.142'
@@ -57,7 +57,12 @@ class Unicorn extends Component {
             left: 20%;
             top: 45%;
             will-change: transform;
-            animation: scaleInAnimation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
+
+          .eye{
+            animation: wink 5s infinite;
+            animation-delay: 1s;
           }
 
           @keyframes scaleInAnimation {
@@ -65,13 +70,34 @@ class Unicorn extends Component {
               transform: scale(0);
               opacity: 0;
             }
-            55% {
+            70% {
               transform: scale(0);
+              opacity: 0;
+            }
+            80% {
               opacity: 0;
             }
             100% {
               transform: scale(1);
               opacity: 1;
+            }
+          }
+
+          @keyframes wink {
+            0% {
+              ry: 5.961;
+            }
+            48% {
+              ry: 5.961;
+            }
+            50% {
+              ry: 2.961;
+            }
+            51% {
+              ry: 5.961;
+            }
+            100% {
+              ry: 5.961;
             }
           }
         `}</style>
