@@ -14,7 +14,8 @@ class GameEngineStateManager {
       itemsToCollect: [],
       clickRecordedBuffer: [],
       puffAnimations: [],
-      starsAnimations: []
+      starsAnimations: [],
+      missedCarsAnimations: []
     }
   }
 
@@ -28,7 +29,8 @@ class GameEngineStateManager {
       itemsToCollect: [],
       clickRecordedBuffer: [],
       puffAnimations: [],
-      starsAnimations: []
+      starsAnimations: [],
+      missedCarsAnimations: []
     }
   }
 
@@ -88,6 +90,10 @@ class GameEngineStateManager {
     this.state.itemsToCollect.push(item)
   }
 
+  addMissedCarAnimation (missedCar) {
+    this.state.missedCarsAnimations.push(missedCar)
+  }
+
   removeItemToCollect (idToRemove) {
     this.state.itemsToCollect = this.state.itemsToCollect.filter(
       item => item.id !== idToRemove
@@ -95,6 +101,12 @@ class GameEngineStateManager {
   }
 
   removePuffAnimation (idToRemove) {
+    this.state.puffAnimations = this.state.puffAnimations.filter(
+      item => item.id !== idToRemove
+    )
+  }
+
+  removeMissedCarAnimation (idToRemove) {
     this.state.puffAnimations = this.state.puffAnimations.filter(
       item => item.id !== idToRemove
     )
