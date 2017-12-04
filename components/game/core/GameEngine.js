@@ -13,6 +13,8 @@ import CollectableItemsEngine, {
   COLLECTABLE_TYPES
 } from './engines/CollectableItemsEngine'
 
+import MissedVehicleAnimationsEngine from './engines/MissedVehicleAnimationsEngine'
+
 import PuffAnimationsEngine from './engines/PuffAnimationsEngine'
 import PuffAnimation from './models/PuffAnimation'
 
@@ -86,6 +88,12 @@ class GameEngine extends Component {
   drawPuffAnimations () {
     GameEngineStateManager.getPuffAnimations().forEach(puffAnimation => {
       PuffAnimationsEngine.drawFrameOnCanvas(this.canvasContext, puffAnimation)
+    })
+  }
+
+  drawMissedCarAnimations () {
+    GameEngineStateManager.getMissedCarAnimations().forEach(missedCar => {
+      MissedVehicleAnimationsEngine.drawFrameOnCanvas(this.canvasContext, missedCar)
     })
   }
 
@@ -266,7 +274,8 @@ class GameEngine extends Component {
         )
 
         // Add a visual clue that we have missed them
-        GameEngineStateManager.addPuffAnimation(
+        // TODO change puff animation class to simple sprite step animation
+        GameEngineStateManager.addMissedCarAnimation(
           new PuffAnimation(
             centerOfDisapearItem.x,
             centerOfDisapearItem.y,
@@ -288,6 +297,9 @@ class GameEngine extends Component {
 
       // Draw puff animations
       this.drawPuffAnimations(this.canvasContext)
+
+      // Draw missed car animations
+      this.drawMissedCarAnimations(this.canvasContext)
 
       // Draw unicorns
       UnicornEngine.drawUnicornsFromTrackerData(

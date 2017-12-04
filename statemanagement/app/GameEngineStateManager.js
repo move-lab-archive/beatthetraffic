@@ -50,6 +50,10 @@ class GameEngineStateManager {
     return this.state.puffAnimations
   }
 
+  getMissedCarAnimations () {
+    return this.state.missedCarsAnimations
+  }
+
   getStarsAnimations () {
     return this.state.starsAnimations
   }
