@@ -1,6 +1,6 @@
 /* global Image */
 
-class MissedVehicleAnimationEngine {
+class MissedCarAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
@@ -47,23 +47,23 @@ class MissedVehicleAnimationEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, puffAnimation) {
+  drawFrameOnCanvas (contextToDrawOn, missedCarAnimation) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(puffAnimation.currentFrame)
+    const sourceData = this.getFrameData(missedCarAnimation.currentFrame)
     contextToDrawOn.drawImage(
       this.offscreenCanvas,
       sourceData.x,
       sourceData.y,
       sourceData.width,
       sourceData.height,
-      puffAnimation.x,
-      puffAnimation.y,
-      puffAnimation.w,
-      puffAnimation.h
+      missedCarAnimation.x,
+      missedCarAnimation.y,
+      missedCarAnimation.w,
+      missedCarAnimation.h
     )
   }
 }
 
-const MissedVehicleAnimationEngineInstance = new MissedVehicleAnimationEngine()
+const MissedCarAnimationsEngineInstance = new MissedCarAnimationsEngine()
 
-export default MissedVehicleAnimationEngineInstance
+export default MissedCarAnimationsEngineInstance
