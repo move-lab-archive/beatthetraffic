@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 class LevelName extends Component {
   render () {
     return (
-      <div className='level-name'>
+      <div
+        className={`level-name
+        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+      >
         {`${this.props.levelName} LEVEL ${this.props.levelNb}`}
         <style jsx>{`
           .level-name {
@@ -15,6 +18,11 @@ class LevelName extends Component {
             font-family: 'Geo', sans-serif;
             color: white;
             z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
+
+          .hidden {
             opacity: 0;
           }
         `}</style>
@@ -30,6 +38,7 @@ export default connect(state => {
 
   return {
     levelName: selectedVideo.get('levelName'),
-    levelNb: selectedVideo.get('level')
+    levelNb: selectedVideo.get('level'),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(LevelName)

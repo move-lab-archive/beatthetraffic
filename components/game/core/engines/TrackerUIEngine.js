@@ -32,10 +32,8 @@ class TrackerUIEngine {
         )
 
         // Set params
-        //context.strokeStyle = '#4EFFFF'
-      //  context.fillStyle = '#4EFFFF'
-        context.strokeStyle = 'transparent'
-        context.fillStyle = 'transparent'
+        context.strokeStyle = '#4EFFFF'
+        context.fillStyle = '#4EFFFF'
         context.lineWidth = 2
         context.globalAlpha = 1
 

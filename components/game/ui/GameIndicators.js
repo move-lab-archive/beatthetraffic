@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import SmokeLevel from './indicators/SmokeLevel'
 import Score from './indicators/Score'
@@ -6,7 +7,10 @@ import Score from './indicators/Score'
 class GameIndicators extends Component {
   render () {
     return (
-      <div className='game-indicators'>
+      <div
+        className={`game-indicators 
+        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+      >
         <Score />
         <SmokeLevel />
         <style jsx>{`
@@ -16,6 +20,11 @@ class GameIndicators extends Component {
             left: 2.6rem;
             z-index: 5;
             transform: will-change;
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
+
+          .hidden {
             opacity: 0;
           }
         `}</style>
@@ -24,4 +33,8 @@ class GameIndicators extends Component {
   }
 }
 
-export default GameIndicators
+export default connect(state => {
+  return {
+    introAnimPlayed: state.app.get('introAnimPlayed')
+  }
+})(GameIndicators)

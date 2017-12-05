@@ -4,24 +4,15 @@ import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
 
 class Intro extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      animateOut: false
-    }
-  }
-
   componentDidMount () {
     SoundsManager.playSound('intro')
 
     const timeline = new TimelineLite({
       onComplete: () => {
-        const cloudAnimationOutDuration = 1
-        this.setState({
-          animateOut: true
-        })
-        this.props.onFinish(cloudAnimationOutDuration)
+        // Here we can specify a delay before the Intro Div is removed from the dom
+        // trick because it takes also 1 sec for the video to start once we dispatch the action
+        const delayOnAnimateOut = 1
+        this.props.onFinish(delayOnAnimateOut)
       }
     })
 
@@ -38,7 +29,6 @@ class Intro extends Component {
       .to('.logo', 0, { opacity: 0 }, '+=1')
       .to('.catch', 0, { opacity: 1 }, '+=0.85')
       .to('.catch', 0, { opacity: 0 }, '+=2')
-      .to('.game-indicators, .menu-button, .progress-bar, .level-name, .audio-button', 0.3, { opacity: 1 }, '+=0') // 7.8s in music
 
     timeline.play()
   }
@@ -53,7 +43,7 @@ class Intro extends Component {
           Stutt<br />gart
         </div>
         <div className='title logo'>
-          <img src="/static/assets/logo/logo-moovel-white.svg"></img>
+          <img src='/static/assets/logo/logo-moovel-white.svg' />
         </div>
         <div className='title catch'>Catch the vehicles!</div>
         <style jsx>{`

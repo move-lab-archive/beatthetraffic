@@ -55,7 +55,6 @@ class Sound extends Component {
             background-repeat: no-repeat;
             background-size: 3rem 3rem;
             background-position: center;
-            opacity: 0;
           }
 
           .audio-button.on {
