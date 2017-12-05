@@ -36,12 +36,16 @@ class GameProgressBar extends PureComponent {
 
   render () {
     return (
-      <div className='progress-bar'>
+      <div className={`progress-bar
+      ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+      >
         <div
-          className={`progress-bar-content 
+          className={`progress-bar-content
           ${this.props.introAnimPlayed ? '' : 'hidden'}`}
           ref={el => (this.el = el)}
         />
+        <div className={`level-2 step`}></div>
+        <div className={`level-3 step`}></div>
         <style jsx>{`
           .progress-bar {
             position: fixed;
@@ -54,6 +58,20 @@ class GameProgressBar extends PureComponent {
             will-change: transform;
             opacity: 1;
             transition: opacity 0.3s;
+          }
+
+          .level-2{
+            left: 33.3%;
+          }
+          .level-3{
+            left: 66.6%;
+          }
+          .step{
+            height: 12px;
+            width: 3px;
+            bottom: 0px;
+            position: fixed;
+            background-color: #fffe4a;
           }
 
           .hidden {

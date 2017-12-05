@@ -7,6 +7,7 @@ import BtnLanding from './landing/BtnLanding'
 import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
+import LocationMenu from './landing/LocationMenu'
 
 class Landing extends Component {
   constructor (props) {
@@ -53,6 +54,7 @@ class Landing extends Component {
         <h1 className='landing-headline'>
           CITIES ARE JAM-PACKED WITH HEAVY TRAFFIC!
         </h1>
+        <LocationMenu />
         <Unicorn />
         <LeftCloud />
         <RightCloud />
@@ -76,6 +78,7 @@ class Landing extends Component {
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
+            cursor: auto;
           }
 
           .landing-headline {
