@@ -4,8 +4,8 @@ class MissedCarAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 1000,
-      height: 379,
+      width: 800,
+      height: 200,
       src: '/static/assets/sprites/missedcar.png',
       nbFrames: 4
     }

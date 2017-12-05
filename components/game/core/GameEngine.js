@@ -198,10 +198,6 @@ class GameEngine extends Component {
               const whatObjectToOutput = this.getWhatToOutputFromDisappearingACar()
 
               if (whatObjectToOutput) {
-                // Add explosion animation
-                GameEngineStateManager.addStarsAnimation(
-                  new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
-                )
                 // Output item to collect
                 this.addCollectableItem(
                   click,
@@ -241,6 +237,12 @@ class GameEngine extends Component {
                 isInsideArea(itemToCollect, click)
               ) {
                 this.collectItem(itemToCollect)
+
+                // Add explosion animation
+                GameEngineStateManager.addStarsAnimation(
+                  new StarsAnimation(click.x, click.y, itemToCollect.id)
+                )
+
                 // break from loop
                 clickUsed = true
                 return false
@@ -276,12 +278,11 @@ class GameEngine extends Component {
         )
 
         // Add a visual clue that we have missed them
-        // TODO change puff animation class to simple sprite step animation
         GameEngineStateManager.addMissedCarAnimation(
           new PuffAnimation(
             centerOfDisapearItem.x,
             centerOfDisapearItem.y,
-            200,
+            100,
             itemMissed.id
           )
         )
