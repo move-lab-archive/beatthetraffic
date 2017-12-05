@@ -129,7 +129,9 @@ export function startLevel () {
     })
 
     // Play the video
-    dispatch(playVideo())
+    if (!getState().video.isPlaying) {
+      dispatch(playVideo())
+    }
   }
 }
 

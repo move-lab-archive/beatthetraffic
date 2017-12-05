@@ -7,12 +7,12 @@ class UnicornEngine {
     this.offscreenCanvas = null
 
     this.sprite = {
-      width: 920,
-      height: 347,
-      src: '/static/assets/sprites/unicorn.png',
-      nbFramePerRow: 8,
-      nbRow: 3,
-      nbTotalFrame: 18,
+      width: 540,
+      height: 462,
+      src: '/static/assets/sprites/unicorn3d.png',
+      nbFramePerRow: 7,
+      nbRow: 6,
+      nbTotalFrame: 37,
       frameWidth: null,
       frameHeight: null
     }

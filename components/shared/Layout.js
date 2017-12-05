@@ -19,7 +19,8 @@ class Layout extends Component {
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
           <link
-            href="https://fonts.googleapis.com/css?family=Geo|Quantico:400,700" rel="stylesheet"
+            href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
+            rel='stylesheet'
           />
         </Head>
         {this.props.children}
@@ -34,8 +35,7 @@ class Layout extends Component {
             top: 0;
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
-            background-color: #FFFE4A;
-            overflow: hidden;
+            background-color: #fffe4a;
             cursor: url(../../static/assets/cursor/cursor-dot.png) 2 2, pointer;
           }
 

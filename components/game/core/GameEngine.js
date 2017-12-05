@@ -13,6 +13,9 @@ import CollectableItemsEngine, {
   COLLECTABLE_TYPES
 } from './engines/CollectableItemsEngine'
 
+import MissedCarAnimationsEngine from './engines/MissedCarAnimationsEngine'
+import MissedCarAnimation from './models/MissedCarAnimation'
+
 import PuffAnimationsEngine from './engines/PuffAnimationsEngine'
 import PuffAnimation from './models/PuffAnimation'
 
@@ -45,6 +48,7 @@ class GameEngine extends Component {
   componentWillReceiveProps (nextProps) {
     if (
       nextProps.isPlaying === true &&
+      nextProps.introAnimPlayed === true &&
       nextProps.isObjectTrackerDataFetched === true
     ) {
       if (!this.isUpdatingCanvas) {
@@ -66,6 +70,7 @@ class GameEngine extends Component {
     PuffAnimationsEngine.init()
     StarsAnimationsEngine.init()
     UnicornEngine.init()
+    MissedCarAnimationsEngine.init()
   }
 
   collectItem (itemToCollect) {
@@ -86,6 +91,12 @@ class GameEngine extends Component {
   drawPuffAnimations () {
     GameEngineStateManager.getPuffAnimations().forEach(puffAnimation => {
       PuffAnimationsEngine.drawFrameOnCanvas(this.canvasContext, puffAnimation)
+    })
+  }
+
+  drawMissedCarAnimations () {
+    GameEngineStateManager.getMissedCarAnimations().forEach(missedCar => {
+      MissedCarAnimationsEngine.drawFrameOnCanvas(this.canvasContext, missedCar)
     })
   }
 
@@ -188,10 +199,6 @@ class GameEngine extends Component {
               const whatObjectToOutput = this.getWhatToOutputFromDisappearingACar()
 
               if (whatObjectToOutput) {
-                // Add explosion animation
-                GameEngineStateManager.addStarsAnimation(
-                  new StarsAnimation(click.x, click.y, potentialObjectToMask.id)
-                )
                 // Output item to collect
                 this.addCollectableItem(
                   click,
@@ -207,7 +214,7 @@ class GameEngine extends Component {
               )
               // Add puff animation
               GameEngineStateManager.addPuffAnimation(
-                new PuffAnimation(
+                new MissedCarAnimation(
                   click.x,
                   click.y,
                   90,
@@ -231,6 +238,12 @@ class GameEngine extends Component {
                 isInsideArea(itemToCollect, click)
               ) {
                 this.collectItem(itemToCollect)
+
+                // Add explosion animation
+                GameEngineStateManager.addStarsAnimation(
+                  new StarsAnimation(click.x, click.y, itemToCollect.id)
+                )
+
                 // break from loop
                 clickUsed = true
                 return false
@@ -266,11 +279,11 @@ class GameEngine extends Component {
         )
 
         // Add a visual clue that we have missed them
-        GameEngineStateManager.addPuffAnimation(
+        GameEngineStateManager.addMissedCarAnimation(
           new PuffAnimation(
             centerOfDisapearItem.x,
             centerOfDisapearItem.y,
-            200,
+            100,
             itemMissed.id
           )
         )
@@ -289,13 +302,18 @@ class GameEngine extends Component {
       // Draw puff animations
       this.drawPuffAnimations(this.canvasContext)
 
-      // Draw unicorns
-      UnicornEngine.drawUnicornsFromTrackerData(
-        this.canvasContext,
-        objectTrackerDataForThisFrame,
-        this.props.canvasResolution,
-        this.props.originalResolution
-      )
+      // Draw missed car animations
+      this.drawMissedCarAnimations(this.canvasContext)
+
+      if (objectTrackerDataForThisFrame) {
+        // Draw unicorns
+        UnicornEngine.drawUnicornsFromTrackerData(
+          this.canvasContext,
+          objectTrackerDataForThisFrame,
+          this.props.canvasResolution,
+          this.props.originalResolution
+        )
+      }
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
@@ -410,6 +428,7 @@ export default connect(state => {
     smokeLevel: getSmokeLevel(
       state.game.get('nbItemsMissed'),
       state.game.get('maxMissed')
-    )
+    ),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GameEngine)
