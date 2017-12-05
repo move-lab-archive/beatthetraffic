@@ -16,7 +16,7 @@ class LeftCloud extends Component {
             left: 0px;
             width: 60%;
             will-change: transform;
-            animation: leftcloudAnimateIn 2.5s;
+            // animation: leftcloudAnimateIn 2.5s;
           }
 
           .animate-out {

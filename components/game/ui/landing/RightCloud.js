@@ -19,7 +19,7 @@ class RightCloud extends Component {
             top: -1%;
             width: 85%;
             right: 0%;
-            animation: rightcloudAnimateIn 2.5s;
+            // animation: rightcloudAnimateIn 2.5s;
           }
 
           .animate-out {
