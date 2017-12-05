@@ -28,6 +28,8 @@ import {
   startLevel
 } from '../../statemanagement/app/GameStateManagement'
 
+import { playVideo } from '../../statemanagement/app/VideoStateManagement'
+
 import { initViewportListeners } from '../../statemanagement/app/ViewportStateManagement'
 
 import SoundsManager from '../../statemanagement/app/SoundsManager'
@@ -122,6 +124,7 @@ class GamePage extends React.Component {
     SoundsManager.preloadGameSounds()
 
     if (this.state.playIntroAnim) {
+      this.props.dispatch(playVideo())
       if (delayHideLanding) {
         this.setState({
           showIntro: true

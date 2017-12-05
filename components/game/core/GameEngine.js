@@ -48,6 +48,7 @@ class GameEngine extends Component {
   componentWillReceiveProps (nextProps) {
     if (
       nextProps.isPlaying === true &&
+      nextProps.introAnimPlayed === true &&
       nextProps.isObjectTrackerDataFetched === true
     ) {
       if (!this.isUpdatingCanvas) {
@@ -425,6 +426,7 @@ export default connect(state => {
     smokeLevel: getSmokeLevel(
       state.game.get('nbItemsMissed'),
       state.game.get('maxMissed')
-    )
+    ),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GameEngine)

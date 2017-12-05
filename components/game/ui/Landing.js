@@ -17,7 +17,7 @@ class Landing extends Component {
 
   handleStartGame () {
     TweenLite.to('.game-landing', 0.3, {
-      backgroundColor: "transparent",
+      backgroundColor: 'transparent',
       delay: 0.5
     })
     TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
@@ -26,23 +26,22 @@ class Landing extends Component {
       ease: Power4.easeOut,
       delay: 0.5
     })
-    TweenLite.to(".leftcloud", 0.8, {
-      x: "-100%",
+    TweenLite.to('.leftcloud', 0.8, {
+      x: '-100%',
       ease: Power4.easeOut,
       delay: 1.5
     })
 
     const backgroundOpacityAnimationDuration = 0.5
 
-    TweenLite.to(".rightcloud", 0.8, {
-      x: "100%",
+    TweenLite.to('.rightcloud', 0.8, {
+      x: '100%',
       ease: Power4.easeOut,
       delay: 1.5,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })
 
-
-  /*  TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
+    /*  TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
       //opacity: 0, // NOTE: changed to general opacity, background color animation is slower
       delay: 1.5,
     }) */
@@ -57,17 +56,13 @@ class Landing extends Component {
         <Unicorn />
         <LeftCloud />
         <RightCloud />
-        {/*
-          Allow start when javascript kicked in
-          and  img first frame is loaded
-          the video can load while we do the 8s anim
-          the "safe" way would be to look at isGameReadyToPlay
-        */}
         <BtnLanding
-          loaded={this.props.isImgFirstFrameLoaded}
+          loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
         />
-        <div className='change-city'><h4>Change city</h4></div>
+        <div className='change-city'>
+          <h4>Change city</h4>
+        </div>
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -134,10 +129,10 @@ class Landing extends Component {
 }
 
 export default connect(state => {
-  // const isGameReadyToPlay =
-  //   state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
+  const isGameReadyToPlay =
+    state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
 
   return {
-    isImgFirstFrameLoaded: state.video.get('imgFirstFrameLoaded')
+    isGameReadyToPlay
   }
 })(Landing)
