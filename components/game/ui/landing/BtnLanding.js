@@ -65,7 +65,7 @@ class BtnLanding extends Component {
             left: 50%;
             top: 78%;
             position: absolute;
-            width: 190px;
+            width: 160px;
             height: 45px;
             transform: translateX(-50%) translateY(-50%);
             //GPU accelerate
@@ -124,7 +124,7 @@ class BtnLanding extends Component {
             background-color: #ff3bff;
             left: 2px;
             top: 2px;
-          }
+           }
 
           @keyframes loaderAnimation {
             0% {

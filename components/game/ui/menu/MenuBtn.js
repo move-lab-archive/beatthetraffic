@@ -7,14 +7,15 @@ class MenuBtn extends Component {
   render () {
     return (
       <div
-        className={`menu-button`}
+        className={`menu-button
+        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
         onClick={() => this.props.dispatch(showMenu())}
       >
         <style jsx>{`
           .menu-button {
             position: fixed;
-            top: 3rem;
-            right: 3rem;
+            top: 1.6rem;
+            right: 2rem;
             z-index: 6;
             width: 4.4rem;
             height: 4.4rem;
@@ -24,6 +25,12 @@ class MenuBtn extends Component {
             background-size: 3rem 3rem;
             background-position: center;
             background-image: url(/static/assets/icons/icon-menu.svg);
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
+
+          .hidden {
+            opacity: 0;
           }
         `}</style>
       </div>
@@ -33,6 +40,7 @@ class MenuBtn extends Component {
 
 export default connect(state => {
   return {
-    showMenu: state.app.get('showMenu')
+    showMenu: state.app.get('showMenu'),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(MenuBtn)

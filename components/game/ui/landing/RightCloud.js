@@ -12,12 +12,14 @@ class RightCloud extends Component {
         {/* NOTE We can't animate in at first load, browser
             is busy doing loading & parsing of javascript and it is slow on svg
         */}
+
         <style jsx>{`
           .rightcloud {
             position: absolute;
             top: -1%;
-            width: 90%;
+            width: 85%;
             right: 0%;
+            // animation: rightcloudAnimateIn 2.5s;
           }
 
           .animate-out {
@@ -34,6 +36,18 @@ class RightCloud extends Component {
             }
             100% {
               transform: translateX(100%);
+            }
+          }
+
+          @keyframes rightcloudAnimateIn {
+            0% {
+              transform: translateX(100%);
+            }
+            70% {
+              transform: translateX(100%);
+            }
+            100% {
+              transform: translateX(0%);
             }
           }
 

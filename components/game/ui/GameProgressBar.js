@@ -37,17 +37,27 @@ class GameProgressBar extends PureComponent {
   render () {
     return (
       <div className='progress-bar'>
-        <div className='progress-bar-content' ref={el => (this.el = el)} />
+        <div
+          className={`progress-bar-content 
+          ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+          ref={el => (this.el = el)}
+        />
         <style jsx>{`
           .progress-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 0.8rem;
+            height: 1rem;
             background-color: #262626;
             z-index: 1;
             will-change: transform;
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
+
+          .hidden {
+            opacity: 0;
           }
 
           .progress-bar-content {
@@ -70,6 +80,7 @@ export default connect(state => {
   return {
     totalDuration: Math.trunc(state.video.get('duration')),
     currentLevel: state.game.get('currentLevel'),
-    nbTotalLevel: state.game.get('nbTotalLevel')
+    nbTotalLevel: state.game.get('nbTotalLevel'),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GameProgressBar)

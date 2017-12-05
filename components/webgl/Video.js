@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import NoSSR from 'react-no-ssr';
 
-import { 
+import {
   setVideoReady,
   setVideoEnded,
   updateCurrentTime
@@ -69,7 +69,7 @@ class Video extends Component {
     this.props.dispatch(setVideoReady({
       duration: this.videoEl.duration
     }));
-    // Cancel autoplay 
+    // Cancel autoplay
     // we set autoplay as a hack because safari mobile doesn't allow
     // to play without user even if not (so we autoplay-pause, then play)
     if(!this.props.isPlaying) {
@@ -85,7 +85,7 @@ class Video extends Component {
       this.isMonitoring = true;
       this.monitorFrames();
     }
-  } 
+  }
 
   handlePause() {
     console.log('video paused')
@@ -167,11 +167,11 @@ class Video extends Component {
     });
   }
 
-  render() { 
+  render() {
     return (
       <video
         key={this.props.src}
-        ref={(el) => { 
+        ref={(el) => {
           this.registerListeners(el)
         }}
         className="video"
@@ -186,7 +186,7 @@ class Video extends Component {
     );
   }
 }
- 
+
 export default connect((state) => {
 
   const selectedVideo = state.app.get('availableVideos').find((video) => {
