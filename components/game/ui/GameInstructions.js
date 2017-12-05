@@ -9,7 +9,10 @@ import Win from './instructions/Win'
 class GameInstructions extends PureComponent {
   render () {
     return (
-      <div className='game-instructions'>
+      <div
+        className={`game-instructions
+        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+      >
         {!this.props.isPlaying &&
           !this.props.failed &&
           !this.props.finished && <LevelBeginning />}
@@ -36,6 +39,10 @@ class GameInstructions extends PureComponent {
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
+            opacity: 1;
+          }
+
+          .hidden {
             opacity: 0;
           }
         `}</style>
@@ -50,6 +57,7 @@ export default connect(state => {
     failed: state.game.get('failed'),
     finished: state.game.get('finished'),
     currentLevel: state.game.get('currentLevel'),
-    nbTotalLevel: state.game.get('nbTotalLevel')
+    nbTotalLevel: state.game.get('nbTotalLevel'),
+    introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GameInstructions)

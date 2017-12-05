@@ -305,13 +305,15 @@ class GameEngine extends Component {
       // Draw missed car animations
       this.drawMissedCarAnimations(this.canvasContext)
 
-      // Draw unicorns
-      UnicornEngine.drawUnicornsFromTrackerData(
-        this.canvasContext,
-        objectTrackerDataForThisFrame,
-        this.props.canvasResolution,
-        this.props.originalResolution
-      )
+      if (objectTrackerDataForThisFrame) {
+        // Draw unicorns
+        UnicornEngine.drawUnicornsFromTrackerData(
+          this.canvasContext,
+          objectTrackerDataForThisFrame,
+          this.props.canvasResolution,
+          this.props.originalResolution
+        )
+      }
 
       // Draw tracker ui data
       if (objectTrackerDataForThisFrame) {
