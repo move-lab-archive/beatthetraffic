@@ -14,6 +14,12 @@ class Landing extends Component {
     super(props)
 
     this.handleStartGame = this.handleStartGame.bind(this)
+    this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
+
+    this.state = {
+      citySelectorVisible: false,
+      javascriptLoaded: false
+    }
   }
 
   handleStartGame () {
@@ -48,13 +54,34 @@ class Landing extends Component {
     }) */
   }
 
+  handleChangeCityClick () {
+    if (this.state.citySelectorVisible) {
+      this.setState({
+        citySelectorVisible: false
+      })
+    } else {
+      this.setState({
+        citySelectorVisible: true
+      })
+    }
+  }
+
+  componentDidMount () {
+    this.setState({
+      javascriptLoaded: true
+    })
+  }
+
   render () {
     return (
       <div className='game-landing'>
         <h1 className='landing-headline'>
           CITIES ARE JAM-PACKED WITH HEAVY TRAFFIC!
         </h1>
-        <LocationMenu />
+        <LocationMenu
+          isVisible={this.state.citySelectorVisible}
+          handleClose={this.handleChangeCityClick}
+        />
         <Unicorn />
         <LeftCloud />
         <RightCloud />
@@ -62,9 +89,11 @@ class Landing extends Component {
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
         />
-        <div className='change-city'>
-          <h4>Change city</h4>
-        </div>
+        {this.state.javascriptLoaded && (
+          <div onClick={this.handleChangeCityClick} className='change-city'>
+            <h4>Change city</h4>
+          </div>
+        )}
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -99,6 +128,7 @@ class Landing extends Component {
             bottom: 1.5rem;
             left: 3rem;
             animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+            cursor: pointer;
           }
 
           @media (min-width: 450px) {

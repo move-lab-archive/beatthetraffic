@@ -37,7 +37,6 @@ class Layout extends Component {
             font-weight: 700;
             background-color: #fffe4a;
             cursor: url(../../static/assets/cursor/cursor-dot.png) 2 2, pointer;
-            overflow: hidden;
           }
 
           :global(h4) {

@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class LocationMenu extends Component {
-  render () {
+  static propTypes = {
+    isVisible: PropTypes.bool,
+    handleClose: PropTypes.func
+  }
+
+  render() {
     return (
       <div>
-        <div className={`LocationsContainer hidden`}>
+        <div
+          className={`LocationsContainer ${
+            this.props.isVisible ? 'visible' : 'hidden'
+          }`}
+        >
           <div className={`Locations`}>
             <h2>Stuttgart</h2>
             <h2>Berlin</h2>
@@ -12,11 +22,13 @@ class LocationMenu extends Component {
             <h2>Los Angeles</h2>
           </div>
           <img
-            className={`closeLocationMenu`} src='/static/assets/icons/icon-close-LocationMenu.svg'
+            onClick={() => this.props.handleClose()}
+            className={`closeLocationMenu`}
+            src="/static/assets/icons/icon-close-LocationMenu.svg"
           />
         </div>
         <style jsx>{`
-          .LocationsContainer{
+          .LocationsContainer {
             background-color: white;
             max-width: 300px;
             width: 90%;
@@ -28,19 +40,20 @@ class LocationMenu extends Component {
             border: 4px solid #262626;
           }
 
-          .Locations{
+          .Locations {
             padding: 1.9rem;
           }
 
-          .Locations h2{
+          .Locations h2 {
             text-transform: uppercase;
             margin: 0;
           }
 
-          .closeLocationMenu{
+          .closeLocationMenu {
             position: absolute;
             top: 1.9rem;
             right: 1.5rem;
+            cursor: pointer;
           }
 
           .hidden {
