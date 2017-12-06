@@ -7,12 +7,12 @@ class UnicornEngine {
     this.offscreenCanvas = null
 
     this.sprite = {
-      width: 540,
-      height: 462,
-      src: '/static/assets/sprites/unicorn3d.png',
-      nbFramePerRow: 7,
+      width: 600,
+      height: 600,
+      src: '/static/assets/sprites/unicorn3dNew.png',
+      nbFramePerRow: 6,
       nbRow: 6,
-      nbTotalFrame: 37,
+      nbTotalFrame: 36,
       frameWidth: null,
       frameHeight: null
     }
@@ -66,10 +66,10 @@ class UnicornEngine {
     let unicorn = {}
     // Compute size depending on bbox area
     const bboxArea = bbox.w * bbox.h
-    let size = Math.floor(Math.sqrt(bboxArea / 3))
+    let size = Math.floor(Math.sqrt(bboxArea / 2))
     // TODO have this dynamic depending on canvas size / sprite image
     // between 30 and 50 pixel for  now
-    size = Math.min(Math.max(parseInt(size), 40), 60)
+    size = Math.min(Math.max(parseInt(size), 90), 120)
 
     // keep proportions
     if (this.sprite.frameWidth > this.sprite.frameHeight) {
