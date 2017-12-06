@@ -112,7 +112,7 @@ class SmokeLevel extends PureComponent {
         </g>
         <style jsx>{`
           .smoke-bar {
-            margin-top: 0.4rem;
+            margin-top: 0.1rem;
             width: 8.5rem;
             height: auto;
           }

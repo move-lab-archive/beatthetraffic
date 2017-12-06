@@ -45,7 +45,7 @@ class Intro extends Component {
         <div className='title logo'>
           <img src='/static/assets/logo/logo-moovel-white.svg' />
         </div>
-        <div className='title catch'>Catch the vehicles!</div>
+        <div className='title catch'>Click the vehicles!</div>
         <style jsx>{`
           .game-landing {
             position: fixed;
