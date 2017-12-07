@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import Router from 'next/router'
 import { loadCity } from '../../../../statemanagement/app/GameStateManagement'
 
+// TODO IMPROVE IT TO BE ABLE TO REUSE EASIER IN GAMEOVER AND WIN PAGE
+
 class LocationMenu extends Component {
   static propTypes = {
     isVisible: PropTypes.bool,

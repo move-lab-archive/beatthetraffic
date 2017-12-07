@@ -17,7 +17,7 @@ class Landing extends Component {
     this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
 
     this.state = {
-      citySelectorVisible: false,
+      citySelectorVisible: false, // NOTE tdurand, this logic could be pushed into the locationMenu component to reuse it easier in Game over and win page
       javascriptLoaded: false
     }
   }
@@ -54,6 +54,8 @@ class Landing extends Component {
     }) */
   }
 
+  // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
+  // to reuse it easier in Game over and win page
   handleChangeCityClick () {
     if (this.state.citySelectorVisible) {
       this.setState({
@@ -89,7 +91,10 @@ class Landing extends Component {
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
         />
+
         {this.state.javascriptLoaded && (
+          // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
+          // to reuse it easier in Game over and win page
           <div onClick={this.handleChangeCityClick} className='change-city'>
             <h4>Change city</h4>
           </div>
