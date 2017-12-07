@@ -2,7 +2,7 @@
 
 > TODO write intro
 
-## General architecture
+## 🏛 General architecture
 
 Beat the traffic runs with:
 
