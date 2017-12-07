@@ -1,7 +1,20 @@
 {
   "defaultSelectedCity": "stuttgart1",
   "defaultSelectedVideo": "stuttgart1-level1",
-  "availableCities": ["stuttgart1", "stuttgart2"],
+  "availableCities": {
+    "stuttgart1": {
+      "label": "Stuttgart 1"
+    },
+    "stuttgart2": {
+      "label": "Stuttgart 2"
+    },
+    "stuttgart3": {
+      "label": "Stuttgart 3"
+    },
+    "stuttgart4": {
+      "label": "Stuttgart 4"
+    }
+  },
   "availableVideos": [
     {
       "name": "stuttgart2-level3",

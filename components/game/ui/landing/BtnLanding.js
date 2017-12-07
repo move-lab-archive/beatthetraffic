@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 class BtnLanding extends Component {
@@ -58,7 +59,7 @@ class BtnLanding extends Component {
       >
         <div className="inner" />
         <div className="outer">
-          <h4>Defend Stuttgart!</h4>
+          <h4>Defend {this.props.selectedCityLabel}!</h4>
         </div>
         <style jsx>{`
           .btn-landing {
@@ -124,7 +125,7 @@ class BtnLanding extends Component {
             background-color: #ff3bff;
             left: 2px;
             top: 2px;
-           }
+          }
 
           @keyframes loaderAnimation {
             0% {
@@ -170,4 +171,11 @@ class BtnLanding extends Component {
   }
 }
 
-export default BtnLanding
+export default connect(state => {
+  return {
+    selectedCityLabel: state.app
+      .get('availableCities')
+      .get(state.app.get('selectedCity'))
+      .get('label')
+  }
+})(BtnLanding)

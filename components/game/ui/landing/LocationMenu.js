@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Router from 'next/router'
+import { loadCity } from '../../../../statemanagement/app/GameStateManagement'
 
 class LocationMenu extends Component {
   static propTypes = {
     isVisible: PropTypes.bool,
-    handleClose: PropTypes.func
+    handleClose: PropTypes.func,
+    availableCities: PropTypes.object
+  }
+
+  changeCity(cityId) {
+    this.props.dispatch(loadCity(cityId))
+    this.props.handleClose()
   }
 
   render() {
@@ -16,10 +25,13 @@ class LocationMenu extends Component {
           }`}
         >
           <div className={`Locations`}>
-            <h2>Stuttgart</h2>
-            <h2>Berlin</h2>
-            <h2>Portland</h2>
-            <h2>Los Angeles</h2>
+            {Object.keys(this.props.availableCities)
+              .filter(cityId => cityId !== this.props.selectedCity)
+              .map(cityId => (
+                <h2 onClick={() => this.changeCity(cityId)} key={cityId}>
+                  {this.props.availableCities[cityId].label}
+                </h2>
+              ))}
           </div>
           <img
             onClick={() => this.props.handleClose()}
@@ -47,6 +59,7 @@ class LocationMenu extends Component {
           .Locations h2 {
             text-transform: uppercase;
             margin: 0;
+            cursor: pointer;
           }
 
           .closeLocationMenu {
@@ -71,4 +84,9 @@ class LocationMenu extends Component {
   }
 }
 
-export default LocationMenu
+export default connect(state => {
+  return {
+    availableCities: state.app.get('availableCities').toJS(),
+    selectedCity: state.app.get('selectedCity')
+  }
+})(LocationMenu)

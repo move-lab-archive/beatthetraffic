@@ -52,7 +52,14 @@ doesn't work.
 ```javascript
 {
   "defaultSelectedCity": "stuttgart1",
-  "availableCities": ["stuttgart1", "stuttgart2"],
+  "availableCities": {
+    "stuttgart": {
+      "label": "Stuttgart"
+    },
+    "berlin": {
+      "label": "Berlin"
+    }
+  }
   "availableVideos": [...]
 }
 ```
@@ -63,10 +70,9 @@ better to add the things in order 😉
 
 ```javascript
 {
-  "name": "stuttgart2-level3", // Respect the convention: $CITYNAME-$LEVELNB
-  "city": "stuttgart1",
-  "cityName": "Stuttgart", // Label for the city
-  "level": 1, // Should be 1, 2 or 3
+  "name": "stuttgart-level3", // Respect the convention: $CITYNAME-$LEVELNB
+  "city": "stuttgart",
+  "level": 3, // Should be 1, 2 or 3
   "levelName": "Stuttgart STR.", // Label that is displayed in the game
   "videoFPS": 30, // The video FPS
   "trackerAndDetectionsFPS": 30, // The FPS of the YOLO / Tracker data, should be the same as the videoFPS
