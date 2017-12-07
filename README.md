@@ -30,7 +30,7 @@ city id will also be the URL to access it:
 You should also specify the default selected city in case the geolocation
 doesn't work.
 
-```json
+```javascript
 {
   "defaultSelectedCity": "stuttgart1",
   "availableCities": ["stuttgart1", "stuttgart2"],
@@ -42,7 +42,7 @@ Then for each city you need to specify 3 levels, that you will add to the
 `availableVideos` array. The order doesn't matter, but for readability it is
 better to add the things in order 😉
 
-```json
+```javascript
 {
   "name": "stuttgart2-level3", // Respect the convention: $CITYNAME-$LEVELNB
   "city": "stuttgart1",
