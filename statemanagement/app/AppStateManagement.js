@@ -16,7 +16,7 @@ import GameConfig from '../../gameconfig.json'
 const initialState = fromJS({
   availableCities: GameConfig.availableCities,
   selectedCity: GameConfig.defaultSelectedCity,
-  selectedVideo: GameConfig.defaultSelectedVideo,
+  selectedVideo: `${GameConfig.defaultSelectedCity}-level1`,
   availableVideos: GameConfig.availableVideos,
   showMenu: false,
   playOnHideMenu: false,
@@ -34,7 +34,7 @@ const UNMUTE_ON_HIDE_MENU = 'App/UNMUTE_ON_HIDE_MENU'
 const KEEP_MUTED_ON_HIDE_MENU = 'App/KEEP_MUTED_ON_HIDE_MENU'
 const SET_INTROANIM_PLAYED = 'App/SET_INTROANIM_PLAYED'
 
-let pathStatic = '/static/detections'
+let pathStatic = '/static/levels'
 
 export function getRawDetectionPath (videoName) {
   return `${pathStatic}/${videoName}/rawdetections.txt`
