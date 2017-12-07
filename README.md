@@ -175,7 +175,7 @@ cv2.destroyAllWindows()
 video.release()
 ```
 
-But for the best results nothing beats a manual process. Ganerate some frames of
+But for the best results nothing beats a manual process. Generate some frames of
 the video with ffmpeg:
 
 `ffmpeg -i prototype_level_1.mp4 -r 1/1 $filename%03d.bmp`
