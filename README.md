@@ -1,3 +1,18 @@
+# Beat the traffic 🚚 🚗 🏍
+
+> TODO write intro
+
+## General architecture
+
+Beat the traffic runs with:
+
+* A node.js app (using express.js) that serves the front-end (this repo), the
+  front-end based on React.js using Next.js
+
+You need node.js installed on the machine in order to run the project.
+
+## 🛠 Development notes
+
 ### Running in Dev mode
 
 ```
@@ -16,7 +31,11 @@ npm run static
 open localhost:5000 in browser
 ```
 
-## How to add or edit a city in the game
+### Export production version of the app and deploy
+
+> TODO @tdurand
+
+## 🏙 How to add or edit a city in the game
 
 ### 1. Fill the gameconfig.json file
 
@@ -81,7 +100,11 @@ better to add the things in order 😉
 
 #### 2.a Run node-yolo to generate the detections
 
+> TODO @mmmmmmmmmm
+
 #### 2.b Run node-tracker-by-detections to generate the tracking data
+
+> TODO @tdurand
 
 ### 3. Export level specific assets
 
