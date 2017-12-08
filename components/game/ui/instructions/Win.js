@@ -7,10 +7,33 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
+import SaveScoreModal from './highscore/SaveScoreModal'
+
 class Win extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      displaySaveScoreModal: false
+    }
+
+    this.handleDisplaySaveScoreModal = this.handleDisplaySaveScoreModal.bind(
+      this
+    )
+    this.handleHideSaveScoreModal = this.handleHideSaveScoreModal.bind(this)
+  }
+
   componentDidMount () {
     SoundsManager.playSound('youwin')
     SoundsManager.playSound('youwinloop')
+  }
+
+  handleDisplaySaveScoreModal () {
+    this.setState({ displaySaveScoreModal: true })
+  }
+
+  handleHideSaveScoreModal () {
+    this.setState({ displaySaveScoreModal: false })
   }
 
   render () {
@@ -19,11 +42,19 @@ class Win extends Component {
         <div className='title'>YOU WON</div>
         <div className='message'>You scored {this.props.score} ⭐️</div>
         <Button
+          title={`Save your score`}
+          onClick={this.handleDisplaySaveScoreModal}
+        />
+        <Button
           title={`Play again`}
           onClick={() => this.props.dispatch(retry())}
         />
+        {this.state.displaySaveScoreModal && (
+          <SaveScoreModal onClose={this.handleHideSaveScoreModal} />
+        )}
         <style jsx>{`
           .instructions-win {
+            position: relative;
             display: flex;
             flex: 1;
             flex-direction: column;

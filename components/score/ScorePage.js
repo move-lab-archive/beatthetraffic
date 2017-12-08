@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
+// TODO handle logic of retriving scores, for now style everything static
+
 class ScorePage extends Component {
   render () {
     return (
