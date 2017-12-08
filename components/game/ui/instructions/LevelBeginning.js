@@ -78,6 +78,7 @@ class LevelBeginning extends Component {
     return (
       <div className='instructions-level-beginning'>
         {/* See in componentDidMount the timing for the msg */}
+        {/* NOTE for @mmmm , when you will style that part, you can have a look in Video.js line 164 😉 */}
         {this.state.displayCongratsMsg && (
           <div className='level-title'>CONGRATS</div>
         )}
