@@ -12,7 +12,8 @@ class LevelBeginning extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      timerAutoStart: 5
+      timerAutoStart: 5,
+      displayCongratsMsg: props.currentLevel >= 2
     }
   }
 
@@ -37,6 +38,15 @@ class LevelBeginning extends Component {
     ) {
       // console.log('Start countdown 5s to start level')
       this.startCountDown()
+    }
+
+    if (this.state.displayCongratsMsg) {
+      // Hide congrats msg after a few seconds
+      setTimeout(() => {
+        this.setState({
+          displayCongratsMsg: false
+        })
+      }, 3000)
     }
   }
 
@@ -67,29 +77,36 @@ class LevelBeginning extends Component {
   render () {
     return (
       <div className='instructions-level-beginning'>
-        <div className='level-title'>LEVEL {this.props.currentLevel}</div>
-        {this.props.currentLevel >= 2 && (
-          <div className='level-help'>
-            {this.props.deviceOrientation === 'portrait' && (
-              <div>
-                <AskLandscapeAnimation />
-                <p>TIP: This level is easier in landscape</p>
-              </div>
-            )}
-            {this.props.deviceOrientation !== 'portrait' &&
-              this.props.isFullscreenAvailable &&
-              !this.props.isFullscreen && (
+        {/* See in componentDidMount the timing for the msg */}
+        {this.state.displayCongratsMsg && (
+          <div className='level-title'>CONGRATS</div>
+        )}
+        {!this.state.displayCongratsMsg && (
+          <div className='level-title'>LEVEL {this.props.currentLevel}</div>
+        )}
+        {!this.state.displayCongratsMsg &&
+          this.props.currentLevel >= 2 && (
+            <div className='level-help'>
+              {this.props.deviceOrientation === 'portrait' && (
                 <div>
-                  <p>TIP: This level is easier in fullscreen</p>
-                  <Button
-                    onClick={() => screenfull.request()}
-                    title='Enter Fullscreen'
-                    transparent
-                  />
+                  <AskLandscapeAnimation />
+                  <p>TIP: This level is easier in landscape</p>
                 </div>
               )}
-          </div>
-        )}
+              {this.props.deviceOrientation !== 'portrait' &&
+                this.props.isFullscreenAvailable &&
+                !this.props.isFullscreen && (
+                  <div>
+                    <p>TIP: This level is easier in fullscreen</p>
+                    <Button
+                      onClick={() => screenfull.request()}
+                      title='Enter Fullscreen'
+                      transparent
+                    />
+                  </div>
+                )}
+            </div>
+          )}
         {this.props.isGameReadyToPlay && (
           <Button
             onClick={() => this.manualStart()}

@@ -161,6 +161,11 @@ class Video extends Component {
       GameEngineStateManager.setCurrentFrame(newCurrentFrame)
       GameEngineStateManager.setCurrentTime(this.videoEl.currentTime)
 
+      // Debug method to end the level sooner to work on the level 1 -> level 2 transition
+      // if(this.props.duration - this.videoEl.currentTime < 40) {
+      //   this.handleEnded()
+      // }
+
       // If currentTime is 10s before end of video, prefetch next level first frame
       if (
         !this.nextLevelFirstFramePrefetched &&
