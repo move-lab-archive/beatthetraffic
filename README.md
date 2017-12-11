@@ -37,7 +37,7 @@ open localhost:5000 in browser
 
 **Using now.sh**
 
-Create an account: https://zeit.co/now and install command line tool, login with it on your now account.
+Create an account: https://zeit.co/now and install command line tool (https://zeit.co/download), login with it on your now account.
 
 You could use the Free OSS plan as it allows static deployment and this code will be open sourced at the end of the day.
 
