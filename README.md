@@ -106,7 +106,7 @@ better to add the things in order 😉
       "x": 0,
       "y": 0,
       "w": 1920,
-      "h": 720
+      "h": 1080
     }
   ],
 
@@ -129,7 +129,7 @@ Until this issue is solved, you can either set the value to the whole video so t
     "x": 0,
     "y": 0,
     "w": 1920,
-    "h": 720
+    "h": 1080
   }
 ]
 ```
