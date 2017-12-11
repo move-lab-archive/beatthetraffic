@@ -31,7 +31,9 @@ npm run static
 open localhost:5000 in browser
 ```
 
-### Export production version of the app and deploy
+### Export static production version of the app and deploy it
+
+> Require node.js >=9.2.0
 
 **Using now.sh**
 
