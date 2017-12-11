@@ -33,7 +33,19 @@ open localhost:5000 in browser
 
 ### Export production version of the app and deploy
 
-> TODO @tdurand
+**Using now.sh**
+
+Create an account: https://zeit.co/now and install command line tool, login with it on your now account.
+
+You could use the Free OSS plan as it allows static deployment and this code will be open sourced at the end of the day.
+
+Then run:
+
+```bash
+npm run export
+npm run deploy
+#Now will give you an url like: https://traffic-cam-qqwjiiwsai.now.sh/
+```
 
 ## 🏙 How to add / edit you own level / city
 
