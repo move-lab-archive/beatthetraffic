@@ -117,7 +117,7 @@ better to add the things in order 😉
 }
 ```
 
-**Special "disappearAreas" field:**
+#### Special "disappearAreas" field:
 
 Please read issue: https://github.com/moovel/lab-beat-the-traffic/issues/28
 
