@@ -35,7 +35,7 @@ open localhost:5000 in browser
 
 > TODO @tdurand
 
-## 🏙 How to add or edit a city in the game
+## 🏙 How to add / edit you own level / city
 
 ### 1. Fill the gameconfig.json file
 
