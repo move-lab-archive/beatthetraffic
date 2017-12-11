@@ -100,12 +100,13 @@ better to add the things in order 😉
     "x": 350,
     "y": 0
   },
+  // See the doc below regarding disappearAreas
   "disappearAreas": [
     {
       "x": 0,
-      "y": 641.77,
-      "w": 1650,
-      "h": 412
+      "y": 0,
+      "w": 1920,
+      "h": 720
     }
   ],
 
@@ -115,6 +116,30 @@ better to add the things in order 😉
   }
 }
 ```
+
+**Special "disappearAreas" field:**
+
+Please read issue: https://github.com/moovel/lab-beat-the-traffic/issues/28
+
+Until this issue is solved, you can either set the value to the whole video so that it will count disappearing cars anywhere, but might very well count false positive like id-reassignment:
+
+```json
+"disappearAreas": [
+  {
+    "x": 0,
+    "y": 0,
+    "w": 1920,
+    "h": 720
+  }
+]
+```
+
+Or set it to a special part or the video or even empty, this will leads not to count any car and never bring the smoke bar up:
+
+```json
+"disappearAreas": []
+```
+
 
 ### 2. Generate the tracking data
 
