@@ -143,7 +143,7 @@ Or set it to a special part or the video or even empty, this will leads not to c
 
 ### 2. Generate the tracking data
 
-Create a folder for the level data in : `/static/assets/levels/${cityname}-level${levelNb}`
+Create a folder for the level data in : `/static/levels/${cityname}-level${levelNb}`
 
 #### 2.a Run node-yolo to generate the detections
 
@@ -158,7 +158,7 @@ Ex: `/static/levels/stuttgart-level1/rawdetections.txt`
 ```bash
 # 1. Install node-tracker-by-detections command line tool
 
-npm install -g node-tracker-by-detections 
+npm install -g node-tracker-by-detections
 
 # 2. Generate the tracker.json file from the rawdetections.txt detections file
 
