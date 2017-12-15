@@ -47,11 +47,45 @@ class UnicornEngine {
     return this.sprites.nbTotalFrame - 1
   }
 
-  /* Associate bearing of the unicorn to a frame */
+  /* Associate bearing of the unicorn to a frame
+                         dY
+
+                       ^               XX
+                       |             XXX
+                       |            XX
+                       |           XX
+                       |         XX
+                       |       XXX
+                       |      XX
+                       |     XX
+                       |    XX    bearing of tracker = this angle in degree
+                       |  XX
+                       |XX
++----------------------XX----------------------->  dX
+                       |
+                       |
+                       |     bearing of unicorn sprite = bearing of tracker + 90º
+                       |
+                       |
+                       |
+                       |
+                       |
+                       |
+                       |
+                       |
+                       +
+
+*/
   getFrameData (bearing) {
     let sprite = this.sprite
-    const bearingIn360Deg = 180 + bearing * (180 / Math.PI)
-    const frameNb = Math.round(bearingIn360Deg * sprite.nbTotalFrame / 360)
+    let bearingSprite = 0
+    // translate bearing of tracker to bearing of sprite
+    if (bearing < 270) {
+      bearingSprite = bearing + 90
+    } else {
+      bearingSprite = bearing + 90 - 360
+    }
+    const frameNb = Math.round(bearingSprite * sprite.nbTotalFrame / 360)
     const rowNb = Math.floor(frameNb / sprite.nbFramePerRow)
     const columnNb = frameNb % sprite.nbFramePerRow
     return {
