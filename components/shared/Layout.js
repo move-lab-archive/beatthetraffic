@@ -35,20 +35,51 @@ class Layout extends Component {
             top: 0;
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
-            background-color: #fffe4a;
-            cursor: url(../../static/assets/cursor/cursor-dot.png) 2 2, pointer;
+            background-color: white;
+            cursor: cell;
+            overflow: hidden;
           }
 
+          :global(h1) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            line-height: 3rem;
+            text-transform: uppercase;
+          }
+          :global(h2) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            line-height: 4.9rem;
+            text-transform: uppercase;
+          }
+          :global(h3) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
+          }
           :global(h4) {
             font-family: 'Geo', sans-serif;
             font-weight: 400;
+            font-size: 1.6rem;
+          }
+          :global(p) {
+            font-family: 'Geo', sans-serif;
+            font-weight: 400;
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 2.9rem;
           }
 
           :global(html) {
-            font-size: 62.5%;
+            font-size: 60%;
           }
 
-          @media (max-width: 450px) {
+          @media (max-width: 600px) {
             :global(html) {
               font-size: 50%;
             }
@@ -61,7 +92,6 @@ class Layout extends Component {
           }
 
           :global(body) {
-            font-size: 1.6rem;
           }
 
           :global(body > div:first-of-type) {

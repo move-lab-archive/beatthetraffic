@@ -15,7 +15,7 @@ class MenuBtn extends Component {
           .menu-button {
             position: fixed;
             top: 1.6rem;
-            right: 2rem;
+            right: 2.1rem;
             z-index: 6;
             width: 4.4rem;
             height: 4.4rem;

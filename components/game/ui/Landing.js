@@ -27,24 +27,16 @@ class Landing extends Component {
       backgroundColor: 'transparent',
       delay: 0.5
     })
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
-      scale: 1,
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle', 0.3, {
       opacity: 0,
-      ease: Power4.easeOut,
       delay: 0.5
-    })
-    TweenLite.to('.leftcloud', 0.8, {
-      x: '-100%',
-      ease: Power4.easeOut,
-      delay: 1.5
     })
 
     const backgroundOpacityAnimationDuration = 0.5
 
-    TweenLite.to('.rightcloud', 0.8, {
-      x: '100%',
-      ease: Power4.easeOut,
-      delay: 1.5,
+    TweenLite.to('.leftcloud, .rightcloud', 0.3, {
+      opacity: 0,
+      delay: 0.5,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })
 
@@ -77,9 +69,9 @@ class Landing extends Component {
   render () {
     return (
       <div className='game-landing'>
-        <h1 className='landing-headline'>
-          CITIES ARE JAM-PACKED WITH HEAVY TRAFFIC!
-        </h1>
+        <h2 className='landing-headline'>
+          STUTTGART IS JAM-PACKED WITH HEAVY TRAFFIC!
+        </h2>
         <LocationMenu
           isVisible={this.state.citySelectorVisible}
           handleClose={this.handleChangeCityClick}
@@ -95,10 +87,20 @@ class Landing extends Component {
         {this.state.javascriptLoaded && (
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page
-          <div onClick={this.handleChangeCityClick} className='change-city'>
-            <h4>Change city</h4>
+          <div onClick={this.handleChangeCityClick} className={this.state.citySelectorVisible? 'activeLocationMenu':''}>
+            <div className='change-city-container'>
+              <h4 className='change-city'>Change city</h4>
+              <img
+                className='IconTriangle'
+                src='/static/assets/icons/icon-triangle.svg'
+              />
+            </div>
           </div>
         )}
+        <div className='about'>
+          <h4>About</h4>
+        </div>
+
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -107,56 +109,82 @@ class Landing extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            background-color: #fffe4a;
+            background-color: white;
             will-change: transform;
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
             cursor: auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
           }
 
           .landing-headline {
             position: absolute;
-            font-size: 4rem;
-            line-height: 4.7rem;
-            top: 13%;
-            right: -6%;
+            margin-top: -80px;
+            width: 220px;
             color: black;
-            width: 300px;
             will-change: transform;
             z-index: 5;
-            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: fadeIn 1.3s;
+            color: #262626;
           }
 
-          .change-city {
+          .change-city-container{
             position: fixed;
+            z-index: 14;
             bottom: 1.5rem;
             left: 3rem;
-            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
+          .change-city {
+            animation: fadeIn 0.5s;
             cursor: pointer;
+            z-index: 14;
+            display:inline-block;
+            padding-right: 0.7rem;
+          }
+          .IconTriangle{
+            z-index: 14;
+            animation: fadeIn 0.5s;
+            transition-duration: 0.3s;
+            transition-delay: 0.3;
+            display:inline-block;
+            padding-bottom: 1px;
+          }
+          .activeLocationMenu{
+            color: #FF3BFF;
+          }
+          .activeLocationMenu .IconTriangle{
+            transform: rotate(180deg);
           }
 
-          @media (min-width: 450px) {
+          .about{
+            position: fixed;
+            bottom: 1.5rem;
+            right: 3rem;
+            cursor: pointer;
+            animation: fadeIn 1.3s;
+          }
+          .about:hover, .change-city:hover{
+            //color: #FF3BFF;
+          }
+
+          @media (min-width: 600px) {
             .landing-headline {
-              right: 20%;
-              top: 20%;
+              width: 525px;
+              text-align: center;
             }
           }
 
-          @keyframes scaleInAnimation {
+          @keyframes fadeIn {
             0% {
-              transform: scale(0);
               opacity: 0;
             }
-            70% {
-              transform: scale(0);
-              opacity: 0;
-            }
-            80% {
+            50% {
               opacity: 0;
             }
             100% {
-              transform: scale(1);
               opacity: 1;
             }
           }

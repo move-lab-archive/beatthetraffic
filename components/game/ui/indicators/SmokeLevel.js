@@ -129,11 +129,11 @@ class SmokeLevel extends PureComponent {
             }
 
             20% {
-              transform: scale(0.9);
+              transform: scale(0.95);
             }
 
             80% {
-              transform: scale(1.1);
+              transform: scale(1.05);
             }
 
             100% {

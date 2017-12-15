@@ -113,16 +113,42 @@ class Menu extends Component {
         className={`menu-page ${this.props.showMenu ? 'visible' : 'hidden'}`}
       >
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
-        <div className='link' onClick={() => this.showAbout()}>
-          ABOUT
+
+        <div className='menu-container'>
+
+          <div className='menu-items'>
+            <div className='link' onClick={() => this.showAbout()}>
+              <h1>ABOUT</h1>
+            </div>
+            <div className='link' onClick={() => this.showScore()}>
+              <h1>HIGH SCORES</h1>
+            </div>
+            <div className='link'><h1>SHARE</h1></div>
+            <SocialShareButtons />
+            {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
+            {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
+          </div>
+
+          <div className='city-selector-items'>
+            <h4>Beat the traffic in</h4>
+            <h2 className='link'>Stuttgart</h2>
+            <h2 className='link'>Berlin</h2>
+            <h2 className='link'>Portland</h2>
+            <h2 className='link'>Los Angeles</h2>
+          </div>
+
         </div>
-        <div className='link' onClick={() => this.showScore()}>
-          SCORE
-        </div>
-        <div className='link'>SHARE</div>
-        <SocialShareButtons />
-        {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
-        {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
+
+        <img
+          className={`menu-rightcloud ${this.props.showMenu ? 'visiblecloud' : 'hiddencloud'}`}
+          src='/static/assets/menu/menu-rightcloud.svg'
+        />
+
+        <img
+          className={`menu-leftcloud ${this.props.showMenu ? 'visiblecloud' : 'hiddencloud'}`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+
         <style jsx>{`
           .menu-page {
             position: fixed;
@@ -131,12 +157,30 @@ class Menu extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            color: white;
-            background-color: #262626;
+            color: #262626;
+            background-color: #ECECEC;
             will-change: transform;
-            transition: 0.3s ease-in-out;
-            padding: 2.4rem;
-            padding-top: 4.4rem;
+            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+          }
+
+          .menu-container{
+            max-width: 700px;
+            width: 100%;
+            height: 100%;
+            position:absolute;
+            top: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          .menu-items{
+            position: absolute;
+            top: 5rem;
+          }
+
+          .city-selector-items{
+            position: absolute;
+            bottom: 5rem;
           }
 
           .hidden {
@@ -148,8 +192,60 @@ class Menu extends Component {
           }
 
           .link {
-            font-size: 5rem;
+            cursor: pointer;
+            position: relative;
+            left: 2.9rem;
           }
+
+          .link:hover{
+            color: #FF3BFF;
+          }
+
+          h2.link{
+            line-height: 1.6rem;
+          }
+
+          .city-selector-items h4{
+            left: 2.9rem;
+            position: relative;
+            line-height: 0.2rem;
+          }
+
+          .menu-rightcloud{
+            position: fixed;
+            top: 0%;
+            width: 60%;
+            right: 0%;
+            z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);;
+          }
+
+          .hiddencloud {
+            transform: translateX(50%);
+          }
+
+          .visiblecloud {
+            transform: translateX(0%);
+          }
+
+          .menu-leftcloud{
+            position: fixed;
+            bottom: 0%;
+            width: 110%;
+            left: 5%;
+            z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);;
+          }
+
+          @media (min-width: 600px) {
+            .menu-rightcloud{
+              width: 40%;
+            }
+            .menu-leftcloud{
+              width: 60%;
+            }
+          }
+
         `}</style>
       </div>
     )

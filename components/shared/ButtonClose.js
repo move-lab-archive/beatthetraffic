@@ -16,6 +16,7 @@ class ButtonClose extends Component {
             right: 2rem;
             width: 2.4rem;
             height: 2.4rem;
+            z-index: 15;
             cursor: pointer;
             background-image: url('/static/assets/icons/icon-close.svg');
             background-size: contain;

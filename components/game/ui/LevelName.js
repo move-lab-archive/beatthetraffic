@@ -7,15 +7,14 @@ class LevelName extends Component {
       <div
         className={`level-name
         ${this.props.introAnimPlayed ? '' : 'hidden'}`}
-      >
+      > <h4>
         {`${this.props.levelName} LEVEL ${this.props.levelNb}`}
+        </h4>
         <style jsx>{`
           .level-name {
             position: fixed;
-            bottom: 2.5rem;
-            left: 2.5rem;
-            font-size: 2.2rem;
-            font-family: 'Geo', sans-serif;
+            bottom: 1.5rem;
+            left: 2.9rem;
             color: white;
             z-index: 1;
             opacity: 1;
