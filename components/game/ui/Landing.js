@@ -8,6 +8,7 @@ import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
+import LevelBeginning from './instructions/LevelBeginning'
 
 class Landing extends Component {
   constructor (props) {
@@ -77,6 +78,9 @@ class Landing extends Component {
           handleClose={this.handleChangeCityClick}
         />
         <Unicorn />
+
+        <LevelBeginning />
+
         <LeftCloud />
         <RightCloud />
         <BtnLanding

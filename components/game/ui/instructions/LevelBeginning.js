@@ -80,10 +80,10 @@ class LevelBeginning extends Component {
         {/* See in componentDidMount the timing for the msg */}
         {/* NOTE for @mmmm , when you will style that part, you can have a look in Video.js line 164 😉 */}
         {this.state.displayCongratsMsg && (
-          <div className='level-title'>CONGRATS</div>
+          <div className='level-title'><h1>CONGRATS</h1></div>
         )}
         {!this.state.displayCongratsMsg && (
-          <div className='level-title'>LEVEL {this.props.currentLevel}</div>
+          <div className='level-title'><h1>LEVEL {this.props.currentLevel}</h1></div>
         )}
         {!this.state.displayCongratsMsg &&
           this.props.currentLevel >= 2 && (
@@ -91,21 +91,8 @@ class LevelBeginning extends Component {
               {this.props.deviceOrientation === 'portrait' && (
                 <div>
                   <AskLandscapeAnimation />
-                  <p>TIP: This level is easier in landscape</p>
                 </div>
               )}
-              {this.props.deviceOrientation !== 'portrait' &&
-                this.props.isFullscreenAvailable &&
-                !this.props.isFullscreen && (
-                  <div>
-                    <p>TIP: This level is easier in fullscreen</p>
-                    <Button
-                      onClick={() => screenfull.request()}
-                      title='Enter Fullscreen'
-                      transparent
-                    />
-                  </div>
-                )}
             </div>
           )}
         {this.props.isGameReadyToPlay && (
@@ -113,6 +100,7 @@ class LevelBeginning extends Component {
             onClick={() => this.manualStart()}
             title={`Starting in ${this.state.timerAutoStart}s`}
             large
+            buttonLevelBeginning
             transparent
           />
         )}
@@ -124,10 +112,17 @@ class LevelBeginning extends Component {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            color: white;
+            z-index: 100;
+
+            position: fixed;
+            background-color: grey;
+            width: 100%;
+            height: 100%;
           }
-          .level-title {
-            font-size: 8rem;
+          .instructions-level-beginning .level-title{
+            color: white;
+            position: fixed;
+            top: 33%;
           }
 
           .level-help {

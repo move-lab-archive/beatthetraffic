@@ -16,7 +16,16 @@ class Gameover extends Component {
     return (
       <div className='instructions-gameover'>
         <div className='title'>GAME OVER</div>
-        <div className='message'>You scored {this.props.score} ⭐️</div>
+        <div className='message'>
+          <h4>Your score</h4>
+          <div className='score'>
+            <h1>{this.props.score}</h1>
+            <img src='/static/assets/icons/icon-star.svg' />
+          </div>
+        </div>
+        <Button large
+          title={`Save your score`}
+        />
         <Button
           title={`Play again`}
           onClick={() => this.props.dispatch(retry())}
@@ -28,21 +37,57 @@ class Gameover extends Component {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #262626;
             padding: 5rem;
-            background-color: #262626;
+            background-color: white;
+            z-index: 100000000000;
+            width: 100%;
+            height: 100%;
           }
           .title {
-            font-size: 6rem;
-            color: red;
+            font-size: 12rem;
+            line-height: 13rem;
+            width: 90%;
+            position: fixed;
+            top: 4rem;
+            color: #FF3BFF;
             text-align: center;
             margin-bottom: 3rem;
           }
 
           .message {
             text-align: center;
-            margin-bottom: 2rem;
+            border: 4px solid #262626;
+            width: 22rem;
+            height: 11.5rem;
+            position: fixed;
+            top: 40%;
           }
+          .message h1{
+            margin-top: 0;
+            float: left;
+          }
+          .message img{
+            float:left;
+            margin-left: 1rem;
+          }
+          .message .score{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          @media (max-width: 600px) {
+
+            .message {
+              top: 50%;
+            }
+            .message {
+              top: 50%;
+            }
+
+          }
+
         `}</style>
       </div>
     )

@@ -125,8 +125,6 @@ class Menu extends Component {
             </div>
             <div className='link'><h1>SHARE</h1></div>
             <SocialShareButtons />
-            {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
-            {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
           </div>
 
           <div className='city-selector-items'>
@@ -138,6 +136,9 @@ class Menu extends Component {
           </div>
 
         </div>
+
+        {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
+        {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
 
         <img
           className={`menu-rightcloud ${this.props.showMenu ? 'visiblecloud' : 'hiddencloud'}`}

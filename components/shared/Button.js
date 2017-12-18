@@ -5,6 +5,7 @@ class Button extends Component {
   static propTypes = {
     title: PropTypes.string,
     large: PropTypes.bool,
+    buttonLevelBeginning: PropTypes.bool,
     transparent: PropTypes.bool,
     onClick: PropTypes.func
   }
@@ -12,48 +13,87 @@ class Button extends Component {
   render() {
     return (
       <a
-        className={`btn 
-          ${this.props.large ? 'btn-large' : ''}
-          ${this.props.transparent ? 'btn-transparent' : ''}
-        `}
+        className={this.props.large ? "large buttonLevelBeginning btn": "btn"}
         onClick={this.props.onClick}
       >
-        {this.props.title}
+        <div className="inner" />
+        <div className="outer">
+            <h4>{this.props.title}</h4>
+        </div>
+
         <style jsx>{`
+
           .btn {
-            background-color: white;
-            border: 1px solid white;
-            color: #262626;
+            width: 10.5rem;
+            height: 4rem;
+            will-change: transform;
+            position: fixed;
+            top: 80%;
+          }
+          .btn h4{
+            margin: 0;
+          }
+          .btn .inner {
+            width: 100%;
+            height: 100%;
+            left: 5px;
+            top: 5px;
+            background-color: #262626;
+            position: absolute;
+          }
+          .btn .outer {
+            width: 100%;
+            height: 100%;
+            background-color: #4effff;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: 0 0;
+          }
+          .btn .outer:hover {
+            background-color: #ff3bff;
             cursor: pointer;
-            padding: 1rem;
-            text-decoration: none;
-            margin-bottom: 1rem;
-            display: inline-block;
+          }
 
-            font-family: 'Geo', sans-serif;
+          .btn .outer:active {
+            background-color: #ff3bff;
+            left: 2px;
+            top: 2px;
+          }
+
+          .large {
+            width: 27rem;
+            height: 6rem;
+            top: 65%;
+          }
+
+          .large h4{
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
             font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
           }
 
-          .btn:hover,
-          .btn:focus {
-            background-color: #e6e6e6;
+          .buttonLevelBeginning{
+            top: 52%;
+            width: 23.5rem;
           }
 
-          .btn-transparent {
-            background-color: transparent;
-            border: 1px solid white;
-            color: white;
+          @media (max-width: 600px) {
+            .btn {
+              top: 88%;
+            }
+            .large {
+              top: 75%;
+            }
+            .buttonLevelBeginning{
+              top: 52%;
+              width: 23.5rem;
+            }
           }
 
-          .btn-transparent:hover,
-          .btn-transparent:focus {
-            background-color: white;
-            color: #262626;
-          }
-
-          .btn-large {
-            font-size: 5rem;
-          }
         `}</style>
       </a>
     )

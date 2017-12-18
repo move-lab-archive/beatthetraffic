@@ -35,11 +35,18 @@ class LocationMenu extends Component {
                 </h3>
               ))}
           </div>
-          <img
-            onClick={() => this.props.handleClose()}
-            className={`closeLocationMenu`}
-            src="/static/assets/icons/icon-close-LocationMenu.svg"
-          />
+
+          <div  onClick={() => this.props.handleClose()}
+                className={`closeLocationMenu`}
+          >
+            <div className="inner" />
+            <div className="outer">
+              <img
+                src="/static/assets/icons/icon-close.svg"
+              />
+            </div>
+          </div>
+
         </div>
         <div
           className={`coverLandingPage ${
@@ -92,19 +99,40 @@ class LocationMenu extends Component {
             position: absolute;
             top: 1.9rem;
             right: 1.9rem;
+            width: 30px;
+            height: 30px;
             cursor: pointer;
-            box-shadow: 4px 4px 0px black;
-            background-color: #4EFFFF;
-            padding: 5px;
           }
-          .closeLocationMenu:hover{
-            background-color: #FF3BFF;
+          .closeLocationMenu .inner {
+            width: 100%;
+            height: 100%;
+            left: 4px;
+            top: 4px;
+            background-color: #262626;
+            position: absolute;
           }
-          .closeLocationMenu:active{
-            box-shadow: 2.5px 2.5px 0px black;
-            margin-right: -1.5px;
-            margin-top: 1.5px;
+          .closeLocationMenu .outer {
+            width: 100%;
+            height: 100%;
+            background-color: #4effff;
+            position: absolute;
           }
+          .closeLocationMenu .outer img{
+            top: 7px;
+            left: 6.5px;
+            position: absolute;
+          }
+          .closeLocationMenu .outer:hover {
+            background-color: #ff3bff;
+            cursor: pointer;
+          }
+
+          .closeLocationMenu .outer:active {
+            background-color: #ff3bff;
+            left: 1px;
+            top: 1px;
+          }
+
 
           .hidden {
             transform: translateY(100%);
