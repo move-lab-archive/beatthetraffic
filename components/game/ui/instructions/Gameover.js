@@ -23,13 +23,13 @@ class Gameover extends Component {
             <img src='/static/assets/icons/icon-star.svg' />
           </div>
         </div>
-        <Button large
-          title={`Save your score`}
-        />
-        <Button
-          title={`Play again`}
-          onClick={() => this.props.dispatch(retry())}
-        />
+          <Button large
+            title={`Save your score`}
+          />
+          <Button
+            title={`Play again`}
+            onClick={() => this.props.dispatch(retry())}
+          />
         <style jsx>{`
           .instructions-gameover {
             display: flex;
@@ -45,14 +45,18 @@ class Gameover extends Component {
             height: 100%;
           }
           .title {
-            font-size: 12rem;
-            line-height: 13rem;
-            width: 90%;
+            font-size: 10rem;
+            line-height: 11rem;
+            width: 95%;
             position: fixed;
-            top: 4rem;
+            top: 6rem;
             color: #FF3BFF;
             text-align: center;
             margin-bottom: 3rem;
+          }
+          .button-large{
+            position: fixed;
+            bottom: 80%;
           }
 
           .message {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull'
 
-import Button from '../../../shared/Button'
+import ButtonLevelBeginning from '../../../shared/ButtonLevelBeginning'
 import Loading from '../../../shared/Loading'
 import AskLandscapeAnimation from '../../../shared/AskLandscapeAnimation'
 
@@ -96,15 +96,14 @@ class LevelBeginning extends Component {
             </div>
           )}
         {this.props.isGameReadyToPlay && (
-          <Button
+          <ButtonLevelBeginning
             onClick={() => this.manualStart()}
             title={`Starting in ${this.state.timerAutoStart}s`}
-            large
-            buttonLevelBeginning
-            transparent
           />
         )}
-        {!this.props.isGameReadyToPlay && <Loading />}
+        {!this.props.isGameReadyToPlay && <Loading />
+          /* NOTE for thibault, lets use the button loader like on the landingscreen, instead of the spinner */
+        }
         <style jsx>{`
           .instructions-level-beginning {
             display: flex;
@@ -113,21 +112,18 @@ class LevelBeginning extends Component {
             align-items: center;
             flex-direction: column;
             z-index: 100;
-
             position: fixed;
-            background-color: grey;
             width: 100%;
             height: 100%;
           }
           .instructions-level-beginning .level-title{
             color: white;
             position: fixed;
-            top: 33%;
+            margin-top: -5rem;
           }
 
           .level-help {
             text-align: center;
-            margin-bottom: 5px;
           }
         `}</style>
       </div>

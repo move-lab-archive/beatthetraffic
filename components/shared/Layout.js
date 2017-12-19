@@ -6,6 +6,7 @@ class Layout extends Component {
     return {
       __html: '<script>window.firstPaint = new Date().getTime()</script>'
     }
+
   }
 
   render () {
@@ -21,11 +22,17 @@ class Layout extends Component {
           <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
             rel='stylesheet'
-          />
+            rel="icon"
+              type="image/png"
+              href="/static/assets/icons/icon-favicon.png"
+            />
         </Head>
         {this.props.children}
         <div dangerouslySetInnerHTML={this.recordFirstPaint()} />
+
         <style jsx>{`
+
+
           :global(html, body) {
             height: 100%;
             width: 100%;
@@ -37,7 +44,6 @@ class Layout extends Component {
             font-weight: 700;
             background-color: white;
             cursor: cell;
-            overflow: hidden;
           }
 
           :global(h1) {
@@ -78,6 +84,8 @@ class Layout extends Component {
           :global(html) {
             font-size: 60%;
           }
+
+
 
           @media (max-width: 600px) {
             :global(html) {

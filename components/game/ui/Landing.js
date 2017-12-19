@@ -8,7 +8,8 @@ import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
-import LevelBeginning from './instructions/LevelBeginning'
+/*import LevelBeginning from './instructions/LevelBeginning' */
+/*NOTE just for style reasons on landing*/
 
 class Landing extends Component {
   constructor (props) {
@@ -79,7 +80,6 @@ class Landing extends Component {
         />
         <Unicorn />
 
-        <LevelBeginning />
 
         <LeftCloud />
         <RightCloud />
@@ -140,6 +140,7 @@ class Landing extends Component {
             z-index: 14;
             bottom: 1.5rem;
             left: 3rem;
+            cursor: pointer;
           }
           .change-city {
             animation: fadeIn 0.5s;
@@ -170,8 +171,8 @@ class Landing extends Component {
             cursor: pointer;
             animation: fadeIn 1.3s;
           }
-          .about:hover, .change-city:hover{
-            //color: #FF3BFF;
+          .about:hover, .change-city-container:hover .change-city{
+            color: #FF3BFF;
           }
 
           @media (min-width: 600px) {

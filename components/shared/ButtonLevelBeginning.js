@@ -4,15 +4,13 @@ import PropTypes from 'prop-types'
 class Button extends Component {
   static propTypes = {
     title: PropTypes.string,
-    large: PropTypes.bool,
-    transparent: PropTypes.bool,
     onClick: PropTypes.func
   }
 
   render() {
     return (
       <a
-        className={this.props.large ? "large btn": "btn"}
+        className={this.props.large ? "btn": "btn"}
         onClick={this.props.onClick}
       >
         <div className="inner" />
@@ -23,15 +21,18 @@ class Button extends Component {
         <style jsx>{`
 
           .btn {
-            width: 10.5rem;
-            height: 4rem;
+            width: 24rem;
+            height: 6rem;
             will-change: transform;
-            margin-top: 2%;
-            position: fixed;
-            bottom: 6%;
+            margin-top: 5rem;
           }
           .btn h4{
             margin: 0;
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
           }
           .btn .inner {
             width: 100%;
@@ -60,20 +61,6 @@ class Button extends Component {
             background-color: #ff3bff;
             left: 2px;
             top: 2px;
-          }
-
-          .large {
-            width: 27rem;
-            height: 6rem;
-            margin-bottom: 7rem;
-          }
-
-          .large h4{
-            font-family: 'Quantico', sans-serif;
-            font-weight: 700;
-            font-size: 2.5rem;
-            line-height: 3.4rem;
-            text-transform: uppercase;
           }
 
           @media (max-width: 600px) {

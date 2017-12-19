@@ -77,11 +77,11 @@ class Win extends Component {
             background-color: white;
           }
           .title {
-            font-size: 12rem;
-            line-height: 13rem;
-            width: 90%;
+            font-size: 10rem;
+            line-height: 11rem;
+            width: 80%;
             position: fixed;
-            top: 4rem;
+            top: 6rem;
             color: #FF3BFF;
             text-align: center;
             margin-bottom: 3rem;
