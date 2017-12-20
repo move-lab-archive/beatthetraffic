@@ -27,7 +27,7 @@ class MenuBtn extends Component {
             position: fixed;
             top: 2.6rem;
             right: 1.4rem;
-            z-index: 6;
+            z-index: 10;
             width: 4.4rem;
             height: 4.4rem;
             opacity: 1;

@@ -8,7 +8,11 @@ class AboutPage extends Component {
         <ButtonClose onClick={this.props.onClose} />
         <div className='about-container'>
           <div className='about-inner'>
-            <h2>ABOUT BEAT THE TRAFFIC</h2>
+            <h2>"Beat The Traffic" is an online game where players interact with current traffic circumstances.</h2>
+            <img
+              className='leftover'
+              src='/static/assets/about-highscores/leftover.jpg'
+            />
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
@@ -23,13 +27,19 @@ class AboutPage extends Component {
               sed diam voluptua. At vero eos.
             </p>
             <h2>CREDITS</h2>
-            <p>
+            <p className='last-item'>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
               sed diam voluptua. At vero eos.
             </p>
           </div>
         </div>
+
+        <img
+          className='cloud-1'
+          src='/static/assets/about-highscores/cloud-1.svg'
+        />
+
         <style jsx>{`
           .about-page {
             position: fixed;
@@ -59,6 +69,45 @@ class AboutPage extends Component {
           }
           .about-inner h2{
             margin-top: 7.1rem;
+          }
+
+          .cloud-1{
+            position: absolute;
+            top: 0%;
+            width: 60%;
+            right: 0%;
+            z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+          }
+
+          .leftover{
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+            border: 4px solid yellow;
+            opacity: 1;
+            width: 100%;
+            margin-left: 0%;
+          }
+
+          .last-item{
+            margin-bottom: 7.1rem;
+          }
+
+          @media (min-width: 600px) {
+
+            .cloud-1{
+              width: 40%;
+            }
+
+          }
+
+          @media (min-width: 900px) {
+
+            .leftover{
+              width: 130%;
+              margin-left: -15%;
+            }
+
           }
         `}</style>
       </div>

@@ -25,6 +25,7 @@ class Button extends Component {
             height: 6rem;
             will-change: transform;
             margin-top: 5rem;
+            position: relative;
           }
           .btn h4{
             margin: 0;

@@ -218,7 +218,7 @@ class Menu extends Component {
             width: 60%;
             right: 0%;
             z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
 
           .hiddencloud {

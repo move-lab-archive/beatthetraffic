@@ -55,6 +55,18 @@ class Win extends Component {
             </div>
           </div>
         </div>
+        <img
+          className='cloud-1'
+          src='/static/assets/gameover-won/cloud-1.svg'
+        />
+        <img
+          className='cloud-2'
+          src='/static/assets/gameover-won/cloud-2.svg'
+        />
+        <img
+          className='cloud-3'
+          src='/static/assets/gameover-won/cloud-3.svg'
+        />
         <Button large
           title={`Save your score`}
         />
@@ -74,7 +86,7 @@ class Win extends Component {
             z-index: 100000000000;
             width: 100%;
             height: 100%;
-            background-color: white;
+            background-color: #FFFE4A;
           }
           .title {
             font-size: 10rem;
@@ -94,6 +106,7 @@ class Win extends Component {
             height: 11.5rem;
             position: fixed;
             top: 40%;
+            background-color: white;
           }
           .message h1{
             margin-top: 0;
@@ -122,6 +135,28 @@ class Win extends Component {
             height: 10vw;
           }
 
+          .cloud-1{
+            position:fixed;
+            top: 0%;
+            right: 0%;
+            z-index: -5;
+            width: 35%;
+          }
+          .cloud-2{
+            position:fixed;
+            top: 10%;
+            left: 0%;
+            z-index: -5;
+            width: 40%;
+          }
+          .cloud-3{
+            position:fixed;
+            bottom: 0%;
+            right: 0%;
+            z-index: -5;
+            width: 20%;
+          }
+
           @media (max-width: 600px) {
 
             .message {
@@ -129,6 +164,17 @@ class Win extends Component {
             }
             .message {
               top: 50%;
+            }
+
+            .cloud-1{
+              width: 90%;
+            }
+            .cloud-2{
+              width: 35%;
+              top: 60%;
+            }
+            .cloud-3{
+              width: 45%;
             }
 
           }

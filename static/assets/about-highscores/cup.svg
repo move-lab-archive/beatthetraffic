@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="139px" height="169px" viewBox="0 0 139 169" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 13</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-5547.000000, -2267.000000)">
+        <g id="Group-13" transform="translate(5547.000000, 2267.000000)">
+            <g id="Group-12" fill="#FFFE4A">
+                <polygon id="Path-8" points="28.263363 168.660914 28.263363 151.804102 41.0894067 151.804102 41.0894067 138.082354 48.7583928 138.082354 48.7583928 127.691151 58.3597844 127.691151 58.3597844 116.682771 34.7971602 87.3828253 22.3617725 28.4669686 21.0834425 0.987819264 117.083442 0.987819264 115.976087 28.4669686 103.581454 87.3828253 80.2882139 116.682771 80.2882139 127.691151 89.8637606 127.691151 89.8637606 138.082354 97.514854 138.082354 97.514854 151.804102 110.153025 151.804102 110.153025 168.660914"></polygon>
+                <polygon id="Path-17" points="114.376771 22 138.061719 22 138.061719 30.5091543 127.113863 72.1552497 99 90.1453971 119.965013 68.3016151 129.362378 30.5091543 114.376771 30.5091543"></polygon>
+                <polygon id="Path-17" transform="translate(19.530859, 56.072699) scale(-1, 1) translate(-19.530859, -56.072699) " points="15.3767708 22 39.0617188 22 39.0617188 30.5091543 28.1138627 72.1552497 3.63797881e-12 90.1453971 20.9650131 68.3016151 30.3623782 30.5091543 15.3767708 30.5091543"></polygon>
+            </g>
+            <text id="1" font-family="Quantico-Bold, Quantico" font-size="50" font-weight="bold" fill="#262626">
+                <tspan x="54" y="68">1</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

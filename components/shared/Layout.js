@@ -20,18 +20,21 @@ class Layout extends Component {
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
           <link
+            rel="icon"
+            type="image/png"
+            href="/static/assets/icons/icon-favicon.png"
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
             rel='stylesheet'
-            rel="icon"
-              type="image/png"
-              href="/static/assets/icons/icon-favicon.png"
             />
         </Head>
         {this.props.children}
         <div dangerouslySetInnerHTML={this.recordFirstPaint()} />
 
-        <style jsx>{`
 
+        <div className='msg'></div>
+
+
+        <style jsx>{`
 
           :global(html, body) {
             height: 100%;

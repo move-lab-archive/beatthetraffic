@@ -8,7 +8,7 @@ import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
-/*import LevelBeginning from './instructions/LevelBeginning' */
+/*import Win from './instructions/Win'*/
 /*NOTE just for style reasons on landing*/
 
 class Landing extends Component {
