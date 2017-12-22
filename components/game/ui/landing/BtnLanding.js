@@ -65,21 +65,22 @@ class BtnLanding extends Component {
           .btn-landing {
             left: 50%;
             top: 50%;
-            margin-top: 100px;
+            margin-top: 110px;
             position: absolute;
-            width: 30rem;
-            height: 6rem;
+            width: 260px;
+            height: 60px;
             transform: translateX(-50%) translateY(-50%);
             //GPU accelerate
             will-change: transform;
             animation: 1.3s fadeIn;
+            z-index: 4;
           }
 
           .loading .outer {
             animation: progressBarAnimation ${this.animationDuration}s linear;
           }
 
-          .loading .outer h4 {
+          .loading .outer h3 {
             opacity: 0;
           }
 
@@ -104,12 +105,11 @@ class BtnLanding extends Component {
             justify-content: center;
             align-items: center;
             transform-origin: 0 0;
-            animation: alarm 0.8s infinite;
-            animation-delay: 30s;
           }
 
           .btn-landing .outer h3 {
             transition: opacity 0.5s;
+            margin-top: 2.8rem;
           }
 
           .btn-landing .outer:hover {
@@ -126,14 +126,12 @@ class BtnLanding extends Component {
           @media (min-width: 600px) {
             .btn-landing {
               margin-top: 50px;
+              width: 300px;
             }
           }
 
           @keyframes progressBarAnimation {
             0% {
-              transform: scaleX(0);
-            }
-            25% {
               transform: scaleX(0);
             }
             100% {
@@ -150,18 +148,6 @@ class BtnLanding extends Component {
             }
             100% {
               opacity: 1;
-            }
-          }
-
-          @keyframes alarm {
-            0% {
-              background-color: #4effff;
-            }
-            50% {
-              background-color: #ff3bff;
-            }
-            100% {
-              background-color: #4effff;
             }
           }
 

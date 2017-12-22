@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '../../../shared/Button'
+/*import PopUpAddScore from '../../../shared/PopUpAddScore'*/
 
 import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
@@ -15,6 +16,11 @@ class Win extends Component {
 
     this.state = {
       displaySaveScoreModal: false
+    }
+
+    this.state = {
+      showAbout: false,
+      showScore: false
     }
 
     this.handleDisplaySaveScoreModal = this.handleDisplaySaveScoreModal.bind(
@@ -39,6 +45,8 @@ class Win extends Component {
   render () {
     return (
       <div className='instructions-win'>
+
+
         <div className='title'>YOU WON</div>
         <div className='message'>
           <div className='score-container'>
@@ -55,18 +63,6 @@ class Win extends Component {
             </div>
           </div>
         </div>
-        <img
-          className='cloud-1'
-          src='/static/assets/gameover-won/cloud-1.svg'
-        />
-        <img
-          className='cloud-2'
-          src='/static/assets/gameover-won/cloud-2.svg'
-        />
-        <img
-          className='cloud-3'
-          src='/static/assets/gameover-won/cloud-3.svg'
-        />
         <Button large
           title={`Save your score`}
         />
@@ -86,7 +82,7 @@ class Win extends Component {
             z-index: 100000000000;
             width: 100%;
             height: 100%;
-            background-color: #FFFE4A;
+            background-color: white;
           }
           .title {
             font-size: 10rem;
@@ -135,28 +131,6 @@ class Win extends Component {
             height: 10vw;
           }
 
-          .cloud-1{
-            position:fixed;
-            top: 0%;
-            right: 0%;
-            z-index: -5;
-            width: 35%;
-          }
-          .cloud-2{
-            position:fixed;
-            top: 10%;
-            left: 0%;
-            z-index: -5;
-            width: 40%;
-          }
-          .cloud-3{
-            position:fixed;
-            bottom: 0%;
-            right: 0%;
-            z-index: -5;
-            width: 20%;
-          }
-
           @media (max-width: 600px) {
 
             .message {
@@ -164,17 +138,6 @@ class Win extends Component {
             }
             .message {
               top: 50%;
-            }
-
-            .cloud-1{
-              width: 90%;
-            }
-            .cloud-2{
-              width: 35%;
-              top: 60%;
-            }
-            .cloud-3{
-              width: 45%;
             }
 
           }

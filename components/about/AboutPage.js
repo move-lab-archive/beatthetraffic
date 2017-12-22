@@ -8,7 +8,7 @@ class AboutPage extends Component {
         <ButtonClose onClick={this.props.onClose} />
         <div className='about-container'>
           <div className='about-inner'>
-            <h2>"Beat The Traffic" is an online game where players interact with current traffic circumstances.</h2>
+            <h2>"Beat The Traffic" is an online game where Lorem ipsum dolor sit amet.</h2>
             <img
               className='leftover'
               src='/static/assets/about-highscores/leftover.jpg'
@@ -34,11 +34,6 @@ class AboutPage extends Component {
             </p>
           </div>
         </div>
-
-        <img
-          className='cloud-1'
-          src='/static/assets/about-highscores/cloud-1.svg'
-        />
 
         <style jsx>{`
           .about-page {
@@ -71,15 +66,6 @@ class AboutPage extends Component {
             margin-top: 7.1rem;
           }
 
-          .cloud-1{
-            position: absolute;
-            top: 0%;
-            width: 60%;
-            right: 0%;
-            z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-          }
-
           .leftover{
             margin-top: 5rem;
             margin-bottom: 5rem;
@@ -91,14 +77,6 @@ class AboutPage extends Component {
 
           .last-item{
             margin-bottom: 7.1rem;
-          }
-
-          @media (min-width: 600px) {
-
-            .cloud-1{
-              width: 40%;
-            }
-
           }
 
           @media (min-width: 900px) {

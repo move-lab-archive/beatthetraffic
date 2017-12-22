@@ -76,8 +76,6 @@ class Layout extends Component {
             font-size: 1.6rem;
           }
           :global(p) {
-            font-family: 'Geo', sans-serif;
-            font-weight: 400;
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             font-size: 2rem;

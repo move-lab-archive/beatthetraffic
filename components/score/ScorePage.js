@@ -26,24 +26,64 @@ class ScorePage extends Component {
                 <p>Berlin</p>
               </div>
             </div>
-            <ol>
-              <li>@mmmmm</li>
-              <li>@tdurand</li>
-              <li>@b-g</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-              <li>@tdurand</li>
-            </ol>
+            <div className='list-container'>
+              <div className='list-item'>
+                <h2 className='name'>@tdurand</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>2</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@mmmmm</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>3</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@tdurand</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>4</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@tdurand</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>5</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@b-g</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>6</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@mmmmm</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>7</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@mmmmm</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>8</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@tdurand</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>9</h2>
+              </div>
+              <div className='list-item'>
+                <h2 className='name'>@tdurand</h2>
+                <h1 className='score'>765</h1>
+                <p className='city'>Stuttgart</p>
+                <h2 className='number'>10</h2>
+              </div>
+            </div>
           </div>
         </div>
-        <img
-          className='cloud-1'
-          src='/static/assets/about-highscores/cloud-1.svg'
-        />
         <style jsx>{`
           .highscore-page {
             position: fixed;
@@ -66,13 +106,13 @@ class ScorePage extends Component {
             transform: translateX(-50%);
           }
           .highscore-inner{
-            left: 2.9rem;
-            right: 2.9rem;
             top: 0rem;
             position: absolute;
+            margin-bottom: 7.1rem;
           }
           .highscore-inner .headline{
             margin-top: 7.1rem;
+            margin-left: 2.9rem;
           }
 
           .cup{
@@ -126,19 +166,51 @@ class ScorePage extends Component {
             align-items:center;
           }
 
-          .cloud-1{
+          .list-container{
+            width: 100%;
+            margin-right: 2.9rem;
+          }
+          .list-item{
+            width: 300px;
+            float: left;
+            height: 20rem;
+            border: 4px solid black;
+            margin-left: 2.9rem;
+            margin-top: 2.9rem;
+            position: relative;
+          }
+          .list-item .name{
             position: absolute;
-            top: 0%;
-            width: 60%;
-            right: 0%;
-            z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            top: 1rem;
+            right: 1.4rem;
+            margin-top: 0;
+            color: #FF3BFF;
+          }
+          .list-item .score{
+            position: absolute;
+            right: 1.4rem;
+            top: 4rem;
+          }
+          .list-item .city{
+            position: absolute;
+            bottom: 1.4rem;
+            right: 1.6rem;
+            margin-bottom: 0;
+          }
+          .list-item .number{
+            position: absolute;
+            left: 1.4rem;
+            bottom: 1rem;
+            margin-bottom: 0;
           }
 
-          @media (min-width: 600px) {
+          @media (max-width: 670px) {
 
-            .cloud-1{
-              width: 40%;
+            .list-item{
+              position:relative;
+              left: 50%;
+              transform: translateX(-50%);
+              margin-left: 0rem;
             }
 
           }

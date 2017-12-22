@@ -80,9 +80,6 @@ class Landing extends Component {
         />
         <Unicorn />
 
-
-        <LeftCloud />
-        <RightCloud />
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
@@ -91,19 +88,24 @@ class Landing extends Component {
         {this.state.javascriptLoaded && (
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page
-          <div onClick={this.handleChangeCityClick} className={this.state.citySelectorVisible? 'activeLocationMenu':''}>
-            <div className='change-city-container'>
-              <h4 className='change-city'>Change city</h4>
-              <img
-                className='IconTriangle'
-                src='/static/assets/icons/icon-triangle.svg'
-              />
+          <div>
+            <div onClick={this.handleChangeCityClick} className={this.state.citySelectorVisible? 'activeLocationMenu':''}>
+              <div className='change-city-container'>
+                <h4 className='change-city'>Change city</h4>
+                <img
+                  className='IconTriangle'
+                  src='/static/assets/icons/icon-triangle.svg'
+                />
+              </div>
             </div>
+            <div className='about'>
+              <h4>About</h4>
+            </div>
+            <LeftCloud />
+            <RightCloud />
           </div>
         )}
-        <div className='about'>
-          <h4>About</h4>
-        </div>
+
 
         <style jsx>{`
           .game-landing {
@@ -129,10 +131,12 @@ class Landing extends Component {
             margin-top: -80px;
             width: 220px;
             color: black;
-            will-change: transform;
             z-index: 5;
             animation: fadeIn 1.3s;
             color: #262626;
+            left: none;
+            transform: translateX(0%);
+            transform: translateY(0%);
           }
 
           .change-city-container{
@@ -143,7 +147,7 @@ class Landing extends Component {
             cursor: pointer;
           }
           .change-city {
-            animation: fadeIn 0.5s;
+            animation: fadeIn 1.3s;
             cursor: pointer;
             z-index: 14;
             display:inline-block;
@@ -151,7 +155,7 @@ class Landing extends Component {
           }
           .IconTriangle{
             z-index: 14;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 1.3s;
             transition-duration: 0.3s;
             transition-delay: 0.3;
             display:inline-block;
@@ -170,6 +174,7 @@ class Landing extends Component {
             right: 3rem;
             cursor: pointer;
             animation: fadeIn 1.3s;
+            z-index: 14;
           }
           .about:hover, .change-city-container:hover .change-city{
             color: #FF3BFF;

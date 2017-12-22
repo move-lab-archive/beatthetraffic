@@ -23,18 +23,6 @@ class Gameover extends Component {
             <img src='/static/assets/icons/icon-star.svg' />
           </div>
         </div>
-        <img
-          className='cloud-1'
-          src='/static/assets/gameover-won/cloud-1.svg'
-        />
-        <img
-          className='cloud-2'
-          src='/static/assets/gameover-won/cloud-2.svg'
-        />
-        <img
-          className='cloud-3'
-          src='/static/assets/gameover-won/cloud-3.svg'
-        />
         <Button large
           title={`Save your score`}
         />
@@ -51,7 +39,7 @@ class Gameover extends Component {
             justify-content: center;
             color: #262626;
             padding: 5rem;
-            background-color: #FFFE4A;
+            background-color: white;
             z-index: 100000000000;
             width: 100%;
             height: 100%;
@@ -94,28 +82,6 @@ class Gameover extends Component {
             transform: translateX(-50%);
           }
 
-          .cloud-1{
-            position:fixed;
-            top: 0%;
-            right: 0%;
-            z-index: -5;
-            width: 35%;
-          }
-          .cloud-2{
-            position:fixed;
-            top: 10%;
-            left: 0%;
-            z-index: -5;
-            width: 40%;
-          }
-          .cloud-3{
-            position:fixed;
-            bottom: 0%;
-            right: 0%;
-            z-index: -5;
-            width: 20%;
-          }
-
           @media (max-width: 600px) {
 
             .message {
@@ -123,17 +89,6 @@ class Gameover extends Component {
             }
             .message {
               top: 50%;
-            }
-
-            .cloud-1{
-              width: 90%;
-            }
-            .cloud-2{
-              width: 35%;
-              top: 60%;
-            }
-            .cloud-3{
-              width: 45%;
             }
 
           }

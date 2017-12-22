@@ -13,8 +13,8 @@ class MenuBtn extends Component {
       >
 
         <svg width="30px" height="22px" viewBox="0 0 30 22" version="1.1">
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="Layout" transform="translate(-3332.000000, -2077.000000)" stroke="#FFFE4A" stroke-width="4">
+            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                <g id="Layout" transform="translate(-3332.000000, -2077.000000)" stroke="#FFFE4A" strokeWidth="4">
                     <path d="M3332,2079 L3362,2079" id="Path-15-Copy-2"></path>
                     <path d="M3332,2088 L3362,2088" id="Path-15-Copy-3"></path>
                     <path d="M3332,2097 L3362,2097" id="Path-15-Copy-4"></path>
@@ -35,6 +35,7 @@ class MenuBtn extends Component {
           }
           .menu-button svg{
             cursor: pointer;
+            transition: 0.1s;
           }
           .menu-button svg:hover g{
             stroke: #FF3BFF;
