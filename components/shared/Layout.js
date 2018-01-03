@@ -23,6 +23,8 @@ class Layout extends Component {
             rel="icon"
             type="image/png"
             href="/static/assets/icons/icon-favicon.png"
+          />
+          <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
             rel='stylesheet'
             />
@@ -47,6 +49,7 @@ class Layout extends Component {
             font-weight: 700;
             background-color: white;
             cursor: cell;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
           }
 
           :global(h1) {

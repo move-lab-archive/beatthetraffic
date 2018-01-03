@@ -46,6 +46,7 @@ class AboutPage extends Component {
             z-index: 10;
             background-color: white;
             overflow: scroll;
+            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .about-container{
             max-width: 700px;

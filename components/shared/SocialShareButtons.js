@@ -36,6 +36,7 @@ class SocialShareButtons extends React.Component {
           .List {
             display: flex;
             margin-bottom: 10px;
+            display: none;
           }
 
           .Button {

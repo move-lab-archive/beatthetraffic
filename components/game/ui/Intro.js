@@ -45,7 +45,19 @@ class Intro extends Component {
         <div className='title logo'>
           <img src='/static/assets/logo/logo-moovel-white.svg' />
         </div>
-        <div className='title catch'>Click the cars
+        <div className='title catch'>Click the
+          <br></br>
+          <div className='highlight'>
+            <div className='top-left-corner-one'></div>
+            <div className='top-left-corner-two'></div>
+            <div className='top-right-corner-one'></div>
+            <div className='top-right-corner-two'></div>
+            <div className='bottom-left-corner-one'></div>
+            <div className='bottom-left-corner-two'></div>
+            <div className='bottom-right-corner-one'></div>
+            <div className='bottom-right-corner-two'></div>
+            cars
+          </div>
         </div>
         <style jsx>{`
           .game-landing {
@@ -92,7 +104,86 @@ class Intro extends Component {
           .catch {
             font-size: 8rem;
             line-height: 8.3rem;
+            width: 100%;
           }
+
+          .highlight{
+            width: 24.5rem;
+            height: 10.2rem;
+            margin-top: 0.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+          }
+
+          .highlight .top-left-corner-one{
+            width: 3rem;
+            height: 1rem;
+            background-color: #4EFFFF;
+            left: 0;
+            top: 0;
+            position:absolute;
+          }
+          .highlight .top-left-corner-two{
+            width: 1rem;
+            height: 3rem;
+            background-color: #4EFFFF;
+            left: 0;
+            top: 0;
+            position:absolute;
+          }
+          .highlight .top-right-corner-one{
+            width: 3rem;
+            height: 1rem;
+            background-color: #4EFFFF;
+            right: 0;
+            top: 0;
+            position:absolute;
+          }
+          .highlight .top-right-corner-two{
+            width: 1rem;
+            height: 3rem;
+            background-color: #4EFFFF;
+            right: 0;
+            top: 0;
+            position:absolute;
+          }
+          .highlight .bottom-left-corner-one{
+            width: 3rem;
+            height: 1rem;
+            background-color: #4EFFFF;
+            left: 0;
+            bottom: 0;
+            position:absolute;
+          }
+          .highlight .bottom-left-corner-two{
+            width: 1rem;
+            height: 3rem;
+            background-color: #4EFFFF;
+            left: 0;
+            bottom: 0;
+            position:absolute;
+          }
+          .highlight .bottom-right-corner-one{
+            width: 3rem;
+            height: 1rem;
+            background-color: #4EFFFF;
+            right: 0;
+            bottom: 0;
+            position:absolute;
+          }
+          .highlight .bottom-right-corner-two{
+            width: 1rem;
+            height: 3rem;
+            background-color: #4EFFFF;
+            right: 0;
+            bottom: 0;
+            position:absolute;
+          }
+
         `}</style>
       </div>
     )

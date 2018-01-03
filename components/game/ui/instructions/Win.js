@@ -18,11 +18,6 @@ class Win extends Component {
       displaySaveScoreModal: false
     }
 
-    this.state = {
-      showAbout: false,
-      showScore: false
-    }
-
     this.handleDisplaySaveScoreModal = this.handleDisplaySaveScoreModal.bind(
       this
     )

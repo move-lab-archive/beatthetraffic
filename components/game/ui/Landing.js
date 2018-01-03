@@ -8,6 +8,7 @@ import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
+
 /*import Win from './instructions/Win'*/
 /*NOTE just for style reasons on landing*/
 
@@ -29,7 +30,7 @@ class Landing extends Component {
       backgroundColor: 'transparent',
       delay: 0.5
     })
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle', 0.3, {
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets', 0.3, {
       opacity: 0,
       delay: 0.5
     })
@@ -80,6 +81,7 @@ class Landing extends Component {
         />
         <Unicorn />
 
+
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
@@ -97,12 +99,26 @@ class Landing extends Component {
                   src='/static/assets/icons/icon-triangle.svg'
                 />
               </div>
+              <LeftCloud />
+              <RightCloud />
+              <div className='mobility-assets'>
+                <img
+                  className='unicorn'
+                  src='/static/assets/landing/asset-unicorn.png'
+                />
+                <img
+                  className='tree'
+                  src='/static/assets/landing/asset-tree.png'
+                />
+                <img
+                  className='rainbow'
+                  src='/static/assets/landing/asset-rainbow.png'
+                />
+              </div>
             </div>
             <div className='about'>
               <h4>About</h4>
             </div>
-            <LeftCloud />
-            <RightCloud />
           </div>
         )}
 
@@ -130,7 +146,7 @@ class Landing extends Component {
             position: absolute;
             margin-top: -80px;
             width: 220px;
-            color: black;
+            color: #FF3BFF;
             z-index: 5;
             animation: fadeIn 1.3s;
             color: #262626;
@@ -180,10 +196,57 @@ class Landing extends Component {
             color: #FF3BFF;
           }
 
+          .mobility-assets .unicorn{
+            max-width: 100%;
+            animation: scaleAssetsUnicorn 10s linear infinite;
+            animation-delay: 1s;
+            opacity: 0;
+            left: 0%;
+            top: -10%;
+            z-index: -100;
+            position: fixed;
+          }
+          .mobility-assets .tree{
+            max-width: 100%;
+            animation: scaleAssetsTree 10s linear infinite;
+            animation-delay: 1s;
+            opacity: 0;
+            left: 20%;
+            top: 6%;
+            z-index: -100;
+            position: fixed;
+          }
+          .mobility-assets .rainbow{
+            max-width: 100%;
+            animation: scaleAssetsRainbow 10s linear infinite;
+            animation-delay: 1s;
+            opacity: 0;
+            left: 0%;
+            top: 30%;
+            z-index: -100;
+            position: fixed;
+          }
+
           @media (min-width: 600px) {
             .landing-headline {
               width: 525px;
               text-align: center;
+            }
+
+            .mobility-assets .unicorn{
+              max-width: 70%;
+              left: 10%;
+              top: 50%;
+            }
+            .mobility-assets .tree{
+              max-width: 30%;
+              left: 50%;
+              top: 6%;
+            }
+            .mobility-assets .rainbow{
+              max-width: 30%;
+              left: 20%;
+              top: 10%;
             }
           }
 
@@ -196,6 +259,48 @@ class Landing extends Component {
             }
             100% {
               opacity: 1;
+            }
+          }
+
+          @keyframes scaleAssetsUnicorn {
+            0% {
+              transform: scale(0.2) translateX(0%) translateY(0%);
+              opacity: 0;
+            }
+            10% {
+              opacity: 1;
+            }
+            100% {
+              transform: scale(0.5) translateX(-250%) translateY(-100%);
+              opacity: 0;
+            }
+          }
+
+          @keyframes scaleAssetsRainbow {
+            0% {
+              transform: scale(0.4) translateX(0%) translateY(0%);
+              opacity: 0;
+            }
+            10% {
+              opacity: 1;
+            }
+            100% {
+              transform: scale(1) translateX(60%) translateY(-40%);
+              opacity: 0;
+            }
+          }
+
+          @keyframes scaleAssetsTree {
+            0% {
+              transform: scale(0.4) translateX(0%) translateY(0%);
+              opacity: 0;
+            }
+            10% {
+              opacity: 1;
+            }
+            100% {
+              transform: scale(0.7) translateX(180%) translateY(50%);
+              opacity: 0;
             }
           }
         `}</style>
