@@ -28,7 +28,7 @@ class LocationMenu extends Component {
         >
           <div className={`Locations`}>
             {Object.keys(this.props.availableCities)
-              .filter(cityId => cityId !== this.props.selectedCity)
+              //.filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
               .map(cityId => (
                 <h3 onClick={() => this.changeCity(cityId)} key={cityId}>
                   {this.props.availableCities[cityId].label}

@@ -23,7 +23,7 @@ class RightCloud extends Component {
             top: 0%;
             width: 30%;
             right: 0%;
-            animation: fadeIn 10s linear infinite;
+            animation: fadeIn 7s linear infinite;
             opacity: 0;
             transform: scale(1);
           }
@@ -32,7 +32,7 @@ class RightCloud extends Component {
             bottom: 10%;
             width: 50%;
             right: 0%;
-            animation: fadeIn 10s linear infinite;
+            animation: fadeIn 5s linear infinite;
             opacity: 0;
             transform: scale(1);
           }
@@ -46,11 +46,11 @@ class RightCloud extends Component {
               opacity: 0;
               transform: scale(1) translateX(0%);
             }
-            10% {
-              opacity: 0.5;
+            30% {
+              opacity: 0.3;
             }
             50% {
-              opacity: 0.5;
+              opacity: 0.3;
             }
             100% {
               transform: scale(3) translateX(-50%);

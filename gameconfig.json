@@ -6,24 +6,21 @@
       "label": "Stuttgart"
     },
     "stuttgart2": {
-      "label": "Berlin"
+      "label": "(unavailable)"
     },
     "stuttgart3": {
-      "label": "New York"
+      "label": "(unavailable)"
     },
     "stuttgart4": {
-      "label": "Portland"
-    },
-    "Berlin": {
-      "label": "Los Angeles"
+      "label": "(unavailable)"
     }
   },
   "availableVideos": [
     {
-      "name": "stuttgart2-level3",
+      "name": "stuttgart1-level1",
       "city": "stuttgart1",
       "level": 1,
-      "levelName": "Stuttgart STR.",
+      "levelName": "Neckartor",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 350,
@@ -33,9 +30,9 @@
       "disappearAreas": [
         {
           "x": 0,
-          "y": 641.77,
-          "w": 1650,
-          "h": 412
+          "y": 0,
+          "w": 1920,
+          "h": 1080
         }
       ],
       "originalResolution": {
@@ -44,50 +41,26 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/243128409.hd.mp4?s=ba1bf393bb9da9d3dbe1b36c3ed061fd680584ee"
+          "https://player.vimeo.com/external/249812673.hd.mp4?s=22064ee93b03a9a3f2f9653b6b02a2ec9062a177&profile_id=175"
       }
     },
     {
       "name": "stuttgart1-level2",
       "city": "stuttgart1",
       "level": 2,
-      "levelName": "MOOVEL STR.",
-      "videoFPS": 25,
+      "levelName": "Marienplatz",
+      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 400,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 25,
+      "trackerAndDetectionsFPS": 30,
       "disappearAreas": [
         {
-          "x": 285,
-          "y": 338,
-          "w": 188,
-          "h": 138
-        },
-        {
-          "x": 156,
-          "y": 970,
-          "w": 476,
-          "h": 113.99999999999999
-        },
-        {
-          "x": 960,
-          "y": 965,
-          "w": 548,
-          "h": 118
-        },
-        {
-          "x": 1580.14,
-          "y": 311.86,
-          "w": 84,
-          "h": 94
-        },
-        {
-          "x": 362,
-          "y": 425,
-          "w": 196,
-          "h": 106
+          "x": 0,
+          "y": 0,
+          "w": 1920,
+          "h": 1080
         }
       ],
       "originalResolution": {
@@ -96,28 +69,35 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/235911346.hd.mp4?s=079f01de35d181dbef705e7ec51da623b2f78de3"
+          "https://player.vimeo.com/external/249812698.hd.mp4?s=99b179d9ea01216d65c49679270c3a87fc5addad&profile_id=175"
       }
     },
     {
       "name": "stuttgart1-level3",
       "city": "stuttgart1",
       "level": 3,
-      "levelName": "Stuttgart STR.",
+      "levelName": "Leinfelden",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
         "y": 0
       },
       "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [],
+      "disappearAreas": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 1920,
+          "h": 1080
+        }
+      ],
       "originalResolution": {
         "w": 1920,
         "h": 1080
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/243127371.hd.mp4?s=7648497d1cb701e3653919cc98a9dd2dd5888164"
+          "https://player.vimeo.com/external/249812743.hd.mp4?s=eacb70b65d5a413f6ba3d2da2c6e29dba1bebc2c&profile_id=175"
       }
     },
     {
@@ -268,7 +248,7 @@
       }
     },
     {
-      "name": "stuttgart4-level2",
+      "name": "stuttgart3-level2",
       "city": "stuttgart4",
       "level": 2,
       "levelName": "Reused STR.",
@@ -307,69 +287,6 @@
       "sources": {
         "hd":
           "https://player.vimeo.com/external/243128510.hd.mp4?s=108ac74d6fa81ec02610f50fd407cbe478da0554&profile_id=174"
-      }
-    },
-    {
-      "name": "Berlin-level1",
-      "city": "Berlin",
-      "level": 1,
-      "levelName": "Berliner STR.",
-      "videoFPS": 30,
-      "videoMobileOffset": {
-        "x": 0,
-        "y": 0
-      },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
-      "sources": {
-        "hd":
-          "https://player.vimeo.com/external/243127419.hd.mp4?s=94619d6df70f65fe39a398a9ef3b30ae0bc44fc8"
-      }
-    },
-    {
-      "name": "Berlin-level2",
-      "city": "Berlin",
-      "level": 2,
-      "levelName": "Berliner STR.",
-      "videoFPS": 30,
-      "videoMobileOffset": {
-        "x": 0,
-        "y": 0
-      },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
-      "sources": {
-        "hd":
-          "https://player.vimeo.com/external/243127419.hd.mp4?s=94619d6df70f65fe39a398a9ef3b30ae0bc44fc8"
-      }
-    },
-    {
-      "name": "Berlin-level3",
-      "city": "Berlin",
-      "level": 3,
-      "levelName": "Berliner STR.",
-      "videoFPS": 30,
-      "videoMobileOffset": {
-        "x": 0,
-        "y": 0
-      },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
-      "sources": {
-        "hd":
-          "https://player.vimeo.com/external/243127419.hd.mp4?s=94619d6df70f65fe39a398a9ef3b30ae0bc44fc8"
       }
     }
   ]

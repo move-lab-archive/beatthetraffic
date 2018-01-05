@@ -147,7 +147,7 @@ class Landing extends Component {
             margin-top: -80px;
             width: 220px;
             color: #FF3BFF;
-            z-index: 5;
+            z-index: 2;
             animation: fadeIn 1.3s;
             color: #262626;
             left: none;
@@ -196,10 +196,12 @@ class Landing extends Component {
             color: #FF3BFF;
           }
 
-          .mobility-assets .unicorn{
+          .mobility-assets{
+            display: none;
+          }
+          /*.mobility-assets .unicorn{
             max-width: 100%;
-            animation: scaleAssetsUnicorn 10s linear infinite;
-            animation-delay: 1s;
+            animation: scaleAssetsUnicorn 14s linear infinite;
             opacity: 0;
             left: 0%;
             top: -10%;
@@ -208,8 +210,7 @@ class Landing extends Component {
           }
           .mobility-assets .tree{
             max-width: 100%;
-            animation: scaleAssetsTree 10s linear infinite;
-            animation-delay: 1s;
+            animation: scaleAssetsTree 9s linear infinite;
             opacity: 0;
             left: 20%;
             top: 6%;
@@ -218,37 +219,13 @@ class Landing extends Component {
           }
           .mobility-assets .rainbow{
             max-width: 100%;
-            animation: scaleAssetsRainbow 10s linear infinite;
-            animation-delay: 1s;
+            animation: scaleAssetsRainbow 7s linear infinite;
             opacity: 0;
             left: 0%;
             top: 30%;
             z-index: -100;
             position: fixed;
-          }
-
-          @media (min-width: 600px) {
-            .landing-headline {
-              width: 525px;
-              text-align: center;
-            }
-
-            .mobility-assets .unicorn{
-              max-width: 70%;
-              left: 10%;
-              top: 50%;
-            }
-            .mobility-assets .tree{
-              max-width: 30%;
-              left: 50%;
-              top: 6%;
-            }
-            .mobility-assets .rainbow{
-              max-width: 30%;
-              left: 20%;
-              top: 10%;
-            }
-          }
+          } */
 
           @keyframes fadeIn {
             0% {
@@ -262,27 +239,27 @@ class Landing extends Component {
             }
           }
 
-          @keyframes scaleAssetsUnicorn {
+        /*  @keyframes scaleAssetsUnicorn {
             0% {
-              transform: scale(0.2) translateX(0%) translateY(0%);
               opacity: 0;
+              transform: translateX(0%) translateY(0%) scale(0.2);
             }
             10% {
-              opacity: 1;
+              opacity: 0.4;
             }
             100% {
-              transform: scale(0.5) translateX(-250%) translateY(-100%);
+              transform: scale(0.5) translateY(-100%) translateX(-150%);
               opacity: 0;
             }
           }
 
           @keyframes scaleAssetsRainbow {
             0% {
-              transform: scale(0.4) translateX(0%) translateY(0%);
               opacity: 0;
+              transform: translateX(0%) translateY(0%) scale(0.4);
             }
             10% {
-              opacity: 1;
+              opacity: 0.4;
             }
             100% {
               transform: scale(1) translateX(60%) translateY(-40%);
@@ -292,16 +269,45 @@ class Landing extends Component {
 
           @keyframes scaleAssetsTree {
             0% {
-              transform: scale(0.4) translateX(0%) translateY(0%);
               opacity: 0;
+              transform: translateX(0%) translateY(0%) scale(0.4);
             }
             10% {
-              opacity: 1;
+              opacity: 0.4;
             }
             100% {
               transform: scale(0.7) translateX(180%) translateY(50%);
               opacity: 0;
             }
+          } */
+
+          @media (min-width: 600px) {
+            .landing-headline {
+              width: 525px;
+              text-align: center;
+            }
+
+            /*.mobility-assets .unicorn{
+              max-width: 70%;
+              left: 10%;
+              top: 50%;
+              opacity: 0;
+              transform: scale(0);
+            }
+            .mobility-assets .tree{
+              max-width: 30%;
+              left: 50%;
+              top: 6%;
+              opacity: 0;
+              transform: scale(0);
+            }
+            .mobility-assets .rainbow{
+              max-width: 30%;
+              left: 20%;
+              top: 10%;
+              opacity: 0;
+              transform: scale(0);
+            }*/
           }
         `}</style>
       </div>

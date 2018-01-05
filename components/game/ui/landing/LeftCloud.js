@@ -24,7 +24,7 @@ class LeftCloud extends Component {
             left: 0px;
             width: 20%;
             will-change: transform;
-            animation: fadeIn 10s linear infinite;
+            animation: fadeIn 6s linear infinite;
             opacity: 0;
             transform: scale(1);
           }
@@ -44,7 +44,7 @@ class LeftCloud extends Component {
             left: 0px;
             width: 35%;
             will-change: transform;
-            animation: fadeIn 10s linear infinite;
+            animation: fadeIn 5s linear infinite;
             opacity: 0;
             transform: scale(1);
           }
@@ -58,11 +58,11 @@ class LeftCloud extends Component {
               opacity: 0;
               transform: scale(1) translateX(0%);
             }
-            10% {
-              opacity: 0.5;
+            30% {
+              opacity: 0.3;
             }
             50% {
-              opacity: 0.5;
+              opacity: 0.7;
             }
             100% {
               transform: scale(3) translateX(50%);
