@@ -105,6 +105,7 @@ class Intro extends Component {
             font-size: 8rem;
             line-height: 8.3rem;
             width: 100%;
+            margin-top: -1rem;
           }
 
           .highlight{

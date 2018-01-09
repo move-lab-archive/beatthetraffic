@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="152px" height="169px" viewBox="0 0 152 169" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+<svg width="388px" height="345px" viewBox="0 0 388 345" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
     <title>Path 34</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-3235.000000, -517.000000)">
-        <path d="M3387,517 L3387,549.387328 L3387,657.81572 L3372.75669,677.31084 L3350.29265,686 L3311.48643,663.334306 L3281.23096,677.31084 L3252.60193,663.334306 L3235,630.201244 L3241.09596,597.261466 L3252.60193,586.69531 L3252.60193,549.387328 L3275.90723,525.70797 L3311.48643,525.70797 L3327.35406,537.420941 C3336.50513,523.80698 3343.11165,517 3347.17363,517 C3351.2356,517 3364.51106,517 3387,517 Z" id="Path-34" fill="#E9E9E9"></path>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-2731.000000, -79.000000)" fill-opacity="0.9" opacity="0.6">
+        <polygon id="Path-34" fill="#FFFFFF" points="2942.95293 79.1067747 3030.46796 89.4764692 3072.64321 129.225123 3072.64321 182.798193 3118.04655 240.373214 3118.04655 295.637716 3059.261 372.788575 2991 375.803214 2966.63644 409.141022 2928.21112 424 2861.83206 385.240322 2810.07927 409.141022 2761.10857 385.240322 2731 328.580826 2741.42731 272.251856 2761.10857 254.183104 2761.10857 190.384247 2800.9729 149.891144 2861.83206 149.891144 2888.97404 169.921017 2897.24539 113.174866"></polygon>
     </g>
 </svg>

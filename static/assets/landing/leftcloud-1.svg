@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="68px" height="135px" viewBox="0 0 68 135" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+<svg width="140px" height="138px" viewBox="0 0 140 138" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
     <title>Path 34</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-3013.000000, -558.000000)">
-        <polygon id="Path-34" fill="#E9E9E9" points="3013 558 3024.12322 561.44044 3031.35764 583.615867 3031.35764 602.73244 3061.28649 609.057739 3081 636.513992 3077.2982 659.297104 3053.45258 683.04 3028.38038 693 3013 689.71768"></polygon>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-2545.000000, -173.000000)" fill-opacity="0.9">
+        <polygon id="Path-34" fill="#FFFFFF" points="2617 176 2628.12322 179.44044 2635.35764 201.615867 2635.35764 220.73244 2665.28649 227.057739 2685 254.513992 2681.2982 277.297104 2657.45258 301.04 2632.38038 311 2617 307.71768 2602.06857 293.857843 2581.47566 293.857843 2553.15523 284.054723 2545.19002 262.353539 2548.58394 242.00721 2559.28805 227.057739 2571.84113 220.73244 2563.3591 201.615867 2571.84113 179.44044 2597.60507 173.014419"></polygon>
     </g>
 </svg>

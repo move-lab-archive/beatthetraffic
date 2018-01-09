@@ -59,10 +59,10 @@ class LeftCloud extends Component {
               transform: scale(1) translateX(0%);
             }
             30% {
-              opacity: 0.3;
+              opacity: 0.7;
             }
             50% {
-              opacity: 0.7;
+              opacity: 0.8;
             }
             100% {
               transform: scale(3) translateX(50%);

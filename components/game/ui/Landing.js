@@ -131,7 +131,7 @@ class Landing extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            background-color: white;
+            background-color: #FFFE4A;
             will-change: transform;
             user-select: none;
             -webkit-touch-callout: none;
@@ -146,7 +146,6 @@ class Landing extends Component {
             position: absolute;
             margin-top: -80px;
             width: 220px;
-            color: #FF3BFF;
             z-index: 2;
             animation: fadeIn 1.3s;
             color: #262626;

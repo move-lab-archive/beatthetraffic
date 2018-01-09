@@ -72,7 +72,7 @@ class LocationMenu extends Component {
 
           .coverLandingPage{
             position: fixed;
-            background: #FFFE4A;
+            background: #4effff;
             width: 100%;
             height: 100%;
             top: 0%;

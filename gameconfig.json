@@ -6,7 +6,7 @@
       "label": "Stuttgart"
     },
     "stuttgart2": {
-      "label": "(unavailable)"
+      "label": "Stuttgart v2"
     },
     "stuttgart3": {
       "label": "(unavailable)"
@@ -48,7 +48,7 @@
       "name": "stuttgart1-level2",
       "city": "stuttgart1",
       "level": 2,
-      "levelName": "Marienplatz",
+      "levelName": "Uferstraße",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 400,
@@ -69,14 +69,14 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/249812698.hd.mp4?s=99b179d9ea01216d65c49679270c3a87fc5addad&profile_id=175"
+          "https://player.vimeo.com/external/250243058.hd.mp4?s=bdbbb0aa48a337f86d868c0315bb096a01d8ff7b&profile_id=174"
       }
     },
     {
       "name": "stuttgart1-level3",
       "city": "stuttgart1",
       "level": 3,
-      "levelName": "Leinfelden",
+      "levelName": "Cannstatter Straße",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
@@ -97,14 +97,14 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/249812743.hd.mp4?s=eacb70b65d5a413f6ba3d2da2c6e29dba1bebc2c&profile_id=175"
+          "https://player.vimeo.com/external/250243089.hd.mp4?s=4b818e4af8efb294690118e29fbda391119119d6&profile_id=174"
       }
     },
     {
       "name": "stuttgart2-level1",
       "city": "stuttgart2",
       "level": 1,
-      "levelName": "Stuttgart STR.",
+      "levelName": "Neckartor",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
@@ -118,14 +118,14 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/243126724.hd.mp4?s=6719a11b32391f01afd275609bde87692d982e74"
+          "https://player.vimeo.com/external/249812673.hd.mp4?s=22064ee93b03a9a3f2f9653b6b02a2ec9062a177&profile_id=175"
       }
     },
     {
       "name": "stuttgart2-level2",
       "city": "stuttgart2",
       "level": 2,
-      "levelName": "Stuttgart STR.",
+      "levelName": "Marienplatz",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
@@ -139,14 +139,14 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/243127266.hd.mp4?s=c27f39395f58157ab91dc4d992369ceb72f8e2b7"
+          "https://player.vimeo.com/external/249812698.hd.mp4?s=99b179d9ea01216d65c49679270c3a87fc5addad&profile_id=175"
       }
     },
     {
       "name": "stuttgart2-level3",
       "city": "stuttgart2",
       "level": 3,
-      "levelName": "Stuttgart STR.",
+      "levelName": "Leinfelden",
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
@@ -160,7 +160,7 @@
       },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/243128409.hd.mp4?s=ba1bf393bb9da9d3dbe1b36c3ed061fd680584ee"
+          "https://player.vimeo.com/external/249812743.hd.mp4?s=eacb70b65d5a413f6ba3d2da2c6e29dba1bebc2c&profile_id=175"
       }
     },
     {

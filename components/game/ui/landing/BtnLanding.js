@@ -74,6 +74,7 @@ class BtnLanding extends Component {
             will-change: transform;
             animation: 1.3s fadeIn;
             z-index: 4;
+            color: #262626;
           }
 
           .loading .outer {
