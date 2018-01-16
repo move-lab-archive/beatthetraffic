@@ -164,6 +164,10 @@ class Menu extends Component {
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
           }
 
+          h1{
+            line-height: 2.8rem;
+          }
+
           .menu-container{
             max-width: 700px;
             width: 100%;

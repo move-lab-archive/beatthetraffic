@@ -44,7 +44,7 @@ class AboutPage extends Component {
             bottom: 0;
             color: #262626;
             z-index: 10;
-            background-color: white;
+            background-color: #FFFE4A;
             overflow: scroll;
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
           }

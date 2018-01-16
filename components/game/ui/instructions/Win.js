@@ -41,14 +41,13 @@ class Win extends Component {
     return (
       <div className='instructions-win'>
 
-
         <div className='title'>YOU WON</div>
         <div className='message'>
           <div className='score-container'>
             <h4>Your score</h4>
             <div className='score'>
               <h1>{this.props.score}</h1>
-              <img src='/static/assets/icons/icon-star.svg' />
+              <img src='/static/assets/icons/icon-star-purple.svg' />
             </div>
           </div>
           <div className='ranking-container'>
@@ -74,10 +73,10 @@ class Win extends Component {
             justify-content: center;
             color: #262626;
             padding: 5rem;
+            background-color: #FFFE4A;
             z-index: 100000000000;
             width: 100%;
             height: 100%;
-            background-color: white;
           }
           .title {
             font-size: 10rem;
@@ -85,22 +84,24 @@ class Win extends Component {
             width: 80%;
             position: fixed;
             top: 6rem;
-            color: #FF3BFF;
+            color: #4EFFFF;
             text-align: center;
             margin-bottom: 3rem;
+            animation: flashingTitle 0.1s linear infinite;
           }
 
           .message {
             text-align: center;
-            border: 4px solid #262626;
             width: 30rem;
             height: 11.5rem;
-            position: fixed;
-            top: 40%;
-            background-color: white;
+            border: 4px solid white;
+            margin-top: 15rem;
+            background-color: #FFFE4A;
+            position: relative;
           }
           .message h1{
             margin-top: 0;
+            line-height: 3rem;
             float: left;
           }
           .message img{
@@ -129,12 +130,21 @@ class Win extends Component {
           @media (max-width: 600px) {
 
             .message {
-              top: 50%;
-            }
-            .message {
-              top: 50%;
+              margin-top: 25rem;
             }
 
+          }
+
+          @keyframes flashingTitle {
+            0% {
+              color: #4EFFFF;
+            }
+            50% {
+              color: #FF3BFF;
+            }
+            100% {
+              color: #4EFFFF;
+            }
           }
 
         `}</style>

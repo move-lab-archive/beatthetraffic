@@ -27,7 +27,7 @@ class Landing extends Component {
 
   handleStartGame () {
     TweenLite.to('.game-landing', 0.3, {
-      backgroundColor: 'transparent',
+      opacity: 0,
       delay: 0.5
     })
     TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets', 0.3, {
@@ -72,15 +72,15 @@ class Landing extends Component {
   render () {
     return (
       <div className='game-landing'>
-        <h2 className='landing-headline'>
-          STUTTGART IS JAM-PACKED WITH HEAVY TRAFFIC!
-        </h2>
+        <h1 className='landing-headline'>
+          BEAT THE TRAFFIC
+          <br></br><span className='city-var'>X</span>
+        </h1>
         <LocationMenu
           isVisible={this.state.citySelectorVisible}
           handleClose={this.handleChangeCityClick}
         />
         <Unicorn />
-
 
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
@@ -99,6 +99,7 @@ class Landing extends Component {
                   src='/static/assets/icons/icon-triangle.svg'
                 />
               </div>
+            </div>
               <LeftCloud />
               <RightCloud />
               <div className='mobility-assets'>
@@ -110,12 +111,8 @@ class Landing extends Component {
                   className='tree'
                   src='/static/assets/landing/asset-tree.png'
                 />
-                <img
-                  className='rainbow'
-                  src='/static/assets/landing/asset-rainbow.png'
-                />
               </div>
-            </div>
+
             <div className='about'>
               <h4>About</h4>
             </div>
@@ -144,14 +141,19 @@ class Landing extends Component {
 
           .landing-headline {
             position: absolute;
-            margin-top: -80px;
-            width: 220px;
+            margin-top: -45px;
+            width: 80%;
             z-index: 2;
-            animation: fadeIn 1.3s;
+            animation: fadeInHeadline 1.3s;
             color: #262626;
             left: none;
             transform: translateX(0%);
             transform: translateY(0%);
+            text-align: center;
+          }
+
+          .city-var{
+            color: #FF3BFF;
           }
 
           .change-city-container{
@@ -160,17 +162,16 @@ class Landing extends Component {
             bottom: 1.5rem;
             left: 3rem;
             cursor: pointer;
+            animation: fadeIn 2s;
           }
           .change-city {
-            animation: fadeIn 1.3s;
             cursor: pointer;
             z-index: 14;
             display:inline-block;
-            padding-right: 0.7rem;
+            padding-right: 0.5rem;
           }
           .IconTriangle{
             z-index: 14;
-            animation: fadeIn 1.3s;
             transition-duration: 0.3s;
             transition-delay: 0.3;
             display:inline-block;
@@ -188,45 +189,48 @@ class Landing extends Component {
             bottom: 1.5rem;
             right: 3rem;
             cursor: pointer;
-            animation: fadeIn 1.3s;
+            animation: fadeIn 2s;
             z-index: 14;
           }
           .about:hover, .change-city-container:hover .change-city{
             color: #FF3BFF;
           }
 
-          .mobility-assets{
-            display: none;
-          }
-          /*.mobility-assets .unicorn{
-            max-width: 100%;
-            animation: scaleAssetsUnicorn 14s linear infinite;
-            opacity: 0;
-            left: 0%;
-            top: -10%;
-            z-index: -100;
+          .mobility-assets .unicorn{
+            animation: fadeIn 2s;
+            width: 8.5rem;
+            opacity: 1;
+            top: 0.7rem;
+            left: 0.5rem;
+            z-index: 0;
             position: fixed;
           }
           .mobility-assets .tree{
-            max-width: 100%;
-            animation: scaleAssetsTree 9s linear infinite;
-            opacity: 0;
-            left: 20%;
-            top: 6%;
-            z-index: -100;
+            animation: fadeIn 2s;
+            width: 7rem;
+            opacity: 1;
+            right: 1rem;
+            top: 2.1rem;
+            z-index: 0;
             position: fixed;
           }
-          .mobility-assets .rainbow{
-            max-width: 100%;
-            animation: scaleAssetsRainbow 7s linear infinite;
-            opacity: 0;
-            left: 0%;
-            top: 30%;
-            z-index: -100;
-            position: fixed;
-          } */
 
           @keyframes fadeIn {
+            0% {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            70% {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          @keyframes fadeInHeadline {
             0% {
               opacity: 0;
             }
@@ -238,75 +242,12 @@ class Landing extends Component {
             }
           }
 
-        /*  @keyframes scaleAssetsUnicorn {
-            0% {
-              opacity: 0;
-              transform: translateX(0%) translateY(0%) scale(0.2);
-            }
-            10% {
-              opacity: 0.4;
-            }
-            100% {
-              transform: scale(0.5) translateY(-100%) translateX(-150%);
-              opacity: 0;
-            }
-          }
-
-          @keyframes scaleAssetsRainbow {
-            0% {
-              opacity: 0;
-              transform: translateX(0%) translateY(0%) scale(0.4);
-            }
-            10% {
-              opacity: 0.4;
-            }
-            100% {
-              transform: scale(1) translateX(60%) translateY(-40%);
-              opacity: 0;
-            }
-          }
-
-          @keyframes scaleAssetsTree {
-            0% {
-              opacity: 0;
-              transform: translateX(0%) translateY(0%) scale(0.4);
-            }
-            10% {
-              opacity: 0.4;
-            }
-            100% {
-              transform: scale(0.7) translateX(180%) translateY(50%);
-              opacity: 0;
-            }
-          } */
-
           @media (min-width: 600px) {
             .landing-headline {
               width: 525px;
               text-align: center;
             }
 
-            /*.mobility-assets .unicorn{
-              max-width: 70%;
-              left: 10%;
-              top: 50%;
-              opacity: 0;
-              transform: scale(0);
-            }
-            .mobility-assets .tree{
-              max-width: 30%;
-              left: 50%;
-              top: 6%;
-              opacity: 0;
-              transform: scale(0);
-            }
-            .mobility-assets .rainbow{
-              max-width: 30%;
-              left: 20%;
-              top: 10%;
-              opacity: 0;
-              transform: scale(0);
-            }*/
           }
         `}</style>
       </div>

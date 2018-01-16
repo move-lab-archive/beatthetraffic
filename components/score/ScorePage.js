@@ -8,19 +8,27 @@ class ScorePage extends Component {
     return (
       <div className={`highscore-page`}>
         <ButtonClose onClick={this.props.onClose} />
+
+        <img
+          className={`rightcloud`}
+          src='/static/assets/menu/menu-rightcloud.svg'
+        />
+
         <div className={`highscore-container`}>
           <div className={`highscore-inner`}>
             <h2 className='headline'>HIGHSCORES</h2>
             <img
               className='cup'
-              src='/static/assets/about-highscores/cup.svg'
+              src='/static/assets/about-highscores/cup.gif'  //maybe better with sprints? need to add transparent backrgound
             />
+
             <div className='first-place'>
               <div className='name'>
                 <h1>Carla</h1>
               </div>
               <div className='score'>
                 <h2>886</h2>
+                <img src='/static/assets/icons/icon-star-purple.svg' />
               </div>
               <div className='city'>
                 <p>Berlin</p>
@@ -30,54 +38,63 @@ class ScorePage extends Component {
               <div className='list-item'>
                 <h2 className='name'>@tdurand</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>2</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@mmmmm</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>3</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@tdurand</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>4</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@tdurand</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>5</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@b-g</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>6</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@mmmmm</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>7</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@mmmmm</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>8</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@tdurand</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>9</h2>
               </div>
               <div className='list-item'>
                 <h2 className='name'>@tdurand</h2>
                 <h1 className='score'>765</h1>
+                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>10</h2>
               </div>
@@ -93,7 +110,7 @@ class ScorePage extends Component {
             bottom: 0;
             color: #262626;
             z-index: 10;
-            background-color: white;
+            background-color: #4EFFFF;
             overflow: scroll;
           }
           .highscore-container{
@@ -115,9 +132,17 @@ class ScorePage extends Component {
             margin-left: 2.9rem;
           }
 
+          .rightcloud{
+            position: absolute;
+            top: 0%;
+            width: 90%;
+            right: 0%;
+            z-index: -1;
+          }
+
           .cup{
             margin-top: 3rem;
-            width: 15rem;
+            width: 25rem;
             left: 50%;
             transform: translateX(-50%);
             position:relative;
@@ -142,6 +167,7 @@ class ScorePage extends Component {
             justify-content:center;
             align-items:center;
             color: #FF3BFF;
+            animation: flashingTitle 0.1s linear infinite;
           }
 
           .first-place .score{
@@ -153,6 +179,11 @@ class ScorePage extends Component {
             display:flex;
             justify-content:center;
             align-items:center;
+          }
+
+          .first-place .score img{
+            margin-left: 0.5rem;
+            margin-top: -0.2rem;
           }
 
           .first-place .city{
@@ -178,6 +209,7 @@ class ScorePage extends Component {
             margin-left: 2.9rem;
             margin-top: 2.9rem;
             position: relative;
+            background-color: white;
           }
           .list-item .name{
             position: absolute;
@@ -188,8 +220,13 @@ class ScorePage extends Component {
           }
           .list-item .score{
             position: absolute;
-            right: 1.4rem;
+            right: 4.7rem;
             top: 4rem;
+          }
+          .list-item .star{
+            position: absolute;
+            right: 1.6rem;
+            top: 8.9rem;
           }
           .list-item .city{
             position: absolute;
@@ -211,9 +248,23 @@ class ScorePage extends Component {
               left: 50%;
               transform: translateX(-50%);
               margin-left: 0rem;
+              margin-right: 15rem;
             }
 
           }
+
+          @keyframes flashingTitle {
+            0% {
+              color: #4EFFFF;
+            }
+            50% {
+              color: #FF3BFF;
+            }
+            100% {
+              color: #4EFFFF;
+            }
+          }
+
         `}</style>
       </div>
     )

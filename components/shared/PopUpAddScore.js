@@ -56,7 +56,7 @@ class Button extends Component {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(255, 254, 74, .93);
+            background: rgba(78, 255, 255, .9);
             z-index: 50;
           }
 
@@ -122,7 +122,7 @@ class Button extends Component {
           	cursor:pointer;
           }
           input[type="checkbox"]:checked + label span {
-	           background-color: #262626;
+	           background-color: #FF3BFF;
            }
 
            .input-box{

@@ -13,7 +13,7 @@ class Layout extends Component {
     return (
       <div>
         <Head>
-          <title>Beat the traffic - The Game</title>
+          <title>Beat the traffic X </title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
@@ -50,13 +50,14 @@ class Layout extends Component {
             background-color: white;
             cursor: cell;
             -webkit-tap-highlight-color: rgba(0,0,0,0);
+            color: #262626;
           }
 
           :global(h1) {
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             font-size: 5rem;
-            line-height: 3rem;
+            line-height: 6rem;
             text-transform: uppercase;
           }
           :global(h2) {

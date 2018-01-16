@@ -59,15 +59,15 @@ class BtnLanding extends Component {
       >
         <div className="inner" />
         <div className="outer">
-          <h3>Defend {this.props.selectedCityLabel}!</h3>
+          <h3>let's play</h3>
         </div>
         <style jsx>{`
           .btn-landing {
             left: 50%;
-            top: 50%;
-            margin-top: 110px;
+            top: 52.5%;
+            margin-top: 70px;
             position: absolute;
-            width: 260px;
+            width: 180px;
             height: 60px;
             transform: translateX(-50%) translateY(-50%);
             //GPU accelerate
@@ -127,7 +127,7 @@ class BtnLanding extends Component {
           @media (min-width: 600px) {
             .btn-landing {
               margin-top: 50px;
-              width: 300px;
+              width: 200px;
             }
           }
 

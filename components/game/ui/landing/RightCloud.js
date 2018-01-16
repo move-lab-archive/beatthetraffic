@@ -50,7 +50,7 @@ class RightCloud extends Component {
               opacity: 0.3;
             }
             50% {
-              opacity: 0.7;
+              opacity: 0.9;
             }
             100% {
               transform: scale(3) translateX(-50%);

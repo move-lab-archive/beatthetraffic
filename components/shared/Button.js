@@ -26,9 +26,8 @@ class Button extends Component {
             width: 10.5rem;
             height: 4rem;
             will-change: transform;
-            margin-top: 2%;
-            position: fixed;
-            bottom: 6%;
+            color: #262626;
+            margin-top: 4rem;
           }
           .btn h4{
             margin: 0;
@@ -38,7 +37,7 @@ class Button extends Component {
             height: 100%;
             left: 5px;
             top: 5px;
-            background-color: #262626;
+            background-color: white;
             position: absolute;
           }
           .btn .outer {
@@ -65,7 +64,7 @@ class Button extends Component {
           .large {
             width: 27rem;
             height: 6rem;
-            margin-bottom: 7rem;
+            margin-bottom: -2rem;
           }
 
           .large h4{

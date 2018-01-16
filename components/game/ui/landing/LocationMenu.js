@@ -78,7 +78,7 @@ class LocationMenu extends Component {
             top: 0%;
             left: 0;
             z-index: 10;
-            opacity: 0.93;
+            opacity: 0.9;
             transition: all 150ms;
           }
 

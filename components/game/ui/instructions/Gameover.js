@@ -37,9 +37,9 @@ class Gameover extends Component {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #262626;
+            color: white;
             padding: 5rem;
-            background-color: white;
+            background-color: #262626;
             z-index: 100000000000;
             width: 100%;
             height: 100%;
@@ -47,29 +47,26 @@ class Gameover extends Component {
           .title {
             font-size: 10rem;
             line-height: 11rem;
-            width: 95%;
+            width: 80%;
             position: fixed;
             top: 6rem;
-            color: #FF3BFF;
+            color: white;
             text-align: center;
             margin-bottom: 3rem;
-          }
-          .button-large{
-            position: fixed;
-            bottom: 80%;
+            animation: flashingTitle 0.1s linear infinite;
           }
 
           .message {
             text-align: center;
-            border: 4px solid #262626;
+            border: 4px solid white;
             width: 22rem;
             height: 11.5rem;
-            position: fixed;
-            top: 40%;
-            background-color: white;
+            margin-top: 15rem;
+            background-color: #262626;
           }
           .message h1{
             margin-top: 0;
+            line-height: 3rem;
             float: left;
           }
           .message img{
@@ -85,12 +82,21 @@ class Gameover extends Component {
           @media (max-width: 600px) {
 
             .message {
-              top: 50%;
-            }
-            .message {
-              top: 50%;
+              margin-top: 25rem;
             }
 
+          }
+
+          @keyframes flashingTitle {
+            0% {
+              color: white;
+            }
+            50% {
+              color: #FF3BFF;
+            }
+            100% {
+              color: white;
+            }
           }
 
         `}</style>

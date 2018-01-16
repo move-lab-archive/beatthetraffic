@@ -119,7 +119,7 @@ class LevelBeginning extends Component {
           .instructions-level-beginning .level-title{
             color: white;
             position: fixed;
-            margin-top: -5rem;
+            padding-bottom: 10rem;
           }
 
           .level-help {
