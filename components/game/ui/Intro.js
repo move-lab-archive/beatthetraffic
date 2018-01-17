@@ -27,6 +27,7 @@ class Intro extends Component {
       .to('.cars', 0, { opacity: 0 }, '+=1')
       .to('.logo', 0, { opacity: 1 })
       .to('.logo', 0, { opacity: 0 }, '+=1')
+      .to('.logo', 0, { opacity: 0 }, '+=2.5')
 
 
     timeline.play()

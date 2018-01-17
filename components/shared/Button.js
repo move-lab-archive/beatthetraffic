@@ -28,6 +28,7 @@ class Button extends Component {
             will-change: transform;
             color: #262626;
             margin-top: 4rem;
+            position: relative;
           }
           .btn h4{
             margin: 0;

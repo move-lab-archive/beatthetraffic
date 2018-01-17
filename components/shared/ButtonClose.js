@@ -18,7 +18,7 @@ class ButtonClose extends Component {
 
         <style jsx>{`
           .btn-close {
-            position: fixed;
+            position: absolute;
             top: 2.6rem;
             right: 2.8rem;
             width: 30px;

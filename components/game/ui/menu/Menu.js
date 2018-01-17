@@ -237,7 +237,7 @@ class Menu extends Component {
             position: fixed;
             bottom: 0%;
             width: 110%;
-            left: 5%;
+            left: 2%;
             z-index: -1;
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);;
           }
@@ -247,7 +247,7 @@ class Menu extends Component {
               width: 40%;
             }
             .menu-leftcloud{
-              width: 60%;
+              width: 45%;
             }
           }
 

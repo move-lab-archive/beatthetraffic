@@ -13,92 +13,115 @@ class ScorePage extends Component {
           className={`rightcloud`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
+        <img
+          className={`leftcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <img
+          className={`thirdcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <img
+          className={`fourthcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <img
+          className={`fifthcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <div className={`background-white`}></div>
 
         <div className={`highscore-container`}>
           <div className={`highscore-inner`}>
-            <h2 className='headline'>HIGHSCORES</h2>
-            <img
-              className='cup'
-              src='/static/assets/about-highscores/cup.gif'  //maybe better with sprints? need to add transparent backrgound
-            />
+            <h2 className='headline'>HIGH SCORES</h2>
 
-            <div className='first-place'>
-              <div className='name'>
-                <h1>Carla</h1>
-              </div>
-              <div className='score'>
-                <h2>886</h2>
-                <img src='/static/assets/icons/icon-star-purple.svg' />
-              </div>
-              <div className='city'>
-                <p>Berlin</p>
-              </div>
-            </div>
-            <div className='list-container'>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>2</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>3</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>4</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>5</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@b-g</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>6</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>7</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>8</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>9</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>10</h2>
+            <div className='first-place-wrapper'>
+              <div className='first-place-container' >
+                <img
+                  className='cup'
+                  src='/static/assets/about-highscores/cup.gif'  //maybe better with sprints? need to add transparent backrgound
+                />
+
+                <div className='first-place'>
+                  <div className='name'>
+                    <h1>Carla</h1>
+                  </div>
+                  <div className='score'>
+                    <h2>886</h2>
+                    <img src='/static/assets/icons/icon-star-purple.svg' />
+                  </div>
+                  <div className='city'>
+                    <p>Berlin</p>
+                  </div>
+                </div>
               </div>
             </div>
+
+              <div className='list-container'>
+                <div className='list-item'>
+                  <h2 className='name'>@tdurand</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>2</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@mmmmm</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>3</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@tdurand</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>4</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@tdurand</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>5</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@b-g</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>6</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@mmmmm</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>7</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@mmmmm</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>8</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@tdurand</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>9</h2>
+                </div>
+                <div className='list-item'>
+                  <h2 className='name'>@tdurand</h2>
+                  <h1 className='score'>765</h1>
+                  <img className='star' src='/static/assets/icons/icon-star-purple.svg' />
+                  <p className='city'>Stuttgart</p>
+                  <h2 className='number'>10</h2>
+                </div>
+              </div>
           </div>
         </div>
         <style jsx>{`
@@ -110,8 +133,10 @@ class ScorePage extends Component {
             bottom: 0;
             color: #262626;
             z-index: 10;
-            background-color: #4EFFFF;
-            overflow: scroll;
+            background-color: white;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
           }
           .highscore-container{
             max-width: 700px;
@@ -125,23 +150,71 @@ class ScorePage extends Component {
           .highscore-inner{
             top: 0rem;
             position: absolute;
-            margin-bottom: 7.1rem;
+            padding-bottom: 7.1rem;
           }
           .highscore-inner .headline{
-            margin-top: 7.1rem;
+            margin-top: 2.3rem;
             margin-left: 2.9rem;
+            text-align: left;
           }
 
           .rightcloud{
             position: absolute;
-            top: 0%;
-            width: 90%;
-            right: 0%;
+            top: -30%;
+            width: 60%;
+            right: -25%;
             z-index: -1;
+          }
+          .leftcloud{
+            position: absolute;
+            bottom: -10%;
+            width: 80%;
+            left: -5%;
+            z-index: -1;
+          }
+          .thirdcloud{
+            position: absolute;
+            top: 95%;
+            width: 50%;
+            left: 70%;
+          }
+          .fourthcloud{
+            position: absolute;
+            top: 85%;
+            width: 50%;
+            left: 30%;
+          }
+          .fifthcloud{
+            position: absolute;
+            top: 90%;
+            width: 60%;
+            left: -10%;
+          }
+          .background-white{
+            position: absolute;
+            background-color: #4EFFFF;
+            top: 0%;
+            width: 100%;
+            height: 110%;
+            z-index: -10;
+          }
+
+          .first-place-container{
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+          }
+          .first-place-wrapper{
+            width: 100%;
+            height: 100%;
+            left: 0%;
+            top: 0%;
+            position: fixed;
           }
 
           .cup{
-            margin-top: 3rem;
+            margin-top: 1rem;
             width: 25rem;
             left: 50%;
             transform: translateX(-50%);
@@ -152,7 +225,7 @@ class ScorePage extends Component {
             position: relative;
             left: 50%;
             transform: translateX(-50%);
-            margin-top: 2rem;
+            margin-top: -2rem;
             width: 30rem;
             height: 15rem;
           }
@@ -172,7 +245,7 @@ class ScorePage extends Component {
 
           .first-place .score{
             position: absolute;
-            top: 7.5rem;
+            top: 6rem;
             left: 0;
             width: 50%;
             height: 7.5rem;
@@ -188,7 +261,7 @@ class ScorePage extends Component {
 
           .first-place .city{
             position: absolute;
-            top: 7.5rem;
+            top: 6rem;
             left: 50%;
             width: 50%;
             height: 7.5rem;
@@ -200,6 +273,7 @@ class ScorePage extends Component {
           .list-container{
             width: 100%;
             margin-right: 2.9rem;
+            margin-top: 65vh;
           }
           .list-item{
             width: 300px;
@@ -220,7 +294,7 @@ class ScorePage extends Component {
           }
           .list-item .score{
             position: absolute;
-            right: 4.7rem;
+            right: 5.3rem;
             top: 4rem;
           }
           .list-item .star{
@@ -248,9 +322,28 @@ class ScorePage extends Component {
               left: 50%;
               transform: translateX(-50%);
               margin-left: 0rem;
-              margin-right: 15rem;
             }
 
+          }
+
+          @media (min-width: 600px) {
+            .rightcloud{
+              width: 40%;
+            }
+            .leftcloud{
+              width: 35%;
+            }
+            .fifthcloud{
+              top: 85%;
+            }
+            .list-container{
+              margin-top: 70vh;
+            }
+            .highscore-inner .headline{
+              margin-top: 2.3rem;
+              text-align: center;
+              margin-left: 0;
+            }
           }
 
           @keyframes flashingTitle {
