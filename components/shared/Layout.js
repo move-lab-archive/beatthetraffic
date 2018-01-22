@@ -6,26 +6,38 @@ class Layout extends Component {
     return {
       __html: '<script>window.firstPaint = new Date().getTime()</script>'
     }
+
   }
 
   render () {
     return (
       <div>
         <Head>
-          <title>Beat the traffic - The Game</title>
+          <title>Beat the traffic X </title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
           <link
+            rel="icon"
+            type="image/png"
+            href="/static/assets/icons/icon-favicon.png"
+          />
+          <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
             rel='stylesheet'
-          />
+            />
         </Head>
         {this.props.children}
         <div dangerouslySetInnerHTML={this.recordFirstPaint()} />
+
+
+        <div className='msg'></div>
+
+
         <style jsx>{`
+
           :global(html, body) {
             height: 100%;
             width: 100%;
@@ -35,20 +47,52 @@ class Layout extends Component {
             top: 0;
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
-            background-color: #fffe4a;
-            cursor: url(../../static/assets/cursor/cursor-dot.png) 2 2, pointer;
+            background-color: white;
+            cursor: cell;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            color: #262626;
           }
 
+          :global(h1) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            line-height: 6rem;
+            text-transform: uppercase;
+          }
+          :global(h2) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            line-height: 4.9rem;
+            text-transform: uppercase;
+          }
+          :global(h3) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
+          }
           :global(h4) {
             font-family: 'Geo', sans-serif;
             font-weight: 400;
+            font-size: 1.6rem;
+          }
+          :global(p) {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 2.9rem;
           }
 
           :global(html) {
-            font-size: 62.5%;
+            font-size: 60%;
           }
 
-          @media (max-width: 450px) {
+
+
+          @media (max-width: 600px) {
             :global(html) {
               font-size: 50%;
             }
@@ -61,7 +105,6 @@ class Layout extends Component {
           }
 
           :global(body) {
-            font-size: 1.6rem;
           }
 
           :global(body > div:first-of-type) {

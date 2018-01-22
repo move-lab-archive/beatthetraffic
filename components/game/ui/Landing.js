@@ -9,6 +9,9 @@ import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
 
+/*import Win from './instructions/Win'*/
+/*NOTE just for style reasons on landing*/
+
 class Landing extends Component {
   constructor (props) {
     super(props)
@@ -24,27 +27,19 @@ class Landing extends Component {
 
   handleStartGame () {
     TweenLite.to('.game-landing', 0.3, {
-      backgroundColor: 'transparent',
-      delay: 0.5
-    })
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.unicorn', 0.3, {
-      scale: 1,
       opacity: 0,
-      ease: Power4.easeOut,
       delay: 0.5
     })
-    TweenLite.to('.leftcloud', 0.8, {
-      x: '-100%',
-      ease: Power4.easeOut,
-      delay: 1.5
+    TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets', 0.3, {
+      opacity: 0,
+      delay: 0.5
     })
 
     const backgroundOpacityAnimationDuration = 0.5
 
-    TweenLite.to('.rightcloud', 0.8, {
-      x: '100%',
-      ease: Power4.easeOut,
-      delay: 1.5,
+    TweenLite.to('.leftcloud, .rightcloud', 0.3, {
+      opacity: 0,
+      delay: 0.5,
       onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     })
 
@@ -78,15 +73,15 @@ class Landing extends Component {
     return (
       <div className='game-landing'>
         <h1 className='landing-headline'>
-          CITIES ARE JAM-PACKED WITH HEAVY TRAFFIC!
+          BEAT THE TRAFFIC
+          <br></br><span className='city-var'>X</span>
         </h1>
         <LocationMenu
           isVisible={this.state.citySelectorVisible}
           handleClose={this.handleChangeCityClick}
         />
         <Unicorn />
-        <LeftCloud />
-        <RightCloud />
+
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
@@ -95,10 +90,36 @@ class Landing extends Component {
         {this.state.javascriptLoaded && (
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page
-          <div onClick={this.handleChangeCityClick} className='change-city'>
-            <h4>Change city</h4>
+          <div>
+            <div onClick={this.handleChangeCityClick} className={this.state.citySelectorVisible? 'activeLocationMenu':''}>
+              <div className='change-city-container'>
+                <h4 className='change-city'>Change city</h4>
+                <img
+                  className='IconTriangle'
+                  src='/static/assets/icons/icon-triangle.svg'
+                />
+              </div>
+            </div>
+              <LeftCloud />
+              <RightCloud />
+              <div className='mobility-assets'>
+                <img
+                  className='unicorn'
+                  src='/static/assets/landing/asset-unicorn.png'
+                />
+                <img
+                  className='tree'
+                  src='/static/assets/landing/asset-tree.png'
+                />
+              </div>
+
+            <div className='about'>
+              <h4>About</h4>
+            </div>
           </div>
         )}
+
+
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -107,58 +128,126 @@ class Landing extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            background-color: #fffe4a;
+            background-color: #FFFE4A;
             will-change: transform;
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
             cursor: auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
           }
 
           .landing-headline {
             position: absolute;
-            font-size: 4rem;
-            line-height: 4.7rem;
-            top: 13%;
-            right: -6%;
-            color: black;
-            width: 300px;
-            will-change: transform;
-            z-index: 5;
-            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+            margin-top: -45px;
+            width: 80%;
+            z-index: 2;
+            animation: fadeInHeadline 1.3s;
+            color: #262626;
+            left: none;
+            transform: translateX(0%);
+            transform: translateY(0%);
+            text-align: center;
           }
 
-          .change-city {
+          .city-var{
+            color: #FF3BFF;
+          }
+
+          .change-city-container{
             position: fixed;
+            z-index: 14;
             bottom: 1.5rem;
             left: 3rem;
-            animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
             cursor: pointer;
+            animation: fadeIn 2s;
+          }
+          .change-city {
+            cursor: pointer;
+            z-index: 14;
+            display:inline-block;
+            padding-right: 0.5rem;
+          }
+          .IconTriangle{
+            z-index: 14;
+            transition-duration: 0.3s;
+            transition-delay: 0.3;
+            display:inline-block;
+            padding-bottom: 1px;
+          }
+          .activeLocationMenu{
+            color: #FF3BFF;
+          }
+          .activeLocationMenu .IconTriangle{
+            transform: rotate(180deg);
           }
 
-          @media (min-width: 450px) {
-            .landing-headline {
-              right: 20%;
-              top: 20%;
-            }
+          .about{
+            position: fixed;
+            bottom: 1.5rem;
+            right: 3rem;
+            cursor: pointer;
+            animation: fadeIn 2s;
+            z-index: 14;
+          }
+          .about:hover, .change-city-container:hover .change-city{
+            color: #FF3BFF;
           }
 
-          @keyframes scaleInAnimation {
+          .mobility-assets .unicorn{
+            animation: fadeIn 2s;
+            width: 8.5rem;
+            opacity: 1;
+            top: 0.7rem;
+            left: 0.5rem;
+            z-index: 0;
+            position: fixed;
+          }
+          .mobility-assets .tree{
+            animation: fadeIn 2s;
+            width: 7rem;
+            opacity: 1;
+            right: 1rem;
+            top: 2.1rem;
+            z-index: 0;
+            position: fixed;
+          }
+
+          @keyframes fadeIn {
             0% {
-              transform: scale(0);
               opacity: 0;
+              transform: scale(0.8);
             }
             70% {
-              transform: scale(0);
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          @keyframes fadeInHeadline {
+            0% {
               opacity: 0;
             }
-            80% {
+            50% {
               opacity: 0;
             }
             100% {
-              transform: scale(1);
               opacity: 1;
             }
+          }
+
+          @media (min-width: 600px) {
+            .landing-headline {
+              width: 525px;
+              text-align: center;
+            }
+
           }
         `}</style>
       </div>

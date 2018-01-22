@@ -8,7 +8,8 @@ function getSrc (collectableType) {
 
 export const COLLECTABLE_TYPES = {
   BANANA: 'banana',
-  TREE: 'tree'
+  TREE: 'tree',
+  CARROT: 'carrot'
 }
 
 class CollectableItemsEngine {
@@ -29,6 +30,15 @@ class CollectableItemsEngine {
       width: 920,
       height: 347,
       src: getSrc(COLLECTABLE_TYPES.TREE),
+      nbFramePerRow: 8,
+      nbRow: 3,
+      nbTotalFrame: 18
+    }
+
+    this.sprites[COLLECTABLE_TYPES.CARROT] = {
+      width: 920,
+      height: 347,
+      src: getSrc(COLLECTABLE_TYPES.CARROT),
       nbFramePerRow: 8,
       nbRow: 3,
       nbTotalFrame: 18

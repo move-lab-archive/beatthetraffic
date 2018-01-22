@@ -151,12 +151,20 @@ class GameEngine extends Component {
     let output = null
 
     if (this.props.smokeLevel < 50) {
-      // Only output bananas or nothing, 50% nothing, 50% banana
-      output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : null
+      // Only output bananas/carrot or nothing, 50% nothing, 50% banana / carrot
+      // Draw nothing or something
+      output = Math.random() < 0.5 ? "bananaOrCarrot" : null
+      if(output === "bananaOrCarrot") {
+        output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.CARROT
+      }
+
     } else if (this.props.smokeLevel >= 50 && this.props.smokeLevel < 80) {
-      // Output banananas or tree
+      // Output banaanas / carrot or tree
       output =
-        Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.TREE
+        Math.random() < 0.5 ? "bananaOrCarrot" : COLLECTABLE_TYPES.TREE
+      if(output === "bananaOrCarrot") {
+        output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.CARROT
+      }
     } else {
       // Output only trees
       output = COLLECTABLE_TYPES.TREE

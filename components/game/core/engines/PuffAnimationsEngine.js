@@ -6,7 +6,7 @@ class PuffAnimationsEngine {
     this.sprite = {
       width: 255,
       height: 69,
-      src: '/static/assets/puff/v1.svg',
+      src: '/static/assets/puff/v1.png',
       nbFrames: 4
     }
   }

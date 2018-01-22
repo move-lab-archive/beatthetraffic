@@ -29,8 +29,11 @@ class Score extends Component {
           }
           .score {
             color: white;
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
             font-size: 4rem;
-            font-weight: bold;
+            line-height: 6rem;
+            text-transform: uppercase;
           }
 
           .icon-star {

@@ -58,6 +58,7 @@ class Unicorn extends Component {
             top: 45%;
             will-change: transform;
             animation: scaleInAnimation 2.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+            display: none;
           }
 
           .eye{

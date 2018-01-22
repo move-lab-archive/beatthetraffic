@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull'
 
-import Button from '../../../shared/Button'
+import ButtonLevelBeginning from '../../../shared/ButtonLevelBeginning'
 import Loading from '../../../shared/Loading'
 import AskLandscapeAnimation from '../../../shared/AskLandscapeAnimation'
 
@@ -80,10 +80,10 @@ class LevelBeginning extends Component {
         {/* See in componentDidMount the timing for the msg */}
         {/* NOTE for @mmmm , when you will style that part, you can have a look in Video.js line 164 😉 */}
         {this.state.displayCongratsMsg && (
-          <div className='level-title'>CONGRATS</div>
+          <div className='level-title'><h1>CONGRATS</h1></div>
         )}
         {!this.state.displayCongratsMsg && (
-          <div className='level-title'>LEVEL {this.props.currentLevel}</div>
+          <div className='level-title'><h1>LEVEL {this.props.currentLevel}</h1></div>
         )}
         {!this.state.displayCongratsMsg &&
           this.props.currentLevel >= 2 && (
@@ -91,32 +91,19 @@ class LevelBeginning extends Component {
               {this.props.deviceOrientation === 'portrait' && (
                 <div>
                   <AskLandscapeAnimation />
-                  <p>TIP: This level is easier in landscape</p>
                 </div>
               )}
-              {this.props.deviceOrientation !== 'portrait' &&
-                this.props.isFullscreenAvailable &&
-                !this.props.isFullscreen && (
-                  <div>
-                    <p>TIP: This level is easier in fullscreen</p>
-                    <Button
-                      onClick={() => screenfull.request()}
-                      title='Enter Fullscreen'
-                      transparent
-                    />
-                  </div>
-                )}
             </div>
           )}
         {this.props.isGameReadyToPlay && (
-          <Button
+          <ButtonLevelBeginning
             onClick={() => this.manualStart()}
             title={`Starting in ${this.state.timerAutoStart}s`}
-            large
-            transparent
           />
         )}
-        {!this.props.isGameReadyToPlay && <Loading />}
+        {!this.props.isGameReadyToPlay && <Loading />
+          /* NOTE for thibault, lets use the button loader like on the landingscreen, instead of the spinner */
+        }
         <style jsx>{`
           .instructions-level-beginning {
             display: flex;
@@ -124,15 +111,19 @@ class LevelBeginning extends Component {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            color: white;
+            z-index: 100;
+            position: fixed;
+            width: 100%;
+            height: 100%;
           }
-          .level-title {
-            font-size: 8rem;
+          .instructions-level-beginning .level-title{
+            color: white;
+            position: fixed;
+            padding-bottom: 10rem;
           }
 
           .level-help {
             text-align: center;
-            margin-bottom: 5px;
           }
         `}</style>
       </div>

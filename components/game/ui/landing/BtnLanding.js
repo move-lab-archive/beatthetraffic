@@ -59,35 +59,33 @@ class BtnLanding extends Component {
       >
         <div className="inner" />
         <div className="outer">
-          <h4>Defend {this.props.selectedCityLabel}!</h4>
+          <h3>let's play</h3>
         </div>
         <style jsx>{`
           .btn-landing {
             left: 50%;
-            top: 78%;
+            top: 52.5%;
+            margin-top: 70px;
             position: absolute;
-            width: 160px;
-            height: 45px;
+            width: 180px;
+            height: 60px;
             transform: translateX(-50%) translateY(-50%);
             //GPU accelerate
             will-change: transform;
-          }
-
-          .loading {
-            animation: loaderAnimation ${this.animationDelay}s
-              cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: 1.3s fadeIn;
+            z-index: 4;
+            color: #262626;
           }
 
           .loading .outer {
             animation: progressBarAnimation ${this.animationDuration}s linear;
           }
 
-          .loading .outer h4 {
+          .loading .outer h3 {
             opacity: 0;
           }
 
           .keep-loading .outer {
-            animation: 1s progressBarBounceAnimation;
             animation-iteration-count: infinite;
           }
 
@@ -110,10 +108,9 @@ class BtnLanding extends Component {
             transform-origin: 0 0;
           }
 
-          .btn-landing .outer h4 {
-            font-family: 'Geo', sans-serif;
-            font-size: 2rem;
+          .btn-landing .outer h3 {
             transition: opacity 0.5s;
+            margin-top: 2.8rem;
           }
 
           .btn-landing .outer:hover {
@@ -127,18 +124,10 @@ class BtnLanding extends Component {
             top: 2px;
           }
 
-          @keyframes loaderAnimation {
-            0% {
-              transform: translateX(-50%) translateY(-50%) scale(0);
-              opacity: 0;
-            }
-            55% {
-              transform: translateX(-50%) translateY(-50%) scale(0);
-              opacity: 0;
-            }
-            100% {
-              transform: translateX(-50%) translateY(-50%) scale(1);
-              opacity: 1;
+          @media (min-width: 600px) {
+            .btn-landing {
+              margin-top: 50px;
+              width: 200px;
             }
           }
 
@@ -146,25 +135,23 @@ class BtnLanding extends Component {
             0% {
               transform: scaleX(0);
             }
-            25% {
-              transform: scaleX(0);
-            }
             100% {
               transform: scaleX(1);
             }
           }
 
-          @keyframes progressBarBounceAnimation {
+          @keyframes fadeIn {
             0% {
-              transform: scaleX(1);
+              opacity: 0;
             }
             50% {
-              transform: scaleX(0.95);
+              opacity: 0;
             }
             100% {
-              transform: scaleX(1);
+              opacity: 1;
             }
           }
+
         `}</style>
       </div>
     )

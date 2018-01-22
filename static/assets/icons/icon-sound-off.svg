@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="35px" height="28px" viewBox="0 0 35 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+<svg width="36px" height="28px" viewBox="0 0 36 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
     <title>Group 6</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Layout" transform="translate(-545.000000, -734.000000)">
-            <g id="Group-6" transform="translate(545.000000, 734.000000)">
-                <path d="M25,10 L33.4869239,18.2911639" id="Path-2" stroke="#FFFB5C" stroke-width="4"></path>
-                <path d="M33.6281648,10 L25,18.3095371" id="Path-2" stroke="#FFFB5C" stroke-width="4"></path>
-                <polygon id="Path-4" fill="#FFFB5C" points="0 7.44275701 0 19.8025701 9.98459846 19.8025701 22 28 22 -4.54747351e-13 9.98459846 7.44275701"></polygon>
-            </g>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-544.000000, -734.000000)">
+        <g id="Group-6" transform="translate(544.000000, 734.000000)">
+            <path d="M26,10 L34.4869239,18.2911639" id="Path-2" stroke="#FFFB5C" stroke-width="4"></path>
+            <path d="M34.6281648,10 L26,18.3095371" id="Path-2" stroke="#FFFB5C" stroke-width="4"></path>
+            <polygon id="Path-4" fill="#FFFB5C" points="0 7.44275701 0 19.8025701 9.98459846 19.8025701 22 28 22 -4.54747351e-13 9.98459846 7.44275701"></polygon>
         </g>
     </g>
 </svg>

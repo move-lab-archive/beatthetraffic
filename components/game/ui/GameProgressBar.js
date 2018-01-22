@@ -67,11 +67,11 @@ class GameProgressBar extends PureComponent {
             left: 66.6%;
           }
           .step{
-            height: 12px;
-            width: 3px;
+            height: 15px;
+            width: 4px;
             bottom: 0px;
             position: fixed;
-            background-color: #fffe4a;
+            background-color: #4EFFFF;
           }
 
           .hidden {

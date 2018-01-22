@@ -8,7 +8,7 @@ class GameIndicators extends Component {
   render () {
     return (
       <div
-        className={`game-indicators 
+        className={`game-indicators
         ${this.props.introAnimPlayed ? '' : 'hidden'}`}
       >
         <Score />
@@ -17,7 +17,7 @@ class GameIndicators extends Component {
           .game-indicators {
             position: fixed;
             top: 1.4rem;
-            left: 2.6rem;
+            left: 2.8rem;
             z-index: 5;
             transform: will-change;
             opacity: 1;

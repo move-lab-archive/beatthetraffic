@@ -6,6 +6,7 @@ import { selectVideoForLevel, selectCity } from './AppStateManagement'
 
 import SoundsManager from './SoundsManager'
 import GameEngineStateManager from './GameEngineStateManager'
+import { COLLECTABLE_TYPES } from '../../components/game/core/engines/CollectableItemsEngine';
 
 // Initial state
 const initialState = fromJS({
@@ -72,7 +73,7 @@ export function removeMissedItem () {
 export function collectItem (itemToCollect) {
   return (dispatch, getState) => {
     itemToCollect.collect()
-    if (itemToCollect.type === 'banana' || itemToCollect.type === 'carrot') {
+    if (itemToCollect.type === COLLECTABLE_TYPES.BANANA || itemToCollect.type === COLLECTABLE_TYPES.CARROT) {
       dispatch(incrementScore())
       SoundsManager.playSound('win-point-withitem')
     } else {

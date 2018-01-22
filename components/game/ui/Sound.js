@@ -45,9 +45,9 @@ class Sound extends Component {
         <style jsx>{`
           .audio-button {
             position: fixed;
-            bottom: 2rem;
-            right: 1.6rem;
-            z-index: 10;
+            bottom: 2.7rem;
+            right: 1.9rem;
+            z-index: 5;
             width: 4.4rem;
             height: 4.4rem;
             cursor: pointer;
