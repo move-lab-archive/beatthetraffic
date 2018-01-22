@@ -2,14 +2,43 @@
 import { scaleDetection } from '../../../../utils/resolution'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 
-class UnicornEngine {
-  constructor () {
-    this.offscreenCanvas = null
+export const VEHICLE_REPLACEMENT_TYPES = {
+  TREE: 'tree',
+  RAINBOW: 'rainbow',
+  UNICORN: 'unicorn'
+}
 
-    this.sprite = {
+class VehicleReplacementEngine {
+  constructor () {
+    this.offscreenCanvas = {}
+    this.sprites = {}
+
+    this.sprites[VEHICLE_REPLACEMENT_TYPES.TREE] = {
       width: 600,
       height: 600,
-      src: '/static/assets/sprites/unicorn3dNew.png',
+      src: '/static/assets/sprites/tree.png',
+      nbFramePerRow: 6,
+      nbRow: 6,
+      nbTotalFrame: 36,
+      frameWidth: null,
+      frameHeight: null
+    }
+
+    this.sprites[VEHICLE_REPLACEMENT_TYPES.UNICORN] = {
+      width: 600,
+      height: 600,
+      src: '/static/assets/sprites/unicorn.png',
+      nbFramePerRow: 6,
+      nbRow: 6,
+      nbTotalFrame: 36,
+      frameWidth: null,
+      frameHeight: null
+    }
+
+    this.sprites[VEHICLE_REPLACEMENT_TYPES.RAINBOW] = {
+      width: 600,
+      height: 600,
+      src: '/static/assets/sprites/rainbow.png',
       nbFramePerRow: 6,
       nbRow: 6,
       nbTotalFrame: 36,
@@ -19,32 +48,33 @@ class UnicornEngine {
   }
 
   init () {
-    // Create image element and load sprite data
-    let img = new Image()
-    img.src = this.sprite.src
 
-    img.onload = () => {
-      // Render sprites on offscreen canvas
-      this.offscreenCanvas = document.createElement('canvas')
-      this.offscreenCanvas.width = this.sprite.width
-      this.offscreenCanvas.height = this.sprite.height
-      // this.offscreenCanvas[collectableType].img = img
-      this.offscreenCanvas
-        .getContext('2d')
-        .drawImage(img, 0, 0, this.sprite.width, this.sprite.height)
+    Object.values(VEHICLE_REPLACEMENT_TYPES).forEach(vehicleReplacementType => {
+      let sprite = this.sprites[vehicleReplacementType]
 
-      // Compute frame data for sprite
-      this.sprite.frameWidth = Math.floor(
-        this.sprite.width / this.sprite.nbFramePerRow
-      )
-      this.sprite.frameHeight = Math.floor(
-        this.sprite.height / this.sprite.nbRow
-      )
-    }
+      // Create image element and load sprite data
+      let img = new Image()
+      img.src = sprite.src
+
+      img.onload = () => {
+        // Render sprites on offscreen canvas
+        this.offscreenCanvas[vehicleReplacementType] = document.createElement('canvas')
+        this.offscreenCanvas[vehicleReplacementType].width = sprite.width
+        this.offscreenCanvas[vehicleReplacementType].height = sprite.height
+        // this.offscreenCanvas[collectableType].img = img
+        this.offscreenCanvas[vehicleReplacementType]
+          .getContext('2d')
+          .drawImage(img, 0, 0, sprite.width, sprite.height)
+
+        // Compute frame data for sprite
+        sprite.frameWidth = Math.floor(sprite.width / sprite.nbFramePerRow)
+        sprite.frameHeight = Math.floor(sprite.height / sprite.nbRow)
+      }
+    })
   }
 
-  getNbFrames () {
-    return this.sprites.nbTotalFrame - 1
+  getNbFrames(vehicleReplacementType) {
+    return this.sprites[vehicleReplacementType].nbTotalFrame - 1
   }
 
   /* Associate bearing of the unicorn to a frame
@@ -76,8 +106,8 @@ class UnicornEngine {
                        +
 
 */
-  getFrameData (bearing) {
-    let sprite = this.sprite
+  getFrameData (bearing, vehicleReplacementType) {
+    let sprite = this.sprites[vehicleReplacementType]
     let bearingSprite = 0
     // translate bearing of tracker to bearing of sprite
     if (bearing < 270) {
@@ -96,8 +126,9 @@ class UnicornEngine {
     }
   }
 
-  getUnicornSize (bbox) {
-    let unicorn = {}
+  getVehicleReplacementSize (bbox, vehicleReplacementType) {
+    let sprite = this.sprites[vehicleReplacementType]
+    let vehicleReplacement = {}
     // Compute size depending on bbox area
     const bboxArea = bbox.w * bbox.h
     let size = Math.floor(Math.sqrt(bboxArea / 2))
@@ -106,22 +137,22 @@ class UnicornEngine {
     size = Math.min(Math.max(parseInt(size), 90), 120)
 
     // keep proportions
-    if (this.sprite.frameWidth > this.sprite.frameHeight) {
-      unicorn.w = size
-      unicorn.h = this.sprite.frameHeight * size / this.sprite.frameWidth
+    if (sprite.frameWidth > sprite.frameHeight) {
+      vehicleReplacement.w = size
+      vehicleReplacement.h = sprite.frameHeight * size / sprite.frameWidth
     } else {
-      unicorn.w = this.sprite.frameWidth * size / this.sprite.frameHeight
-      unicorn.h = size
+      vehicleReplacement.w = sprite.frameWidth * size / sprite.frameHeight
+      vehicleReplacement.h = size
     }
 
-    return unicorn
+    return vehicleReplacement
   }
 
   drawFrameOnCanvas (contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(item.bearing)
+    const sourceData = this.getFrameData(item.bearing, VEHICLE_REPLACEMENT_TYPES.TREE)
     contextToDrawOn.drawImage(
-      this.offscreenCanvas,
+      this.offscreenCanvas[VEHICLE_REPLACEMENT_TYPES.TREE],
       sourceData.x,
       sourceData.y,
       sourceData.width,
@@ -133,7 +164,7 @@ class UnicornEngine {
     )
   }
 
-  drawUnicornsFromTrackerData (
+  drawVehiclesReplacementFromTrackerData (
     context,
     objectTrackerDataForThisFrame,
     canvasResolution,
@@ -157,18 +188,18 @@ class UnicornEngine {
 
         objectScaled = {
           ...objectScaled,
-          ...this.getUnicornSize(objectScaled)
+          ...this.getVehicleReplacementSize(objectScaled, VEHICLE_REPLACEMENT_TYPES.TREE)
         }
 
         return objectScaled
       })
 
-    unicornsToDrawThisFrame.forEach(unicorn => {
-      this.drawFrameOnCanvas(context, unicorn)
+    unicornsToDrawThisFrame.forEach(vehicleReplacement => {
+      this.drawFrameOnCanvas(context, vehicleReplacement)
     })
   }
 }
 
-const UnicornEngineInstance = new UnicornEngine()
+const VehicleReplacementEngineInstance = new VehicleReplacementEngine()
 
-export default UnicornEngineInstance
+export default VehicleReplacementEngineInstance

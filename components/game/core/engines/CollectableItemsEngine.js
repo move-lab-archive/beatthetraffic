@@ -2,18 +2,19 @@
 
 const PATH_TO_ASSETS = '/static/assets/sprites'
 
-function getSrc (collectableType) {
+function getSrc(collectableType) {
   return `${PATH_TO_ASSETS}/${collectableType}.png`
 }
 
 export const COLLECTABLE_TYPES = {
   BANANA: 'banana',
-  TREE: 'tree',
-  CARROT: 'carrot'
+  HEALING: 'healing',
+  CARROT: 'carrot',
+  CHERRY: 'cherry'
 }
 
 class CollectableItemsEngine {
-  constructor () {
+  constructor() {
     this.offscreenCanvas = {}
     this.sprites = {}
 
@@ -26,10 +27,10 @@ class CollectableItemsEngine {
       nbTotalFrame: 18
     }
 
-    this.sprites[COLLECTABLE_TYPES.TREE] = {
+    this.sprites[COLLECTABLE_TYPES.HEALING] = {
       width: 920,
       height: 347,
-      src: getSrc(COLLECTABLE_TYPES.TREE),
+      src: getSrc(COLLECTABLE_TYPES.HEALING),
       nbFramePerRow: 8,
       nbRow: 3,
       nbTotalFrame: 18
@@ -43,9 +44,18 @@ class CollectableItemsEngine {
       nbRow: 3,
       nbTotalFrame: 18
     }
+
+    this.sprites[COLLECTABLE_TYPES.CHERRY] = {
+      width: 480,
+      height: 600,
+      src: getSrc(COLLECTABLE_TYPES.CHERRY),
+      nbFramePerRow: 4,
+      nbRow: 5,
+      nbTotalFrame: 18
+    }
   }
 
-  init () {
+  init() {
     Object.values(COLLECTABLE_TYPES).forEach(collectableType => {
       let sprite = this.sprites[collectableType]
 
@@ -70,12 +80,12 @@ class CollectableItemsEngine {
     })
   }
 
-  getNbFrames (collectableType) {
+  getNbFrames(collectableType) {
     return this.sprites[collectableType].nbTotalFrame - 1
   }
 
   /* frame needs to start at 0 */
-  getFrameData (frameNb, collectableType) {
+  getFrameData(frameNb, collectableType) {
     let sprite = this.sprites[collectableType]
     const rowNb = Math.floor(frameNb / sprite.nbFramePerRow)
     const columnNb = frameNb % sprite.nbFramePerRow
@@ -87,7 +97,7 @@ class CollectableItemsEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, item) {
+  drawFrameOnCanvas(contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(item.currentFrame, item.type)
     contextToDrawOn.drawImage(
@@ -101,27 +111,6 @@ class CollectableItemsEngine {
       item.w,
       item.h
     )
-  }
-
-  // TODO DELETE IF UNUSED
-  // TODO RENAME drawExplosionAnimationFrameOnCanvas
-  drawStarsAnimationsFrameOnCanvas (contextToDrawOn, starsAnimation) {
-    const sourceData = this.getFrameData(starsAnimation.currentFrame, 'banana')
-    starsAnimation.dots.map(dot => {
-      contextToDrawOn.globalAlpha = dot.opacity
-      contextToDrawOn.drawImage(
-        this.offscreenCanvas['banana'],
-        sourceData.x,
-        sourceData.y,
-        sourceData.width,
-        sourceData.height,
-        dot.x,
-        dot.y,
-        dot.width,
-        dot.height
-      )
-      contextToDrawOn.globalAlpha = 1
-    })
   }
 }
 

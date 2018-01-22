@@ -73,7 +73,9 @@ export function removeMissedItem () {
 export function collectItem (itemToCollect) {
   return (dispatch, getState) => {
     itemToCollect.collect()
-    if (itemToCollect.type === COLLECTABLE_TYPES.BANANA || itemToCollect.type === COLLECTABLE_TYPES.CARROT) {
+    if (itemToCollect.type === COLLECTABLE_TYPES.BANANA || 
+        itemToCollect.type === COLLECTABLE_TYPES.CARROT ||
+        itemToCollect.type === COLLECTABLE_TYPES.CHERRY) {
       dispatch(incrementScore())
       SoundsManager.playSound('win-point-withitem')
     } else {

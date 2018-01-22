@@ -24,7 +24,7 @@ import StarsAnimation from './models/StarsAnimation'
 
 import DebugTrackerEngine from './engines/DebugTrackerEngine'
 import TrackerUIEngine from './engines/TrackerUIEngine'
-import UnicornEngine from './engines/UnicornEngine'
+import VehicleReplacementEngine from './engines/VehicleReplacementEngine'
 
 import {
   addKilledItem,
@@ -69,7 +69,7 @@ class GameEngine extends Component {
     CollectableItemsEngine.init()
     PuffAnimationsEngine.init()
     StarsAnimationsEngine.init()
-    UnicornEngine.init()
+    VehicleReplacementEngine.init()
     MissedCarAnimationsEngine.init()
   }
 
@@ -315,7 +315,7 @@ class GameEngine extends Component {
 
       if (objectTrackerDataForThisFrame) {
         // Draw unicorns
-        UnicornEngine.drawUnicornsFromTrackerData(
+        VehicleReplacementEngine.drawVehiclesReplacementFromTrackerData(
           this.canvasContext,
           objectTrackerDataForThisFrame,
           this.props.canvasResolution,
