@@ -120,7 +120,9 @@ export function prefetchNextLevelFirstFrame () {
         return video.get('city') === city && video.get('level') === nextLevel
       })
 
-    dispatch(prefetchImgFirstFrame(nextLevelVideo.get('name')))
+    if(nextLevelVideo) {
+      dispatch(prefetchImgFirstFrame(nextLevelVideo.get('name')))
+    }
   }
 }
 
