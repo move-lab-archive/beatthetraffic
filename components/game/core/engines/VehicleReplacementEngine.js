@@ -48,7 +48,6 @@ class VehicleReplacementEngine {
   }
 
   init () {
-
     Object.values(VEHICLE_REPLACEMENT_TYPES).forEach(vehicleReplacementType => {
       let sprite = this.sprites[vehicleReplacementType]
 
@@ -58,7 +57,9 @@ class VehicleReplacementEngine {
 
       img.onload = () => {
         // Render sprites on offscreen canvas
-        this.offscreenCanvas[vehicleReplacementType] = document.createElement('canvas')
+        this.offscreenCanvas[vehicleReplacementType] = document.createElement(
+          'canvas'
+        )
         this.offscreenCanvas[vehicleReplacementType].width = sprite.width
         this.offscreenCanvas[vehicleReplacementType].height = sprite.height
         // this.offscreenCanvas[collectableType].img = img
@@ -73,7 +74,7 @@ class VehicleReplacementEngine {
     })
   }
 
-  getNbFrames(vehicleReplacementType) {
+  getNbFrames (vehicleReplacementType) {
     return this.sprites[vehicleReplacementType].nbTotalFrame - 1
   }
 
@@ -150,7 +151,10 @@ class VehicleReplacementEngine {
 
   drawFrameOnCanvas (contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(item.bearing, VEHICLE_REPLACEMENT_TYPES.TREE)
+    const sourceData = this.getFrameData(
+      item.bearing,
+      VEHICLE_REPLACEMENT_TYPES.TREE
+    )
     contextToDrawOn.drawImage(
       this.offscreenCanvas[VEHICLE_REPLACEMENT_TYPES.TREE],
       sourceData.x,
@@ -188,7 +192,10 @@ class VehicleReplacementEngine {
 
         objectScaled = {
           ...objectScaled,
-          ...this.getVehicleReplacementSize(objectScaled, VEHICLE_REPLACEMENT_TYPES.TREE)
+          ...this.getVehicleReplacementSize(
+            objectScaled,
+            VEHICLE_REPLACEMENT_TYPES.TREE
+          )
         }
 
         return objectScaled
