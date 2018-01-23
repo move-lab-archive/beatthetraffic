@@ -13,6 +13,9 @@ class VehicleReplacementEngine {
     this.offscreenCanvas = {}
     this.sprites = {}
 
+    // Keep track of object id -> Vehicle type
+    this.mapVehicleTypes = {}
+
     this.sprites[VEHICLE_REPLACEMENT_TYPES.TREE] = {
       width: 600,
       height: 600,
@@ -127,11 +130,11 @@ class VehicleReplacementEngine {
     }
   }
 
-  getVehicleReplacementSize (bbox, vehicleReplacementType) {
-    let sprite = this.sprites[vehicleReplacementType]
+  getVehicleReplacementSize (object) {
+    let sprite = this.sprites[object.type]
     let vehicleReplacement = {}
     // Compute size depending on bbox area
-    const bboxArea = bbox.w * bbox.h
+    const bboxArea = object.w * object.h
     let size = Math.floor(Math.sqrt(bboxArea / 2))
     // TODO have this dynamic depending on canvas size / sprite image
     // between 30 and 50 pixel for  now
@@ -149,14 +152,33 @@ class VehicleReplacementEngine {
     return vehicleReplacement
   }
 
+  getRandomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  getVehicleReplacementType (objectId) {
+    let vehicleReplacementType = this.mapVehicleTypes[objectId]
+    if (vehicleReplacementType) {
+      return vehicleReplacementType
+    } else {
+      let randomInt = this.getRandomInt(0, 2)
+      if (randomInt === 0) {
+        vehicleReplacementType = VEHICLE_REPLACEMENT_TYPES.RAINBOW
+      } else if (randomInt === 1) {
+        vehicleReplacementType = VEHICLE_REPLACEMENT_TYPES.TREE
+      } else {
+        vehicleReplacementType = VEHICLE_REPLACEMENT_TYPES.UNICORN
+      }
+      this.mapVehicleTypes[objectId] = vehicleReplacementType
+      return vehicleReplacementType
+    }
+  }
+
   drawFrameOnCanvas (contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
-    const sourceData = this.getFrameData(
-      item.bearing,
-      VEHICLE_REPLACEMENT_TYPES.TREE
-    )
+    const sourceData = this.getFrameData(item.bearing, item.type)
     contextToDrawOn.drawImage(
-      this.offscreenCanvas[VEHICLE_REPLACEMENT_TYPES.TREE],
+      this.offscreenCanvas[item.type],
       sourceData.x,
       sourceData.y,
       sourceData.width,
@@ -190,12 +212,13 @@ class VehicleReplacementEngine {
           originalResolution
         )
 
+        // Get vehicle replacement type from map
+        // if existing object, otherwise draw random
+        objectScaled.type = this.getVehicleReplacementType(objectScaled.id)
+
         objectScaled = {
           ...objectScaled,
-          ...this.getVehicleReplacementSize(
-            objectScaled,
-            VEHICLE_REPLACEMENT_TYPES.TREE
-          )
+          ...this.getVehicleReplacementSize(objectScaled)
         }
 
         return objectScaled
