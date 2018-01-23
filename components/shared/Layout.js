@@ -6,7 +6,6 @@ class Layout extends Component {
     return {
       __html: '<script>window.firstPaint = new Date().getTime()</script>'
     }
-
   }
 
   render () {
@@ -20,24 +19,21 @@ class Layout extends Component {
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
           <link
-            rel="icon"
-            type="image/png"
-            href="/static/assets/icons/icon-favicon.png"
+            rel='icon'
+            type='image/png'
+            href='/static/assets/icons/icon-favicon.png'
           />
           <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
             rel='stylesheet'
-            />
+          />
         </Head>
         {this.props.children}
         <div dangerouslySetInnerHTML={this.recordFirstPaint()} />
 
-
-        <div className='msg'></div>
-
+        <div className='msg' />
 
         <style jsx>{`
-
           :global(html, body) {
             height: 100%;
             width: 100%;
@@ -49,8 +45,16 @@ class Layout extends Component {
             font-weight: 700;
             background-color: white;
             cursor: cell;
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             color: #262626;
+          }
+
+          :global(html) {
+            box-sizing: border-box;
+          }
+
+          :global(*, *:before, *:after) {
+            box-sizing: inherit;
           }
 
           :global(h1) {
@@ -89,8 +93,6 @@ class Layout extends Component {
           :global(html) {
             font-size: 60%;
           }
-
-
 
           @media (max-width: 600px) {
             :global(html) {

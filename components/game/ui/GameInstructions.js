@@ -40,6 +40,7 @@ class GameInstructions extends PureComponent {
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
             opacity: 1;
+            overflow: scroll;
           }
 
           .hidden {

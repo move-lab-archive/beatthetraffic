@@ -16,44 +16,55 @@ class Gameover extends Component {
     return (
       <div className='instructions-gameover'>
         <div className='title'>GAME OVER</div>
-        <div className='message'>
-          <h4>Your score</h4>
-          <div className='score'>
-            <h1>{this.props.score}</h1>
-            <img src='/static/assets/icons/icon-star.svg' />
+        <div className='content'>
+          <div className='message'>
+            <h4>Your score</h4>
+            <div className='score'>
+              <h1>{this.props.score}</h1>
+              <img src='/static/assets/icons/icon-star.svg' />
+            </div>
+          </div>
+          <div className='cta'>
+            <Button large title={`Save your score`} />
+            <Button
+              title={`Play again`}
+              onClick={() => this.props.dispatch(retry())}
+            />
           </div>
         </div>
-        <Button large
-          title={`Save your score`}
-        />
-        <Button
-          title={`Play again`}
-          onClick={() => this.props.dispatch(retry())}
-        />
         <style jsx>{`
           .instructions-gameover {
             display: flex;
             flex: 1;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             color: white;
             padding: 5rem;
             background-color: #262626;
             z-index: 100000000000;
-            width: 100%;
-            height: 100%;
+            min-height: 550px;
           }
           .title {
             font-size: 10rem;
             line-height: 11rem;
             width: 80%;
-            position: fixed;
             top: 6rem;
             color: white;
             text-align: center;
-            margin-bottom: 3rem;
             animation: flashingTitle 0.1s linear infinite;
+          }
+
+          .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           .message {
@@ -61,30 +72,21 @@ class Gameover extends Component {
             border: 4px solid white;
             width: 22rem;
             height: 11.5rem;
-            margin-top: 15rem;
             background-color: #262626;
           }
-          .message h1{
+          .message h1 {
             margin-top: 0;
             line-height: 3rem;
             float: left;
           }
-          .message img{
-            float:left;
+          .message img {
+            float: left;
             margin-left: 1rem;
           }
-          .message .score{
+          .message .score {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-          }
-
-          @media (max-width: 600px) {
-
-            .message {
-              margin-top: 25rem;
-            }
-
           }
 
           @keyframes flashingTitle {
@@ -92,13 +94,12 @@ class Gameover extends Component {
               color: white;
             }
             50% {
-              color: #FF3BFF;
+              color: #ff3bff;
             }
             100% {
               color: white;
             }
           }
-
         `}</style>
       </div>
     )
