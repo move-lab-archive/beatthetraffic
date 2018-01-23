@@ -105,7 +105,7 @@ class Landing extends Component {
               }
             >
               <div className='change-city-container'>
-                <h4 className='change-city'>Change city</h4>
+                <h4 className='change-city'>CHANGE CITY</h4>
                 <img
                   className='IconTriangle'
                   src='/static/assets/icons/icon-triangle.svg'
@@ -131,7 +131,7 @@ class Landing extends Component {
                 this.props.dispatch(showMenu())
               }}
             >
-              <h4>About</h4>
+              <h4>ABOUT</h4>
             </div>
           </div>
         )}
