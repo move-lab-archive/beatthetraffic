@@ -139,6 +139,9 @@ class Video extends Component {
     }
     this.videoEl = el
     if (this.videoEl) {
+      if (this.props.playbackRate) {
+        this.videoEl.playbackRate = this.props.playbackRate
+      }
       // console.log('registerListeners')
       this.videoEl.addEventListener('canplay', this.handleCanPlay)
       this.videoEl.addEventListener('play', this.handlePlay)
@@ -270,6 +273,7 @@ export default connect(state => {
     currentTime: state.video.get('currentTime'),
     duration: state.video.get('duration'),
     videoFPS: selectedVideo.get('videoFPS'),
+    playbackRate: selectedVideo.get('playbackRate'),
     firstFrameLoaded: state.video.get('firstFrameLoaded'),
     srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),
     videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS()
