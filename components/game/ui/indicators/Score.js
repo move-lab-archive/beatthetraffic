@@ -39,6 +39,7 @@ class Score extends Component {
           .icon-star {
             width: 3rem;
             height: 3rem;
+            margin-left: 0.5rem;
           }
         `}</style>
       </div>
