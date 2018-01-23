@@ -8,8 +8,9 @@ function getSrc (collectableType) {
 
 export const COLLECTABLE_TYPES = {
   BANANA: 'banana',
-  TREE: 'tree',
-  CARROT: 'carrot'
+  HEALING: 'healing',
+  CARROT: 'carrot',
+  CHERRY: 'cherry'
 }
 
 class CollectableItemsEngine {
@@ -26,10 +27,10 @@ class CollectableItemsEngine {
       nbTotalFrame: 18
     }
 
-    this.sprites[COLLECTABLE_TYPES.TREE] = {
+    this.sprites[COLLECTABLE_TYPES.HEALING] = {
       width: 920,
       height: 347,
-      src: getSrc(COLLECTABLE_TYPES.TREE),
+      src: getSrc(COLLECTABLE_TYPES.HEALING),
       nbFramePerRow: 8,
       nbRow: 3,
       nbTotalFrame: 18
@@ -41,6 +42,15 @@ class CollectableItemsEngine {
       src: getSrc(COLLECTABLE_TYPES.CARROT),
       nbFramePerRow: 8,
       nbRow: 3,
+      nbTotalFrame: 18
+    }
+
+    this.sprites[COLLECTABLE_TYPES.CHERRY] = {
+      width: 480,
+      height: 600,
+      src: getSrc(COLLECTABLE_TYPES.CHERRY),
+      nbFramePerRow: 4,
+      nbRow: 5,
       nbTotalFrame: 18
     }
   }
@@ -101,27 +111,6 @@ class CollectableItemsEngine {
       item.w,
       item.h
     )
-  }
-
-  // TODO DELETE IF UNUSED
-  // TODO RENAME drawExplosionAnimationFrameOnCanvas
-  drawStarsAnimationsFrameOnCanvas (contextToDrawOn, starsAnimation) {
-    const sourceData = this.getFrameData(starsAnimation.currentFrame, 'banana')
-    starsAnimation.dots.map(dot => {
-      contextToDrawOn.globalAlpha = dot.opacity
-      contextToDrawOn.drawImage(
-        this.offscreenCanvas['banana'],
-        sourceData.x,
-        sourceData.y,
-        sourceData.width,
-        sourceData.height,
-        dot.x,
-        dot.y,
-        dot.width,
-        dot.height
-      )
-      contextToDrawOn.globalAlpha = 1
-    })
   }
 }
 

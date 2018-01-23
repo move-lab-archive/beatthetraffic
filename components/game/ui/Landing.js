@@ -9,8 +9,8 @@ import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
 
-/*import Win from './instructions/Win'*/
-/*NOTE just for style reasons on landing*/
+/* import Win from './instructions/Win' */
+/* NOTE just for style reasons on landing */
 
 class Landing extends Component {
   constructor (props) {
@@ -30,10 +30,14 @@ class Landing extends Component {
       opacity: 0,
       delay: 0.5
     })
-    TweenLite.to('.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets', 0.3, {
-      opacity: 0,
-      delay: 0.5
-    })
+    TweenLite.to(
+      '.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets',
+      0.3,
+      {
+        opacity: 0,
+        delay: 0.5
+      }
+    )
 
     const backgroundOpacityAnimationDuration = 0.5
 
@@ -74,7 +78,8 @@ class Landing extends Component {
       <div className='game-landing'>
         <h1 className='landing-headline'>
           BEAT THE TRAFFIC
-          <br></br><span className='city-var'>X</span>
+          <br />
+          <span className='city-var'>{this.props.selectedCity}</span>
         </h1>
         <LocationMenu
           isVisible={this.state.citySelectorVisible}
@@ -91,7 +96,12 @@ class Landing extends Component {
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page
           <div>
-            <div onClick={this.handleChangeCityClick} className={this.state.citySelectorVisible? 'activeLocationMenu':''}>
+            <div
+              onClick={this.handleChangeCityClick}
+              className={
+                this.state.citySelectorVisible ? 'activeLocationMenu' : ''
+              }
+            >
               <div className='change-city-container'>
                 <h4 className='change-city'>Change city</h4>
                 <img
@@ -100,25 +110,24 @@ class Landing extends Component {
                 />
               </div>
             </div>
-              <LeftCloud />
-              <RightCloud />
-              <div className='mobility-assets'>
-                <img
-                  className='unicorn'
-                  src='/static/assets/landing/asset-unicorn.png'
-                />
-                <img
-                  className='tree'
-                  src='/static/assets/landing/asset-tree.png'
-                />
-              </div>
+            <LeftCloud />
+            <RightCloud />
+            <div className='mobility-assets'>
+              <img
+                className='unicorn'
+                src='/static/assets/landing/asset-unicorn.png'
+              />
+              <img
+                className='tree'
+                src='/static/assets/landing/asset-tree.png'
+              />
+            </div>
 
             <div className='about'>
               <h4>About</h4>
             </div>
           </div>
         )}
-
 
         <style jsx>{`
           .game-landing {
@@ -128,15 +137,15 @@ class Landing extends Component {
             left: 0;
             bottom: 0;
             z-index: 10;
-            background-color: #FFFE4A;
+            background-color: #fffe4a;
             will-change: transform;
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
             cursor: auto;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
           .landing-headline {
@@ -152,11 +161,11 @@ class Landing extends Component {
             text-align: center;
           }
 
-          .city-var{
-            color: #FF3BFF;
+          .city-var {
+            color: #ff3bff;
           }
 
-          .change-city-container{
+          .change-city-container {
             position: fixed;
             z-index: 14;
             bottom: 1.5rem;
@@ -167,24 +176,24 @@ class Landing extends Component {
           .change-city {
             cursor: pointer;
             z-index: 14;
-            display:inline-block;
+            display: inline-block;
             padding-right: 0.5rem;
           }
-          .IconTriangle{
+          .IconTriangle {
             z-index: 14;
             transition-duration: 0.3s;
             transition-delay: 0.3;
-            display:inline-block;
+            display: inline-block;
             padding-bottom: 1px;
           }
-          .activeLocationMenu{
-            color: #FF3BFF;
+          .activeLocationMenu {
+            color: #ff3bff;
           }
-          .activeLocationMenu .IconTriangle{
+          .activeLocationMenu .IconTriangle {
             transform: rotate(180deg);
           }
 
-          .about{
+          .about {
             position: fixed;
             bottom: 1.5rem;
             right: 3rem;
@@ -192,11 +201,12 @@ class Landing extends Component {
             animation: fadeIn 2s;
             z-index: 14;
           }
-          .about:hover, .change-city-container:hover .change-city{
-            color: #FF3BFF;
+          .about:hover,
+          .change-city-container:hover .change-city {
+            color: #ff3bff;
           }
 
-          .mobility-assets .unicorn{
+          .mobility-assets .unicorn {
             animation: fadeIn 2s;
             width: 8.5rem;
             opacity: 1;
@@ -205,7 +215,7 @@ class Landing extends Component {
             z-index: 0;
             position: fixed;
           }
-          .mobility-assets .tree{
+          .mobility-assets .tree {
             animation: fadeIn 2s;
             width: 7rem;
             opacity: 1;
@@ -247,7 +257,6 @@ class Landing extends Component {
               width: 525px;
               text-align: center;
             }
-
           }
         `}</style>
       </div>
@@ -260,6 +269,10 @@ export default connect(state => {
     state.objectTracker.get('fetched') && state.video.get('isReadyToPlay')
 
   return {
-    isGameReadyToPlay
+    isGameReadyToPlay,
+    selectedCity: state.app
+      .get('availableCities')
+      .get(state.app.get('selectedCity'))
+      .get('label')
   }
 })(Landing)
