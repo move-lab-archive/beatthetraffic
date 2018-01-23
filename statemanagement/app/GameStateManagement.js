@@ -13,7 +13,7 @@ const initialState = fromJS({
   score: 0,
   killedItems: [],
   nbItemsMissed: 0,
-  maxMissed: 20,
+  maxMissed: 10,
   currentLevel: 1,
   isPlaying: false,
   finished: false,
