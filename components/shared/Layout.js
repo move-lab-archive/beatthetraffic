@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Head from 'next/head'
 
 class Layout extends Component {
@@ -12,7 +13,7 @@ class Layout extends Component {
     return (
       <div>
         <Head>
-          <title>Beat the traffic X </title>
+          <title>Beat the traffic {this.props.selectedCity}</title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
@@ -134,4 +135,11 @@ class Layout extends Component {
   }
 }
 
-export default Layout
+export default connect(state => {
+  return {
+    selectedCity: state.app
+      .get('availableCities')
+      .get(state.app.get('selectedCity'))
+      .get('label')
+  }
+})(Layout)
