@@ -36,28 +36,27 @@ class LocationMenu extends Component {
               ))}
           </div>
 
-          <div  onClick={() => this.props.handleClose()}
-                className={`closeLocationMenu`}
+          <div
+            onClick={() => this.props.handleClose()}
+            className={`closeLocationMenu`}
           >
             <div className="inner" />
             <div className="outer">
-              <img
-                src="/static/assets/icons/icon-close.svg"
-              />
+              <img src="/static/assets/icons/icon-close.svg" />
             </div>
           </div>
-
         </div>
         <div
           className={`coverLandingPage ${
-            this.props.isVisible ? 'visibleCoverLandingPage' : 'hiddenCoverLandingPage'
+            this.props.isVisible
+              ? 'visibleCoverLandingPage'
+              : 'hiddenCoverLandingPage'
           }`}
-        >
-        </div>
+        />
         <style jsx>{`
           .LocationsContainer {
             background-color: white;
-            max-width: 300px;
+            max-width: 280px;
             width: 90%;
             left: 3.1rem;
             bottom: 7rem;
@@ -70,7 +69,7 @@ class LocationMenu extends Component {
             z-index: 15;
           }
 
-          .coverLandingPage{
+          .coverLandingPage {
             position: fixed;
             background: #4effff;
             width: 100%;
@@ -91,8 +90,8 @@ class LocationMenu extends Component {
             margin: 0;
             cursor: pointer;
           }
-          .Locations h3:hover{
-            color: #FF3BFF;
+          .Locations h3:hover {
+            color: #ff3bff;
           }
 
           .closeLocationMenu {
@@ -117,7 +116,7 @@ class LocationMenu extends Component {
             background-color: #4effff;
             position: absolute;
           }
-          .closeLocationMenu .outer img{
+          .closeLocationMenu .outer img {
             top: 7px;
             left: 6.5px;
             position: absolute;
@@ -132,7 +131,6 @@ class LocationMenu extends Component {
             left: 1px;
             top: 1px;
           }
-
 
           .hidden {
             transform: translateY(100%);
