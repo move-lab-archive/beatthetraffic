@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
@@ -35,9 +36,7 @@ class Intro extends Component {
   render () {
     return (
       <div className='game-landing'>
-        <div className='title location'>
-          Stutt<br />gart
-        </div>
+        <div className='title location'>{this.props.selectedCity}</div>
         <div className='title click'>Click</div>
         <div className='title the'>the</div>
         <div className='title cars'>
@@ -87,6 +86,8 @@ class Intro extends Component {
           .location {
             font-size: 12rem;
             line-height: 12rem;
+            word-break: break-all;
+            min-width: 320px;
           }
           .click {
             font-size: 13.1rem;
@@ -95,11 +96,11 @@ class Intro extends Component {
             font-size: 19.5rem;
           }
           .cars {
-            font-size: 14.1rem;
+            font-size: 13.5rem;
           }
 
           .highlight {
-            width: 40rem;
+            width: 38rem;
             height: 15rem;
             margin-top: 0.5rem;
             margin-left: auto;
@@ -180,4 +181,11 @@ class Intro extends Component {
   }
 }
 
-export default Intro
+export default connect(state => {
+  return {
+    selectedCity: state.app
+      .get('availableCities')
+      .get(state.app.get('selectedCity'))
+      .get('label')
+  }
+})(Intro)
