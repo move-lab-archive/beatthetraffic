@@ -23,20 +23,28 @@ class GameProgressBar extends PureComponent {
 
   monitorProgress () {
     if (GameEngineStateManager.getCurrentTime() !== this.currentTime) {
-      const progressInLevel =
-        GameEngineStateManager.getCurrentTime() / this.props.totalDuration || 0
+      let progressInLevel = 0
+      if (this.props.totalDuration > 0) {
+        progressInLevel =
+          GameEngineStateManager.getCurrentTime() / this.props.totalDuration
+      }
       const progressOffset =
         this.progressByLevel * (this.props.currentLevel - 1)
       const progress = progressOffset + progressInLevel * this.progressByLevel
+      if (!isFinite(progress)) {
+        /* eslint-disable */
+        debugger
+      }
       TweenLite.set(this.el, { scaleX: progress })
       this.currentTime = GameEngineStateManager.getCurrentTime()
     }
     raf(this.monitorProgress)
   }
 
-  render () {
+  render() {
     return (
-      <div className={`progress-bar
+      <div
+        className={`progress-bar
       ${this.props.introAnimPlayed ? '' : 'hidden'}`}
       >
         <div
@@ -44,8 +52,8 @@ class GameProgressBar extends PureComponent {
           ${this.props.introAnimPlayed ? '' : 'hidden'}`}
           ref={el => (this.el = el)}
         />
-        <div className={`level-2 step`}></div>
-        <div className={`level-3 step`}></div>
+        <div className={`level-2 step`} />
+        <div className={`level-3 step`} />
         <style jsx>{`
           .progress-bar {
             position: fixed;
@@ -60,18 +68,18 @@ class GameProgressBar extends PureComponent {
             transition: opacity 0.3s;
           }
 
-          .level-2{
+          .level-2 {
             left: 33.3%;
           }
-          .level-3{
+          .level-3 {
             left: 66.6%;
           }
-          .step{
+          .step {
             height: 15px;
             width: 4px;
             bottom: 0px;
             position: fixed;
-            background-color: #4EFFFF;
+            background-color: #4effff;
           }
 
           .hidden {
