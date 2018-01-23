@@ -9,6 +9,8 @@ import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
 
+import { showMenu } from '../../../statemanagement/app/AppStateManagement'
+
 /* import Win from './instructions/Win' */
 /* NOTE just for style reasons on landing */
 
@@ -123,7 +125,12 @@ class Landing extends Component {
               />
             </div>
 
-            <div className='about'>
+            <div
+              className='about'
+              onClick={() => {
+                this.props.dispatch(showMenu())
+              }}
+            >
               <h4>About</h4>
             </div>
           </div>
