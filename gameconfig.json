@@ -21,6 +21,7 @@
       "city": "stuttgart1",
       "level": 1,
       "levelName": "Neckartor",
+      "playbackRate": 1,
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 350,
@@ -49,6 +50,7 @@
       "city": "stuttgart1",
       "level": 2,
       "levelName": "Uferstraße",
+      "playbackRate": 1.5,
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 400,
@@ -77,6 +79,7 @@
       "city": "stuttgart1",
       "level": 3,
       "levelName": "Cannstatter Straße",
+      "playbackRate": 1.8,
       "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,

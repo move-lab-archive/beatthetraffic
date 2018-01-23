@@ -18,8 +18,8 @@ class Loading extends Component {
             font-style: italic;
           }
           .spinner {
-            width: 7rem;
-            height: 7rem;
+            width: 6rem;
+            height: 6rem;
             border-style: solid;
             border-color: rgba(0, 0, 0, 0);
             border-top-color: #fffe4a;

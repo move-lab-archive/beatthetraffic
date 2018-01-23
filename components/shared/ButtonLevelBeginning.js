@@ -10,24 +10,22 @@ class Button extends Component {
   render() {
     return (
       <a
-        className={this.props.large ? "btn": "btn"}
+        className={this.props.large ? 'btn' : 'btn'}
         onClick={this.props.onClick}
       >
         <div className="inner" />
         <div className="outer">
-            <h4>{this.props.title}</h4>
+          <h4>{this.props.title}</h4>
         </div>
 
         <style jsx>{`
-
           .btn {
             width: 24rem;
             height: 6rem;
             will-change: transform;
-            margin-top: 5rem;
             position: relative;
           }
-          .btn h4{
+          .btn h4 {
             margin: 0;
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
@@ -70,7 +68,6 @@ class Button extends Component {
             .large {
             }
           }
-
         `}</style>
       </a>
     )

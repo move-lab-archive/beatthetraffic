@@ -80,12 +80,16 @@ class LevelBeginning extends Component {
         {/* See in componentDidMount the timing for the msg */}
         {/* NOTE for @mmmm , when you will style that part, you can have a look in Video.js line 164 😉 */}
         {this.state.displayCongratsMsg && (
-          <div className='level-title'><h1>CONGRATS</h1></div>
+          <div className='level-title'>
+            <h1>CONGRATS</h1>
+          </div>
         )}
         {!this.state.displayCongratsMsg && (
-          <div className='level-title'><h1>LEVEL {this.props.currentLevel}</h1></div>
+          <div className='level-title'>
+            <h1>LEVEL {this.props.currentLevel}</h1>
+          </div>
         )}
-        {!this.state.displayCongratsMsg &&
+        {/* {!this.state.displayCongratsMsg &&
           this.props.currentLevel >= 2 && (
             <div className='level-help'>
               {this.props.deviceOrientation === 'portrait' && (
@@ -93,17 +97,27 @@ class LevelBeginning extends Component {
                   <AskLandscapeAnimation />
                 </div>
               )}
+              {this.props.deviceOrientation !== 'portrait' &&
+                this.props.isFullscreenAvailable &&
+                !this.props.isFullscreen && (
+                  <div>
+                    <p>TIP: This level is easier in fullscreen</p>
+                    <Button
+                      onClick={() => screenfull.request()}
+                      title='Enter Fullscreen'
+                      transparent
+                    />
+                  </div>
+                )}
             </div>
-          )}
+          )} */}
         {this.props.isGameReadyToPlay && (
           <ButtonLevelBeginning
             onClick={() => this.manualStart()}
             title={`Starting in ${this.state.timerAutoStart}s`}
           />
         )}
-        {!this.props.isGameReadyToPlay && <Loading />
-          /* NOTE for thibault, lets use the button loader like on the landingscreen, instead of the spinner */
-        }
+        {!this.props.isGameReadyToPlay && <Loading />}
         <style jsx>{`
           .instructions-level-beginning {
             display: flex;
@@ -116,10 +130,8 @@ class LevelBeginning extends Component {
             width: 100%;
             height: 100%;
           }
-          .instructions-level-beginning .level-title{
+          .instructions-level-beginning .level-title {
             color: white;
-            position: fixed;
-            padding-bottom: 10rem;
           }
 
           .level-help {

@@ -9,6 +9,8 @@ import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 import LocationMenu from './landing/LocationMenu'
 
+import { showMenu } from '../../../statemanagement/app/AppStateManagement'
+
 /* import Win from './instructions/Win' */
 /* NOTE just for style reasons on landing */
 
@@ -103,7 +105,7 @@ class Landing extends Component {
               }
             >
               <div className='change-city-container'>
-                <h4 className='change-city'>Change city</h4>
+                <h4 className='change-city'>CHANGE CITY</h4>
                 <img
                   className='IconTriangle'
                   src='/static/assets/icons/icon-triangle.svg'
@@ -123,8 +125,13 @@ class Landing extends Component {
               />
             </div>
 
-            <div className='about'>
-              <h4>About</h4>
+            <div
+              className='about'
+              onClick={() => {
+                this.props.dispatch(showMenu())
+              }}
+            >
+              <h4>ABOUT</h4>
             </div>
           </div>
         )}

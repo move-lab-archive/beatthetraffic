@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
@@ -29,28 +30,25 @@ class Intro extends Component {
       .to('.logo', 0, { opacity: 0 }, '+=1')
       .to('.logo', 0, { opacity: 0 }, '+=2.5')
 
-
     timeline.play()
   }
 
   render () {
     return (
       <div className='game-landing'>
-        <div className='title location'>
-          Stutt<br />gart
-        </div>
+        <div className='title location'>{this.props.selectedCity}</div>
         <div className='title click'>Click</div>
         <div className='title the'>the</div>
         <div className='title cars'>
           <div className='highlight'>
-            <div className='top-left-corner-one'></div>
-            <div className='top-left-corner-two'></div>
-            <div className='top-right-corner-one'></div>
-            <div className='top-right-corner-two'></div>
-            <div className='bottom-left-corner-one'></div>
-            <div className='bottom-left-corner-two'></div>
-            <div className='bottom-right-corner-one'></div>
-            <div className='bottom-right-corner-two'></div>
+            <div className='top-left-corner-one' />
+            <div className='top-left-corner-two' />
+            <div className='top-right-corner-one' />
+            <div className='top-right-corner-two' />
+            <div className='bottom-left-corner-one' />
+            <div className='bottom-left-corner-two' />
+            <div className='bottom-right-corner-one' />
+            <div className='bottom-right-corner-two' />
             cars
           </div>
         </div>
@@ -65,7 +63,7 @@ class Intro extends Component {
             right: 0;
             left: 0;
             bottom: 0;
-            z-index: 10;
+            z-index: 8;
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
@@ -88,6 +86,8 @@ class Intro extends Component {
           .location {
             font-size: 12rem;
             line-height: 12rem;
+            word-break: break-all;
+            min-width: 320px;
           }
           .click {
             font-size: 13.1rem;
@@ -96,90 +96,96 @@ class Intro extends Component {
             font-size: 19.5rem;
           }
           .cars {
-            font-size: 14.1rem;
+            font-size: 13.5rem;
           }
 
-          .highlight{
-            width: 40rem;
+          .highlight {
+            width: 38rem;
             height: 15rem;
             margin-top: 0.5rem;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             display: flex;
-            justify-content:center;
-            align-items:center;
+            justify-content: center;
+            align-items: center;
           }
 
-          .highlight .top-left-corner-one{
+          .highlight .top-left-corner-one {
             width: 3rem;
             height: 1rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             left: 0;
             top: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .top-left-corner-two{
+          .highlight .top-left-corner-two {
             width: 1rem;
             height: 3rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             left: 0;
             top: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .top-right-corner-one{
+          .highlight .top-right-corner-one {
             width: 3rem;
             height: 1rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             right: 0;
             top: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .top-right-corner-two{
+          .highlight .top-right-corner-two {
             width: 1rem;
             height: 3rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             right: 0;
             top: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .bottom-left-corner-one{
+          .highlight .bottom-left-corner-one {
             width: 3rem;
             height: 1rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             left: 0;
             bottom: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .bottom-left-corner-two{
+          .highlight .bottom-left-corner-two {
             width: 1rem;
             height: 3rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             left: 0;
             bottom: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .bottom-right-corner-one{
+          .highlight .bottom-right-corner-one {
             width: 3rem;
             height: 1rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             right: 0;
             bottom: 0;
-            position:absolute;
+            position: absolute;
           }
-          .highlight .bottom-right-corner-two{
+          .highlight .bottom-right-corner-two {
             width: 1rem;
             height: 3rem;
-            background-color: #4EFFFF;
+            background-color: #4effff;
             right: 0;
             bottom: 0;
-            position:absolute;
+            position: absolute;
           }
-
         `}</style>
       </div>
     )
   }
 }
 
-export default Intro
+export default connect(state => {
+  return {
+    selectedCity: state.app
+      .get('availableCities')
+      .get(state.app.get('selectedCity'))
+      .get('label')
+  }
+})(Intro)

@@ -88,6 +88,7 @@ better to add the things in order 😉
   "city": "stuttgart",
   "level": 3, // Should be 1, 2 or 3
   "levelName": "Stuttgart STR.", // Label that is displayed in the game
+  "playbackRate": 1.2, // If you want to speed up the video
   "videoFPS": 30, // The video FPS
   "trackerAndDetectionsFPS": 30, // The FPS of the YOLO / Tracker data, should be the same as the videoFPS
   "originalResolution": {
@@ -139,7 +140,6 @@ Or set it to a special part or the video or even empty, this will leads not to c
 ```json
 "disappearAreas": []
 ```
-
 
 ### 2. Generate the tracking data
 
