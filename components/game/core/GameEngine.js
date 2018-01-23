@@ -240,7 +240,7 @@ class GameEngine extends Component {
               )
               // Add puff animation
               GameEngineStateManager.addPuffAnimation(
-                new MissedCarAnimation(
+                new PuffAnimation(
                   click.x,
                   click.y,
                   90,
@@ -306,7 +306,7 @@ class GameEngine extends Component {
 
         // Add a visual clue that we have missed them
         GameEngineStateManager.addMissedCarAnimation(
-          new PuffAnimation(
+          new MissedCarAnimation(
             centerOfDisapearItem.x,
             centerOfDisapearItem.y,
             100,
