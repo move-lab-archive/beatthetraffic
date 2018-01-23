@@ -2,7 +2,7 @@
 
 const PATH_TO_ASSETS = '/static/assets/sprites'
 
-function getSrc(collectableType) {
+function getSrc (collectableType) {
   return `${PATH_TO_ASSETS}/${collectableType}.png`
 }
 
@@ -14,7 +14,7 @@ export const COLLECTABLE_TYPES = {
 }
 
 class CollectableItemsEngine {
-  constructor() {
+  constructor () {
     this.offscreenCanvas = {}
     this.sprites = {}
 
@@ -55,7 +55,7 @@ class CollectableItemsEngine {
     }
   }
 
-  init() {
+  init () {
     Object.values(COLLECTABLE_TYPES).forEach(collectableType => {
       let sprite = this.sprites[collectableType]
 
@@ -80,12 +80,12 @@ class CollectableItemsEngine {
     })
   }
 
-  getNbFrames(collectableType) {
+  getNbFrames (collectableType) {
     return this.sprites[collectableType].nbTotalFrame - 1
   }
 
   /* frame needs to start at 0 */
-  getFrameData(frameNb, collectableType) {
+  getFrameData (frameNb, collectableType) {
     let sprite = this.sprites[collectableType]
     const rowNb = Math.floor(frameNb / sprite.nbFramePerRow)
     const columnNb = frameNb % sprite.nbFramePerRow
@@ -97,7 +97,7 @@ class CollectableItemsEngine {
     }
   }
 
-  drawFrameOnCanvas(contextToDrawOn, item) {
+  drawFrameOnCanvas (contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(item.currentFrame, item.type)
     contextToDrawOn.drawImage(

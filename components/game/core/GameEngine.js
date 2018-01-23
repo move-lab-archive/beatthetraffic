@@ -146,28 +146,46 @@ class GameEngine extends Component {
     GameEngineStateManager.addCollectableItem(newItem)
   }
 
+  getRandomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
   getWhatToOutputFromDisappearingACar () {
     // Depending on smoke level, decide wheter we output heath helper or points, or nothing
     let output = null
 
     if (this.props.smokeLevel < 50) {
-      // Only output bananas/carrot or nothing, 50% nothing, 50% banana / carrot
-      // Draw nothing or something
-      output = Math.random() < 0.5 ? "bananaOrCarrot" : null
-      if(output === "bananaOrCarrot") {
-        output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.CARROT
+      // Probability: 50% nothing, 50% cherry/carrot/banana
+      output = Math.random() < 0.5 ? 'random-item-win-point' : null
+      if (output === 'random-item-win-point') {
+        output = this.getRandomInt(0, 2)
+        if (output === 0) {
+          output = COLLECTABLE_TYPES.BANANA
+        } else if (output === 1) {
+          output = COLLECTABLE_TYPES.CARROT
+        } else {
+          output = COLLECTABLE_TYPES.CHERRY
+        }
       }
-
     } else if (this.props.smokeLevel >= 50 && this.props.smokeLevel < 80) {
-      // Output banaanas / carrot or tree
+      // Output banaanas / carrot or healing kit
       output =
-        Math.random() < 0.5 ? "bananaOrCarrot" : COLLECTABLE_TYPES.TREE
-      if(output === "bananaOrCarrot") {
-        output = Math.random() < 0.5 ? COLLECTABLE_TYPES.BANANA : COLLECTABLE_TYPES.CARROT
+        Math.random() < 0.5
+          ? 'random-item-win-point'
+          : COLLECTABLE_TYPES.HEALING
+      if (output === 'random-item-win-point') {
+        output = this.getRandomInt(0, 2)
+        if (output === 0) {
+          output = COLLECTABLE_TYPES.BANANA
+        } else if (output === 1) {
+          output = COLLECTABLE_TYPES.CARROT
+        } else {
+          output = COLLECTABLE_TYPES.CHERRY
+        }
       }
     } else {
-      // Output only trees
-      output = COLLECTABLE_TYPES.TREE
+      // Output only healable kits
+      output = COLLECTABLE_TYPES.HEALING
     }
 
     return output
