@@ -115,7 +115,6 @@ class Menu extends Component {
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
 
         <div className='menu-container'>
-
           <div className='menu-items'>
             <div className='link' onClick={() => this.showAbout()}>
               <h1>ABOUT</h1>
@@ -123,7 +122,9 @@ class Menu extends Component {
             <div className='link' onClick={() => this.showScore()}>
               <h1>HIGH SCORES</h1>
             </div>
-            <div className='link'><h1>SHARE</h1></div>
+            <div className='link'>
+              <h1>SHARE</h1>
+            </div>
             <SocialShareButtons />
           </div>
 
@@ -134,19 +135,22 @@ class Menu extends Component {
             <h2 className='link'>Portland</h2>
             <h2 className='link'>Los Angeles</h2>
           </div>
-
         </div>
 
         {this.state.showAbout && <AboutPage onClose={() => this.hideAbout()} />}
         {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
 
         <img
-          className={`menu-rightcloud ${this.props.showMenu ? 'visiblecloud' : 'hiddencloud'}`}
+          className={`menu-rightcloud ${
+            this.props.showMenu ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
 
         <img
-          className={`menu-leftcloud ${this.props.showMenu ? 'visiblecloud' : 'hiddencloud'}`}
+          className={`menu-leftcloud ${
+            this.props.showMenu ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
 
@@ -159,32 +163,34 @@ class Menu extends Component {
             bottom: 0;
             z-index: 10;
             color: #262626;
-            background-color: #ECECEC;
+            background-color: #ececec;
             will-change: transform;
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
           }
 
-          h1{
+          h1 {
             line-height: 2.8rem;
           }
 
-          .menu-container{
+          .menu-container {
             max-width: 700px;
             width: 100%;
             height: 100%;
-            position:absolute;
+            position: absolute;
             top: 0%;
             left: 50%;
             transform: translateX(-50%);
           }
 
-          .menu-items{
-            position: absolute;
+          .menu-items {
+            // position: absolute;
             top: 5rem;
           }
 
-          .city-selector-items{
-            position: absolute;
+          .city-selector-items {
+            // position: absolute;
             bottom: 5rem;
           }
 
@@ -202,21 +208,21 @@ class Menu extends Component {
             left: 2.9rem;
           }
 
-          .link:hover{
-            color: #FF3BFF;
+          .link:hover {
+            color: #ff3bff;
           }
 
-          h2.link{
+          h2.link {
             line-height: 1.6rem;
           }
 
-          .city-selector-items h4{
+          .city-selector-items h4 {
             left: 2.9rem;
             position: relative;
             line-height: 0.2rem;
           }
 
-          .menu-rightcloud{
+          .menu-rightcloud {
             position: fixed;
             top: 0%;
             width: 60%;
@@ -233,24 +239,23 @@ class Menu extends Component {
             transform: translateX(0%);
           }
 
-          .menu-leftcloud{
+          .menu-leftcloud {
             position: fixed;
             bottom: 0%;
             width: 110%;
             left: 2%;
             z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
 
           @media (min-width: 600px) {
-            .menu-rightcloud{
+            .menu-rightcloud {
               width: 40%;
             }
-            .menu-leftcloud{
+            .menu-leftcloud {
               width: 45%;
             }
           }
-
         `}</style>
       </div>
     )
