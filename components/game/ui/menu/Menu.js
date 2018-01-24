@@ -114,26 +114,36 @@ class Menu extends Component {
       >
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
 
-        <div className='menu-container'>
-          <div className='menu-items'>
-            <div className='link' onClick={() => this.showAbout()}>
-              <h1>ABOUT</h1>
+        <div className='menu-menu-container'>
+          <div className='menu-container'>
+            <div className='menu-items'>
+              <div className='link' onClick={() => this.showAbout()}>
+                <h1>ABOUT</h1>
+              </div>
+              <div className='link' onClick={() => this.showScore()}>
+                <h1>HIGH SCORES</h1>
+              </div>
+              <div className='link'>
+                <h1>SHARE</h1>
+              </div>
+              <SocialShareButtons />
             </div>
-            <div className='link' onClick={() => this.showScore()}>
-              <h1>HIGH SCORES</h1>
-            </div>
-            <div className='link'>
-              <h1>SHARE</h1>
-            </div>
-            <SocialShareButtons />
-          </div>
 
-          <div className='city-selector-items'>
-            <h4>Beat the traffic in</h4>
-            <h2 className='link'>Stuttgart</h2>
-            <h2 className='link'>Berlin</h2>
-            <h2 className='link'>Portland</h2>
-            <h2 className='link'>Los Angeles</h2>
+            <div className='city-selector-items'>
+              <h4>Beat the traffic</h4>
+              <h2 className='link'>Tokio</h2>
+              <h2 className='link'>Berlin</h2>
+              <h2 className='link'>New York</h2>
+              <h2 className='link'>Los Angeles</h2>
+              <h2 className='link'>Stuttgart</h2>
+              <h2 className='link'>Portland</h2>
+              <h2 className='link'>New Delhi</h2>
+              <h2 className='link'>Moscow</h2>
+              <h2 className='link'>Barcelona</h2>
+              <h2 className='link'>Addis Ababa</h2>
+              <h2 className='link'>Buenos Aires</h2>
+              <h2 className='link'>London</h2>
+            </div>
           </div>
         </div>
 
@@ -166,12 +176,21 @@ class Menu extends Component {
             background-color: #ececec;
             will-change: transform;
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            overflow-y: auto;
+            overflow-y: hidden;
             overflow-x: hidden;
           }
 
           h1 {
             line-height: 2.8rem;
+          }
+
+          .menu-menu-container{
+            overflow-x: auto;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
           }
 
           .menu-container {
@@ -185,13 +204,14 @@ class Menu extends Component {
           }
 
           .menu-items {
-            // position: absolute;
+            position: absolute;
             top: 5rem;
           }
 
           .city-selector-items {
-            // position: absolute;
-            bottom: 5rem;
+            position: absolute;
+            top: 60%;
+            padding-bottom: 5rem;
           }
 
           .hidden {
@@ -248,12 +268,18 @@ class Menu extends Component {
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
 
-          @media (min-width: 600px) {
+          @media (min-width: 500px) {
             .menu-rightcloud {
               width: 40%;
             }
             .menu-leftcloud {
               width: 45%;
+            }
+          }
+
+          @media (max-height: 500px) {
+            .city-selector-items {
+              top: 70%;
             }
           }
         `}</style>

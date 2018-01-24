@@ -76,10 +76,18 @@ class Button extends Component {
             text-transform: uppercase;
           }
 
-          @media (max-width: 600px) {
+          @media (max-height: 500px) {
             .btn {
+              right: 3.3rem;
+              left: auto;
+              position: fixed;
+              bottom: 3rem;
             }
             .large {
+              position: fixed;
+              left: 50%;
+              transform: translateX(-50%);
+              bottom: 4rem;
             }
           }
 

@@ -11,7 +11,7 @@ import LocationMenu from './landing/LocationMenu'
 
 import { showMenu } from '../../../statemanagement/app/AppStateManagement'
 
-/* import Win from './instructions/Win' */
+/*import Gameover from './instructions/Gameover'*/
 /* NOTE just for style reasons on landing */
 
 class Landing extends Component {
@@ -88,6 +88,7 @@ class Landing extends Component {
           handleClose={this.handleChangeCityClick}
         />
         <Unicorn />
+
 
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}

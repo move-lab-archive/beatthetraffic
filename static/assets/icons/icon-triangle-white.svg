@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="5px" viewBox="0 0 11 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-triangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1592.000000, -4954.000000)">
+        <g id="icon-triangle" transform="translate(1592.000000, 4954.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <polygon id="Triangle-2" transform="translate(5.500000, 2.500000) scale(-1, 1) rotate(90.000000) translate(-5.500000, -2.500000) " points="3 2.5 8 -3 8 8"></polygon>
+        </g>
+    </g>
+</svg>
