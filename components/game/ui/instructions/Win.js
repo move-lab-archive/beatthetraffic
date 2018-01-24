@@ -59,10 +59,14 @@ class Win extends Component {
           </div>
         </div>
         <Button large title={`Save your score`} />
-        <Button
-          title={`Play again`}
-          onClick={() => this.props.dispatch(retry())}
-        />
+        <div className='cta-secondary'>
+          <Button
+            title={`Play again`}
+            onClick={() => this.props.dispatch(retry())}
+          />
+          <div className='cta-secondary-separator' />
+          <Button title={`? todo`} />
+        </div>
         <div className='change-city-container'>
           <h4 className='change-city'>PLAY ANOTHER CITY</h4>
           <img
@@ -95,12 +99,6 @@ class Win extends Component {
           }
 
           .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .cta {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -143,6 +141,14 @@ class Win extends Component {
           .score h1 {
             margin: 0;
             margin-right: 0.5rem;
+          }
+
+          .cta-secondary {
+            display: flex;
+          }
+
+          .cta-secondary-separator {
+            width: 2rem;
           }
 
           .change-city-container {
