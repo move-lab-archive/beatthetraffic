@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '../../../shared/Button'
+import PopUpAddScore from '../../../shared/PopUpAddScore'
 
 import { retry } from '../../../../statemanagement/app/GameStateManagement'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
@@ -48,8 +49,9 @@ class Gameover extends Component {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 5rem;
-            z-index: 100000000000;
+            padding: 2rem;
+            padding-bottom: 5rem;
+            z-index: 15;
             width: 100%;
             height: 100%;
           }
@@ -57,11 +59,8 @@ class Gameover extends Component {
             font-size: 10rem;
             line-height: 11rem;
             width: 80%;
-            position: fixed;
-            top: 15%;
-            color: #4EFFFF;
+            color: #4effff;
             text-align: center;
-            margin-bottom: 3rem;
             animation: flashingTitle 0.1s linear infinite;
           }
 
@@ -78,29 +77,31 @@ class Gameover extends Component {
           }
 
           .message {
-            text-align: center;
-            width: 30rem;
-            height: 12rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
             border-bottom: 4px solid white;
-            margin-top: 15rem;
-            background-color: #262626;
-            position: relative;
+
+            // increase vertival spacing between flex-box item
+            margin-top: 4rem;
+            margin-bottom: 4rem;
           }
-          .message h1 {
-            margin-top: 0;
-            line-height: 3rem;
-            float: left;
+
+          .message h4 {
+            margin-bottom: 0.4rem;
           }
-          .message img {
-            float: left;
-            margin-left: 1rem;
+
+          .score {
+            display: flex;
+            flex-direction: row;
           }
-          .message .score {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-          .message .score h1{
+
+          .score h1 {
+            margin: 0;
+            margin-right: 0.5rem;
           }
 
           .change-city-container {
@@ -134,24 +135,28 @@ class Gameover extends Component {
             color: #ff3bff;
           }
 
-          @media (max-width: 600px) {
-
-            .message {
-              margin-top: 25rem;
+          @media (max-height: 575px) {
+            .title {
+              font-size: 7rem;
+              line-height: 8rem;
             }
 
+            .message {
+              margin-top: 2rem;
+              margin-bottom: 2rem;
+            }
           }
 
-          @media (max-height: 500px) {
-
+          @media (max-height: 475px) {
             .title {
-              top: 3rem;
+              font-size: 6.5rem;
+              line-height: 7rem;
             }
 
             .message {
-              margin-top: 6rem;
+              margin-top: 0rem;
+              margin-bottom: 0rem;
             }
-
           }
 
           @keyframes flashingTitle {
