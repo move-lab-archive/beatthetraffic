@@ -85,7 +85,7 @@ class Gameover extends Component {
             padding-right: 1rem;
             border-bottom: 4px solid white;
 
-            // increase vertival spacing between flex-box item
+            // increase vertical spacing between flex-box item
             margin-top: 4rem;
             margin-bottom: 4rem;
           }
@@ -97,6 +97,8 @@ class Gameover extends Component {
           .score {
             display: flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: center;
           }
 
           .score h1 {
