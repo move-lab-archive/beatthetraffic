@@ -10,6 +10,7 @@ class PopUpAddScore extends Component {
   render () {
     return (
       <div className='popup-page'>
+        <div className='popup-overlay' onClick={() => this.props.onClose()} />
         <div className='popup-container'>
           <div className='popup-container-inner'>
             <form>
@@ -52,17 +53,24 @@ class PopUpAddScore extends Component {
                   I want to know about upcoming moovel lab projects.
                 </label>
               </div>
-              <Button
-                title={`Cancel`}
-                onClick={() => this.props.onClose()}
-                bgBlack
-              />
-              <Button title={`Add score`} bgBlack />
+              <div className='cta'>
+                <Button
+                  title={`Cancel`}
+                  onClick={() => this.props.onClose()}
+                  bgBlack
+                />
+                <div className='separator' />
+                <Button
+                  bgBlack
+                  title={`Add score`}
+                  onClick={() => this.props.onClose()}
+                />
+              </div>
             </form>
           </div>
         </div>
         <style jsx>{`
-          .popup-page{
+          .popup-page {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -70,13 +78,25 @@ class PopUpAddScore extends Component {
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(78, 255, 255, .9);
             z-index: 50;
             color: #262626;
           }
 
-          .popup-container{
+          .popup-overlay {
+            background: rgba(78, 255, 255, 0.9);
+            z-index: 49;
             position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+
+          .popup-container {
+            position: fixed;
+            z-index: 50;
             max-width: 450px;
             width: 90%;
             height: 42.5rem;
@@ -87,7 +107,7 @@ class PopUpAddScore extends Component {
             transform: translateX(-50%) translateY(-50%);
           }
 
-          .popup-container-inner{
+          .popup-container-inner {
             position: absolute;
             left: 2.9rem;
             right: 2.9rem;
@@ -95,11 +115,20 @@ class PopUpAddScore extends Component {
             bottom: 2.9rem;
           }
 
-          .popup-container-inner p{
+          .popup-container-inner p {
             margin-bottom: 1rem;
           }
 
-          .input-text{
+          .cta {
+            display: flex;
+            justify-content: center;
+          }
+
+          .separator {
+            width: 2rem;
+          }
+
+          .input-text {
             width: 97.5%;
             height: 3.2rem;
             margin-top: 1rem;
@@ -108,7 +137,7 @@ class PopUpAddScore extends Component {
             font-weight: 700;
             font-size: 2rem;
             line-height: 2.9rem;
-            background-color: #EFEFEF;
+            background-color: #efefef;
             text-indent: 0.7rem;
           }
           input:focus {
@@ -126,39 +155,39 @@ class PopUpAddScore extends Component {
           }
 
           input[type='checkbox'] {
-            display:none;
+            display: none;
           }
 
           input[type='checkbox'] + label span {
-            display:inline-block;
+            display: inline-block;
             width: 3.2rem;
             height: 3.2rem;
-            margin-right:8px;
-            vertical-align:middle;
+            margin-right: 8px;
+            vertical-align: middle;
             border: 4px solid #262626;
-            cursor:pointer;
+            cursor: pointer;
           }
 
           input[type='checkbox']:checked + label span {
-             background-color: #FF3BFF;
-           }
-
-           .input-box{
-             margin-top: 1rem;
-           }
-
-           .cancel{
-             left: 0%;
-           }
-           .addscore{
-             left: 12.5rem;
-           }
-
-          @media (max-width: 600px) {
-            .popup-container{
-              height: 44rem;
+            background-color: #ff3bff;
           }
 
+          .input-box {
+            margin-top: 1rem;
+          }
+
+          .cancel {
+            left: 0%;
+          }
+          .addscore {
+            left: 12.5rem;
+          }
+
+          @media (max-width: 600px) {
+            .popup-container {
+              height: 44rem;
+            }
+          }
         `}</style>
       </div>
     )
