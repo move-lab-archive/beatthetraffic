@@ -7,6 +7,27 @@ class PopUpAddScore extends Component {
     onClose: PropTypes.func
   }
 
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isSaving: false,
+      error: false
+    }
+  }
+
+  saveScore () {
+    this.setState({
+      isSaving: true,
+      error: false
+    })
+
+    setTimeout(() => {
+      // TODO Redirect to highscore page
+      this.props.onClose()
+    }, 1000)
+  }
+
   render () {
     return (
       <div className='popup-page'>
@@ -55,6 +76,7 @@ class PopUpAddScore extends Component {
               </div>
               <div className='cta'>
                 <Button
+                  disabled={this.state.isSaving}
                   title={`Cancel`}
                   onClick={() => this.props.onClose()}
                   bgBlack
@@ -62,8 +84,11 @@ class PopUpAddScore extends Component {
                 <div className='separator' />
                 <Button
                   bgBlack
-                  title={`Add score`}
-                  onClick={() => this.props.onClose()}
+                  disabled={this.state.isSaving}
+                  title={`${
+                    this.state.isSaving ? 'Saving score...' : 'Save score'
+                  }`}
+                  onClick={() => this.saveScore()}
                 />
               </div>
             </form>
@@ -109,10 +134,12 @@ class PopUpAddScore extends Component {
 
           .popup-container-inner {
             position: absolute;
-            left: 2.9rem;
-            right: 2.9rem;
-            top: 0.4rem;
-            bottom: 2.9rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding-left: 2.8rem;
+            padding-right: 2.8rem;
           }
 
           .popup-container-inner p {
@@ -122,6 +149,7 @@ class PopUpAddScore extends Component {
           .cta {
             display: flex;
             justify-content: center;
+            margin-top: 1rem;
           }
 
           .separator {

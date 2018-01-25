@@ -5,8 +5,19 @@ class Button extends Component {
   static propTypes = {
     title: PropTypes.string,
     large: PropTypes.bool,
+    disabled: PropTypes.bool,
     onClick: PropTypes.func,
     bgBlack: PropTypes.bool
+  }
+
+  static defaultProps = {
+    disabled: false
+  }
+
+  handleClick () {
+    if (!this.props.disabled) {
+      this.props.onClick()
+    }
   }
 
   render () {
@@ -16,7 +27,7 @@ class Button extends Component {
           ${this.props.large ? 'large' : ''} 
           ${this.props.bgBlack ? 'bg-black' : ''}
         `}
-        onClick={this.props.onClick}
+        onClick={() => this.handleClick()}
       >
         <div className='inner' />
         <div className='outer'>
