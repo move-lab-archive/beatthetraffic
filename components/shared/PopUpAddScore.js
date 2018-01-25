@@ -1,63 +1,78 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from './Button'
 
-class Button extends Component {
+class PopUpAddScore extends Component {
   static propTypes = {
-    onClick: PropTypes.func
+    onClose: PropTypes.func
   }
 
-  render() {
+  render () {
     return (
       <div className='popup-page'>
         <div className='popup-container'>
           <div className='popup-container-inner'>
             <form>
               <p>Please add a name to save your score.</p>
-              <input className='input-text' type='text' placeholder='Name' /><br />
-              <input className='input-text' type='text' placeholder='E-mail / optional' /><br />
-              <input className='input-text' type='text' placeholder='Link / optional' /><br />
-
-              <div className="input-box">
-                <input type="checkbox" name="first-accept" id="first-accept" value="1" />
-                  <label htmlFor="first-accept" className="check">
-                    <span></span>
-                    Inform me ones if somebody beats my score.
-                  </label>
+              <input className='input-text' type='text' placeholder='Name' />
+              <br />
+              <input
+                className='input-text'
+                type='text'
+                placeholder='E-mail / optional'
+              />
+              <br />
+              <input
+                className='input-text'
+                type='text'
+                placeholder='Link / optional'
+              />
+              <br />
+              <div className='input-box'>
+                <input
+                  type='checkbox'
+                  name='first-accept'
+                  id='first-accept'
+                  value='1'
+                />
+                <label htmlFor='first-accept' className='check'>
+                  <span />
+                  Inform me ones if somebody beats my score.
+                </label>
               </div>
-              <div className="input-box">
-                <input type="checkbox" name="second-accept" id="second-accept" value="1" />
-                  <label htmlFor="second-accept" className="check">
-                    <span></span>
-                    I want to know about upcoming moovel lab projects.
-                  </label>
+              <div className='input-box'>
+                <input
+                  type='checkbox'
+                  name='second-accept'
+                  id='second-accept'
+                  value='1'
+                />
+                <label htmlFor='second-accept' className='check'>
+                  <span />
+                  I want to know about upcoming moovel lab projects.
+                </label>
               </div>
-
-              <a className="btn cancel">
-                <div className="inner" />
-                <div className="outer">
-                    <h4>Cancel</h4>
-                </div>
-              </a>
-
-              <a className="btn addscore">
-                <div className="inner" />
-                <div className="outer">
-                    <h4>Add score</h4>
-                </div>
-              </a>
-
+              <Button
+                title={`Cancel`}
+                onClick={() => this.props.onClose()}
+                bgBlack
+              />
+              <Button title={`Add score`} bgBlack />
             </form>
           </div>
         </div>
-
         <style jsx>{`
-
           .popup-page{
             position: fixed;
             width: 100%;
             height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: rgba(78, 255, 255, .9);
             z-index: 50;
+            color: #262626;
           }
 
           .popup-container{
@@ -109,20 +124,23 @@ class Button extends Component {
             font-weight: 400;
             font-size: 1.6rem;
           }
-          input[type="checkbox"] {
-	           display:none;
+
+          input[type='checkbox'] {
+            display:none;
           }
-          input[type="checkbox"] + label span {
-          	display:inline-block;
-          	width: 3.2rem;
-          	height: 3.2rem;
-          	margin-right:8px;
-          	vertical-align:middle;
+
+          input[type='checkbox'] + label span {
+            display:inline-block;
+            width: 3.2rem;
+            height: 3.2rem;
+            margin-right:8px;
+            vertical-align:middle;
             border: 4px solid #262626;
-          	cursor:pointer;
+            cursor:pointer;
           }
-          input[type="checkbox"]:checked + label span {
-	           background-color: #FF3BFF;
+
+          input[type='checkbox']:checked + label span {
+             background-color: #FF3BFF;
            }
 
            .input-box{
@@ -136,50 +154,10 @@ class Button extends Component {
              left: 12.5rem;
            }
 
-           .btn {
-             width: 10.5rem;
-             height: 4rem;
-             will-change: transform;
-             margin-top: 3rem;
-             position: absolute;
-           }
-           .btn h4{
-             margin: 0;
-           }
-           .btn .inner {
-             width: 100%;
-             height: 100%;
-             left: 5px;
-             top: 5px;
-             background-color: #262626;
-             position: absolute;
-           }
-           .btn .outer {
-             width: 100%;
-             height: 100%;
-             background-color: #4effff;
-             position: absolute;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             transform-origin: 0 0;
-           }
-           .btn .outer:hover {
-             background-color: #ff3bff;
-             cursor: pointer;
-           }
-
-           .btn .outer:active {
-             background-color: #ff3bff;
-             left: 2px;
-             top: 2px;
-           }
-
-
-            @media (max-width: 600px) {
-              .popup-container{
-                height: 44rem;
-            }
+          @media (max-width: 600px) {
+            .popup-container{
+              height: 44rem;
+          }
 
         `}</style>
       </div>
@@ -187,4 +165,4 @@ class Button extends Component {
   }
 }
 
-export default Button
+export default PopUpAddScore

@@ -8,8 +8,6 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
-import SaveScoreModal from './highscore/SaveScoreModal'
-
 class Win extends Component {
   constructor (props) {
     super(props)

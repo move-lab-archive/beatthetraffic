@@ -8,9 +8,27 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
 class Gameover extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      showAddScorePopup: false
+    }
+
+    this.closePopupAddScore = this.closePopupAddScore.bind(this)
+  }
+
   componentDidMount () {
     SoundsManager.playSound('youlose')
     SoundsManager.playSound('youloseloop')
+  }
+
+  closePopupAddScore () {
+    this.setState({ showAddScorePopup: false })
+  }
+
+  showPopupAddScore () {
+    this.setState({ showAddScorePopup: true })
   }
 
   render () {
@@ -26,7 +44,11 @@ class Gameover extends Component {
             </div>
           </div>
           <div className='cta'>
-            <Button large title={`Save your score`} />
+            <Button
+              large
+              title={`Save your score`}
+              onClick={() => this.showPopupAddScore()}
+            />
             <Button
               title={`Play again`}
               onClick={() => this.props.dispatch(retry())}
@@ -40,6 +62,9 @@ class Gameover extends Component {
             src='/static/assets/icons/icon-triangle-white.svg'
           />
         </div>
+        {this.state.showAddScorePopup && (
+          <PopUpAddScore onClose={this.closePopupAddScore} />
+        )}
         <style jsx>{`
           .instructions-gameover {
             color: white;
