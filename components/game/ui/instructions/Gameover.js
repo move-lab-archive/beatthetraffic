@@ -76,7 +76,6 @@ class Gameover extends Component {
             justify-content: center;
             padding: 2rem;
             padding-bottom: 5rem;
-            z-index: 15;
             width: 100%;
             height: 100%;
           }

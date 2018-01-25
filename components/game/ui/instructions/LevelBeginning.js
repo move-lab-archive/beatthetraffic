@@ -129,7 +129,6 @@ class LevelBeginning extends Component {
             width: 100%;
             height: 100%;
             background-color: rgba(38, 38, 38, 0.5);
-            z-index: 0; //tdurant can you add gameprogressbar, score and smokelevel on top of this layer, but still under the gameover layer? :)
           }
           .instructions-level-beginning .level-title {
             color: white;
