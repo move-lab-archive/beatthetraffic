@@ -326,7 +326,7 @@ class ScorePage extends Component {
 
           }
 
-          @media (min-width: 600px) {
+          @media (min-width: 500px) {
             .rightcloud{
               width: 40%;
             }

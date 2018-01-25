@@ -12,25 +12,25 @@ class Button extends Component {
   render() {
     return (
       <a
-        className={this.props.large ? "large btn": "btn"}
+        className={this.props.large ? 'large btn' : 'btn'}
         onClick={this.props.onClick}
       >
         <div className="inner" />
         <div className="outer">
-            <h4>{this.props.title}</h4>
+          <h4>{this.props.title}</h4>
         </div>
 
         <style jsx>{`
-
           .btn {
             width: 10.5rem;
             height: 4rem;
             will-change: transform;
             color: #262626;
-            margin-top: 4rem;
+            margin-top: 1rem;
+            margin-bottom: 5px;
             position: relative;
           }
-          .btn h4{
+          .btn h4 {
             margin: 0;
           }
           .btn .inner {
@@ -65,24 +65,15 @@ class Button extends Component {
           .large {
             width: 27rem;
             height: 6rem;
-            margin-bottom: -2rem;
           }
 
-          .large h4{
+          .large h4 {
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             font-size: 2.5rem;
             line-height: 3.4rem;
             text-transform: uppercase;
           }
-
-          @media (max-width: 600px) {
-            .btn {
-            }
-            .large {
-            }
-          }
-
         `}</style>
       </a>
     )
