@@ -4,71 +4,112 @@ class Loading extends Component {
   render () {
     return (
       <div className='loader'>
-        <div className='spinner' />
+        <div className='spinner'>
+          <div className='circle circle-one' />
+          <div className='circle circle-two' />
+          <div className='circle circle-three' />
+        </div>
+
         <style jsx>{`
           .loader {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            margin-bottom: 2rem;
           }
-          .message {
-            margin-top: 1rem;
-            font-style: italic;
-          }
+
           .spinner {
-            width: 6rem;
+            width: 12rem;
             height: 6rem;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0);
-            border-top-color: #fffe4a;
-            border-width: 0.3rem 0rem 0rem 0rem;
-            transform: will-change;
-
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-
-            -webkit-animation: spin 0.5s infinite linear;
-            -moz-animation: spin 0.5s infinite linear;
-            -o-animation: spin 0.5s infinite linear;
-            animation: spin 0.5s infinite linear;
+            will-change: transform;
+            position: relative;
           }
 
-          @-webkit-keyframes spin {
-            from {
-              -webkit-transform: rotate(0deg);
-            }
-            to {
-              -webkit-transform: rotate(359deg);
-            }
+          .circle {
+            width: 2rem;
+            height: 2rem;
+            background-color: #00ffff;
+            top: 2rem;
           }
 
-          @-moz-keyframes spin {
-            from {
-              -moz-transform: rotate(0deg);
-            }
-            to {
-              -moz-transform: rotate(359deg);
-            }
+          .circle-one {
+            position: absolute;
+            left: 1rem;
+            animation: spinone 1s infinite;
           }
 
-          @-o-keyframes spin {
-            from {
-              -o-transform: rotate(0deg);
-            }
-            to {
-              -o-transform: rotate(359deg);
-            }
+          .circle-two {
+            position: absolute;
+            left: 4.5rem;
+            animation: spintwo 1s infinite;
           }
 
-          @keyframes spin {
-            from {
-              transform: rotate(0deg);
+          .circle-three {
+            position: absolute;
+            left: 8rem;
+            animation: spinthree 1s infinite;
+          }
+
+          @keyframes spinone {
+            0% {
+              background-color: #fffe4a;
+              transform: scale(1);
             }
-            to {
-              transform: rotate(359deg);
+            15% {
+              background-color: #00ffff;
+              transform: scale(1.2);
+            }
+            30% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            100% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+          }
+          @keyframes spintwo {
+            0% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            30% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            45% {
+              background-color: #00ffff;
+              transform: scale(1.2);
+            }
+            60% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            100% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+          }
+          @keyframes spinthree {
+            0% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            60% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            75% {
+              background-color: #00ffff;
+              transform: scale(1.2);
+            }
+            90% {
+              background-color: #fffe4a;
+              transform: scale(1);
+            }
+            100% {
+              background-color: #fffe4a;
+              transform: scale(1);
             }
           }
         `}</style>

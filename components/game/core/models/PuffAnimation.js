@@ -15,7 +15,7 @@ class PuffAnimation {
   }
 
   animate () {
-    this.anim = TweenLite.to(this, 0.5, {
+    this.anim = TweenLite.to(this, 0.4, {
       currentFrame: PuffAnimationsEngine.getNbFrames(),
       ease: SteppedEase.config(PuffAnimationsEngine.getNbFrames()),
       onComplete: () => {

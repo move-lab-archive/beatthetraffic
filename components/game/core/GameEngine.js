@@ -243,7 +243,7 @@ class GameEngine extends Component {
                 new PuffAnimation(
                   click.x,
                   click.y,
-                  90,
+                  130,
                   potentialObjectToMask.id
                 )
               )
