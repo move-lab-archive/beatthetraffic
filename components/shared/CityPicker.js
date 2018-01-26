@@ -47,7 +47,13 @@ class CityPicker extends Component {
             {Object.keys(this.props.availableCities)
               // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
               .map(cityId => (
-                <h3 onClick={() => this.changeCity(cityId)} key={cityId}>
+                <h3
+                  onClick={() => this.changeCity(cityId)}
+                  key={cityId}
+                  className={
+                    cityId === this.props.selectedCity ? 'selected' : ''
+                  }
+                >
                   {this.props.availableCities[cityId].label}
                 </h3>
               ))}
@@ -102,6 +108,11 @@ class CityPicker extends Component {
             margin: 0;
             cursor: pointer;
           }
+
+          .cities h3.selected {
+            color: #ff3bff;
+          }
+
           .cities h3:hover {
             color: #ff3bff;
           }
@@ -133,7 +144,10 @@ class CityPicker extends Component {
 
 export default connect(state => {
   return {
-    availableCities: state.app.get('availableCities').toJS(),
+    availableCities: state.app
+      .get('availableCities')
+      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+      .toJS(),
     selectedCity: state.app.get('selectedCity'),
     isVisible: state.app.get('showCityPicker'),
     label: state.app.get('cityPickerLabel')
