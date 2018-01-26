@@ -7,7 +7,6 @@ import BtnLanding from './landing/BtnLanding'
 import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
-import LocationMenu from './landing/LocationMenu'
 
 import { showMenu } from '../../../statemanagement/app/AppStateManagement'
 
@@ -19,16 +18,15 @@ import {
   blockCanvasScrolling,
   restoreCanvasScrolling
 } from '../../../statemanagement/app/ViewportStateManagement'
+import ChangeCityButton from '../../shared/ChangeCityButton'
 
 class Landing extends Component {
   constructor (props) {
     super(props)
 
     this.handleStartGame = this.handleStartGame.bind(this)
-    this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
 
     this.state = {
-      citySelectorVisible: false, // NOTE tdurand, this logic could be pushed into the locationMenu component to reuse it easier in Game over and win page
       javascriptLoaded: false
     }
   }
@@ -41,7 +39,7 @@ class Landing extends Component {
       delay: 0.5
     })
     TweenLite.to(
-      '.change-city,.landing-headline,.btn-landing,.about,.IconTriangle,.mobility-assets',
+      '.landing-headline,.btn-landing,.about,.mobility-assets',
       0.3,
       {
         opacity: 0,
@@ -63,20 +61,6 @@ class Landing extends Component {
     }) */
   }
 
-  // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
-  // to reuse it easier in Game over and win page
-  handleChangeCityClick () {
-    if (this.state.citySelectorVisible) {
-      this.setState({
-        citySelectorVisible: false
-      })
-    } else {
-      this.setState({
-        citySelectorVisible: true
-      })
-    }
-  }
-
   componentDidMount () {
     this.setState({
       javascriptLoaded: true
@@ -92,10 +76,6 @@ class Landing extends Component {
           <br />
           <span className='city-var'>{this.props.selectedCity}</span>
         </h1>
-        <LocationMenu
-          isVisible={this.state.citySelectorVisible}
-          handleClose={this.handleChangeCityClick}
-        />
         <Unicorn />
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
@@ -105,20 +85,7 @@ class Landing extends Component {
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page
           <div>
-            <div
-              onClick={this.handleChangeCityClick}
-              className={
-                this.state.citySelectorVisible ? 'activeLocationMenu' : ''
-              }
-            >
-              <div className='change-city-container'>
-                <h4 className='change-city'>CHANGE CITY</h4>
-                <img
-                  className='IconTriangle'
-                  src='/static/assets/icons/icon-triangle.svg'
-                />
-              </div>
-            </div>
+            <ChangeCityButton label='CHANGE CITY' />
             <LeftCloud />
             <RightCloud />
             <div className='mobility-assets'>
@@ -179,34 +146,6 @@ class Landing extends Component {
             color: #ff3bff;
           }
 
-          .change-city-container {
-            position: fixed;
-            z-index: 14;
-            bottom: 1.5rem;
-            left: 3rem;
-            cursor: pointer;
-            animation: fadeIn 2s;
-          }
-          .change-city {
-            cursor: pointer;
-            z-index: 14;
-            display: inline-block;
-            padding-right: 0.5rem;
-          }
-          .IconTriangle {
-            z-index: 14;
-            transition-duration: 0.3s;
-            transition-delay: 0.3;
-            display: inline-block;
-            padding-bottom: 1px;
-          }
-          .activeLocationMenu {
-            color: #ff3bff;
-          }
-          .activeLocationMenu .IconTriangle {
-            transform: rotate(180deg);
-          }
-
           .about {
             position: fixed;
             bottom: 1.5rem;
@@ -215,8 +154,7 @@ class Landing extends Component {
             animation: fadeIn 2s;
             z-index: 14;
           }
-          .about:hover,
-          .change-city-container:hover .change-city {
+          .about:hover {
             color: #ff3bff;
           }
 

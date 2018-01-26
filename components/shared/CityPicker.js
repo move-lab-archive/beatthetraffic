@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { loadCity } from '../../../../statemanagement/app/GameStateManagement'
+import { loadCity } from '../../statemanagement/app/GameStateManagement'
+import { hideCityPicker } from '../../statemanagement/app/AppStateManagement'
+import ButtonClose from './ButtonClose'
+import ChangeCityButton from './ChangeCityButton'
 
-// TODO IMPROVE IT TO BE ABLE TO REUSE EASIER IN GAMEOVER AND WIN PAGE
-
-class LocationMenu extends Component {
+class CityPicker extends Component {
   static propTypes = {
     isVisible: PropTypes.bool,
-    handleClose: PropTypes.func,
+    label: PropTypes.string,
     availableCities: PropTypes.object
   }
 
@@ -22,9 +23,13 @@ class LocationMenu extends Component {
     }
   }
 
+  handleClose () {
+    this.props.dispatch(hideCityPicker())
+  }
+
   changeCity (cityId) {
     this.props.dispatch(loadCity(cityId))
-    this.props.handleClose()
+    this.handleClose()
   }
 
   render () {
@@ -34,11 +39,11 @@ class LocationMenu extends Component {
           ref={el => {
             this.containerRef = el
           }}
-          className={`LocationsContainer ${
+          className={`city-picker-container ${
             this.props.isVisible ? 'visible' : 'hidden'
           }`}
         >
-          <div className={`Locations`}>
+          <div className={`cities`}>
             {Object.keys(this.props.availableCities)
               // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
               .map(cityId => (
@@ -47,27 +52,18 @@ class LocationMenu extends Component {
                 </h3>
               ))}
           </div>
-
-          <div
-            onClick={() => this.props.handleClose()}
-            className={`closeLocationMenu`}
-          >
-            <div className='inner' />
-            <div className='outer'>
-              <img src='/static/assets/icons/icon-close.svg' />
-            </div>
-          </div>
+          <ButtonClose onClick={() => this.handleClose()} smallPadding />
         </div>
         <div
-          onClick={() => this.props.handleClose()}
-          className={`coverLandingPage ${
-            this.props.isVisible
-              ? 'visibleCoverLandingPage'
-              : 'hiddenCoverLandingPage'
+          onClick={() => this.handleClose()}
+          className={`city-picker-overlay ${
+            this.props.isVisible ? 'visible' : 'hidden'
           }`}
-        />
+        >
+          <ChangeCityButton label={this.props.label} />
+        </div>
         <style jsx>{`
-          .LocationsContainer {
+          .city-picker-container {
             background-color: white;
             max-width: 280px;
             width: 90%;
@@ -85,7 +81,7 @@ class LocationMenu extends Component {
             z-index: 15;
           }
 
-          .coverLandingPage {
+          .city-picker-overlay {
             position: fixed;
             background: #4effff;
             width: 100%;
@@ -97,73 +93,35 @@ class LocationMenu extends Component {
             transition: all 150ms;
           }
 
-          .Locations {
+          .cities {
             padding: 1.9rem;
           }
 
-          .Locations h3 {
+          .cities h3 {
             text-transform: uppercase;
             margin: 0;
             cursor: pointer;
           }
-          .Locations h3:hover {
+          .cities h3:hover {
             color: #ff3bff;
           }
 
-          .closeLocationMenu {
-            position: absolute;
-            top: 1.9rem;
-            right: 1.9rem;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-          }
-          .closeLocationMenu .inner {
-            width: 100%;
-            height: 100%;
-            left: 4px;
-            top: 4px;
-            background-color: #262626;
-            position: absolute;
-          }
-          .closeLocationMenu .outer {
-            width: 100%;
-            height: 100%;
-            background-color: #4effff;
-            position: absolute;
-          }
-          .closeLocationMenu .outer img {
-            top: 7px;
-            left: 6.5px;
-            position: absolute;
-          }
-          .closeLocationMenu .outer:hover {
-            background-color: #ff3bff;
-            cursor: pointer;
-          }
-
-          .closeLocationMenu .outer:active {
-            background-color: #ff3bff;
-            left: 1px;
-            top: 1px;
-          }
-
-          .hidden {
+          .city-picker-container.hidden {
             transform: translateY(100%);
             bottom: 0rem;
           }
 
-          .visible {
+          .city-picker-container.visible {
             transform: translateX(0%);
             bottom: 7rem;
           }
 
-          .hiddenCoverLandingPage {
+          .city-picker-overlay.hidden {
             opacity: 0;
             z-index: 0;
           }
 
-          .visibleCoverLandingPage {
+          .city-picker-overlay.visible {
             opacity: 0.93;
             z-index: 10;
           }
@@ -176,6 +134,8 @@ class LocationMenu extends Component {
 export default connect(state => {
   return {
     availableCities: state.app.get('availableCities').toJS(),
-    selectedCity: state.app.get('selectedCity')
+    selectedCity: state.app.get('selectedCity'),
+    isVisible: state.app.get('showCityPicker'),
+    label: state.app.get('cityPickerLabel')
   }
-})(LocationMenu)
+})(CityPicker)

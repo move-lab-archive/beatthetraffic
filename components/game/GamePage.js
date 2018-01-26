@@ -34,6 +34,7 @@ import { initViewportListeners } from '../../statemanagement/app/ViewportStateMa
 
 import SoundsManager from '../../statemanagement/app/SoundsManager'
 import GameEngineStateManager from '../../statemanagement/app/GameEngineStateManager'
+import CityPicker from '../shared/CityPicker'
 
 class GamePage extends React.Component {
   constructor (props) {
@@ -192,6 +193,7 @@ class GamePage extends React.Component {
             <GameProgressBar />
             <MenuBtn />
             <Menu url={this.props.url} />
+            <CityPicker />
           </div>
         )}
       </div>

@@ -11,7 +11,6 @@ import {
 import { turnSoundOn, turnSoundOff } from './SettingsStateManagement'
 
 import GameConfig from '../../gameconfig.json'
-import { saveScrollPosition } from './ViewportStateManagement'
 
 // Initial state
 const initialState = fromJS({
@@ -20,6 +19,8 @@ const initialState = fromJS({
   selectedVideo: GameConfig.defaultSelectedVideo,
   availableVideos: GameConfig.availableVideos,
   showMenu: false,
+  showCityPicker: false,
+  cityPickerLabel: '',
   playOnHideMenu: false,
   unmuteOnHideMenu: false,
   introAnimPlayed: false
@@ -30,6 +31,8 @@ const SELECT_VIDEO = 'App/SELECT_VIDEO'
 const SELECT_CITY = 'App/SELECT_CITY'
 const SHOW_MENU = 'App/SHOW_MENU'
 const HIDE_MENU = 'App/HIDE_MENU'
+const SHOW_CITY_PICKER = 'App/SHOW_CITY_PICKER'
+const HIDE_CITY_PICKER = 'App/HIDE_CITY_PICKER'
 const PLAY_ON_HIDE_MENU = 'App/PLAY_ON_HIDE_MENU'
 const UNMUTE_ON_HIDE_MENU = 'App/UNMUTE_ON_HIDE_MENU'
 const KEEP_MUTED_ON_HIDE_MENU = 'App/KEEP_MUTED_ON_HIDE_MENU'
@@ -56,6 +59,19 @@ export function getFirstFrameImgPath (videoName) {
 export function setIntroAnimPlayed () {
   return {
     type: SET_INTROANIM_PLAYED
+  }
+}
+
+export function showCityPicker (label) {
+  return {
+    type: SHOW_CITY_PICKER,
+    payload: label
+  }
+}
+
+export function hideCityPicker () {
+  return {
+    type: HIDE_CITY_PICKER
   }
 }
 
@@ -192,6 +208,12 @@ export default function AppReducer (state = initialState, action = {}) {
       return state.set('showMenu', true)
     case HIDE_MENU:
       return state.set('showMenu', false).set('playOnHideMenu', false)
+    case SHOW_CITY_PICKER:
+      return state
+        .set('showCityPicker', true)
+        .set('cityPickerLabel', action.payload)
+    case HIDE_CITY_PICKER:
+      return state.set('showCityPicker', false)
     case PLAY_ON_HIDE_MENU:
       return state.set('playOnHideMenu', true)
     case UNMUTE_ON_HIDE_MENU:

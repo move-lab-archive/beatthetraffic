@@ -11,6 +11,7 @@ import {
   blockCanvasScrolling,
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
+import ChangeCityButton from '../../../shared/ChangeCityButton'
 
 class Gameover extends Component {
   constructor (props) {
@@ -66,13 +67,7 @@ class Gameover extends Component {
             />
           </div>
         </div>
-        <div className='change-city-container'>
-          <h4 className='change-city'>PLAY ANOTHER CITY</h4>
-          <img
-            className='IconTriangle'
-            src='/static/assets/icons/icon-triangle-white.svg'
-          />
-        </div>
+        <ChangeCityButton label='PLAY ANOTHER CITY' white />
         {this.state.showAddScorePopup && (
           <PopUpAddScore onClose={this.closePopupAddScore} />
         )}
@@ -140,37 +135,6 @@ class Gameover extends Component {
           .score h1 {
             margin: 0;
             margin-right: 0.5rem;
-          }
-
-          .change-city-container {
-            position: fixed;
-            z-index: 14;
-            bottom: 1.5rem;
-            left: 3rem;
-            cursor: pointer;
-            animation: fadeIn 2s;
-          }
-          .change-city {
-            cursor: pointer;
-            z-index: 14;
-            display: inline-block;
-            padding-right: 0.5rem;
-          }
-          .IconTriangle {
-            z-index: 14;
-            transition-duration: 0.3s;
-            transition-delay: 0.3;
-            display: inline-block;
-            padding-bottom: 1px;
-          }
-          .activeLocationMenu {
-            color: #ff3bff;
-          }
-          .activeLocationMenu .IconTriangle {
-            transform: rotate(180deg);
-          }
-          .change-city-container:hover .change-city {
-            color: #ff3bff;
           }
 
           @media (max-height: 575px) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '../../../shared/Button'
-/* import PopUpAddScore from '../../../shared/PopUpAddScore' */
+import ChangeCityButton from '../../../shared/ChangeCityButton'
 
 import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
@@ -76,13 +76,7 @@ class Win extends Component {
           <div className='cta-secondary-separator' />
           <Button title={`? todo`} />
         </div>
-        <div className='change-city-container'>
-          <h4 className='change-city'>PLAY ANOTHER CITY</h4>
-          <img
-            className='IconTriangle'
-            src='/static/assets/icons/icon-triangle.svg'
-          />
-        </div>
+        <ChangeCityButton label='PLAY ANOTHER CITY' />
         <style jsx>{`
           .instructions-win {
             color: #262626;
