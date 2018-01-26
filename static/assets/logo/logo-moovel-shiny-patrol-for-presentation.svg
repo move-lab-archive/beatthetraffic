@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152px" height="97px" viewBox="0 0 152 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <g id="logo-moovel-shiny-patrol-for-presentation" fill="#00FFFF" fill-rule="nonzero">
+                <path d="M23.98334,28.17714 L78.16647,28.17714 L70.71835,20.61317 C68.77119,18.68897 68.77119,15.36655 70.71835,13.44236 C72.66393,11.51921 75.82029,11.51921 77.76587,13.44236 L93.54082,29.02701 C95.48639,30.9512 95.48639,34.06376 93.54082,35.98691 C93.48494,36.04107 77.76587,51.56167 77.76587,51.56167 C75.82029,53.48482 72.66498,53.47649 70.71835,51.55438 C68.77119,49.63175 68.77119,46.49836 70.71835,44.57521 L77.79855,37.55074 L23.98334,37.55074 C21.23075,37.55074 19,35.58228 19,32.86394 C19,30.1456 21.23075,28.17714 23.98334,28.17714 Z M33.00016,66 C41.45457,66 49.16081,62.81846 55.00078,57.59057 C60.83867,62.81846 68.54647,66 77.00036,66 C95.22651,66 110,51.22594 110,33.00026 C110,14.77354 95.22651,0 77.00036,0 C68.54647,0 60.83867,3.18257 55.00078,8.40891 C49.16081,3.18257 41.45457,0 33.00016,0 C14.77505,0 0,14.77354 0,33.00026 C0,51.22594 14.77505,66 33.00016,66 Z" id="moovel_supersign_white_rgb"></path>
+            </g>
+            <text id="for-bernd" transform="translate(103.867774, 51.760737) rotate(-32.000000) translate(-103.867774, -51.760737) " font-family="SignPainter-HouseScript, SignPainter" font-size="36" font-style="condensed" font-weight="normal" fill="#FF3BFF">
+                <tspan x="51.8677744" y="60.7607374">for bernd</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
