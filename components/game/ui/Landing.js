@@ -34,6 +34,8 @@ class Landing extends Component {
   }
 
   handleStartGame () {
+    this.props.dispatch(restoreCanvasScrolling())
+
     TweenLite.to('.game-landing', 0.3, {
       opacity: 0,
       delay: 0.5
@@ -80,10 +82,6 @@ class Landing extends Component {
       javascriptLoaded: true
     })
     this.props.dispatch(blockCanvasScrolling())
-  }
-
-  componentWillUnmount () {
-    this.props.dispatch(restoreCanvasScrolling(true))
   }
 
   render () {
