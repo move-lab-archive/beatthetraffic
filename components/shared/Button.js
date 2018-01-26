@@ -5,18 +5,32 @@ class Button extends Component {
   static propTypes = {
     title: PropTypes.string,
     large: PropTypes.bool,
-    transparent: PropTypes.bool,
-    onClick: PropTypes.func
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+    bgBlack: PropTypes.bool
   }
 
-  render() {
+  static defaultProps = {
+    disabled: false
+  }
+
+  handleClick () {
+    if (!this.props.disabled) {
+      this.props.onClick()
+    }
+  }
+
+  render () {
     return (
       <a
-        className={this.props.large ? 'large btn' : 'btn'}
-        onClick={this.props.onClick}
+        className={`btn 
+          ${this.props.large ? 'large' : ''} 
+          ${this.props.bgBlack ? 'bg-black' : ''}
+        `}
+        onClick={() => this.handleClick()}
       >
-        <div className="inner" />
-        <div className="outer">
+        <div className='inner' />
+        <div className='outer'>
           <h4>{this.props.title}</h4>
         </div>
 
@@ -29,6 +43,7 @@ class Button extends Component {
             margin-top: 1rem;
             margin-bottom: 5px;
             position: relative;
+            display: inline-block;
           }
           .btn h4 {
             margin: 0;
@@ -41,6 +56,11 @@ class Button extends Component {
             background-color: white;
             position: absolute;
           }
+
+          .btn.bg-black .inner {
+            background-color: black;
+          }
+
           .btn .outer {
             width: 100%;
             height: 100%;
@@ -51,6 +71,7 @@ class Button extends Component {
             align-items: center;
             transform-origin: 0 0;
           }
+
           .btn .outer:hover {
             background-color: #ff3bff;
             cursor: pointer;

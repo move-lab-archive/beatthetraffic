@@ -84,23 +84,23 @@ class Intro extends Component {
             text-transform: uppercase;
           }
           .location {
-            font-size: 12rem;
-            line-height: 12rem;
+            font-size: 6rem;
+            line-height: 7rem;
             word-break: break-all;
             min-width: 320px;
           }
           .click {
-            font-size: 13.1rem;
+            font-size: 13rem;
           }
           .the {
-            font-size: 19.5rem;
+            font-size: 19rem;
           }
           .cars {
-            font-size: 13.5rem;
+            font-size: 13rem;
           }
 
           .highlight {
-            width: 38rem;
+            width: 36rem;
             height: 15rem;
             margin-top: 0.5rem;
             margin-left: auto;

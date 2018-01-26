@@ -125,13 +125,14 @@ class LevelBeginning extends Component {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            z-index: 100;
             position: fixed;
             width: 100%;
             height: 100%;
+            background-color: rgba(38, 38, 38, 0.5);
           }
           .instructions-level-beginning .level-title {
             color: white;
+            margin-top: -5rem;
           }
 
           .level-help {

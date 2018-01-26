@@ -8,14 +8,17 @@ import Win from './instructions/Win'
 
 class GameInstructions extends PureComponent {
   render () {
+    const showLevelBeginningInstructions =
+      !this.props.isPlaying && !this.props.failed && !this.props.finished
+
     return (
       <div
         className={`game-instructions
-        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+        ${this.props.introAnimPlayed ? '' : 'hidden'} 
+        ${showLevelBeginningInstructions ? 'inside-game' : ''}
+        `}
       >
-        {!this.props.isPlaying &&
-          !this.props.failed &&
-          !this.props.finished && <LevelBeginning />}
+        {showLevelBeginningInstructions && <LevelBeginning />}
         {!this.props.isPlaying &&
           !this.props.failed &&
           this.props.finished &&
@@ -40,6 +43,10 @@ class GameInstructions extends PureComponent {
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
             opacity: 1;
+          }
+
+          .game-instructions.inside-game {
+            z-index: 4;
           }
 
           .hidden {

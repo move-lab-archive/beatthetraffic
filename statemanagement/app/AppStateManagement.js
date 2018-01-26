@@ -16,7 +16,7 @@ import GameConfig from '../../gameconfig.json'
 const initialState = fromJS({
   availableCities: GameConfig.availableCities,
   selectedCity: GameConfig.defaultSelectedCity,
-  selectedVideo: `${GameConfig.defaultSelectedCity}-level1`,
+  selectedVideo: GameConfig.defaultSelectedVideo,
   availableVideos: GameConfig.availableVideos,
   showMenu: false,
   playOnHideMenu: false,
