@@ -207,7 +207,6 @@ export default connect(state => {
   return {
     isGamePlaying: state.game.get('isPlaying'),
     levelNb: selectedVideo.get('level'),
-    videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS(),
     canvasResolution: state.viewport.get('canvasResolution').toJS(),
     introAnimPlayed: state.app.get('introAnimPlayed')
   }

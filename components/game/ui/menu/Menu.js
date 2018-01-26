@@ -9,6 +9,10 @@ import AboutPage from '../../../about/AboutPage'
 import ScorePage from '../../../score/ScorePage'
 
 import { hideMenu } from '../../../../statemanagement/app/AppStateManagement'
+import {
+  blockCanvasScrolling,
+  restoreCanvasScrolling
+} from '../../../../statemanagement/app/ViewportStateManagement'
 
 class Menu extends Component {
   constructor (props) {
@@ -37,11 +41,20 @@ class Menu extends Component {
             shallow: true
           }
         )
+
+        this.props.dispatch(blockCanvasScrolling())
+
+        // Scroll to top when shown
+        if (this.refMenuEl) {
+          this.refMenuEl.scrollTop = 0
+        }
       } else {
         // Restore url
         Router.replace('/', `${this.urlWhenEnteringMenuToRestore}`, {
           shallow: true
         })
+
+        this.props.dispatch(restoreCanvasScrolling())
       }
     }
 
@@ -114,7 +127,12 @@ class Menu extends Component {
       >
         <ButtonClose onClick={() => this.props.dispatch(hideMenu())} />
 
-        <div className='menu-container'>
+        <div
+          className='menu-container'
+          ref={el => {
+            this.refMenuEl = el
+          }}
+        >
           <div className='menu'>
             <div className='menu-items'>
               <div className='link' onClick={() => this.showAbout()}>
@@ -191,7 +209,7 @@ class Menu extends Component {
             -webkit-overflow-scrolling: touch;
           }
 
-          .menu{
+          .menu {
             max-width: 700px;
             width: 100%;
             height: 100%;

@@ -11,9 +11,14 @@ import LocationMenu from './landing/LocationMenu'
 
 import { showMenu } from '../../../statemanagement/app/AppStateManagement'
 
-/* import LevelBeginning from './instructions/LevelBeginning' */
+// import Gameover from './instructions/Gameover'
 /* import Loading from '../../shared/Loading' */
 /* NOTE just for style reasons on landing */
+
+import {
+  blockCanvasScrolling,
+  restoreCanvasScrolling
+} from '../../../statemanagement/app/ViewportStateManagement'
 
 class Landing extends Component {
   constructor (props) {
@@ -74,6 +79,11 @@ class Landing extends Component {
     this.setState({
       javascriptLoaded: true
     })
+    this.props.dispatch(blockCanvasScrolling())
+  }
+
+  componentWillUnmount () {
+    this.props.dispatch(restoreCanvasScrolling(true))
   }
 
   render () {
@@ -89,12 +99,10 @@ class Landing extends Component {
           handleClose={this.handleChangeCityClick}
         />
         <Unicorn />
-
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
         />
-
         {this.state.javascriptLoaded && (
           // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
           // to reuse it easier in Game over and win page

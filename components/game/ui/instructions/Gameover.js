@@ -7,6 +7,11 @@ import PopUpAddScore from '../../../shared/PopUpAddScore'
 import { retry } from '../../../../statemanagement/app/GameStateManagement'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
+import {
+  blockCanvasScrolling,
+  restoreCanvasScrolling
+} from '../../../../statemanagement/app/ViewportStateManagement'
+
 class Gameover extends Component {
   constructor (props) {
     super(props)
@@ -21,6 +26,12 @@ class Gameover extends Component {
   componentDidMount () {
     SoundsManager.playSound('youlose')
     SoundsManager.playSound('youloseloop')
+
+    this.props.dispatch(blockCanvasScrolling())
+  }
+
+  componentWillUnmount () {
+    this.props.dispatch(restoreCanvasScrolling())
   }
 
   closePopupAddScore () {
@@ -78,6 +89,7 @@ class Gameover extends Component {
             padding-bottom: 5rem;
             width: 100%;
             height: 100%;
+            z-index: 10; // only for styling from landing page
           }
           .title {
             font-size: 10rem;

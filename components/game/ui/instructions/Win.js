@@ -8,6 +8,11 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
+import {
+  blockCanvasScrolling,
+  restoreCanvasScrolling
+} from '../../../../statemanagement/app/ViewportStateManagement'
+
 class Win extends Component {
   constructor (props) {
     super(props)
@@ -25,6 +30,12 @@ class Win extends Component {
   componentDidMount () {
     SoundsManager.playSound('youwin')
     SoundsManager.playSound('youwinloop')
+
+    this.props.dispatch(blockCanvasScrolling())
+  }
+
+  componentWillUnmount () {
+    this.props.dispatch(restoreCanvasScrolling())
   }
 
   handleDisplaySaveScoreModal () {

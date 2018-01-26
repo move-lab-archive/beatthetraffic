@@ -50,6 +50,11 @@ class Layout extends Component {
             color: #262626;
           }
 
+          :global(html.overflow-hidden, html.overflow-hidden body) {
+            overflow: hidden;
+            position: relative;
+          }
+
           :global(html) {
             box-sizing: border-box;
           }

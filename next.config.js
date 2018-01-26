@@ -35,9 +35,7 @@ module.exports = {
       '/about': { page: '/about' },
       '/highscore': { page: '/highscore' },
       ...getCity('stuttgart1'),
-      ...getCity('stuttgart2'),
-      ...getCity('stuttgart3'),
-      ...getCity('stuttgart4')
+      ...getCity('stuttgart2')
     }
   }
 }

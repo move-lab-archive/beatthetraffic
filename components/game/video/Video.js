@@ -11,6 +11,8 @@ import {
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
+import { scrollToPosition } from '../../../statemanagement/app/ViewportStateManagement'
+
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
 class Video extends Component {
@@ -45,11 +47,10 @@ class Video extends Component {
       // We want to re-render the video item if the src has changed
       // console.log('Render video')
       setTimeout(() => {
-        window.scroll({
-          top: this.props.videoMobileOffset.y,
-          left: this.props.videoMobileOffset.x,
-          behavior: 'smooth'
-        })
+        this.props.dispatch(
+          scrollToPosition(this.props.videoMobileOffset),
+          true
+        )
       }, 500)
       return true
     } else {

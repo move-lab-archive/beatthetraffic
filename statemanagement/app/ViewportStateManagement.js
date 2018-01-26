@@ -4,6 +4,11 @@ import screenfull from 'screenfull'
 // Initial state
 const initialState = fromJS({
   listenersInitialized: false,
+  blockCanvasScrolling: false,
+  canvasScrollingPositionToRestore: {
+    x: 0,
+    y: 0
+  },
   deviceOrientation: 'none',
   isFullscreen: false,
   isFullscreenAvailable: false,
@@ -19,6 +24,7 @@ const SET_LANDSCAPE = 'Viewport/SET_LANDSCAPE'
 const INIT_LISTENERS = 'Viewport/INIT_LISTENERS'
 const SET_FULLSCREEN_STATUS = 'Viewport/SET_FULLSCREEN_STATUS'
 const SET_FULLSCREEN_AVAILABLE = 'Viewport/SET_FULLSCREEN_AVAILABLE'
+const SAVE_SCROLL_POSITION = 'Viewport/SAVE_SCROLL_POSITION'
 
 export function handleOrientationChange (dispatch) {
   // console.log(window.orientation)
@@ -40,6 +46,50 @@ export function handleFullScreenChange (dispatch) {
   } else {
     // console.log('leaving fullscreen')
     dispatch(setFullScreenStatus(false))
+  }
+}
+
+export function scrollToPosition (position, smooth = false) {
+  return (dispatch, getState) => {
+    window.scroll({
+      top: position.y,
+      left: position.x,
+      behavior: smooth ? 'smooth' : 'auto'
+    })
+
+    dispatch(saveScrollPosition(position))
+  }
+}
+
+export function saveScrollPosition (position) {
+  return {
+    type: SAVE_SCROLL_POSITION,
+    payload: position
+  }
+}
+
+export function blockCanvasScrolling () {
+  return (dispatch, getState) => {
+    dispatch(
+      saveScrollPosition({
+        x: window.scrollX,
+        y: window.scrollY
+      })
+    )
+
+    document.documentElement.className = 'overflow-hidden'
+  }
+}
+
+export function restoreCanvasScrolling (smooth = false) {
+  return (dispatch, getState) => {
+    const canvasScrollingPositionToRestore = getState()
+      .viewport.get('canvasScrollingPositionToRestore')
+      .toJS()
+
+    document.documentElement.className = ''
+
+    dispatch(scrollToPosition(canvasScrollingPositionToRestore, smooth))
   }
 }
 
@@ -145,6 +195,11 @@ export default function ViewportStateManagement (
       return state.set('isFullscreen', action.payload)
     case SET_FULLSCREEN_AVAILABLE:
       return state.set('isFullscreenAvailable', true)
+    case SAVE_SCROLL_POSITION:
+      return state.set(
+        'canvasScrollingPositionToRestore',
+        fromJS(action.payload)
+      )
     default:
       return state
   }
