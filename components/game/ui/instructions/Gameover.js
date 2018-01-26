@@ -67,7 +67,7 @@ class Gameover extends Component {
             />
           </div>
         </div>
-        <ChangeCityButton label='PLAY ANOTHER CITY' white />
+        <ChangeCityButton label='PLAY ANOTHER CITY' white noAnim />
         {this.state.showAddScorePopup && (
           <PopUpAddScore onClose={this.closePopupAddScore} />
         )}

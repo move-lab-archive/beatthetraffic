@@ -10,7 +10,8 @@ class ChangeCityButton extends Component {
   static propTypes = {
     label: PropTypes.string,
     white: PropTypes.bool,
-    cityPickerVisible: PropTypes.bool
+    cityPickerVisible: PropTypes.bool,
+    noAnim: PropTypes.bool
   }
 
   constructor (props) {
@@ -34,6 +35,7 @@ class ChangeCityButton extends Component {
         className={`change-city-container
             ${this.props.cityPickerVisible ? 'active' : ''}
             ${this.props.white ? 'white' : ''}
+            ${this.props.noAnim ? '' : 'anim'}
           `}
       >
         <h4 className='change-city'>{this.props.label}</h4>
@@ -56,6 +58,9 @@ class ChangeCityButton extends Component {
             bottom: 1.5rem;
             left: 3rem;
             cursor: pointer;
+          }
+
+          .change-city-container.anim {
             animation: fadeIn 2s;
           }
 
@@ -85,6 +90,21 @@ class ChangeCityButton extends Component {
             transition-delay: 0.3;
             display: inline-block;
             padding-bottom: 1px;
+          }
+
+          @keyframes fadeIn {
+            0% {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            70% {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
           }
         `}</style>
       </div>

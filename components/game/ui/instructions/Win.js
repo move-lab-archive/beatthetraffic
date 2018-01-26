@@ -76,7 +76,7 @@ class Win extends Component {
           <div className='cta-secondary-separator' />
           <Button title={`? todo`} />
         </div>
-        <ChangeCityButton label='PLAY ANOTHER CITY' />
+        <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
         <style jsx>{`
           .instructions-win {
             color: #262626;
@@ -151,37 +151,6 @@ class Win extends Component {
 
           .cta-secondary-separator {
             width: 2rem;
-          }
-
-          .change-city-container {
-            position: fixed;
-            z-index: 14;
-            bottom: 1.5rem;
-            left: 3rem;
-            cursor: pointer;
-            animation: fadeIn 2s;
-          }
-          .change-city {
-            cursor: pointer;
-            z-index: 14;
-            display: inline-block;
-            padding-right: 0.5rem;
-          }
-          .IconTriangle {
-            z-index: 14;
-            transition-duration: 0.3s;
-            transition-delay: 0.3;
-            display: inline-block;
-            padding-bottom: 1px;
-          }
-          .activeLocationMenu {
-            color: #ff3bff;
-          }
-          .activeLocationMenu .IconTriangle {
-            transform: rotate(180deg);
-          }
-          .change-city-container:hover .change-city {
-            color: #ff3bff;
           }
 
           @media (max-height: 575px) {
