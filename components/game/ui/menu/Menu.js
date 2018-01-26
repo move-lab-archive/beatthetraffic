@@ -149,18 +149,22 @@ class Menu extends Component {
 
             <div className='city-selector-items'>
               <h4>Beat the traffic in</h4>
-              <h2 className='link'>Tokio</h2>
-              <h2 className='link'>Berlin</h2>
-              <h2 className='link'>New York</h2>
-              <h2 className='link'>Los Angeles</h2>
-              <h2 className='link'>Stuttgart</h2>
-              <h2 className='link'>Portland</h2>
-              <h2 className='link'>New Delhi</h2>
-              <h2 className='link'>Moscow</h2>
-              <h2 className='link'>Barcelona</h2>
-              <h2 className='link'>Addis Ababa</h2>
-              <h2 className='link'>Buenos Aires</h2>
-              <h2 className='link'>London</h2>
+              {Object.keys(this.props.availableCities)
+                // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
+                .map(cityId => (
+                  <h2
+                    onClick={() => {
+                      // TODO IMPROVE WITHOUT HARD RELOAD
+                      window.location.href = `/${cityId}/level/1`
+                    }}
+                    key={cityId}
+                    className={`link ${
+                      cityId === this.props.selectedCity ? 'selected' : ''
+                    }`}
+                  >
+                    {this.props.availableCities[cityId].label}
+                  </h2>
+                ))}
             </div>
           </div>
         </div>
@@ -244,11 +248,15 @@ class Menu extends Component {
             left: 2.9rem;
           }
 
+          .link.selected {
+            color: #ff3bff;
+          }
+
           .link:hover {
             color: #ff3bff;
           }
 
-          h2.link {
+          .link {
             line-height: 1.6rem;
           }
 
@@ -311,6 +319,11 @@ class Menu extends Component {
 
 export default connect(state => {
   return {
-    showMenu: state.app.get('showMenu')
+    showMenu: state.app.get('showMenu'),
+    availableCities: state.app
+      .get('availableCities')
+      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+      .toJS(),
+    selectedCity: state.app.get('selectedCity')
   }
 })(Menu)
