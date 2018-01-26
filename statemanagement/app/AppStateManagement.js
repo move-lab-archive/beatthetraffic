@@ -11,6 +11,7 @@ import {
 import { turnSoundOn, turnSoundOff } from './SettingsStateManagement'
 
 import GameConfig from '../../gameconfig.json'
+import { saveScrollPosition } from './ViewportStateManagement'
 
 // Initial state
 const initialState = fromJS({
