@@ -45,7 +45,10 @@ class Layout extends Component {
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             background-color: white;
-            cursor: cell;
+            cursor: -webkit-image-set(
+                  url(../../static/assets/cursor/magic-wand.png) 2x
+                )10 10,
+              pointer;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             color: #262626;
           }
