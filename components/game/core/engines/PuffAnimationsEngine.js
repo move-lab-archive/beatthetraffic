@@ -4,8 +4,8 @@ class PuffAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 255,
-      height: 69,
+      width: 510,
+      height: 138,
       src: '/static/assets/puff/v1.png',
       nbFrames: 4
     }
