@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from './Button'
+import ButtonClose from './ButtonClose'
 
 class PopUpAddScore extends Component {
   static propTypes = {
@@ -33,6 +34,7 @@ class PopUpAddScore extends Component {
       <div className='popup-page'>
         <div className='popup-overlay' onClick={() => this.props.onClose()} />
         <div className='popup-container'>
+          <ButtonClose onClick={() => this.props.onClose()} smallPadding />
           <div className='popup-container-inner'>
             <form>
               <p>Please add a name to save your score.</p>
