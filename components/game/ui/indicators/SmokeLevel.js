@@ -81,7 +81,7 @@ class SmokeLevel extends PureComponent {
 
     return (
       <svg
-        viewBox='0 0 72 25'
+        viewBox='0 0 72 20'
         xmlns='http://www.w3.org/2000/svg'
         className={`smoke-bar ${
           smokePercentage >= 80 ? 'smoke-bar-alarm-anim' : ''
@@ -105,7 +105,7 @@ class SmokeLevel extends PureComponent {
                 x='0'
                 y='0'
                 width={this.props.nbMissed * 72 / this.props.maxMissed}
-                height='25'
+                height='20'
               />
             </clipPath>
           </defs>
@@ -113,7 +113,7 @@ class SmokeLevel extends PureComponent {
         <style jsx>{`
           .smoke-bar {
             margin-top: 0.1rem;
-            width: 8.5rem;
+            width: 10.6rem;
             height: auto;
           }
 
