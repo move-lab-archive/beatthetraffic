@@ -1,28 +1,18 @@
-function getCity (cityName) {
-  const cityRoutes = {}
+const cities = Object.keys(require('./gameconfig.json').availableCities)
 
-  cityRoutes[`/${cityName}/level/1`] = {
-    page: '/',
-    query: {
-      city: cityName,
-      level: 1
-    }
-  }
+function getCityRoutes (cityName) {
+  const cityRoutes = new Map()
 
-  cityRoutes[`/${cityName}/level/2`] = {
-    page: '/',
-    query: {
-      city: cityName,
-      level: 2
-    }
-  }
+  const nbLevels = 3
 
-  cityRoutes[`/${cityName}/level/3`] = {
-    page: '/',
-    query: {
-      city: cityName,
-      level: 3
-    }
+  for (let currentLevel = 1; currentLevel <= nbLevels; currentLevel++) {
+    cityRoutes.set(`/${cityName}/level/${currentLevel}`, {
+      page: '/',
+      query: {
+        city: cityName,
+        level: currentLevel
+      }
+    })
   }
 
   return cityRoutes
@@ -30,12 +20,26 @@ function getCity (cityName) {
 
 module.exports = {
   exportPathMap: function () {
-    return {
-      '/': { page: '/' },
-      '/about': { page: '/about' },
-      '/highscore': { page: '/highscore' },
-      ...getCity('stuttgart1'),
-      ...getCity('stuttgart2')
-    }
+    let routes = new Map()
+
+    routes.set('/', { page: '/' })
+    routes.set('/about', { page: '/about' })
+    routes.set('/highscore', { page: '/highscore' })
+
+    let allCitiesRoutes = cities.map(city => getCityRoutes(city))
+
+    allCitiesRoutes.forEach(cityRoutes => {
+      cityRoutes.forEach((value, key) => {
+        routes.set(key, value)
+      })
+    })
+    // Convert to object literal map
+    // https://gist.github.com/lukehorvat/133e2293ba6ae96a35ba
+    let routesObjLiteral = Array.from(routes).reduce(
+      (obj, [key, value]) => Object.assign(obj, { [key]: value }),
+      {}
+    )
+
+    return routesObjLiteral
   }
 }

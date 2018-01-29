@@ -3,39 +3,53 @@
   "defaultSelectedVideo": "stuttgart1-level1",
   "availableCities": {
     "stuttgart1": {
+      "location": [9.1829321, 48.7758459],
       "label": "Stuttgart"
     },
     "stuttgart2": {
+      "location": [-58.381592, 34.603722],
       "label": "Stuttgart 2"
-    },
+    }
+  },
+  "futureCitiesToCopyToAvailableCities": {
     "tokyo": {
+      "location": [139.69171, 35.6895],
       "label": "Tokyo"
     },
     "berlin": {
+      "location": [139.69171, 35.6895],
       "label": "Berlin"
     },
     "newyork": {
+      "location": [139.69171, 35.6895],
       "label": "New York"
     },
     "losangeles": {
+      "location": [139.69171, 35.6895],
       "label": "Los Angeles"
     },
     "portland": {
+      "location": [139.69171, 35.6895],
       "label": "Portland"
     },
     "newdelhi": {
+      "location": [139.69171, 35.6895],
       "label": "New Delhi"
     },
     "barcelona": {
+      "location": [139.69171, 35.6895],
       "label": "Moscow"
     },
     "addisabeba": {
+      "location": [139.69171, 35.6895],
       "label": "Addis Abeba"
     },
     "buenosaires": {
+      "location": [-58.381592, 34.603722],
       "label": "Buenos Aires"
     },
     "london": {
+      "location": [139.69171, 35.6895],
       "label": "London"
     }
   },

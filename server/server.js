@@ -1,28 +1,41 @@
+const geoip = require('geoip-lite')
 const express = require('express')
-const next = require('next')
+const bodyParser = require('body-parser')
+const Geo = require('./geo')
+const availableCities = require('../gameconfig.json').availableCities
+const defaultCity = require('../gameconfig.json').defaultSelectedCity
 
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const app = express()
 
-app.prepare()
-.then(() => {
-  const server = express()
+app.use(bodyParser.urlencoded({ extended: true }))
 
-  server.get('/:city/level/:level', (req, res) => {
-    return app.render(req, res, '/', {
-      city: req.params.city,
-      level: parseInt(req.params.level, 10)
-    })
-  });
+app.get('/', (req, res) => {
+  // Default city
+  let cityToRedirectTo = defaultCity
 
-  server.get('*', (req, res) => {
-    return handle(req, res)
-  })
+  const clientIP =
+    req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  // Try to get closest city from api
+  console.log('Client ip is: ' + clientIP)
 
-  server.listen(port, (err) => {
-    if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
-  })
+  const geo = geoip.lookup(clientIP)
+
+  if (geo) {
+    cityToRedirectTo = Geo.getClosestCityToIPLngLat(geo.ll, availableCities)
+      .slug
+    console.log('Closest city is ' + cityToRedirectTo)
+  } else {
+    // Can't get IP, default to default city
+    console.log('Cant guess IP, fallback to default city')
+  }
+
+  res.redirect(`/${cityToRedirectTo}/level/1`)
 })
+
+app.get('/:city', (req, res) => {
+  res.redirect(`/${req.params.city}/level/1`)
+})
+
+app.use(express.static('out'))
+
+app.listen(4000, () => console.log('Example app listening on port 4000!'))
