@@ -1,5 +1,6 @@
 const geoip = require('geoip-lite')
 const express = require('express')
+const compression = require('compression')
 const bodyParser = require('body-parser')
 const Geo = require('./geo')
 const availableCities = require('../gameconfig.json').availableCities
@@ -8,6 +9,9 @@ const defaultCity = require('../gameconfig.json').defaultSelectedCity
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
+// TODO WE COULD CONFIGURE THE BUILD PROCESS TO PRE-COMPRESS
+// OUT/ directory to avoid doing it on the fly and use CPU
+app.use(compression())
 
 app.get('/', (req, res) => {
   // Default city
