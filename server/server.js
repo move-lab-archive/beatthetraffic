@@ -32,8 +32,12 @@ app.get('/', (req, res) => {
   res.redirect(`/${cityToRedirectTo}/level/1`)
 })
 
-app.get('/:city', (req, res) => {
-  res.redirect(`/${req.params.city}/level/1`)
+app.get('/:city', (req, res, next) => {
+  if (Object.keys(availableCities).indexOf(req.params.city) > -1) {
+    res.redirect(`/${req.params.city}/level/1`)
+  } else {
+    next()
+  }
 })
 
 app.use(express.static('out'))
