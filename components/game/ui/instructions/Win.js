@@ -90,6 +90,7 @@ class Win extends Component {
             padding-bottom: 5rem;
             width: 100%;
             height: 100%;
+            cursor: default;
           }
           .title {
             font-size: 10rem;

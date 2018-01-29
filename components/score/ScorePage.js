@@ -164,6 +164,7 @@ class ScorePage extends Component {
             overflow-y: scroll;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
+            cursor: default;
           }
           .highscore-container {
             max-width: 700px;

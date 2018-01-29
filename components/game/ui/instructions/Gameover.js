@@ -51,7 +51,7 @@ class Gameover extends Component {
           <div className='message'>
             <h4>Your score</h4>
             <div className='score'>
-              <h1>300</h1>
+              <h1>{this.props.score}</h1>
               <img src='/static/assets/icons/icon-star.svg' />
             </div>
           </div>
@@ -85,6 +85,7 @@ class Gameover extends Component {
             width: 100%;
             height: 100%;
             z-index: 10; // only for styling from landing page
+            cursor: default;
           }
           .title {
             font-size: 10rem;

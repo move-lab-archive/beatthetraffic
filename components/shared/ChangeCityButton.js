@@ -65,7 +65,7 @@ class ChangeCityButton extends Component {
           }
 
           .change-city-container.active .change-city,
-          .change-city-container:hover .change-city {
+          .change-city-container.white:hover .change-city {
             color: #ff3bff;
           }
 
