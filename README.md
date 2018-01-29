@@ -49,6 +49,17 @@ npm run deploy
 #Now will give you an url like: https://traffic-cam-qqwjiiwsai.now.sh/
 ```
 
+### Build and run production build with geolocation redirects and DB
+
+> Require node.js >=9.2.0
+
+This exports the static pages on the server, and run the production server.js file. It's not a static deployment, it's a node instance but it serve static exports for some routes.
+
+```bash
+npm run now-build
+npm run now-start
+```
+
 ## 🏙 How to add / edit you own level / city
 
 ### 1. Fill the gameconfig.json file
