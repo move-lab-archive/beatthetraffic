@@ -79,9 +79,11 @@ doesn't work.
   "defaultSelectedCity": "stuttgart1",
   "availableCities": {
     "stuttgart": {
+      "location": [9.1829321, 48.7758459]  // Longitude , Latitude
       "label": "Stuttgart"
     },
     "berlin": {
+      "location": [9.1829321, 48.7758459] // Longitude , Latitude
       "label": "Berlin"
     }
   }
