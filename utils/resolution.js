@@ -28,12 +28,16 @@ export function scalePoint (point, finalResolution, originalResolution) {
   }
 }
 
-export function enlargeBbox (bbox, enlargeSize) {
+export function enlargeBbox (bbox, enlargePercentage) {
+  // Bound it between 20 and 30 pixels
+  let widthGrow = Math.min(Math.max(bbox.w * enlargePercentage / 100, 20), 30)
+  let heightGrow = Math.min(Math.max(bbox.h * enlargePercentage / 100, 20), 30)
+
   return {
-    x: bbox.x - enlargeSize,
-    y: bbox.y - enlargeSize,
-    w: bbox.w + enlargeSize * 2,
-    h: bbox.h + enlargeSize * 2
+    x: bbox.x - widthGrow / 2,
+    y: bbox.y - heightGrow / 2,
+    w: bbox.w + widthGrow,
+    h: bbox.h + heightGrow
   }
 }
 

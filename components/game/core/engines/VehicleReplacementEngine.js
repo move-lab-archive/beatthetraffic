@@ -141,7 +141,7 @@ class VehicleReplacementEngine {
     let size = Math.floor(Math.sqrt(bboxArea / 2))
     // TODO have this dynamic depending on canvas size / sprite image
     // between 30 and 50 pixel for  now
-    size = Math.min(Math.max(parseInt(size), 90), 120) * sprite.scaleFactor
+    size = Math.min(Math.max(parseInt(size), 45), 120) * sprite.scaleFactor
 
     // keep proportions
     if (sprite.frameWidth > sprite.frameHeight) {

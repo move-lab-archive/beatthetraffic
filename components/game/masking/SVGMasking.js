@@ -11,8 +11,6 @@ import { getAverageImgPath } from '../../../statemanagement/app/AppStateManageme
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
-const ENLARGE_SIZE = 25
-
 const initialState = {
   masks: []
 }
@@ -58,7 +56,7 @@ class SVGMasking extends Component {
         mask => {
           return {
             ...mask,
-            ...enlargeBbox(mask, ENLARGE_SIZE)
+            ...enlargeBbox(mask, 50)
           }
         }
       )
