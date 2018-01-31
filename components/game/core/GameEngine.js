@@ -298,8 +298,8 @@ class GameEngine extends Component {
       itemsMissedThisFrame.forEach(itemMissed => {
         // console.log(`Frame ${frame}, ${itemMissed.idDisplay} missed:`)
         this.props.dispatch(addMissedItem())
-        const centerOfDisapearItem = scalePoint(
-          itemMissed.disappearArea,
+        const centerOfDisappearItem = scalePoint(
+          itemMissed.disappearingHint,
           this.props.canvasResolution,
           this.props.originalResolution
         )
@@ -307,8 +307,8 @@ class GameEngine extends Component {
         // Add a visual clue that we have missed them
         GameEngineStateManager.addMissedCarAnimation(
           new MissedCarAnimation(
-            centerOfDisapearItem.x,
-            centerOfDisapearItem.y,
+            centerOfDisappearItem.x,
+            centerOfDisappearItem.y,
             100,
             itemMissed.id
           )
@@ -327,9 +327,6 @@ class GameEngine extends Component {
 
       // Draw puff animations
       this.drawPuffAnimations(this.canvasContext)
-
-      // Draw missed car animations
-      this.drawMissedCarAnimations(this.canvasContext)
 
       if (objectTrackerDataForThisFrame) {
         // Draw unicorns
@@ -350,6 +347,9 @@ class GameEngine extends Component {
           this.props.originalResolution
         )
       }
+
+      // Draw missed car animations on top of trackerui
+      this.drawMissedCarAnimations(this.canvasContext)
 
       // Draw debug raw detections data
       let rawDetectionsForThisFrame = this.props.rawDetections[frame]

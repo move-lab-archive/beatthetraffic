@@ -21,6 +21,18 @@ export function scaleArea (area, finalResolution, originalResolution) {
   }
 }
 
+export function shrinkAreaByPercentage (area, shrinkPercentage) {
+  const widthVariation = area.w * shrinkPercentage / 100
+  const heightVariation = area.h * shrinkPercentage / 100
+
+  return {
+    x: area.x + widthVariation / 2,
+    y: area.y + heightVariation / 2,
+    w: area.w - widthVariation,
+    h: area.h - heightVariation
+  }
+}
+
 export function scalePoint (point, finalResolution, originalResolution) {
   return {
     x: point.x * finalResolution.w / originalResolution.w,
