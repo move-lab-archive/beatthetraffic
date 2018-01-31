@@ -16,49 +16,48 @@ class SmokeLevel extends PureComponent {
     // Only tweak sounds if game is playing
     if (!this.props.isGamePlaying) {
       // console.log("Game not playing, don't tweak sounds")
-
     }
 
     /* =======
       Speed up sound logic (when smoke comes up)
     ======= */
 
-    // if (nextSmokePercentage >= 50 && currentSmokePercentage < 50) {
-    //   // Speed up sound when smoke is superior to 50% for the first time
-    //   // console.log('Speed up sound')
-    //   // todo transition ?
-    //   SoundsManager.changePlaybackRate(
-    //     `main_level${this.props.currentLevel}`,
-    //     1.2
-    //   )
-    // }
+    if (nextSmokePercentage >= 50 && currentSmokePercentage < 50) {
+      // Speed up sound when smoke is superior to 50% for the first time
+      // console.log('Speed up sound')
+      // todo transition ?
+      SoundsManager.changePlaybackRate(
+        `main_level${this.props.currentLevel}`,
+        1.2
+      )
+    }
 
-    // if (nextSmokePercentage >= 80 && currentSmokePercentage < 80) {
-    //   // Trigger alert playing when smoke is superior to 80% for the first time
-    //   // console.log('Play alert sound')
-    //   SoundsManager.playSound('transition-normal-alert')
-    //   SoundsManager.playSound('alert')
-    // }
+    if (nextSmokePercentage >= 80 && currentSmokePercentage < 80) {
+      // Trigger alert playing when smoke is superior to 80% for the first time
+      // console.log('Play alert sound')
+      SoundsManager.playSound('transition-normal-alert')
+      SoundsManager.playSound('alert')
+    }
 
-    // /* =======
-    //   Slow down sound logic (when lowering the smoke bar)
-    // ======= */
+    /* =======
+      Slow down sound logic (when lowering the smoke bar)
+    ======= */
 
-    // if (nextSmokePercentage < 50 && currentSmokePercentage >= 50) {
-    //   // Slow down sound
-    //   // console.log('Slow down sound')
-    //   SoundsManager.changePlaybackRate(
-    //     `main_level${this.props.currentLevel}`,
-    //     1
-    //   )
-    // }
+    if (nextSmokePercentage < 50 && currentSmokePercentage >= 50) {
+      // Slow down sound
+      // console.log('Slow down sound')
+      SoundsManager.changePlaybackRate(
+        `main_level${this.props.currentLevel}`,
+        1
+      )
+    }
 
-    // if (nextSmokePercentage < 80 && currentSmokePercentage >= 80) {
-    //   // Recovering from alert
-    //   // console.log('Recovering from alert sound')
-    //   SoundsManager.playSound('transition-alert-normal')
-    //   SoundsManager.playSound(`main_level${this.props.currentLevel}`, 1.2)
-    // }
+    if (nextSmokePercentage < 80 && currentSmokePercentage >= 80) {
+      // Recovering from alert
+      // console.log('Recovering from alert sound')
+      SoundsManager.playSound('transition-alert-normal')
+      SoundsManager.playSound(`main_level${this.props.currentLevel}`, 1.2)
+    }
   }
 
   getFillColor () {
