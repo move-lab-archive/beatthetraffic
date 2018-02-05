@@ -40,6 +40,7 @@ class MenuBtn extends Component {
             z-index: 10;
             width: 4.4rem;
             height: 4.4rem;
+            cursor: default;
           }
           .menu-button svg {
             cursor: pointer;

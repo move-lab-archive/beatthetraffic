@@ -74,31 +74,19 @@ class Landing extends Component {
         <h1 className='landing-headline'>
           BEAT THE TRAFFIC
           <br />
-          <span className='city-var'>{this.props.selectedCity}</span>
+          <span className='city-var x'>X</span>
+          <span className='city-var city'>{this.props.selectedCity}</span>
+          {/* @tdurand is it possible to do this change from X to the cities name after the progressbar is fully loaded? Like this we can include the Name and in the city in the landing page  :) */}
         </h1>
         <Unicorn />
         <BtnLanding
           loaded={this.props.isGameReadyToPlay}
           onClick={this.handleStartGame}
         />
+        <img className='tree' src='/static/assets/landing/asset-tree.png' />
         {this.state.javascriptLoaded && (
-          // NOTE tdurand, this logic could be pushed into the locationMenu component to be absolute
-          // to reuse it easier in Game over and win page
           <div>
             <ChangeCityButton label='CHANGE CITY' />
-            <LeftCloud />
-            <RightCloud />
-            <div className='mobility-assets'>
-              <img
-                className='unicorn'
-                src='/static/assets/landing/asset-unicorn.png'
-              />
-              <img
-                className='tree'
-                src='/static/assets/landing/asset-tree.png'
-              />
-            </div>
-
             <div
               className='about'
               onClick={() => {
@@ -107,9 +95,16 @@ class Landing extends Component {
             >
               <h4>ABOUT</h4>
             </div>
+            <LeftCloud />
+            <RightCloud />
+            <div className='mobility-assets'>
+              <img
+                className='unicorn'
+                src='/static/assets/landing/asset-unicorn.png'
+              />
+            </div>
           </div>
         )}
-
         <style jsx>{`
           .game-landing {
             position: fixed;
@@ -136,14 +131,23 @@ class Landing extends Component {
             z-index: 2;
             animation: fadeInHeadline 1.3s;
             color: #262626;
-            left: none;
-            transform: translateX(0%);
-            transform: translateY(0%);
             text-align: center;
           }
 
           .city-var {
             color: #ff3bff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
+          .x {
+            animation: outx 2s;
+            opacity: 0;
+          }
+          .city {
+            animation: incity 2s;
+            opacity: 1;
           }
 
           .about {
@@ -166,15 +170,18 @@ class Landing extends Component {
             left: 0.5rem;
             z-index: 0;
             position: fixed;
+            display: none;
           }
-          .mobility-assets .tree {
-            animation: fadeIn 2s;
+
+          .tree {
+            animation: fadeInHeadline 1.3s;
             width: 7rem;
             opacity: 1;
-            right: 1rem;
-            top: 2.1rem;
-            z-index: 0;
-            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: -170px;
+            z-index: 100;
+            position: absolute;
           }
 
           @keyframes fadeIn {
@@ -204,10 +211,40 @@ class Landing extends Component {
             }
           }
 
+          @keyframes outx {
+            0% {
+              opacity: 1;
+            }
+            99% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+
+          @keyframes incity {
+            0% {
+              opacity: 0;
+            }
+            99% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
           @media (min-width: 600px) {
             .landing-headline {
               width: 525px;
               text-align: center;
+            }
+          }
+
+          @media (max-height: 430px) {
+            .tree {
+              margin-top: -120px;
             }
           }
         `}</style>

@@ -65,12 +65,13 @@ class ChangeCityButton extends Component {
           }
 
           .change-city-container.active .change-city,
-          .change-city-container.white:hover .change-city {
+          .change-city-container:hover .change-city {
             color: #ff3bff;
           }
 
           .change-city-container.active .change-city-icon {
             transform: rotate(180deg);
+            transform-origin: 50% 40%;
           }
 
           .change-city-container.white .change-city {
@@ -88,8 +89,7 @@ class ChangeCityButton extends Component {
             z-index: 14;
             transition-duration: 0.3s;
             transition-delay: 0.3;
-            display: inline-block;
-            padding-bottom: 1px;
+            padding-bottom: 0.7rem;
           }
 
           @keyframes fadeIn {

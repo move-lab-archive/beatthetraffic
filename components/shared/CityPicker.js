@@ -88,6 +88,7 @@ class CityPicker extends Component {
             transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
             transition-delay: 150ms;
             z-index: 15;
+            cursor: default;
           }
 
           .city-picker-overlay {
@@ -98,8 +99,9 @@ class CityPicker extends Component {
             top: 0%;
             left: 0;
             z-index: 10;
-            opacity: 0.9;
-            transition: all 150ms;
+            opacity: 0.93;
+            transition: all 200ms; /*transition not working @tdurant any idea why? But its nothing important for now;) micro detail*/
+            cursor: default;
           }
 
           .cities {

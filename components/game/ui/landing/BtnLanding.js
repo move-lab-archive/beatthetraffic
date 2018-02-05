@@ -8,7 +8,7 @@ class BtnLanding extends Component {
     onClick: PropTypes.func
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     /* Put a long animation duration because
@@ -26,7 +26,7 @@ class BtnLanding extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const timeSinceAnimationStarted = new Date().getTime() - window.firstPaint
     // If game isn't ready restart progress bar in time
     this.timeoutRestartAnimation = setTimeout(() => {
@@ -38,18 +38,18 @@ class BtnLanding extends Component {
     }, this.animationDuration * 1000 - timeSinceAnimationStarted)
   }
 
-  handleClick() {
+  handleClick () {
     if (this.props.loaded) {
       clearTimeout(this.timeoutRestartAnimation)
       this.props.onClick()
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearTimeout(this.timeoutRestartAnimation)
   }
 
-  render() {
+  render () {
     return (
       <div
         className={`btn-landing ${this.props.loaded ? '' : 'loading'} ${
@@ -57,19 +57,18 @@ class BtnLanding extends Component {
         }`}
         onClick={this.handleClick}
       >
-        <div className="inner" />
-        <div className="outer">
+        <div className='inner' />
+        <div className='outer'>
           <h3>let's play</h3>
         </div>
         <style jsx>{`
           .btn-landing {
             left: 50%;
-            top: 52.5%;
-            margin-top: 70px;
             position: absolute;
             width: 180px;
             height: 60px;
-            transform: translateX(-50%) translateY(-50%);
+            margin-top: 110px;
+            transform: translateX(-50%);
             //GPU accelerate
             will-change: transform;
             animation: 1.3s fadeIn;
@@ -126,8 +125,14 @@ class BtnLanding extends Component {
 
           @media (min-width: 600px) {
             .btn-landing {
-              margin-top: 50px;
+              margin-top: 100px;
               width: 200px;
+            }
+          }
+
+          @media (max-height: 430px) {
+            .btn-landing {
+              margin-top: 80px;
             }
           }
 
@@ -151,7 +156,6 @@ class BtnLanding extends Component {
               opacity: 1;
             }
           }
-
         `}</style>
       </div>
     )

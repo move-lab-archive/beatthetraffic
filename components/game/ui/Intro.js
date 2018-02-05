@@ -53,7 +53,7 @@ class Intro extends Component {
           </div>
         </div>
         <div className='title logo'>
-          <img src='/static/assets/logo/logo-moovel-shiny-patrol-for-presentation.svg' />
+          <img src='/static/assets/logo/logo-moovel-shiny-patrol.svg' />
         </div>
 
         <style jsx>{`
