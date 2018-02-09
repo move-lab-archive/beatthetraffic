@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
+import ButtonSubpages from '../shared/ButtonSubpages'
+
 // TODO handle logic of retriving scores, for now style everything static
 
 class ScorePage extends Component {
@@ -23,10 +25,6 @@ class ScorePage extends Component {
         />
         <img
           className={`fourthcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
-        />
-        <img
-          className={`fifthcloud`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
         <div className={`background-white`} />
@@ -133,7 +131,7 @@ class ScorePage extends Component {
                 <h1 className='score'>765</h1>
                 <img
                   className='star'
-                  src='/static/assets/icons/icon-star-purple.svg'
+                  src='/static/assets/icons/icon-star.svg'
                 />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>9</h2>
@@ -143,12 +141,20 @@ class ScorePage extends Component {
                 <h1 className='score'>765</h1>
                 <img
                   className='star'
-                  src='/static/assets/icons/icon-star-purple.svg'
+                  src='/static/assets/icons/icon-star.svg'
                 />
                 <p className='city'>Stuttgart</p>
                 <h2 className='number'>10</h2>
               </div>
             </div>
+
+            <h1 className='reminder'>Not on the list?</h1>
+
+            <ButtonSubpages
+              large
+              title={`Play again`}
+              onClick={() => this.props.dispatch(retry())}
+            />
           </div>
         </div>
         <style jsx>{`
@@ -178,7 +184,7 @@ class ScorePage extends Component {
           .highscore-inner {
             top: 0rem;
             position: absolute;
-            padding-bottom: 7.1rem;
+            padding-bottom: 20rem;
           }
           .highscore-inner .headline {
             margin-top: 2.3rem;
@@ -188,42 +194,36 @@ class ScorePage extends Component {
 
           .rightcloud {
             position: absolute;
-            top: -20%;
+            top: -15%;
             width: 60%;
-            right: -25%;
+            right: -5%;
             z-index: -1;
           }
           .leftcloud {
             position: absolute;
-            bottom: -15%;
+            bottom: -1%;
             width: 80%;
-            left: -5%;
+            left: -10%;
             z-index: -1;
           }
           .thirdcloud {
             position: absolute;
-            top: 95%;
+            bottom: -1%;
             width: 50%;
             left: 70%;
           }
           .fourthcloud {
             position: absolute;
-            top: 85%;
+            bottom: -1%;
             width: 50%;
             left: 30%;
-          }
-          .fifthcloud {
-            position: absolute;
-            top: 90%;
-            width: 60%;
-            left: -10%;
           }
           .background-white {
             position: absolute;
             background-color: #4effff;
             top: 0%;
             width: 100%;
-            height: 110%;
+            height: 100%;
             z-index: -10;
           }
 
@@ -299,18 +299,21 @@ class ScorePage extends Component {
           }
 
           .list-container {
-            width: 100%;
-            margin-right: 2.9rem;
             margin-top: 90vh;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-flow: row wrap;
+            justify-content: center;
           }
           .list-item {
-            width: 300px;
-            float: left;
+            width: 290px;
             height: 20rem;
-            border-bottom: 4px solid black;
-            margin-left: 2.9rem;
             margin-top: 2.9rem;
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
             position: relative;
+            background-color: rgb(240, 240, 240);
           }
           .list-item .name {
             position: absolute;
@@ -342,24 +345,34 @@ class ScorePage extends Component {
             margin-bottom: 0;
           }
 
-          @media (max-width: 670px) {
-            .list-item {
-              position: relative;
-              left: 50%;
-              transform: translateX(-50%);
-              margin-left: 0rem;
-            }
+          .reminder {
+            text-align: center;
+            margin-top: 15rem;
           }
 
-          @media (min-width: 500px) {
+          .playagainbutton {
+            position: absolute;
+            left: 50%;
+          }
+
+          @media (min-width: 550px) {
             .rightcloud {
-              width: 40%;
+              width: 35%;
+              right: -10%;
             }
             .leftcloud {
-              width: 35%;
+              width: 42%;
+              left: -5%;
             }
-            .fifthcloud {
-              top: 85%;
+            .thirdcloud {
+              width: 42%;
+              left: 60%;
+              bottom: -15%;
+            }
+            .fourthcloud {
+              width: 50%;
+              left: 30%;
+              bottom: -25%;
             }
             .list-container {
               margin-top: 90vh;
@@ -375,6 +388,28 @@ class ScorePage extends Component {
             .cup {
               width: 14rem;
               margin-top: 5rem;
+            }
+            .fourthcloud {
+              width: 43%;
+            }
+          }
+
+          @media (min-height: 800px) {
+            .fourthcloud {
+              bottom: -5%;
+            }
+            .thirdcloud {
+              bottom: -5%;
+            }
+            .leftcloud {
+              bottom: -1%;
+            }
+            .rightcloud {
+              right: -5%;
+            }
+            .cup {
+              width: 20rem;
+              margin-top: 0rem;
             }
           }
 
