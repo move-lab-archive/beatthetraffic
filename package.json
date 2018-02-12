@@ -26,6 +26,7 @@
     "howler": "^2.0.8",
     "immutable": "^3.8.2",
     "lodash.minby": "^4.6.0",
+    "mongodb": "^3.0.2",
     "next": "^4.2.3",
     "next-redux-wrapper": "^1.3.5",
     "prop-types": "^15.6.0",
