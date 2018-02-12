@@ -49,24 +49,25 @@ npm run deploy
 #Now will give you an url like: https://traffic-cam-qqwjiiwsai.now.sh/
 ```
 
-**Using docker**
-
-```bash
-# Create the docker image
-docker-compose build
-# Run the image on port 80
-docker-compose up
-```
-
 ### Build and run production build with geolocation redirects and DB
 
 > Require node.js >=9.2.0
+> and Require mongodb installed
 
 This exports the static pages on the server, and run the production server.js file. It's not a static deployment, it's a node instance but it serve static exports for some routes.
 
 ```bash
 npm run now-build
 npm run now-start
+```
+
+**Using docker to set-up node and mongodb env**
+
+```bash
+# Create the docker image
+docker-compose build
+# Run the image on port 80
+docker-compose up
 ```
 
 ## 🏙 How to add / edit you own level / city
