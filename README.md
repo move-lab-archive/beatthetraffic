@@ -49,6 +49,15 @@ npm run deploy
 #Now will give you an url like: https://traffic-cam-qqwjiiwsai.now.sh/
 ```
 
+**Using docker**
+
+```bash
+# Create the docker image
+docker build -t beat-the-traffic .
+# Run the image on port 80
+docker run -p 80:4000 beat-the-traffic
+```
+
 ### Build and run production build with geolocation redirects and DB
 
 > Require node.js >=9.2.0
