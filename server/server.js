@@ -10,7 +10,14 @@ const DBManager = require('./db/DBManager')
 const app = express()
 
 // Init connection to db
-DBManager.init()
+DBManager.init().then(
+  () => {
+    console.log('Success init db')
+  },
+  err => {
+    console.error(err)
+  }
+)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -77,4 +84,4 @@ app.get('/api/highscore', (req, res) => {
 
 app.use(express.static('out'))
 
-app.listen(4000, () => console.log('Example app listening on port 4000!'))
+app.listen(4000, () => console.log('App listening on port 4000!'))

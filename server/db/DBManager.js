@@ -1,6 +1,11 @@
 var MongoClient = require('mongodb').MongoClient
 
-var url = 'mongodb://localhost:27017'
+var mongoURL = 'mongodb://localhost:27017'
+
+// Where "mongo" is the name of the service in the docker-compose.yml file
+if (process.env.DOCKER_DEPLOY) {
+  mongoURL = 'mongodb://mongo:27017'
+}
 
 class DBManager {
   contructor () {
@@ -9,9 +14,9 @@ class DBManager {
 
   init () {
     return new Promise((resolve, reject) => {
-      MongoClient.connect(url, (err, client) => {
+      MongoClient.connect(mongoURL, (err, client) => {
         if (err) {
-          reject()
+          reject(err)
         } else {
           let db = client.db('beatthetraffic')
           this.db = db
