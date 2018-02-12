@@ -53,9 +53,9 @@ npm run deploy
 
 ```bash
 # Create the docker image
-docker build -t beat-the-traffic .
+docker-compose build
 # Run the image on port 80
-docker run -p 80:4000 beat-the-traffic
+docker-compose up
 ```
 
 ### Build and run production build with geolocation redirects and DB
