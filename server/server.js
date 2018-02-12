@@ -5,10 +5,22 @@ const bodyParser = require('body-parser')
 const Geo = require('./geo')
 const availableCities = require('../gameconfig.json').availableCities
 const defaultCity = require('../gameconfig.json').defaultSelectedCity
+const DBManager = require('./db/DBManager')
 
 const app = express()
 
+// Init connection to db
+DBManager.init().then(
+  () => {
+    console.log('Success init db')
+  },
+  err => {
+    console.error(err)
+  }
+)
+
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 // TODO WE COULD CONFIGURE THE BUILD PROCESS TO PRE-COMPRESS
 // OUT/ directory to avoid doing it on the fly and use CPU
 app.use(compression())
@@ -44,6 +56,32 @@ app.get('/:city', (req, res, next) => {
   }
 })
 
+app.post('/api/highscore', (req, res) => {
+  let highscoreData = req.body
+
+  let highscore = {
+    date: new Date(),
+    name: req.body.name,
+    score: req.body.score,
+    city: req.body.city
+  }
+
+  // Insert in DB
+  DBManager.insertHighscore(highscore).then(() => {
+    // Determine rank of this score
+    DBManager.getRankOfHighscore(highscore.score).then(rank => {
+      highscore.rank = rank + 1
+      res.json(rank)
+    })
+  })
+})
+
+app.get('/api/highscore', (req, res) => {
+  DBManager.getHighscores(10).then(highscores => {
+    res.json(highscores)
+  })
+})
+
 app.use(express.static('out'))
 
-app.listen(4000, () => console.log('Example app listening on port 4000!'))
+app.listen(4000, () => console.log('App listening on port 4000!'))

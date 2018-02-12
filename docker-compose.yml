@@ -1,0 +1,21 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - "80:4000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      - DOCKER_DEPLOY=true
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
