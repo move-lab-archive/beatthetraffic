@@ -178,8 +178,7 @@ class Landing extends Component {
             width: 7rem;
             opacity: 1;
             left: 50%;
-            transform: translateX(-50%);
-            margin-top: -170px;
+            transform: translateX(-50%) translateY(-150px);
             z-index: 100;
             position: absolute;
           }
@@ -240,11 +239,13 @@ class Landing extends Component {
               width: 525px;
               text-align: center;
             }
+            .tree {
+            }
           }
 
-          @media (max-height: 430px) {
+          @media (max-height: 400px) {
             .tree {
-              margin-top: -120px;
+              transform: translateX(-50%) translateY(-110px);
             }
           }
         `}</style>

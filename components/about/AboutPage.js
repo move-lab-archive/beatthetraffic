@@ -6,38 +6,55 @@ class AboutPage extends Component {
     return (
       <div className={`about-page`}>
         <ButtonClose onClick={this.props.onClose} />
-        <div className='about-container'>
-          <div className='about-inner'>
-            <h2>
-              "Beat The Traffic" is an online game where Lorem ipsum dolor sit
-              amet.
-            </h2>
-            <img
-              className='leftover'
-              src='/static/assets/about-highscores/leftover.jpg'
-            />
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet.
-            </p>
-            <h2>WANT TO SEE YOUR CITY IN THE GAME?</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos.
-            </p>
-            <h2>CREDITS</h2>
-            <p className='last-item'>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos.
-            </p>
+
+        <img
+          className={`rightcloud`}
+          src='/static/assets/menu/menu-rightcloud.svg'
+        />
+        <img
+          className={`leftcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <img
+          className={`thirdcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <img
+          className={`fourthcloud`}
+          src='/static/assets/menu/menu-leftcloud.svg'
+        />
+        <div className={`background-white`} />
+
+        <div className={`about-container`}>
+          <div className={`about-inner`}>
+            <h2 className='headline'>ABOUT</h2>
+
+            <div className='title-wrapper'>
+              <div className='title-container'>
+                <img
+                  className='tree'
+                  src='/static/assets/landing/asset-tree.png'
+                />
+                <h1>
+                  Beat the traffic<br />
+                  <span>X</span>
+                </h1>
+              </div>
+            </div>
+
+            <div className='text-container'>
+              <img src='/static/assets/about-highscores/leftover.jpg' />
+              <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                takimata sanctus est Lorem ipsum dolor sit amet.
+              </p>
+              <h1>WANT TO SEE YOUR CITY IN THE GAME?</h1>
+            </div>
           </div>
         </div>
-
         <style jsx>{`
           .about-page {
             position: fixed;
@@ -47,9 +64,9 @@ class AboutPage extends Component {
             bottom: 0;
             color: #262626;
             z-index: 10;
-            background-color: #fffe4a;
-            overflow: scroll;
-            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            background-color: white;
+            overflow-y: scroll;
+            overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             cursor: default;
           }
@@ -63,32 +80,142 @@ class AboutPage extends Component {
             transform: translateX(-50%);
           }
           .about-inner {
-            left: 2.9rem;
-            right: 2.9rem;
             top: 0rem;
             position: absolute;
+            padding-bottom: 20rem;
           }
-          .about-inner h2 {
-            margin-top: 7.1rem;
+          .about-inner .headline {
+            margin-top: 2.3rem;
+            margin-left: 2.9rem;
+            text-align: left;
           }
 
-          .leftover {
-            margin-top: 5rem;
-            margin-bottom: 5rem;
-            border: 4px solid yellow;
-            opacity: 1;
+          .rightcloud {
+            position: absolute;
+            top: -15%;
+            width: 60%;
+            right: -5%;
+            z-index: -1;
+          }
+          .leftcloud {
+            position: absolute;
+            bottom: -1%;
+            width: 80%;
+            left: -10%;
+            z-index: -1;
+          }
+          .thirdcloud {
+            position: absolute;
+            bottom: -1%;
+            width: 50%;
+            left: 70%;
+          }
+          .fourthcloud {
+            position: absolute;
+            bottom: -1%;
+            width: 50%;
+            left: 30%;
+          }
+          .background-white {
+            position: absolute;
+            background-color: #fffe4a;
+            top: 0%;
             width: 100%;
-            margin-left: 0%;
+            height: 100%;
+            z-index: -10;
           }
 
-          .last-item {
-            margin-bottom: 7.1rem;
+          .title-container {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            text-align: center;
+          }
+          .title-wrapper {
+            width: 100%;
+            height: 100%;
+            left: 0%;
+            top: 0%;
+            position: fixed;
           }
 
-          @media (min-width: 900px) {
-            .leftover {
-              width: 130%;
-              margin-left: -15%;
+          .title-container span {
+            color: #ff3bff;
+          }
+          .title-container img {
+            width: 7rem;
+          }
+
+          .text-container {
+            margin-top: 90vh;
+            margin-left: 2.9rem;
+            margin-right: 2.9rem;
+          }
+
+          .text-container img {
+            width: 100%;
+          }
+
+          @media (min-width: 550px) {
+            .rightcloud {
+              width: 35%;
+              right: -10%;
+            }
+            .leftcloud {
+              width: 42%;
+              left: -5%;
+            }
+            .thirdcloud {
+              width: 42%;
+              left: 60%;
+              bottom: -15%;
+            }
+            .fourthcloud {
+              width: 50%;
+              left: 30%;
+              bottom: -25%;
+            }
+            .text-container {
+              margin-top: 90vh;
+            }
+            .about-inner .headline {
+              margin-top: 2.3rem;
+              text-align: center;
+              margin-left: 0;
+            }
+          }
+
+          @media (max-height: 400px) {
+            .fourthcloud {
+              width: 43%;
+            }
+          }
+
+          @media (min-height: 800px) {
+            .fourthcloud {
+              bottom: -5%;
+            }
+            .thirdcloud {
+              bottom: -5%;
+            }
+            .leftcloud {
+              bottom: -1%;
+            }
+            .rightcloud {
+              right: -5%;
+            }
+          }
+
+          @keyframes flashingTitle {
+            0% {
+              color: #fffe4a;
+            }
+            50% {
+              color: #ff3bff;
+            }
+            100% {
+              color: #fffe4a;
             }
           }
         `}</style>
