@@ -25,7 +25,6 @@ class Button extends Component {
     return (
       <a
         className={`btn 
-          ${this.props.center ? 'center' : ''} 
           ${this.props.large ? 'large' : ''} 
           ${this.props.medium ? 'medium' : ''} 
           ${this.props.bgBlack ? 'bg-black' : ''}
