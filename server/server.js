@@ -1,3 +1,4 @@
+const RateLimit = require('express-rate-limit')
 const geoip = require('geoip-lite')
 const express = require('express')
 const compression = require('compression')
@@ -56,7 +57,13 @@ app.get('/:city', (req, res, next) => {
   }
 })
 
-app.post('/api/highscore', (req, res) => {
+var saveHighscoreLimiter = new RateLimit({
+  windowMs: 60000, // 1 min
+  max: 1, // start blocking after 1 requests
+  message: 'Too many highscore are being recorded from that IP address'
+})
+
+app.post('/api/highscore', saveHighscoreLimiter, (req, res) => {
   let highscoreData = req.body
 
   let highscore = {
