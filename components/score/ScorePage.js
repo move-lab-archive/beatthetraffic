@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
-import ButtonSubpages from '../shared/ButtonSubpages'
+import Button from '../shared/Button'
 
 // TODO handle logic of retriving scores, for now style everything static
 
@@ -149,12 +149,13 @@ class ScorePage extends Component {
             </div>
 
             <h1 className='reminder'>Not on the list?</h1>
-
-            <ButtonSubpages
-              large
-              title={`Play again`}
-              onClick={() => this.props.dispatch(retry())}
-            />
+            <div className='align-center'>
+              <Button
+                medium
+                title={`Play again`}
+                onClick={() => this.props.dispatch(retry())}
+              />
+            </div>
           </div>
         </div>
         <style jsx>{`
@@ -353,6 +354,10 @@ class ScorePage extends Component {
           .playagainbutton {
             position: absolute;
             left: 50%;
+          }
+
+          .align-center {
+            text-align: center;
           }
 
           @media (min-width: 550px) {

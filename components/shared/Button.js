@@ -5,6 +5,7 @@ class Button extends Component {
   static propTypes = {
     title: PropTypes.string,
     large: PropTypes.bool,
+    medium: PropTypes.bool,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     bgBlack: PropTypes.bool
@@ -24,7 +25,9 @@ class Button extends Component {
     return (
       <a
         className={`btn 
+          ${this.props.center ? 'center' : ''} 
           ${this.props.large ? 'large' : ''} 
+          ${this.props.medium ? 'medium' : ''} 
           ${this.props.bgBlack ? 'bg-black' : ''}
         `}
         onClick={() => this.handleClick()}
@@ -45,6 +48,7 @@ class Button extends Component {
             position: relative;
             display: inline-block;
           }
+
           .btn h4 {
             margin: 0;
           }
@@ -81,6 +85,19 @@ class Button extends Component {
             background-color: #ff3bff;
             left: 2px;
             top: 2px;
+          }
+
+          .medium {
+            width: 20rem;
+            height: 6rem;
+          }
+
+          .medium h4 {
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
           }
 
           .large {
