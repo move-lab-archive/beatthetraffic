@@ -3,7 +3,7 @@ import {
   shrinkAreaByPercentage
 } from '../../../../utils/resolution'
 
-const MIN_ACTIVE_FRAMES = 50
+const MIN_ACTIVE_FRAMES = 100
 
 let mapOfFirstTimeObjectsAppearFrameNb = {}
 
@@ -38,12 +38,15 @@ export default function detectMissedItemsThisFrame (
 
   // *** STEP 1 ***
   // Register appearance of objects that are appearing for the
-  // first time
-  objectTrackerData[currentFrame].forEach(item => {
-    if (!mapOfFirstTimeObjectsAppearFrameNb[item.id]) {
-      mapOfFirstTimeObjectsAppearFrameNb[item.id] = currentFrame
-    }
-  })
+  // first time in the visible canvas
+  objectTrackerData[currentFrame]
+    .filter(objectTracked => isInsideArea(visibleArea, objectTracked))
+    .forEach(item => {
+      if (!mapOfFirstTimeObjectsAppearFrameNb[item.id]) {
+        console.log('register')
+        mapOfFirstTimeObjectsAppearFrameNb[item.id] = currentFrame
+      }
+    })
 
   // *** STEP 2 ***
   // Compute the objectTracked list of this frame that are
