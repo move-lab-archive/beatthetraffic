@@ -1,6 +1,7 @@
 import {
   isInsideArea,
-  shrinkAreaByPercentage
+  shrinkAreaByPercentage,
+  isBiggerThan1PercentOfVisibleArea
 } from '../../../../utils/resolution'
 
 const MIN_ACTIVE_FRAMES = 50
@@ -52,13 +53,15 @@ export default function detectMissedItemsThisFrame (
   // => inside the visible viewport
   // => matched for more than MIN_ACTIVE_FRAME in the visible viewport
   // => not already masked
+  // => bigger than 1% of the viewport
   const visibleTrackedObjects = objectTrackerData[currentFrame].filter(
     objectTracked =>
       !alreadyKilledItems.includes(objectTracked.id) &&
       currentFrame - mapOfFirstTimeObjectsAppearFrameNb[objectTracked.id] >
         MIN_ACTIVE_FRAMES &&
       !alreadyKilledItems.includes(objectTracked.id) &&
-      isInsideArea(visibleArea, objectTracked)
+      isInsideArea(visibleArea, objectTracked) &&
+      isBiggerThan1PercentOfVisibleArea(objectTracked, visibleArea)
   )
 
   // *** STEP 3 ***
@@ -82,7 +85,6 @@ export default function detectMissedItemsThisFrame (
         ) &&
         // Make sure it is outside of the visible viewport shrinked by 10%
         !isInsideArea(shrinkAreaByPercentage(visibleArea, 10), objectTracked)
-      // IDEA Make sure it's not too small, generaly item badly tracked are small
     )
     .map(objectTracked => {
       let sameObjectFiveFrameBefore = objectTrackerData[currentFrame - 5].find(

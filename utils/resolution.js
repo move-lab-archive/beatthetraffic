@@ -89,3 +89,14 @@ export function isInsideSomeAreas (areas, point, idDisplay) {
   // console.log(`Run isInsideSomeAreas for ${idDisplay}, returned: ${isInside}`)
   return isInside
 }
+
+export function isBiggerThan1PercentOfVisibleArea (objectTracked, visibleArea) {
+  if (
+    objectTracked.w * objectTracked.h * 100 / (visibleArea.w * visibleArea.h) >
+    1
+  ) {
+    return true
+  } else {
+    return false
+  }
+}
