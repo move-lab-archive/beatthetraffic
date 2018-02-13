@@ -82,6 +82,7 @@ export default function detectMissedItemsThisFrame (
         ) &&
         // Make sure it is outside of the visible viewport shrinked by 10%
         !isInsideArea(shrinkAreaByPercentage(visibleArea, 10), objectTracked)
+      // IDEA Make sure it's not too small, generaly item badly tracked are small
     )
     .map(objectTracked => {
       let sameObjectFiveFrameBefore = objectTrackerData[currentFrame - 5].find(
