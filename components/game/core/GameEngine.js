@@ -298,7 +298,7 @@ class GameEngine extends Component {
           new MissedCarAnimation(
             centerOfDisappearItem.x,
             centerOfDisappearItem.y,
-            100,
+            TrackerUIEngine.computeCircleRadius(itemMissed.w * itemMissed.h) * 4,
             itemMissed.id
           )
         )

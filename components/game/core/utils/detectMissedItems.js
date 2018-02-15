@@ -87,7 +87,7 @@ export default function detectMissedItemsThisFrame (
         !isInsideArea(shrinkAreaByPercentage(visibleArea, 10), objectTracked)
     )
     .map(objectTracked => {
-      let sameObjectFiveFrameBefore = objectTrackerData[currentFrame - 5].find(
+      let sameObjectFiveFrameBefore = objectTrackerData[currentFrame - 3].find(
         item => item.id === objectTracked.id
       )
       return {
