@@ -13,57 +13,84 @@ export const COLLECTABLE_TYPES = {
   CHERRY: 'cherry'
 }
 
+const PERCENTAGE_SIZE_BBOX = 50 / 100
+const MAX_PERCENTAGE_SIZE_CANVAS = 10 / 100
+const MIN_PERCENTAGE_SIZE_CANVAS = 5 / 100
+
 class CollectableItemsEngine {
   constructor () {
     this.offscreenCanvas = {}
     this.sprites = {}
 
     this.sprites[COLLECTABLE_TYPES.BANANA] = {
-      width: 920,
-      height: 347,
+      ratioWidthHeight: 0.8,
       src: getSrc(COLLECTABLE_TYPES.BANANA),
-      nbFramePerRow: 8,
-      nbRow: 3,
-      nbTotalFrame: 18
+      nbFramePerRow: 4,
+      nbRow: 5,
+      nbTotalFrame: 18,
+      scaleFactor: 1,
+      frameWidth: null,
+      frameHeight: null
     }
 
     this.sprites[COLLECTABLE_TYPES.HEALING] = {
-      width: 920,
-      height: 347,
+      ratioWidthHeight: 0.8,
       src: getSrc(COLLECTABLE_TYPES.HEALING),
-      nbFramePerRow: 8,
-      nbRow: 3,
-      nbTotalFrame: 18
+      nbFramePerRow: 4,
+      nbRow: 5,
+      nbTotalFrame: 18,
+      scaleFactor: 1,
+      frameWidth: null,
+      frameHeight: null
     }
 
     this.sprites[COLLECTABLE_TYPES.CARROT] = {
-      width: 920,
-      height: 347,
+      ratioWidthHeight: 0.8,
       src: getSrc(COLLECTABLE_TYPES.CARROT),
-      nbFramePerRow: 8,
-      nbRow: 3,
-      nbTotalFrame: 18
+      nbFramePerRow: 4,
+      nbRow: 5,
+      nbTotalFrame: 18,
+      scaleFactor: 1,
+      frameWidth: null,
+      frameHeight: null
     }
 
     this.sprites[COLLECTABLE_TYPES.CHERRY] = {
-      width: 480,
-      height: 600,
+      ratioWidthHeight: 0.8,
       src: getSrc(COLLECTABLE_TYPES.CHERRY),
       nbFramePerRow: 4,
       nbRow: 5,
-      nbTotalFrame: 18
+      nbTotalFrame: 18,
+      scaleFactor: 1,
+      frameWidth: null,
+      frameHeight: null
     }
   }
 
-  init () {
+  init (canvasResolution) {
+    // From canvasResolution compute the sprite size needed
+    this.canvasResolution = canvasResolution
+    this.minItemSize = MIN_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
+    this.maxItemSize = MAX_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
+
     Object.values(COLLECTABLE_TYPES).forEach(collectableType => {
       let sprite = this.sprites[collectableType]
+
+      // Compute sprite width / height to draw to offscreen canvas
+      sprite.height = sprite.nbRow * this.maxItemSize
+      sprite.width = sprite.height * sprite.ratioWidthHeight
 
       // Create image element and load sprite data
       let img = new Image()
       img.src = sprite.src
 
       img.onload = () => {
+        console.log(
+          `Set up a ${sprite.width}x${
+            sprite.height
+          } offscreen canvas for ${collectableType}`
+        )
+
         // Render sprites on offscreen canvas
         this.offscreenCanvas[collectableType] = document.createElement('canvas')
         this.offscreenCanvas[collectableType].width = sprite.width
@@ -95,6 +122,27 @@ class CollectableItemsEngine {
       width: sprite.frameWidth,
       height: sprite.frameHeight
     }
+  }
+
+  getItemSize (bbox, type) {
+    let sprite = this.sprites[type]
+    let item = {}
+    // Compute size depending on bbox height
+    let size = PERCENTAGE_SIZE_BBOX * bbox.h * sprite.scaleFactor
+
+    // Constraint between min and max
+    size = Math.max(Math.min(size, this.maxItemSize), this.minItemSize)
+
+    // keep proportions
+    if (sprite.frameWidth > sprite.frameHeight) {
+      item.w = size
+      item.h = sprite.frameHeight * size / sprite.frameWidth
+    } else {
+      item.w = sprite.frameWidth * size / sprite.frameHeight
+      item.h = size
+    }
+
+    return item
   }
 
   drawFrameOnCanvas (contextToDrawOn, item) {

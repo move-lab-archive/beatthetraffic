@@ -61,17 +61,12 @@ class VehicleReplacementEngine {
     this.minItemSize = MIN_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
     this.maxItemSize = MAX_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
 
-    // THEN for each asset (Collectable, Starts, Puff, Missed item),
-    // make sizing dynamic depending on canvas resolution
-    // make offscreen canvas dynamic too
-    // + load sd / hd / full-hd video depending
-
     Object.values(VEHICLE_REPLACEMENT_TYPES).forEach(vehicleReplacementType => {
       let sprite = this.sprites[vehicleReplacementType]
 
       // Compute sprite width / height to draw to offscreen canvas
-      let spriteHeight = sprite.nbRow * this.maxItemSize
-      let spriteWidth = spriteHeight * sprite.ratioWidthHeight
+      sprite.height = sprite.nbRow * this.maxItemSize
+      sprite.width = sprite.height * sprite.ratioWidthHeight
 
       // TODO: Do we want to load a diff png depending on pixel density ?
       // let maxAssetSize = window.devicePixelRatio * this.spriteHeight
@@ -82,23 +77,25 @@ class VehicleReplacementEngine {
 
       img.onload = () => {
         console.log(
-          `Set up a ${spriteWidth}x${spriteHeight} offscreen canvas for ${vehicleReplacementType}`
+          `Set up a ${sprite.width}x${
+            sprite.height
+          } offscreen canvas for ${vehicleReplacementType}`
         )
 
         // Render sprites on offscreen canvas
         this.offscreenCanvas[vehicleReplacementType] = document.createElement(
           'canvas'
         )
-        this.offscreenCanvas[vehicleReplacementType].width = spriteWidth
-        this.offscreenCanvas[vehicleReplacementType].height = spriteHeight
+        this.offscreenCanvas[vehicleReplacementType].width = sprite.width
+        this.offscreenCanvas[vehicleReplacementType].height = sprite.height
         // this.offscreenCanvas[collectableType].img = img
         this.offscreenCanvas[vehicleReplacementType]
           .getContext('2d')
-          .drawImage(img, 0, 0, spriteWidth, spriteHeight)
+          .drawImage(img, 0, 0, sprite.width, sprite.height)
 
         // Compute frame data for sprite
-        sprite.frameWidth = Math.floor(spriteWidth / sprite.nbFramePerRow)
-        sprite.frameHeight = Math.floor(spriteHeight / sprite.nbRow)
+        sprite.frameWidth = Math.floor(sprite.width / sprite.nbFramePerRow)
+        sprite.frameHeight = Math.floor(sprite.height / sprite.nbRow)
       }
     })
   }
@@ -160,6 +157,7 @@ class VehicleReplacementEngine {
     let sprite = this.sprites[object.type]
     let vehicleReplacement = {}
 
+    // Compute size depending on bbox height
     let size = PERCENTAGE_SIZE_BBOX * object.h * sprite.scaleFactor
 
     // Constraint between min and max

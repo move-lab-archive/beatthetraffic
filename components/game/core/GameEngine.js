@@ -66,7 +66,7 @@ class GameEngine extends Component {
 
   componentDidMount () {
     // Rendering engine that have offscreen canvas to init on client
-    CollectableItemsEngine.init()
+    CollectableItemsEngine.init(this.props.canvasResolution)
     PuffAnimationsEngine.init()
     StarsAnimationsEngine.init()
     VehicleReplacementEngine.init(this.props.canvasResolution)
@@ -114,24 +114,9 @@ class GameEngine extends Component {
     this.canvasContext.clearRect(0, 0, this.props.canvasResolution.w, this.props.canvasResolution.h)
   }
 
-  getItemSize (mask) {
-    // Compute size depending on bbox area
-    const maskArea = mask.w * mask.h
-    let size = Math.floor(Math.sqrt(maskArea / 4))
-    // TODO have this dynamic depending on canvas size / sprite image
-    // between 30 and 50 pixel for  now
-    size = Math.min(Math.max(parseInt(size), 30), 50)
-    return size
-  }
-
   addCollectableItem (clickInfo, objectMaskedThatOutputObject, type) {
-    const itemSize = this.getItemSize(objectMaskedThatOutputObject)
+    const size = CollectableItemsEngine.getItemSize(objectMaskedThatOutputObject, type)
     const itemType = type
-
-    const size = {
-      w: itemSize,
-      h: itemSize
-    }
 
     const newItem = new CollectableItem(
       itemType,
