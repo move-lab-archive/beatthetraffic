@@ -14,6 +14,7 @@ import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManag
 import { scrollToPosition } from '../../../statemanagement/app/ViewportStateManagement'
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
+import Loading from '../../shared/Loading'
 
 class Video extends Component {
   constructor (props) {
@@ -26,18 +27,24 @@ class Video extends Component {
     this.handlePause = this.handlePause.bind(this)
     this.handleEnded = this.handleEnded.bind(this)
     this.handleFirstFrameLoaded = this.handleFirstFrameLoaded.bind(this)
+    this.handleBuffering = this.handleBuffering.bind(this)
+    this.handleFinishBuffering = this.handleFinishBuffering.bind(this)
     this.isMonitoring = false
     this.lastCurrentTime = 0
 
     this.state = {
-      canRenderVideo: false
+      canRenderVideo: false,
+      isBuffering: false
     }
   }
 
   shouldComponentUpdate (nextProps, nextState) {
     // We want to re-render the video item if the firstFrameLoaded has loaded
     // to mask the first frame image trick
-    if (nextProps.firstFrameLoaded !== this.props.firstFrameLoaded) {
+    if (
+      nextProps.firstFrameLoaded !== this.props.firstFrameLoaded ||
+      nextState.isBuffering !== this.state.isBuffering
+    ) {
       // console.log('firstFrameLoaded, re-render')
       return true
     } else if (
@@ -101,7 +108,6 @@ class Video extends Component {
   }
 
   handlePlay () {
-    // console.log('playing')
     // If not already monitoring
     if (!this.isMonitoring) {
       // console.log('Start monitoring frames')
@@ -124,6 +130,18 @@ class Video extends Component {
     this.props.dispatch(firstFrameLoaded())
   }
 
+  handleBuffering () {
+    this.setState({
+      isBuffering: true
+    })
+  }
+
+  handleFinishBuffering () {
+    this.setState({
+      isBuffering: false
+    })
+  }
+
   cleanListeners (el) {
     // console.log('Clean previous listeners')
     el.removeEventListener('canplay', this.handleCanPlay)
@@ -131,6 +149,8 @@ class Video extends Component {
     el.removeEventListener('pause', this.handlePause)
     el.removeEventListener('ended', this.handleEnded)
     el.removeEventListener('loadeddata', this.handleFirstFrameLoaded)
+    el.removeEventListener('waiting', this.handleBuffering)
+    el.removeEventListener('playing', this.handleFinishBuffering)
   }
 
   registerListeners (el) {
@@ -149,6 +169,8 @@ class Video extends Component {
       this.videoEl.addEventListener('pause', this.handlePause)
       this.videoEl.addEventListener('ended', this.handleEnded)
       this.videoEl.addEventListener('loadeddata', this.handleFirstFrameLoaded)
+      this.videoEl.addEventListener('waiting', this.handleBuffering)
+      this.videoEl.addEventListener('playing', this.handleFinishBuffering)
     }
   }
 
@@ -202,6 +224,12 @@ class Video extends Component {
         {!this.props.firstFrameLoaded && (
           <img className='img-firstframe' src={this.props.srcFirstFrame} />
         )}
+        {this.props.isPlaying &&
+          this.state.isBuffering && (
+            <div className='buffering'>
+              <Loading />
+            </div>
+          )}
         {this.props.src &&
           this.state.canRenderVideo && (
             <video
@@ -219,6 +247,19 @@ class Video extends Component {
             </video>
           )}
         <style jsx>{`
+          .buffering {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.8);
+          }
+
           .img-firstframe {
             position: absolute;
             top: 0;
