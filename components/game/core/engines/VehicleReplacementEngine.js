@@ -8,6 +8,10 @@ export const VEHICLE_REPLACEMENT_TYPES = {
   UNICORN: 'unicorn'
 }
 
+const PERCENTAGE_SIZE_BBOX = 80 / 100
+const MAX_PERCENTAGE_SIZE_CANVAS = 16 / 100
+const MIN_PERCENTAGE_SIZE_CANVAS = 6 / 100
+
 class VehicleReplacementEngine {
   constructor () {
     this.offscreenCanvas = {}
@@ -18,8 +22,7 @@ class VehicleReplacementEngine {
     this.mapVehicleTypes = {}
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.TREE] = {
-      width: 600,
-      height: 600,
+      ratioWidthHeight: 1,
       src: '/static/assets/sprites/tree.png',
       nbFramePerRow: 6,
       nbRow: 6,
@@ -30,8 +33,7 @@ class VehicleReplacementEngine {
     }
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.UNICORN] = {
-      width: 600,
-      height: 600,
+      ratioWidthHeight: 1,
       src: '/static/assets/sprites/unicorn.png',
       nbFramePerRow: 6,
       nbRow: 6,
@@ -42,8 +44,7 @@ class VehicleReplacementEngine {
     }
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.RAINBOW] = {
-      width: 600,
-      height: 600,
+      ratioWidthHeight: 1,
       src: '/static/assets/sprites/rainbow.png',
       nbFramePerRow: 6,
       nbRow: 6,
@@ -55,37 +56,49 @@ class VehicleReplacementEngine {
   }
 
   init (canvasResolution) {
-    console.log(canvasResolution)
+    // From canvasResolution compute the sprite size needed
     this.canvasResolution = canvasResolution
-    this.minSize = 6 / 100 * this.canvasResolution.h
-    this.maxSize = 16 / 100 * this.canvasResolution.h
-    let maxAssetSize = window.devicePixelRatio * this.maxSize
-    let maxSpriteHeight = 6 * this.maxSize
+    this.minItemSize = MIN_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
+    this.maxItemSize = MAX_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
 
-    console.log(maxSpriteHeight)
+    // THEN for each asset (Collectable, Starts, Puff, Missed item),
+    // make sizing dynamic depending on canvas resolution
+    // make offscreen canvas dynamic too
+    // + load sd / hd / full-hd video depending
 
     Object.values(VEHICLE_REPLACEMENT_TYPES).forEach(vehicleReplacementType => {
       let sprite = this.sprites[vehicleReplacementType]
+
+      // Compute sprite width / height to draw to offscreen canvas
+      let spriteHeight = sprite.nbRow * this.maxItemSize
+      let spriteWidth = spriteHeight * sprite.ratioWidthHeight
+
+      // TODO: Do we want to load a diff png depending on pixel density ?
+      // let maxAssetSize = window.devicePixelRatio * this.spriteHeight
 
       // Create image element and load sprite data
       let img = new Image()
       img.src = sprite.src
 
       img.onload = () => {
+        console.log(
+          `Set up a ${spriteWidth}x${spriteHeight} offscreen canvas for ${vehicleReplacementType}`
+        )
+
         // Render sprites on offscreen canvas
         this.offscreenCanvas[vehicleReplacementType] = document.createElement(
           'canvas'
         )
-        this.offscreenCanvas[vehicleReplacementType].width = sprite.width
-        this.offscreenCanvas[vehicleReplacementType].height = sprite.height
+        this.offscreenCanvas[vehicleReplacementType].width = spriteWidth
+        this.offscreenCanvas[vehicleReplacementType].height = spriteHeight
         // this.offscreenCanvas[collectableType].img = img
         this.offscreenCanvas[vehicleReplacementType]
           .getContext('2d')
-          .drawImage(img, 0, 0, sprite.width, sprite.height)
+          .drawImage(img, 0, 0, spriteWidth, spriteHeight)
 
         // Compute frame data for sprite
-        sprite.frameWidth = Math.floor(sprite.width / sprite.nbFramePerRow)
-        sprite.frameHeight = Math.floor(sprite.height / sprite.nbRow)
+        sprite.frameWidth = Math.floor(spriteWidth / sprite.nbFramePerRow)
+        sprite.frameHeight = Math.floor(spriteHeight / sprite.nbRow)
       }
     })
   }
@@ -147,10 +160,10 @@ class VehicleReplacementEngine {
     let sprite = this.sprites[object.type]
     let vehicleReplacement = {}
 
-    let size = 80 / 100 * object.h * sprite.scaleFactor
+    let size = PERCENTAGE_SIZE_BBOX * object.h * sprite.scaleFactor
 
     // Constraint between min and max
-    size = Math.max(Math.min(size, this.maxSize), this.minSize)
+    size = Math.max(Math.min(size, this.maxItemSize), this.minItemSize)
 
     // keep proportions
     if (sprite.frameWidth > sprite.frameHeight) {
