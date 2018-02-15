@@ -111,11 +111,19 @@ class GameEngine extends Component {
   }
 
   clearCanvas () {
-    this.canvasContext.clearRect(0, 0, this.props.canvasResolution.w, this.props.canvasResolution.h)
+    this.canvasContext.clearRect(
+      0,
+      0,
+      this.props.canvasResolution.w,
+      this.props.canvasResolution.h
+    )
   }
 
   addCollectableItem (clickInfo, objectMaskedThatOutputObject, type) {
-    const size = CollectableItemsEngine.getItemSize(objectMaskedThatOutputObject, type)
+    const size = CollectableItemsEngine.getItemSize(
+      objectMaskedThatOutputObject,
+      type
+    )
     const itemType = type
 
     const newItem = new CollectableItem(
@@ -179,7 +187,12 @@ class GameEngine extends Component {
   loopUpdateCanvas () {
     if (this.lastFrameDrawn !== GameEngineStateManager.getCurrentFrame()) {
       // Clear previous frame
-      this.canvasContext.clearRect(0, 0, this.props.canvasResolution.w, this.props.canvasResolution.h)
+      this.canvasContext.clearRect(
+        0,
+        0,
+        this.props.canvasResolution.w,
+        this.props.canvasResolution.h
+      )
 
       // Get current frame of the tracker
       // (sometimes it can be diffrent from the video framerate)
@@ -224,7 +237,9 @@ class GameEngine extends Component {
                 addKilledItem(potentialObjectToMask.id, whatObjectToOutput)
               )
 
-              const puffAnimationSize = PuffAnimationsEngine.getItemSize(potentialObjectToMask)
+              const puffAnimationSize = PuffAnimationsEngine.getItemSize(
+                potentialObjectToMask
+              )
 
               // Add puff animation
               GameEngineStateManager.addPuffAnimation(
@@ -256,7 +271,12 @@ class GameEngine extends Component {
 
                 // Add explosion animation
                 GameEngineStateManager.addStarsAnimation(
-                  new StarsAnimation(click.x, click.y, itemToCollect.id)
+                  new StarsAnimation(
+                    click.x,
+                    click.y,
+                    itemToCollect.id,
+                    this.props.canvasResolution
+                  )
                 )
 
                 // break from loop
@@ -298,7 +318,8 @@ class GameEngine extends Component {
           new MissedCarAnimation(
             centerOfDisappearItem.x,
             centerOfDisappearItem.y,
-            TrackerUIEngine.computeCircleRadius(itemMissed.w * itemMissed.h) * 4,
+            TrackerUIEngine.computeCircleRadius(itemMissed.w * itemMissed.h) *
+              4,
             itemMissed.id
           )
         )

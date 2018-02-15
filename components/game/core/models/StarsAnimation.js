@@ -2,17 +2,16 @@ import { TweenMax, TweenLite, TimelineLite } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 import StarsAnimationsEngine from '../engines/StarsAnimationsEngine'
 
-// TODO rename to explosion animation
 class StarsAnimation {
-  constructor (x, y, id) {
+  constructor (x, y, id, canvasResolution) {
     this.x = x
     this.y = y
     this.id = id
 
-    this.emitterSize = 50
+    this.emitterSize = 45 * canvasResolution.h / 720
     this.dotQuantity = 10
-    this.dotSizeMax = 30
-    this.dotSizeMin = 10
+    this.dotSizeMax = 25 * canvasResolution.h / 720
+    this.dotSizeMin = 10 * canvasResolution.h / 720
 
     this.maxAnimDuration = 0
 
