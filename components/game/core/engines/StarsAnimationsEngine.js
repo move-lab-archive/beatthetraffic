@@ -1,12 +1,11 @@
 /* global Image */
 
-// Overkill if we render only one frame
 class StarsAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 1380,
-      height: 76,
+      width: 900,
+      height: 50,
       src: '/static/assets/sprites/stars.png',
       nbFrames: 18
     }
