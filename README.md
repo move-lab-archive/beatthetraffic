@@ -111,11 +111,12 @@ better to add the things in order 😉
   "city": "stuttgart",
   "level": 3, // Should be 1, 2 or 3
   "levelName": "Stuttgart STR.", // Label that is displayed in the game
-  "playbackRate": 1.2, // If you want to speed up the video
-  "videoFPS": 30, // The video FPS
-  "trackerAndDetectionsFPS": 30, // The FPS of the YOLO / Tracker data, should be the same as the videoFPS
+  "playbackRate": 1.2, // OPTIONAL FIELD (default: 1) If you want to speed up the video
+  "videoFPS": 30, // OPTIONAL FIELD (default: 30) The video FPS
+  "trackerAndDetectionsFPS": 30, // OPTIONAL FIELD (default: 30) The FPS of the YOLO / Tracker data, should be the same as the videoFPS
   "originalResolution": {
-    // The resolution on which we ran the YOLO detections and tracker
+    // OPTIONAL FIELD : The resolution on which we ran the YOLO detections and tracker
+    // Default to 1920x1080
     "w": 1920,
     "h": 1080
   },
@@ -124,44 +125,12 @@ better to add the things in order 😉
     "x": 350,
     "y": 0
   },
-  // See the doc below regarding disappearAreas
-  "disappearAreas": [
-    {
-      "x": 0,
-      "y": 0,
-      "w": 1920,
-      "h": 1080
-    }
-  ],
-
   "sources": {
     // The urls of the video, please read https://help.vimeo.com/hc/en-us/articles/224823567-Direct-links to know how to get those links, or use your own server
     "hd": "https://player.vimeo.com/external/{vimeoId}.hd.mp4?s=XXXXXXX"
+    "sd": "https://player.vimeo.com/external/{vimeoId}.hd.mp4?s=XXXXXXX"
   }
 }
-```
-
-#### Special "disappearAreas" field:
-
-Please read issue: https://github.com/moovel/lab-beat-the-traffic/issues/28
-
-Until this issue is solved, you can either set the value to the whole video so that it will count disappearing cars anywhere, but might very well count false positive like id-reassignment:
-
-```json
-"disappearAreas": [
-  {
-    "x": 0,
-    "y": 0,
-    "w": 1920,
-    "h": 1080
-  }
-]
-```
-
-Or set it to a special part or the video or even empty, this will leads not to count any car and never bring the smoke bar up:
-
-```json
-"disappearAreas": []
 ```
 
 ### 2. Generate the tracking data

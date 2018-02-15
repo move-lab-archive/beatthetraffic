@@ -59,28 +59,15 @@
       "city": "stuttgart1",
       "level": 1,
       "levelName": "Neckartor",
-      "playbackRate": 1,
-      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 350,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/253212378.hd.mp4?s=3cfa88f1fa200f79bf1b829b64f0d32f0490b6d7&profile_id=175"
+          "https://player.vimeo.com/external/253212378.hd.mp4?s=3cfa88f1fa200f79bf1b829b64f0d32f0490b6d7&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/253212378.sd.mp4?s=123424d1ed48cfd2592fa68a435a4eff207df1cb&profile_id=165"
       }
     },
     {
@@ -94,22 +81,11 @@
         "x": 400,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/251165418.hd.mp4?s=74c118918a19318529750d354c5b79941a02a96e&profile_id=175"
+          "https://player.vimeo.com/external/251165418.hd.mp4?s=74c118918a19318529750d354c5b79941a02a96e&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/251165418.sd.mp4?s=45b1b41caf0777cc5c2d0be9792e0a4998f08d96&profile_id=165"
       }
     },
     {
@@ -118,27 +94,15 @@
       "level": 3,
       "levelName": "Cannstatter Straße",
       "playbackRate": 1.3,
-      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/253213722.hd.mp4?s=39cc6f45d260d133207ae958aaf0b7c7c2bfdc3b&profile_id=175"
+          "https://player.vimeo.com/external/253213722.hd.mp4?s=39cc6f45d260d133207ae958aaf0b7c7c2bfdc3b&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/253213722.sd.mp4?s=6d10d2165c6d2c9b50f460c1e1b5eab06d4f94fe&profile_id=165"
       }
     },
     {
@@ -147,27 +111,15 @@
       "level": 1,
       "levelName": "Neckartor",
       "playbackRate": 1.2,
-      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 350,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/250642409.hd.mp4?s=3ff7ed00b976692823ec86668404996a229b9491&profile_id=175&test=diff"
+          "https://player.vimeo.com/external/253212378.hd.mp4?s=3cfa88f1fa200f79bf1b829b64f0d32f0490b6d7&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/253212378.sd.mp4?s=123424d1ed48cfd2592fa68a435a4eff207df1cb&profile_id=165"
       }
     },
     {
@@ -176,27 +128,15 @@
       "level": 2,
       "levelName": "Uferstraße",
       "playbackRate": 1.5,
-      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 400,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/251165418.hd.mp4?s=74c118918a19318529750d354c5b79941a02a96e&profile_id=175"
+          "https://player.vimeo.com/external/251165418.hd.mp4?s=74c118918a19318529750d354c5b79941a02a96e&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/251165418.sd.mp4?s=45b1b41caf0777cc5c2d0be9792e0a4998f08d96&profile_id=165"
       }
     },
     {
@@ -205,27 +145,15 @@
       "level": 3,
       "levelName": "Cannstatter Straße",
       "playbackRate": 1.8,
-      "videoFPS": 30,
       "videoMobileOffset": {
         "x": 0,
         "y": 0
       },
-      "trackerAndDetectionsFPS": 30,
-      "disappearAreas": [
-        {
-          "x": 0,
-          "y": 0,
-          "w": 1920,
-          "h": 1080
-        }
-      ],
-      "originalResolution": {
-        "w": 1920,
-        "h": 1080
-      },
       "sources": {
         "hd":
-          "https://player.vimeo.com/external/250642451.hd.mp4?s=077b070f3ef0bae9a2df72b9a0defd7c624aa0fa&profile_id=175"
+          "https://player.vimeo.com/external/253213722.hd.mp4?s=39cc6f45d260d133207ae958aaf0b7c7c2bfdc3b&profile_id=175",
+        "sd":
+          "https://player.vimeo.com/external/253213722.sd.mp4?s=6d10d2165c6d2c9b50f460c1e1b5eab06d4f94fe&profile_id=165"
       }
     }
   ]

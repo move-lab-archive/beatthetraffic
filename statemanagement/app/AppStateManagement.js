@@ -17,7 +17,29 @@ const initialState = fromJS({
   availableCities: GameConfig.availableCities,
   selectedCity: GameConfig.defaultSelectedCity,
   selectedVideo: GameConfig.defaultSelectedVideo,
-  availableVideos: GameConfig.availableVideos,
+  availableVideos: GameConfig.availableVideos.map(video => {
+    // Set some default
+    if (!video.trackerAndDetectionsFPS) {
+      video.trackerAndDetectionsFPS = 30
+    }
+
+    if (!video.playbackRate) {
+      video.playbackRate = 1
+    }
+
+    if (!video.originalResolution) {
+      video.originalResolution = {
+        w: 1920,
+        h: 1080
+      }
+    }
+
+    if (!video.videoFPS) {
+      video.videoFPS = 30
+    }
+
+    return video
+  }),
   showMenu: false,
   showCityPicker: false,
   cityPickerLabel: '',
@@ -166,15 +188,17 @@ export function selectVideo (name) {
         })
 
       // Set video src
-      dispatch(setVideoSrc(videoSelected.getIn(['sources', 'hd'])))
+      dispatch(setVideoSrc(videoSelected.getIn(['sources', 'sd'])))
 
       // Fetch detection and object tracking data associated with the video
       // WARN: it executes only on client, we don't want to await for this MBs of data
       //       and include when in the bundle with the app on SSR
       if (!getState().settings.get('isServerRendering')) {
-        dispatch(
-          fetchRawDetections(getRawDetectionPath(videoSelected.get('name')))
-        )
+        if (process.env.NODE_ENV !== 'production') {
+          dispatch(
+            fetchRawDetections(getRawDetectionPath(videoSelected.get('name')))
+          )
+        }
         dispatch(
           fetchObjectTracker(getTrackerDataPath(videoSelected.get('name')))
         )
