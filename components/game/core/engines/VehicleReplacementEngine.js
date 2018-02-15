@@ -12,6 +12,7 @@ class VehicleReplacementEngine {
   constructor () {
     this.offscreenCanvas = {}
     this.sprites = {}
+    this.canvasResolution = {}
 
     // Keep track of object id -> Vehicle type
     this.mapVehicleTypes = {}
@@ -53,7 +54,16 @@ class VehicleReplacementEngine {
     }
   }
 
-  init () {
+  init (canvasResolution) {
+    console.log(canvasResolution)
+    this.canvasResolution = canvasResolution
+    this.minSize = 6 / 100 * this.canvasResolution.h
+    this.maxSize = 16 / 100 * this.canvasResolution.h
+    let maxAssetSize = window.devicePixelRatio * this.maxSize
+    let maxSpriteHeight = 6 * this.maxSize
+
+    console.log(maxSpriteHeight)
+
     Object.values(VEHICLE_REPLACEMENT_TYPES).forEach(vehicleReplacementType => {
       let sprite = this.sprites[vehicleReplacementType]
 
@@ -136,12 +146,11 @@ class VehicleReplacementEngine {
   getVehicleReplacementSize (object) {
     let sprite = this.sprites[object.type]
     let vehicleReplacement = {}
-    // Compute size depending on bbox area
-    const bboxArea = object.w * object.h
-    let size = Math.floor(Math.sqrt(bboxArea / 2))
-    // TODO have this dynamic depending on canvas size / sprite image
-    // between 30 and 50 pixel for  now
-    size = Math.min(Math.max(parseInt(size), 45), 120) * sprite.scaleFactor
+
+    let size = 80 / 100 * object.h * sprite.scaleFactor
+
+    // Constraint between min and max
+    size = Math.max(Math.min(size, this.maxSize), this.minSize)
 
     // keep proportions
     if (sprite.frameWidth > sprite.frameHeight) {

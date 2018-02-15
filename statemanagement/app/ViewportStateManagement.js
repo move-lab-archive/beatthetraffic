@@ -24,6 +24,7 @@ const SET_LANDSCAPE = 'Viewport/SET_LANDSCAPE'
 const INIT_LISTENERS = 'Viewport/INIT_LISTENERS'
 const SET_FULLSCREEN_STATUS = 'Viewport/SET_FULLSCREEN_STATUS'
 const SET_FULLSCREEN_AVAILABLE = 'Viewport/SET_FULLSCREEN_AVAILABLE'
+const SET_CANVAS_RESOLUTION = 'Viewport/SET_CANVAS_RESOLUTION'
 const SAVE_SCROLL_POSITION = 'Viewport/SAVE_SCROLL_POSITION'
 
 export function handleOrientationChange (dispatch) {
@@ -93,6 +94,32 @@ export function restoreCanvasScrolling (smooth = false) {
   }
 }
 
+export function setCanvasResolution (size) {
+  return {
+    type: SET_CANVAS_RESOLUTION,
+    payload: size
+  }
+}
+
+export function getCanvasResolution () {
+  let innerWidth = window.innerWidth
+  let innerHeight = window.innerHeight
+
+  if (innerWidth / innerHeight < 16 / 9) {
+    // Height is 100% and there is a scroll on the width
+    return {
+      w: innerHeight * 16 / 9,
+      h: innerHeight
+    }
+  } else {
+    // Width is 100% and there is a scroll on the height
+    return {
+      w: innerWidth,
+      h: innerWidth * 9 / 16
+    }
+  }
+}
+
 export function initViewportListeners () {
   return (dispatch, getState) => {
     // Only if not initialized
@@ -111,6 +138,10 @@ export function initViewportListeners () {
         screenfull.on('change', handleFullScreenChange.bind(this, dispatch))
         dispatch(setFullscreenAvailable())
       }
+
+      // init canvas
+      dispatch(setCanvasResolution(getCanvasResolution()))
+      // TODO ADD RESIZE EVENT HANDLER AND ORIENTATION CHANGE TO SET CANVAS SIZE
     }
   }
 }
@@ -200,6 +231,8 @@ export default function ViewportStateManagement (
         'canvasScrollingPositionToRestore',
         fromJS(action.payload)
       )
+    case SET_CANVAS_RESOLUTION:
+      return state.set('canvasResolution', fromJS(action.payload))
     default:
       return state
   }

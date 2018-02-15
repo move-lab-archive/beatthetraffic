@@ -69,7 +69,7 @@ class GameEngine extends Component {
     CollectableItemsEngine.init()
     PuffAnimationsEngine.init()
     StarsAnimationsEngine.init()
-    VehicleReplacementEngine.init()
+    VehicleReplacementEngine.init(this.props.canvasResolution)
     MissedCarAnimationsEngine.init()
   }
 
