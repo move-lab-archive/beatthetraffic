@@ -67,7 +67,7 @@ class GameEngine extends Component {
   componentDidMount () {
     // Rendering engine that have offscreen canvas to init on client
     CollectableItemsEngine.init(this.props.canvasResolution)
-    PuffAnimationsEngine.init()
+    PuffAnimationsEngine.init(this.props.canvasResolution)
     StarsAnimationsEngine.init()
     VehicleReplacementEngine.init(this.props.canvasResolution)
     MissedCarAnimationsEngine.init()
@@ -223,12 +223,16 @@ class GameEngine extends Component {
               this.props.dispatch(
                 addKilledItem(potentialObjectToMask.id, whatObjectToOutput)
               )
+
+              const puffAnimationSize = PuffAnimationsEngine.getItemSize(potentialObjectToMask)
+
               // Add puff animation
               GameEngineStateManager.addPuffAnimation(
                 new PuffAnimation(
                   click.x,
                   click.y,
-                  130,
+                  puffAnimationSize.w,
+                  puffAnimationSize.h,
                   potentialObjectToMask.id
                 )
               )

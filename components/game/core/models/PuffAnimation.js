@@ -3,11 +3,11 @@ import GameEngineStateManager from '../../../../statemanagement/app/GameEngineSt
 import PuffAnimationsEngine from '../engines/PuffAnimationsEngine'
 
 class PuffAnimation {
-  constructor (x, y, size, id) {
-    this.x = x - size / 2
-    this.y = y - size / 2
-    this.w = size
-    this.h = size
+  constructor (x, y, w, h, id) {
+    this.x = x - w / 2
+    this.y = y - h / 2
+    this.w = w
+    this.h = h
     this.id = id
     this.currentFrame = 0
 

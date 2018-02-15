@@ -1,22 +1,35 @@
 /* global Image */
+const PERCENTAGE_SIZE_BBOX = 130 / 100
+const MAX_PERCENTAGE_SIZE_CANVAS = 20 / 100
+const MIN_PERCENTAGE_SIZE_CANVAS = 10 / 100
 
 class PuffAnimationsEngine {
   constructor () {
     this.offscreenCanvas = null
     this.sprite = {
-      width: 510,
-      height: 138,
       src: '/static/assets/puff/v1.png',
       nbFrames: 4
     }
   }
 
-  init () {
+  init (canvasResolution) {
     // Create image element and load sprite data
     let img = new Image()
     img.src = this.sprite.src
 
+    this.canvasResolution = canvasResolution
+    this.minItemSize = MIN_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
+    this.maxItemSize = MAX_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
+
+    this.sprite.height = this.maxItemSize
+    this.sprite.width = this.maxItemSize * this.sprite.nbFrames
+
     img.onload = () => {
+      console.log(
+        `Set up a ${this.sprite.width}x${
+          this.sprite.height
+        } offscreen canvas for Puff animation`
+      )
       // Render sprite on offscreen canvas
       this.offscreenCanvas = document.createElement('canvas')
       this.offscreenCanvas.width = this.sprite.width
@@ -44,6 +57,16 @@ class PuffAnimationsEngine {
       y: 0,
       width: this.sprite.frameWidth,
       height: this.sprite.frameHeight
+    }
+  }
+
+  getItemSize (bbox) {
+    let size = PERCENTAGE_SIZE_BBOX * Math.max(bbox.h, bbox.w)
+    size = Math.max(Math.min(size, this.maxItemSize), this.minItemSize)
+
+    return {
+      w: size,
+      h: size
     }
   }
 
