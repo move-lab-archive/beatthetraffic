@@ -76,11 +76,11 @@ class VehicleReplacementEngine {
       img.src = sprite.src
 
       img.onload = () => {
-        console.log(
-          `Set up a ${sprite.width}x${
-            sprite.height
-          } offscreen canvas for ${vehicleReplacementType}`
-        )
+        // console.log(
+        //   `Set up a ${sprite.width}x${
+        //     sprite.height
+        //   } offscreen canvas for ${vehicleReplacementType}`
+        // )
 
         // Render sprites on offscreen canvas
         this.offscreenCanvas[vehicleReplacementType] = document.createElement(
