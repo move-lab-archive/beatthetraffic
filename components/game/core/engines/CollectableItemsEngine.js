@@ -85,11 +85,11 @@ class CollectableItemsEngine {
       img.src = sprite.src
 
       img.onload = () => {
-        console.log(
-          `Set up a ${sprite.width}x${
-            sprite.height
-          } offscreen canvas for ${collectableType}`
-        )
+        // console.log(
+        //   `Set up a ${sprite.width}x${
+        //     sprite.height
+        //   } offscreen canvas for ${collectableType}`
+        // )
 
         // Render sprites on offscreen canvas
         this.offscreenCanvas[collectableType] = document.createElement('canvas')

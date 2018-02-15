@@ -25,11 +25,11 @@ class PuffAnimationsEngine {
     this.sprite.width = this.maxItemSize * this.sprite.nbFrames
 
     img.onload = () => {
-      console.log(
-        `Set up a ${this.sprite.width}x${
-          this.sprite.height
-        } offscreen canvas for Puff animation`
-      )
+      // console.log(
+      //   `Set up a ${this.sprite.width}x${
+      //     this.sprite.height
+      //   } offscreen canvas for Puff animation`
+      // )
       // Render sprite on offscreen canvas
       this.offscreenCanvas = document.createElement('canvas')
       this.offscreenCanvas.width = this.sprite.width
