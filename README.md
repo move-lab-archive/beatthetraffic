@@ -219,6 +219,8 @@ that may alter the colors a bit)_ , and then you can use ffmpeg for example:
 Kill the process after 1 sec overwise it will extract all the frames of the
 video. (or change with a command that just extract the first frame 😝)
 
+The final asset must be 1280x720 size, and you should use image optim https://imageoptim.com/online before copying the asset.
+
 Then you need to convert it to jpeg and copy it to the following folder:
 
 `/static/levels/${cityname}-level${levelNb}/firstframe.jpg`
@@ -270,9 +272,11 @@ the video with ffmpeg:
 
 And then stich the non moving parts together.
 
+The final asset must be 1280x720 size, and you should use image optim https://imageoptim.com/online before copying the asset.
+
 When you have your average image, copy it to the following directory:
 
-`/static/levels/${cityname}-level${levelNb}/average.jpg`
+`/static/levels/${cityname}-level${levelNb}/average-1280.jpg`
 
 #### Image optimisation
 
