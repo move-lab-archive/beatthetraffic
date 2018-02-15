@@ -111,7 +111,7 @@ class GameEngine extends Component {
   }
 
   clearCanvas () {
-    this.canvasContext.clearRect(0, 0, 1280, 720)
+    this.canvasContext.clearRect(0, 0, this.props.canvasResolution.w, this.props.canvasResolution.h)
   }
 
   getItemSize (mask) {
@@ -194,7 +194,7 @@ class GameEngine extends Component {
   loopUpdateCanvas () {
     if (this.lastFrameDrawn !== GameEngineStateManager.getCurrentFrame()) {
       // Clear previous frame
-      this.canvasContext.clearRect(0, 0, 1280, 720)
+      this.canvasContext.clearRect(0, 0, this.props.canvasResolution.w, this.props.canvasResolution.h)
 
       // Get current frame of the tracker
       // (sometimes it can be diffrent from the video framerate)
@@ -390,8 +390,8 @@ class GameEngine extends Component {
               this.canvasContext = el.getContext('2d')
             }
           }}
-          width='1280'
-          height='720'
+          width={this.props.canvasResolution.w}
+          height={this.props.canvasResolution.h}
           className='canvas'
         />
         <style jsx>{`

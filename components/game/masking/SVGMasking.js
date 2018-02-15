@@ -90,15 +90,15 @@ class SVGMasking extends Component {
         <svg
           id='average-img'
           preserveAspectRatio='xMinYMax meet'
-          viewBox='0 0 1280 720'
+          viewBox={`0 0 ${this.props.canvasResolution.w} ${this.props.canvasResolution.h}`}
           className={`average-img`}
         >
           <image
             xlinkHref={this.props.averageImgSrc}
             x='0'
             y='0'
-            width='1280px'
-            height='720px'
+            width={`${this.props.canvasResolution.w}px`}
+            height={`${this.props.canvasResolution.h}px`}
             clipPath='url(#svgPath)'
           />
           <SmokeSVGOverlay />
@@ -163,6 +163,7 @@ export default connect(state => {
     isObjectTrackerDataFetched: state.objectTracker.get('fetched'),
     isPlaying: state.video.get('isPlaying'),
     isAtBeggining: state.video.get('isAtBeggining'),
-    averageImgSrc: getAverageImgPath(selectedVideo.get('name'))
+    averageImgSrc: getAverageImgPath(selectedVideo.get('name')),
+    canvasResolution: state.viewport.get('canvasResolution').toJS()
   }
 })(SVGMasking)
