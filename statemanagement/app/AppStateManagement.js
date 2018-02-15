@@ -187,9 +187,6 @@ export function selectVideo (name) {
           return video.get('name') === name
         })
 
-      // Set video src
-      dispatch(setVideoSrc(videoSelected.getIn(['sources', 'sd'])))
-
       // Fetch detection and object tracking data associated with the video
       // WARN: it executes only on client, we don't want to await for this MBs of data
       //       and include when in the bundle with the app on SSR
@@ -202,6 +199,13 @@ export function selectVideo (name) {
         dispatch(
           fetchObjectTracker(getTrackerDataPath(videoSelected.get('name')))
         )
+
+        // Set video src
+        let quality = 'hd'
+        if (window.innerHeight < 550 && window.innerWidth < 1000) {
+          quality = 'sd'
+        }
+        dispatch(setVideoSrc(videoSelected.getIn(['sources', quality])))
       }
     })
   }
@@ -213,6 +217,17 @@ export function fetchRemainingData () {
   return (dispatch, getState) => {
     const videoSelectedName = getState().app.get('selectedVideo')
     dispatch(prefetchImgFirstFrame(videoSelectedName))
+    const videoSelected = getState()
+      .app.get('availableVideos')
+      .find(video => {
+        return video.get('name') === videoSelectedName
+      })
+    // Set video src
+    let quality = 'hd'
+    if (window.innerHeight < 550 && window.innerWidth < 1000) {
+      quality = 'sd'
+    }
+    dispatch(setVideoSrc(videoSelected.getIn(['sources', quality])))
     // Do not load raw detections in prod
     if (process.env.NODE_ENV !== 'production') {
       dispatch(fetchRawDetections(getRawDetectionPath(videoSelectedName)))
