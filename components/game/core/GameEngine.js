@@ -299,7 +299,6 @@ class GameEngine extends Component {
       const itemsMissedThisFrame = detectMissedItemsThisFrame(
         frame,
         this.props.objectTrackerData,
-        this.props.allowedDisappearAreas,
         this.props.alreadyKilledItems,
         computeVisibleArea(this.props.originalResolution)
       )
@@ -459,7 +458,6 @@ export default connect(state => {
     originalResolution: selectedVideo.get('originalResolution').toJS(),
     canvasResolution: state.viewport.get('canvasResolution').toJS(),
     ratioVideoTrackerFPS,
-    allowedDisappearAreas: selectedVideo.get('disappearAreas').toJS(),
     alreadyKilledItems: state.game.get('killedItems'),
     smokeLevel: getSmokeLevel(
       state.game.get('nbItemsMissed'),

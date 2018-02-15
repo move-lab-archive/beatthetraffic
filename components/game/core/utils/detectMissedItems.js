@@ -11,7 +11,6 @@ let mapOfFirstTimeObjectsAppearFrameNb = {}
 export default function detectMissedItemsThisFrame (
   currentFrame,
   objectTrackerData,
-  allowedDisappearAreas,
   alreadyKilledItems,
   visibleCanvasAreaScaledToVideoResolution
 ) {
