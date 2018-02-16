@@ -33,6 +33,10 @@ class CityPicker extends PureComponent {
   // }
 
   render () {
+    let availableCities = this.props.availableCities
+      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+      .toJS()
+
     return (
       <div>
         <div
@@ -44,26 +48,18 @@ class CityPicker extends PureComponent {
           }`}
         >
           <div className={`cities`}>
-            {Object.keys(
-              this.props.availableCities
-                .sort((a, b) => a.get('label').localeCompare(b.get('label')))
-                .toJS()
-            )
-              // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
-              .map(cityId => (
-                <h3
-                  onClick={() => {
-                    // TODO IMPROVE WITHOUT HARD RELOAD
-                    window.location.href = `/${cityId}/level/1`
-                  }}
-                  key={cityId}
-                  className={
-                    cityId === this.props.selectedCity ? 'selected' : ''
-                  }
-                >
-                  {this.props.availableCities.get(cityId).label}
-                </h3>
-              ))}
+            {Object.keys(availableCities).map(cityId => (
+              <h3
+                onClick={() => {
+                  // TODO IMPROVE WITHOUT HARD RELOAD
+                  window.location.href = `/${cityId}/level/1`
+                }}
+                key={cityId}
+                className={cityId === this.props.selectedCity ? 'selected' : ''}
+              >
+                {availableCities[cityId].label}
+              </h3>
+            ))}
           </div>
           <ButtonClose onClick={() => this.handleClose()} smallPadding />
         </div>

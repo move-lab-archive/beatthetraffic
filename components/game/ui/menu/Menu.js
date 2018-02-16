@@ -121,6 +121,10 @@ class Menu extends PureComponent {
   }
 
   render () {
+    let availableCities = this.props.availableCities
+      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+      .toJS()
+
     return (
       <div
         className={`menu-page ${this.props.showMenu ? 'visible' : 'hidden'}`}
@@ -149,26 +153,20 @@ class Menu extends PureComponent {
 
             <div className='city-selector-items'>
               <h4>Beat the traffic in</h4>
-              {Object.keys(
-                this.props.availableCities
-                  .sort((a, b) => a.get('label').localeCompare(b.get('label')))
-                  .toJS()
-              )
-                // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
-                .map(cityId => (
-                  <h2
-                    onClick={() => {
-                      // TODO IMPROVE WITHOUT HARD RELOAD
-                      window.location.href = `/${cityId}/level/1`
-                    }}
-                    key={cityId}
-                    className={`link ${
-                      cityId === this.props.selectedCity ? 'selected' : ''
-                    }`}
-                  >
-                    {this.props.availableCities.get(cityId).label}
-                  </h2>
-                ))}
+              {Object.keys(availableCities).map(cityId => (
+                <h2
+                  onClick={() => {
+                    // TODO IMPROVE WITHOUT HARD RELOAD
+                    window.location.href = `/${cityId}/level/1`
+                  }}
+                  key={cityId}
+                  className={`link ${
+                    cityId === this.props.selectedCity ? 'selected' : ''
+                  }`}
+                >
+                  {availableCities[cityId].label}
+                </h2>
+              ))}
             </div>
           </div>
         </div>
