@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import raf from 'raf'
 
@@ -11,7 +11,7 @@ import { getAverageImgPath } from '../../../statemanagement/app/AppStateManageme
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
-class SVGMasking extends Component {
+class SVGMasking extends PureComponent {
   constructor (props) {
     super(props)
 
@@ -148,17 +148,17 @@ class SVGMasking extends Component {
         <svg
           id='average-img'
           preserveAspectRatio='xMinYMax meet'
-          viewBox={`0 0 ${this.props.canvasResolution.w} ${
-            this.props.canvasResolution.h
-          }`}
+          viewBox={`0 0 ${this.props.canvasResolution.get(
+            'w'
+          )} ${this.props.canvasResolution.get('h')}`}
           className={`average-img`}
         >
           <image
             xlinkHref={this.props.averageImgSrc}
             x='0'
             y='0'
-            width={`${this.props.canvasResolution.w}px`}
-            height={`${this.props.canvasResolution.h}px`}
+            width={`${this.props.canvasResolution.get('w')}px`}
+            height={`${this.props.canvasResolution.get('h')}px`}
             clipPath='url(#svgPath)'
           />
           <SmokeSVGOverlay />
@@ -231,6 +231,6 @@ export default connect(state => {
     isPlaying: state.video.get('isPlaying'),
     isAtBeggining: state.video.get('isAtBeggining'),
     averageImgSrc: getAverageImgPath(selectedVideo.get('name')),
-    canvasResolution: state.viewport.get('canvasResolution').toJS()
+    canvasResolution: state.viewport.get('canvasResolution')
   }
 })(SVGMasking)

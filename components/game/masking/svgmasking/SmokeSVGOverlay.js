@@ -38,8 +38,8 @@ class SmokeSVGOverlay extends PureComponent {
         y='0'
         fill={pollutionOverlayStyle.pollutionFillColor}
         fillOpacity={pollutionOverlayStyle.pollutionOpacity}
-        width={this.props.canvasResolution.w}
-        height={this.props.canvasResolution.h}
+        width={this.props.canvasResolution.get('w')}
+        height={this.props.canvasResolution.get('h')}
       />
     )
   }
@@ -49,6 +49,6 @@ export default connect(state => {
   return {
     nbMissed: state.game.get('nbItemsMissed'),
     maxMissed: state.game.get('maxMissed'),
-    canvasResolution: state.viewport.get('canvasResolution').toJS()
+    canvasResolution: state.viewport.get('canvasResolution')
   }
 })(SmokeSVGOverlay)

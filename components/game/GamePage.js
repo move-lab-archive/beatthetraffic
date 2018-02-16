@@ -36,7 +36,7 @@ import SoundsManager from '../../statemanagement/app/SoundsManager'
 import GameEngineStateManager from '../../statemanagement/app/GameEngineStateManager'
 import CityPicker from '../shared/CityPicker'
 
-class GamePage extends React.Component {
+class GamePage extends React.PureComponent {
   constructor (props) {
     super(props)
 
@@ -93,7 +93,7 @@ class GamePage extends React.Component {
       y: event.pageY
     }
 
-    const canvas = this.props.canvasResolution
+    const canvas = this.props.canvasResolution.toJS()
 
     const innerWidth = window.innerWidth
     const innerHeight = window.innerHeight
@@ -209,7 +209,7 @@ export default connect(state => {
   return {
     isGamePlaying: state.game.get('isPlaying'),
     levelNb: selectedVideo.get('level'),
-    canvasResolution: state.viewport.get('canvasResolution').toJS(),
+    canvasResolution: state.viewport.get('canvasResolution'),
     introAnimPlayed: state.app.get('introAnimPlayed')
   }
 })(GamePage)

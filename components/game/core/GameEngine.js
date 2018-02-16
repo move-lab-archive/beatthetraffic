@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import raf from 'raf'
 
@@ -37,7 +37,7 @@ import { computeVisibleArea } from '../../../statemanagement/app/ViewportStateMa
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
-class GameEngine extends Component {
+class GameEngine extends PureComponent {
   constructor (props) {
     super(props)
     this.lastFrameDrawn = -1

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 
@@ -14,7 +14,7 @@ import {
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
 
-class Menu extends Component {
+class Menu extends PureComponent {
   constructor (props) {
     super(props)
 
@@ -149,7 +149,11 @@ class Menu extends Component {
 
             <div className='city-selector-items'>
               <h4>Beat the traffic in</h4>
-              {Object.keys(this.props.availableCities)
+              {Object.keys(
+                this.props.availableCities
+                  .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+                  .toJS()
+              )
                 // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
                 .map(cityId => (
                   <h2
@@ -162,7 +166,7 @@ class Menu extends Component {
                       cityId === this.props.selectedCity ? 'selected' : ''
                     }`}
                   >
-                    {this.props.availableCities[cityId].label}
+                    {this.props.availableCities.get(cityId).label}
                   </h2>
                 ))}
             </div>
@@ -321,10 +325,7 @@ class Menu extends Component {
 export default connect(state => {
   return {
     showMenu: state.app.get('showMenu'),
-    availableCities: state.app
-      .get('availableCities')
-      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
-      .toJS(),
+    availableCities: state.app.get('availableCities'),
     selectedCity: state.app.get('selectedCity')
   }
 })(Menu)

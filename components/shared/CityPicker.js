@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { loadCity } from '../../statemanagement/app/GameStateManagement'
@@ -6,7 +6,7 @@ import { hideCityPicker } from '../../statemanagement/app/AppStateManagement'
 import ButtonClose from './ButtonClose'
 import ChangeCityButton from './ChangeCityButton'
 
-class CityPicker extends Component {
+class CityPicker extends PureComponent {
   static propTypes = {
     isVisible: PropTypes.bool,
     label: PropTypes.string,
@@ -44,7 +44,11 @@ class CityPicker extends Component {
           }`}
         >
           <div className={`cities`}>
-            {Object.keys(this.props.availableCities)
+            {Object.keys(
+              this.props.availableCities
+                .sort((a, b) => a.get('label').localeCompare(b.get('label')))
+                .toJS()
+            )
               // .filter(cityId => cityId !== this.props.selectedCity) //show active state of city in location menu
               .map(cityId => (
                 <h3
@@ -57,7 +61,7 @@ class CityPicker extends Component {
                     cityId === this.props.selectedCity ? 'selected' : ''
                   }
                 >
-                  {this.props.availableCities[cityId].label}
+                  {this.props.availableCities.get(cityId).label}
                 </h3>
               ))}
           </div>
@@ -149,10 +153,7 @@ class CityPicker extends Component {
 
 export default connect(state => {
   return {
-    availableCities: state.app
-      .get('availableCities')
-      .sort((a, b) => a.get('label').localeCompare(b.get('label')))
-      .toJS(),
+    availableCities: state.app.get('availableCities'),
     selectedCity: state.app.get('selectedCity'),
     isVisible: state.app.get('showCityPicker'),
     label: state.app.get('cityPickerLabel')
