@@ -66,6 +66,7 @@ class SVGMasking extends PureComponent {
           elem.setAttribute('height', maskedItem.h)
           elem.setAttribute('x', maskedItem.x)
           elem.setAttribute('y', maskedItem.y)
+          elem.style.display = 'block'
         }
 
         // This is not working, appending the child but it is then not visible ... weird
@@ -100,6 +101,7 @@ class SVGMasking extends PureComponent {
             elem.setAttribute('height', 0)
             elem.setAttribute('x', 0)
             elem.setAttribute('y', 0)
+            elem.style.display = 'none'
           }
         }
       }
@@ -119,6 +121,7 @@ class SVGMasking extends PureComponent {
         elem.setAttribute('height', 0)
         elem.setAttribute('x', 0)
         elem.setAttribute('y', 0)
+        elem.style.display = 'none'
       }
     }
   }
