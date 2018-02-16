@@ -24,6 +24,8 @@ class SVGMasking extends Component {
     this.isUpdatingMasks = false
     this.lastFrameDrawn = -1
     this.loopUpdateMasks = this.loopUpdateMasks.bind(this)
+
+    this.previousMaskedItemSize = 0
   }
 
   componentWillReceiveProps (nextProps) {
@@ -60,7 +62,55 @@ class SVGMasking extends Component {
           }
         }
       )
-      this.setState({ masks: maskedItemsThisFrame })
+
+      let elem, clipPath
+
+      maskedItemsThisFrame.forEach((maskedItem, index) => {
+        elem = document.getElementById(`mask-${index}`)
+        if (elem) {
+          elem.setAttribute('width', maskedItem.w)
+          elem.setAttribute('height', maskedItem.h)
+          elem.setAttribute('x', maskedItem.x)
+          elem.setAttribute('y', maskedItem.y)
+        }
+
+        // This is not working, appending the child but it is then not visible ... weird
+        // Workaround is to insert 20 div in the DOM as we won't mask more than this
+        // else {
+        //   elem = document.createElement('rect')
+        //   elem.setAttribute('id', `mask-${index}`)
+        //   elem.setAttribute('x', Math.floor(maskedItem.x))
+        //   elem.setAttribute('y', Math.floor(maskedItem.y))
+        //   elem.setAttribute('stroke', '#000000')
+        //   elem.setAttribute('stroke-miterlimit', '10')
+        //   elem.setAttribute('rx', '5')
+        //   elem.setAttribute('ry', '5')
+        //   elem.setAttribute('width', Math.floor(maskedItem.w))
+        //   elem.setAttribute('height', Math.floor(maskedItem.h))
+        //   clipPath = document.getElementById('svgPath')
+        //   clipPath.appendChild(elem)
+        // }
+      })
+
+      if (this.previousMaskedItemSize > maskedItemsThisFrame.length) {
+        // Reset masks that are not reused from previous frame
+        for (
+          let index = maskedItemsThisFrame.length;
+          index < this.previousMaskedItemSize;
+          index++
+        ) {
+          elem = document.getElementById(`mask-${index}`)
+          // console.log(elem)
+          if (elem) {
+            elem.setAttribute('width', 0)
+            elem.setAttribute('height', 0)
+            elem.setAttribute('x', 0)
+            elem.setAttribute('y', 0)
+          }
+        }
+      }
+
+      this.previousMaskedItemSize = maskedItemsThisFrame.length
     }
     raf(this.loopUpdateMasks.bind(this))
   }
@@ -90,7 +140,9 @@ class SVGMasking extends Component {
         <svg
           id='average-img'
           preserveAspectRatio='xMinYMax meet'
-          viewBox={`0 0 ${this.props.canvasResolution.w} ${this.props.canvasResolution.h}`}
+          viewBox={`0 0 ${this.props.canvasResolution.w} ${
+            this.props.canvasResolution.h
+          }`}
           className={`average-img`}
         >
           <image
@@ -102,18 +154,24 @@ class SVGMasking extends Component {
             clipPath='url(#svgPath)'
           />
           <SmokeSVGOverlay />
-          {/* {this.state.masks.map(mask => (
-            <image
-              key={`${mask.id}-unicorn`}
-              x={mask.x + mask.w / 2 - this.getUnicornSize(mask) / 2}
-              y={mask.y + mask.h / 2 - this.getUnicornSize(mask) / 2}
-              width={this.getUnicornSize(mask)}
-              height={this.getUnicornSize(mask)}
-              xlinkHref='/static/assets/icons/icon-unicorn.svg'
-            />
-          ))} */}
           <defs>
-            <Clippath masks={this.state.masks} />
+            <clipPath id='svgPath'>
+              {Array(20)
+                .fill(1)
+                .map((value, index) => (
+                  <rect
+                    id={`mask-${index}`}
+                    x='0'
+                    y='0'
+                    stroke='#000000'
+                    strokeMiterlimit='10'
+                    rx='5'
+                    ry='5'
+                    width='0'
+                    height='0'
+                  />
+                ))}
+            </clipPath>
           </defs>
         </svg>
         <style jsx>{`
