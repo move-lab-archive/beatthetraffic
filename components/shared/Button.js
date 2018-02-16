@@ -28,6 +28,7 @@ class Button extends Component {
           ${this.props.large ? 'large' : ''} 
           ${this.props.medium ? 'medium' : ''} 
           ${this.props.bgBlack ? 'bg-black' : ''}
+          ${this.props.disabled ? 'disabled' : ''}
         `}
         onClick={() => this.handleClick()}
       >

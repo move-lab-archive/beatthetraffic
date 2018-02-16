@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import Button from './Button'
 import ButtonClose from './ButtonClose'
 
 class PopUpAddScore extends Component {
   static propTypes = {
-    onClose: PropTypes.func
+    onClose: PropTypes.func,
+    score: PropTypes.number,
+    city: PropTypes.string
   }
 
   constructor (props) {
@@ -13,23 +16,58 @@ class PopUpAddScore extends Component {
 
     this.state = {
       isSaving: false,
-      error: false
+      error: false,
+      formData: {
+        name: '',
+        link: '',
+        email: '',
+        newsletter: false
+      }
     }
   }
 
   saveScore () {
+    // Validate fields
+
     this.setState({
       isSaving: true,
       error: false
     })
 
-    setTimeout(() => {
-      // TODO Redirect to highscore page
-      this.props.onClose()
-    }, 1000)
+    // GET http://lab.moovel.com/newsletter?email=YOUREMAIL
+    if (this.state.formData.newsletter) {
+      axios.get(
+        `https://lab.moovel.com/newsletter?email=${this.state.formData.email}`
+      )
+    }
+
+    axios
+      .post('/api/highscore', {
+        name: this.state.formData.name,
+        link: this.state.formData.link,
+        email: this.state.formData.email,
+        newsletter: this.state.formData.newsletter,
+        score: this.props.score,
+        city: this.props.city
+      })
+      .then(
+        response => {
+          this.props.onClose()
+          // Success, redirect to highscore page
+        },
+        () => {
+          // Error display
+          this.setState({
+            isSaving: false,
+            error: true
+          })
+        }
+      )
   }
 
   render () {
+    const canSubmit = this.state.formData.name !== '' && !this.state.isSaving
+
     return (
       <div className='popup-page'>
         <div className='popup-overlay' onClick={() => this.props.onClose()} />
@@ -38,10 +76,33 @@ class PopUpAddScore extends Component {
           <div className='popup-container-inner'>
             <form>
               <p>Please add a name to save your score.</p>
-              <input className='input-text' type='text' placeholder='Name' />
+              {this.state.error && (
+                <p className='error'>Error while saving, please retry...</p>
+              )}
+              <input
+                className='input-text'
+                type='text'
+                placeholder='Name'
+                onChange={event =>
+                  this.setState({
+                    formData: {
+                      ...this.state.formData,
+                      name: event.target.value
+                    }
+                  })
+                }
+              />
               <br />
               <input
                 className='input-text'
+                onChange={event =>
+                  this.setState({
+                    formData: {
+                      ...this.state.formData,
+                      email: event.target.value
+                    }
+                  })
+                }
                 type='text'
                 placeholder='E-mail / optional'
               />
@@ -50,26 +111,30 @@ class PopUpAddScore extends Component {
                 className='input-text'
                 type='text'
                 placeholder='Link / optional'
+                onChange={event =>
+                  this.setState({
+                    formData: {
+                      ...this.state.formData,
+                      link: event.target.value
+                    }
+                  })
+                }
               />
               <br />
-              <div className='input-box'>
-                <input
-                  type='checkbox'
-                  name='first-accept'
-                  id='first-accept'
-                  value='1'
-                />
-                <label htmlFor='first-accept' className='check'>
-                  <span />
-                  Inform me ones if somebody beats my score.
-                </label>
-              </div>
               <div className='input-box'>
                 <input
                   type='checkbox'
                   name='second-accept'
                   id='second-accept'
                   value='1'
+                  onChange={event =>
+                    this.setState({
+                      formData: {
+                        ...this.state.formData,
+                        newsletter: event.target.checked
+                      }
+                    })
+                  }
                 />
                 <label htmlFor='second-accept' className='check'>
                   <span />
@@ -86,7 +151,7 @@ class PopUpAddScore extends Component {
                 <div className='separator' />
                 <Button
                   bgBlack
-                  disabled={this.state.isSaving}
+                  disabled={!canSubmit}
                   title={`${
                     this.state.isSaving ? 'Saving score...' : 'Save score'
                   }`}
@@ -217,6 +282,11 @@ class PopUpAddScore extends Component {
             .popup-container {
               height: 44rem;
             }
+          }
+
+          .error {
+            color: red;
+            font-style: italic;
           }
         `}</style>
       </div>

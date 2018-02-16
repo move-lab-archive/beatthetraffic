@@ -195,9 +195,9 @@ class Video extends Component {
       // Debug method to end the level 1 sooner to work on the level 1 -> level 2 transition
       // OR to work on YOU WON, you can load http://localhost:3000/stuttgart1/level/3
       // ex: end the level 50s before it finishes
-      // if (this.props.duration - this.videoEl.currentTime < 50) {
-      //   this.handleEnded()
-      // }
+      if (this.props.duration - this.videoEl.currentTime < 45) {
+        this.handleEnded()
+      }
 
       // If currentTime is 10s before end of video, prefetch next level first frame
       if (

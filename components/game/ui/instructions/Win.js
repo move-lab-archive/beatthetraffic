@@ -8,6 +8,8 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
+import PopUpAddScore from '../../../shared/PopUpAddScore'
+
 import {
   blockCanvasScrolling,
   restoreCanvasScrolling
@@ -18,13 +20,10 @@ class Win extends Component {
     super(props)
 
     this.state = {
-      displaySaveScoreModal: false
+      showAddScorePopup: false
     }
 
-    this.handleDisplaySaveScoreModal = this.handleDisplaySaveScoreModal.bind(
-      this
-    )
-    this.handleHideSaveScoreModal = this.handleHideSaveScoreModal.bind(this)
+    this.closePopupAddScore = this.closePopupAddScore.bind(this)
   }
 
   componentDidMount () {
@@ -38,12 +37,12 @@ class Win extends Component {
     this.props.dispatch(restoreCanvasScrolling())
   }
 
-  handleDisplaySaveScoreModal () {
-    this.setState({ displaySaveScoreModal: true })
+  closePopupAddScore () {
+    this.setState({ showAddScorePopup: false })
   }
 
-  handleHideSaveScoreModal () {
-    this.setState({ displaySaveScoreModal: false })
+  showPopupAddScore () {
+    this.setState({ showAddScorePopup: true })
   }
 
   render () {
@@ -67,16 +66,27 @@ class Win extends Component {
             </div>
           </div>
         </div>
-        <Button large title={`Save your score`} />
-        <div className='cta-secondary'>
+        <Button
+          large
+          title={`Save your score`}
+          onClick={() => this.showPopupAddScore()}
+        />
+        {/* <div className='cta-secondary'>
           <Button
             title={`Play again`}
             onClick={() => this.props.dispatch(retry())}
           />
           <div className='cta-secondary-separator' />
           <Button title={`? todo`} />
-        </div>
+        </div> */}
         <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
+        {this.state.showAddScorePopup && (
+          <PopUpAddScore
+            onClose={this.closePopupAddScore}
+            score={this.props.score}
+            city={this.props.currentCity}
+          />
+        )}
         <style jsx>{`
           .instructions-win {
             color: #262626;
@@ -198,6 +208,7 @@ class Win extends Component {
 export default connect(state => {
   return {
     score: state.game.get('score'),
-    currentLevel: state.game.get('currentLevel')
+    currentLevel: state.game.get('currentLevel'),
+    currentCity: state.app.get('selectedCity')
   }
 })(Win)

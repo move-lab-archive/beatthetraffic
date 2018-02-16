@@ -69,6 +69,9 @@ app.post('/api/highscore', saveHighscoreLimiter, (req, res) => {
   let highscore = {
     date: new Date(),
     name: req.body.name,
+    email: req.body.email,
+    newsletter: req.body.newsletter,
+    link: req.body.link,
     score: req.body.score,
     city: req.body.city
   }

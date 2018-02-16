@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '../../../shared/Button'
-import PopUpAddScore from '../../../shared/PopUpAddScore'
 
 import { retry } from '../../../../statemanagement/app/GameStateManagement'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
@@ -14,16 +13,6 @@ import {
 import ChangeCityButton from '../../../shared/ChangeCityButton'
 
 class Gameover extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      showAddScorePopup: false
-    }
-
-    this.closePopupAddScore = this.closePopupAddScore.bind(this)
-  }
-
   componentDidMount () {
     SoundsManager.playSound('youlose')
     SoundsManager.playSound('youloseloop')
@@ -33,14 +22,6 @@ class Gameover extends Component {
 
   componentWillUnmount () {
     this.props.dispatch(restoreCanvasScrolling())
-  }
-
-  closePopupAddScore () {
-    this.setState({ showAddScorePopup: false })
-  }
-
-  showPopupAddScore () {
-    this.setState({ showAddScorePopup: true })
   }
 
   render () {
@@ -58,19 +39,12 @@ class Gameover extends Component {
           <div className='cta'>
             <Button
               large
-              title={`Save your score`}
-              onClick={() => this.showPopupAddScore()}
-            />
-            <Button
               title={`Play again`}
               onClick={() => this.props.dispatch(retry())}
             />
           </div>
         </div>
         <ChangeCityButton label='PLAY ANOTHER CITY' white noAnim />
-        {this.state.showAddScorePopup && (
-          <PopUpAddScore onClose={this.closePopupAddScore} />
-        )}
         <style jsx>{`
           .instructions-gameover {
             color: white;
