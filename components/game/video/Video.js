@@ -187,6 +187,11 @@ class Video extends Component {
       GameEngineStateManager.setCurrentFrame(newCurrentFrame)
       GameEngineStateManager.setCurrentTime(this.videoEl.currentTime)
 
+      // Sometimes the playing event doesn't fire so here we can cancel buffering
+      if (this.state.isBuffering) {
+        this.handleFinishBuffering()
+      }
+
       // Debug method to end the level 1 sooner to work on the level 1 -> level 2 transition
       // OR to work on YOU WON, you can load http://localhost:3000/stuttgart1/level/3
       // ex: end the level 50s before it finishes
