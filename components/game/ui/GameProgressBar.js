@@ -17,7 +17,9 @@ class GameProgressBar extends PureComponent {
 
   componentDidMount () {
     this.monitorProgress()
-    this.el.style = `transform:scaleX(0);`
+    if(this.el) {
+      this.el.style = `transform:scaleX(0);`
+    }
   }
 
   monitorProgress () {
