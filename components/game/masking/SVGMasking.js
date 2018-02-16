@@ -168,6 +168,7 @@ class SVGMasking extends Component {
                 .fill(1)
                 .map((value, index) => (
                   <rect
+                    key={`mask-${index}`}
                     id={`mask-${index}`}
                     x='0'
                     y='0'
