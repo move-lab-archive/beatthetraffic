@@ -11,15 +11,9 @@ import { getAverageImgPath } from '../../../statemanagement/app/AppStateManageme
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 
-const initialState = {
-  masks: []
-}
-
 class SVGMasking extends Component {
   constructor (props) {
     super(props)
-
-    this.state = initialState
 
     this.isUpdatingMasks = false
     this.lastFrameDrawn = -1
@@ -42,12 +36,12 @@ class SVGMasking extends Component {
 
     if (nextProps.selectedVideoName !== this.props.selectedVideoName) {
       // console.log('Changed level, need to clear up masking canvas')
-      this.setState(initialState)
+      this.clearAllMasks()
     }
 
     if (nextProps.isAtBeggining !== this.props.isAtBeggining) {
       // console.log('Level reset, need to clear up masking canvas')
-      this.setState(initialState)
+      this.clearAllMasks()
     }
   }
 
@@ -113,6 +107,20 @@ class SVGMasking extends Component {
       this.previousMaskedItemSize = maskedItemsThisFrame.length
     }
     raf(this.loopUpdateMasks.bind(this))
+  }
+
+  clearAllMasks () {
+    let elem
+    for (let index = 0; index < 20; index++) {
+      elem = document.getElementById(`mask-${index}`)
+      // console.log(elem)
+      if (elem) {
+        elem.setAttribute('width', 0)
+        elem.setAttribute('height', 0)
+        elem.setAttribute('x', 0)
+        elem.setAttribute('y', 0)
+      }
+    }
   }
 
   getPollutionOverlayStyle () {
