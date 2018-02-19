@@ -8,7 +8,7 @@ import GamePage from '../components/game/GamePage'
 import { loadCity } from '../statemanagement/app/GameStateManagement'
 
 class Index extends React.Component {
-  static getInitialProps ({ store, query, isServer }) {
+  static getInitialProps ({ store, query, isServer, pathname, asPath }) {
     const city = query.city || store.getState().app.get('selectedCity')
     const level = query.level || 1
     // console.log(`Setting city ${city}, level ${level}`)

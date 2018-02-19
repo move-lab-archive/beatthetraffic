@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 import Button from '../../../shared/Button'
 import ChangeCityButton from '../../../shared/ChangeCityButton'
@@ -9,6 +10,8 @@ import { retry } from '../../../../statemanagement/app/GameStateManagement'
 import SoundsManager from '../../../../statemanagement/app/SoundsManager'
 
 import PopUpAddScore from '../../../shared/PopUpAddScore'
+
+import ScorePage from '../../../score/ScorePage'
 
 import {
   blockCanvasScrolling,
@@ -20,10 +23,52 @@ class Win extends Component {
     super(props)
 
     this.state = {
-      showAddScorePopup: false
+      showAddScorePopup: false,
+      showScore: false
     }
 
     this.closePopupAddScore = this.closePopupAddScore.bind(this)
+    this.hideScore = this.hideScore.bind(this)
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (
+      this.props.url.query.show === 'win' &&
+      newProps.url.query.page === 'score'
+    ) {
+      // console.log('Show highscore')
+      this.setState({
+        showScore: true,
+        showAddScorePopup: false
+      })
+    }
+    if (
+      this.props.url.query.show === 'win' &&
+      newProps.url.query.page === 'popup'
+    ) {
+      // console.log('Show save score popup')
+      this.setState({
+        showAddScorePopup: true,
+        showScore: false
+      })
+    }
+    if (
+      this.props.url.query.show === 'win' &&
+      newProps.url.query.page === undefined
+    ) {
+      // console.log('Hide highscore or popup')
+      this.setState({
+        showScore: false,
+        showAddScorePopup: false
+      })
+    }
+    if (
+      this.props.url.query.page === 'score' &&
+      newProps.url.query.page === undefined
+    ) {
+      // console.log('back from highscore')
+      this.hideScore()
+    }
   }
 
   componentDidMount () {
@@ -31,18 +76,51 @@ class Win extends Component {
     SoundsManager.playSound('youwinloop')
 
     this.props.dispatch(blockCanvasScrolling())
+
+    this.urlWhenEnteringWinToRestore = Router.asPath
+
+    // Doing the ?show=menu trick because of a bug of next.js
+    // https://github.com/zeit/next.js/issues/2668
+    Router.replace(
+      '/?show=win',
+      `${this.urlWhenEnteringWinToRestore}?show=win`,
+      {
+        shallow: true
+      }
+    )
   }
 
   componentWillUnmount () {
     this.props.dispatch(restoreCanvasScrolling())
+    // Restore url
+    Router.replace('/', `${this.urlWhenEnteringWinToRestore}`, {
+      shallow: true
+    })
   }
 
   closePopupAddScore () {
-    this.setState({ showAddScorePopup: false })
+    // console.log('back')
+    window.history.back()
   }
 
   showPopupAddScore () {
-    this.setState({ showAddScorePopup: true })
+    Router.push(
+      '/?show=win&page=popup',
+      `${this.urlWhenEnteringWinToRestore}?show=savescore`,
+      {
+        shallow: true
+      }
+    )
+  }
+
+  showScore () {
+    Router.replace('/?show=win&page=score', `/highscore`, {
+      shallow: true
+    })
+  }
+
+  hideScore () {
+    this.props.dispatch(retry())
   }
 
   render () {
@@ -71,22 +149,16 @@ class Win extends Component {
           title={`Save your score`}
           onClick={() => this.showPopupAddScore()}
         />
-        {/* <div className='cta-secondary'>
-          <Button
-            title={`Play again`}
-            onClick={() => this.props.dispatch(retry())}
-          />
-          <div className='cta-secondary-separator' />
-          <Button title={`? todo`} />
-        </div> */}
         <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
         {this.state.showAddScorePopup && (
           <PopUpAddScore
             onClose={this.closePopupAddScore}
+            onSuccess={() => this.showScore()}
             score={this.props.score}
             city={this.props.currentCity}
           />
         )}
+        {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
         <style jsx>{`
           .instructions-win {
             color: #262626;

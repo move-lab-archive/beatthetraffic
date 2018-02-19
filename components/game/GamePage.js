@@ -48,6 +48,7 @@ class GamePage extends React.PureComponent {
       clientSide: false,
       showLanding: true,
       showIntro: false,
+      showMenuAndSoundBtn: true,
       playIntroAnim: !props.introAnimPlayed
     }
   }
@@ -70,6 +71,25 @@ class GamePage extends React.PureComponent {
     if (this.props.introAnimPlayed) {
       this.setState({
         playIntroAnim: false
+      })
+    }
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (
+      this.props.url.query.show !== 'win' &&
+      newProps.url.query.show === 'win'
+    ) {
+      this.setState({
+        showMenuAndSoundBtn: false
+      })
+    }
+    if (
+      this.props.url.query.show === 'win' &&
+      newProps.url.query.show !== 'win'
+    ) {
+      this.setState({
+        showMenuAndSoundBtn: true
       })
     }
   }
@@ -182,16 +202,22 @@ class GamePage extends React.PureComponent {
         {this.state.clientSide && (
           <div>
             {!this.props.isGamePlaying &&
-              !this.state.showIntro && <GameInstructions />}
+              !this.state.showIntro && (
+                <GameInstructions url={this.props.url} />
+              )}
             {process.env.NODE_ENV !== 'production' && <SettingsControl />}
             <GameIndicators />
             <GameEngine />
-            <Sound />
             <SVGMasking />
             <Video />
             <LevelName />
             <GameProgressBar />
-            <MenuBtn />
+            {this.state.showMenuAndSoundBtn && (
+              <React.Fragment>
+                <MenuBtn />
+                <Sound />
+              </React.Fragment>
+            )}
             <Menu url={this.props.url} />
             <CityPicker />
           </div>

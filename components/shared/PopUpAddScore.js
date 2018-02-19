@@ -7,6 +7,7 @@ import ButtonClose from './ButtonClose'
 class PopUpAddScore extends Component {
   static propTypes = {
     onClose: PropTypes.func,
+    onSuccess: PropTypes.func,
     score: PropTypes.number,
     city: PropTypes.string
   }
@@ -52,7 +53,7 @@ class PopUpAddScore extends Component {
       })
       .then(
         response => {
-          this.props.onClose()
+          this.props.onSuccess()
           // Success, redirect to highscore page
         },
         () => {
