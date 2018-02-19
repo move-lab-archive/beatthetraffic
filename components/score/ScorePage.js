@@ -92,6 +92,9 @@ class ScorePage extends PureComponent {
                         ref={el => {
                           if (index + 2 === parseInt(this.props.rank, 10)) {
                             setTimeout(() => {
+                              if (!el) {
+                                return
+                              }
                               el.scrollIntoView()
                             }, 200)
                           }
@@ -107,6 +110,36 @@ class ScorePage extends PureComponent {
                         <h2 className='number'>{index + 2}</h2>
                       </div>
                     ))}
+                  {this.props.scoreData &&
+                    this.props.rank > this.props.highscores.size + 1 && (
+                      <React.Fragment>
+                        <div
+                          className={`list-item`}
+                          ref={el => {
+                            setTimeout(() => {
+                              if (!el) {
+                                return
+                              }
+                              el.scrollIntoView()
+                            }, 200)
+                          }}
+                        >
+                          <div className='etcetcetc'>...</div>
+                        </div>
+                        <div className={`list-item selected`}>
+                          <h2 className='name'>{this.props.scoreData.name}</h2>
+                          <h1 className='score'>
+                            {this.props.scoreData.score}
+                          </h1>
+                          <img
+                            className='star'
+                            src='/static/assets/icons/icon-star.svg'
+                          />
+                          <p className='city'>{this.props.scoreData.city}</p>
+                          <h2 className='number'>{this.props.rank}</h2>
+                        </div>
+                      </React.Fragment>
+                    )}
                 </div>
 
                 <h1 className='reminder'>Not on the list?</h1>
@@ -288,6 +321,19 @@ class ScorePage extends PureComponent {
             position: relative;
             background-color: rgb(240, 240, 240);
           }
+
+          .list-item .etcetcetc {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            font-size: 5rem;
+          }
+
+          .list-item.selected {
+            border: 10px solid yellow;
+          }
+
           .list-item .name {
             position: absolute;
             top: 1rem;

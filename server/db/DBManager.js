@@ -49,7 +49,6 @@ class DBManager {
           if (err) {
             reject(err)
           } else {
-            console.log('Highscore inserted successfully')
             resolve(r)
           }
         })

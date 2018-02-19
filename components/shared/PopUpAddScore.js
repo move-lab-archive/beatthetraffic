@@ -42,18 +42,20 @@ class PopUpAddScore extends Component {
       )
     }
 
+    const highscore = {
+      name: this.state.formData.name,
+      link: this.state.formData.link,
+      email: this.state.formData.email,
+      newsletter: this.state.formData.newsletter,
+      score: this.props.score,
+      city: this.props.city
+    }
+
     axios
-      .post('/api/highscores', {
-        name: this.state.formData.name,
-        link: this.state.formData.link,
-        email: this.state.formData.email,
-        newsletter: this.state.formData.newsletter,
-        score: this.props.score,
-        city: this.props.city
-      })
+      .post('/api/highscores', highscore)
       .then(
         response => {
-          this.props.onSuccess(response.data)
+          this.props.onSuccess(response.data, highscore)
           // Success, redirect to highscore page (response.data == rank of highscore)
         },
         () => {
