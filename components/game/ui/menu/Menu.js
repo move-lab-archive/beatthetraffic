@@ -282,7 +282,7 @@ class Menu extends PureComponent {
           }
 
           .link {
-            line-height: 1.6rem;
+            line-height: 1.8rem;
           }
 
           .city-selector-items h4 {

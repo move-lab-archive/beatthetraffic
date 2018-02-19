@@ -73,10 +73,7 @@ class Landing extends Component {
       <div className='game-landing'>
         <h1 className='landing-headline'>
           BEAT THE TRAFFIC
-          <br />
-          <span className='city-var x'>X</span>
           <span className='city-var city'>{this.props.selectedCity}</span>
-          {/* @tdurand is it possible to do this change from X to the cities name after the progressbar is fully loaded? Like this we can include the Name and in the city in the landing page  :) */}
         </h1>
         <Unicorn />
         <BtnLanding
@@ -135,19 +132,8 @@ class Landing extends Component {
           }
 
           .city-var {
+            display: block;
             color: #ff3bff;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-
-          .x {
-            animation: outx 2s;
-            opacity: 0;
-          }
-          .city {
-            animation: incity 2s;
-            opacity: 1;
           }
 
           .about {
