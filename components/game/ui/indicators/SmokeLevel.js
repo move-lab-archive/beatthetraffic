@@ -13,6 +13,11 @@ class SmokeLevel extends PureComponent {
     )
     const currentSmokePercentage = this.props.currentSmokeLevel
 
+    if (!nextProps.isGamePlaying) {
+      // console.log("Game not playing, don't tweak sounds")
+      return
+    }
+
     /* =======
       Speed up sound logic (when smoke comes up)
     ======= */
@@ -41,10 +46,7 @@ class SmokeLevel extends PureComponent {
     if (nextSmokePercentage < 50 && currentSmokePercentage >= 50) {
       // Slow down sound
       // console.log('Slow down sound')
-      SoundsManager.changePlaybackRate(
-        `main_level${this.props.currentLevel}`,
-        1
-      )
+      SoundsManager.changePlaybackRate(`main_level${nextProps.currentLevel}`, 1)
     }
 
     if (nextSmokePercentage < 80 && currentSmokePercentage >= 80) {
@@ -52,9 +54,9 @@ class SmokeLevel extends PureComponent {
       // console.log('Recovering from alert sound')
       SoundsManager.playSound('transition-alert-normal')
       if (nextSmokePercentage > 50) {
-        SoundsManager.playSound(`main_level${this.props.currentLevel}`, 1.2)
+        SoundsManager.playSound(`main_level${nextProps.currentLevel}`, 1.2)
       } else {
-        SoundsManager.playSound(`main_level${this.props.currentLevel}`, 1)
+        SoundsManager.playSound(`main_level${nextProps.currentLevel}`, 1)
       }
     }
   }
