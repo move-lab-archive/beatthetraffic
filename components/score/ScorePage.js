@@ -6,16 +6,6 @@ import Button from '../shared/Button'
 import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 
 class ScorePage extends PureComponent {
-  componentWillReceiveProps (newProps) {
-    // if (
-    //   this.props.highscoresFetched !== newProps.highscoresFetched &&
-    //   newProps.highscoresFetched === true
-    // ) {
-    //   if (newProps.rank) {
-    //     // Scroll to rank when highscore data rendered
-    //   }
-    // }
-  }
 
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
@@ -147,7 +137,7 @@ class ScorePage extends PureComponent {
                   <Button
                     medium
                     title={`Play again`}
-                    onClick={() => this.props.dispatch(retry())}
+                    onClick={this.props.onClose}
                   />
                 </div>
               </React.Fragment>
