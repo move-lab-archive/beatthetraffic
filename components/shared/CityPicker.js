@@ -60,6 +60,12 @@ class CityPicker extends PureComponent {
                 {availableCities[cityId].label}
               </h3>
             ))}
+            <div className='more-cities'>
+              Want to play a new city? Ping us{' '}
+              <a href='https://twitter.com/moovellab' target='_blank'>
+                @moovellab
+              </a>
+            </div>
           </div>
           <ButtonClose onClick={() => this.handleClose()} smallPadding />
         </div>
@@ -105,6 +111,16 @@ class CityPicker extends PureComponent {
 
           .cities {
             padding: 1.9rem;
+          }
+
+          .more-cities {
+            font-family: 'Geo', sans-serif;
+            margin-top: 2rem;
+            font-size: 2rem;
+          }
+
+          .more-cities a,.more-cities a:hover,.more-cities a.selected {
+            color: #4EFFFF;
           }
 
           .cities h3 {
