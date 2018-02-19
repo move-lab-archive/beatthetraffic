@@ -11,6 +11,15 @@ class ScorePage extends PureComponent {
     this.props.dispatch(fetchHighscores())
   }
 
+  getCityLabel (city) {
+    const cityData = this.props.availableCities[city]
+    if (cityData) {
+      return cityData.label
+    } else {
+      return ''
+    }
+  }
+
   render () {
     return (
       <div className={`highscore-page`}>
@@ -61,7 +70,11 @@ class ScorePage extends PureComponent {
                         <img src='/static/assets/icons/icon-star.svg' />
                       </div>
                       <div className='city'>
-                        <p>{this.props.highscores.first().get('city')}</p>
+                        <p>
+                          {this.getCityLabel(
+                            this.props.highscores.first().get('city')
+                          )}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -96,7 +109,9 @@ class ScorePage extends PureComponent {
                           className='star'
                           src='/static/assets/icons/icon-star.svg'
                         />
-                        <p className='city'>{highscore.get('city')}</p>
+                        <p className='city'>
+                          {this.getCityLabel([highscore.get('city')])}
+                        </p>
                         <h2 className='number'>{index + 2}</h2>
                       </div>
                     ))}
@@ -125,7 +140,9 @@ class ScorePage extends PureComponent {
                             className='star'
                             src='/static/assets/icons/icon-star.svg'
                           />
-                          <p className='city'>{this.props.scoreData.city}</p>
+                          <p className='city'>
+                            {this.getCityLabel(this.props.scoreData.city)}
+                          </p>
                           <h2 className='number'>{this.props.rank}</h2>
                         </div>
                       </React.Fragment>
@@ -473,6 +490,7 @@ export default connect(state => {
     highscores: state.game.get('highscores'),
     isFetchingHighscores: state.game.get('isFetchingHighscores'),
     highscoresFetched: state.game.get('highscoresFetched'),
-    highscoresFetchError: state.game.get('highscoresFetchError')
+    highscoresFetchError: state.game.get('highscoresFetchError'),
+    availableCities: state.app.get('availableCities').toJS()
   }
 })(ScorePage)
