@@ -272,7 +272,12 @@ class Menu extends PureComponent {
             color: #ff3bff;
           }
 
-          .link:hover {
+          .link h1 {
+            cursor: pointer;
+          }
+
+          .link:hover,
+          .link:hover h1 {
             color: #ff3bff;
           }
 
