@@ -20,6 +20,16 @@ class ScorePage extends PureComponent {
     }
   }
 
+  followLink (link) {
+    if (link) {
+      if (link.indexOf('https://') > -1 || link.indexOf('http://') > -1) {
+        window.open(link, '_blank')
+      } else {
+        window.open(`http://${link}`, '_blank')
+      }
+    }
+  }
+
   render () {
     return (
       <div className={`highscore-page`}>
@@ -62,7 +72,13 @@ class ScorePage extends PureComponent {
                     />
 
                     <div className='first-place'>
-                      <div className='name'>
+                      <div
+                        className={`name ${this.props.highscores.first().get('link') ? 'clickable' : ''}`}
+                        onClick={this.followLink.bind(
+                          this,
+                          this.props.highscores.first().get('link')
+                        )}
+                      >
                         <h1>{this.props.highscores.first().get('name')}</h1>
                       </div>
                       <div className='score'>
@@ -103,7 +119,15 @@ class ScorePage extends PureComponent {
                           }
                         }}
                       >
-                        <h2 className='name'>{highscore.get('name')}</h2>
+                        <h2
+                          className={`name ${highscore.get('link') ? 'clickable' : ''}`}
+                          onClick={this.followLink.bind(
+                            this,
+                            highscore.get('link')
+                          )}
+                        >
+                          {highscore.get('name')}
+                        </h2>
                         <h1 className='score'>{highscore.get('score')}</h1>
                         <img
                           className='star'
@@ -132,7 +156,15 @@ class ScorePage extends PureComponent {
                           <div className='etcetcetc'>...</div>
                         </div>
                         <div className={`list-item selected`}>
-                          <h2 className='name'>{this.props.scoreData.name}</h2>
+                          <h2
+                            className={`name ${this.props.scoreData.link ? 'clickable' : ''}`}
+                            onClick={this.followLink.bind(
+                              this,
+                              this.props.scoreData.link
+                            )}
+                          >
+                            {this.props.scoreData.name}
+                          </h2>
                           <h1 className='score'>
                             {this.props.scoreData.score}
                           </h1>
@@ -478,6 +510,14 @@ class ScorePage extends PureComponent {
             align-items: center;
             justify-content: center;
             box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
+          }
+
+          .name.clickable { 
+            cursor: pointer;
+          }
+
+          .name.clickable:hover {
+            text-decoration: underline;
           }
         `}</style>
       </div>
