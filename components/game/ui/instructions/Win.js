@@ -114,7 +114,7 @@ class Win extends Component {
   }
 
   showScore () {
-    Router.replace('/?show=win&page=score', `/highscore`, {
+    Router.replace('/?show=win&page=score', `/highscores`, {
       shallow: true
     })
   }
