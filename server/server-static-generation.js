@@ -56,7 +56,7 @@ app.prepare().then(() => {
   })
 
   server.get('/api/highscores', (req, res) => {
-    DBManager.getHighscores(10).then(highscores => {
+    DBManager.getHighscores(50).then(highscores => {
       res.json(highscores)
     })
   })

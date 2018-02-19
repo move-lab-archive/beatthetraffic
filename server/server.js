@@ -95,7 +95,7 @@ app.post('/api/highscores', saveHighscoreLimiter, (req, res) => {
 })
 
 app.get('/api/highscores', (req, res) => {
-  DBManager.getHighscores(10).then(highscores => {
+  DBManager.getHighscores(50).then(highscores => {
     res.json(highscores)
   })
 })

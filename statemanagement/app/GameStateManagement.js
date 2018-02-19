@@ -23,7 +23,7 @@ const initialState = fromJS({
   highscores: [],
   isFetchingHighscores: false,
   highscoresFetched: false,
-  highscoreFetchError: false
+  highscoresFetchError: false
 })
 
 // Actions
@@ -320,7 +320,7 @@ export default function GameReducer (state = initialState, action = {}) {
       return state
         .set('isFetchingHighscores', true)
         .set('highscoresFetched', false)
-        .set('highscoreFetchError', false)
+        .set('highscoresFetchError', false)
         .set('highscores', fromJS([]))
     case FETCH_HIGHSCORES_SUCCESS:
       return state
@@ -331,7 +331,7 @@ export default function GameReducer (state = initialState, action = {}) {
       return state
         .set('isFetchingHighscores', false)
         .set('highscoresFetched', true)
-        .set('highscoreFetchError', true)
+        .set('highscoresFetchError', true)
     default:
       return state
   }

@@ -53,8 +53,8 @@ class PopUpAddScore extends Component {
       })
       .then(
         response => {
-          this.props.onSuccess()
-          // Success, redirect to highscore page
+          this.props.onSuccess(response.data)
+          // Success, redirect to highscore page (response.data == rank of highscore)
         },
         () => {
           // Error display

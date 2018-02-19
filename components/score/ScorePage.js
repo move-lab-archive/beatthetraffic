@@ -6,6 +6,17 @@ import Button from '../shared/Button'
 import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 
 class ScorePage extends PureComponent {
+  componentWillReceiveProps (newProps) {
+    // if (
+    //   this.props.highscoresFetched !== newProps.highscoresFetched &&
+    //   newProps.highscoresFetched === true
+    // ) {
+    //   if (newProps.rank) {
+    //     // Scroll to rank when highscore data rendered
+    //   }
+    // }
+  }
+
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
   }
@@ -71,8 +82,20 @@ class ScorePage extends PureComponent {
                     .filter((value, index) => index > 1)
                     .map((highscore, index) => (
                       <div
-                        className='list-item'
+                        className={`list-item 
+                        ${
+                      index + 2 === parseInt(this.props.rank, 10)
+                        ? 'selected'
+                        : ''
+                      }`}
                         key={`${index}-${highscore.get('name')}`}
+                        ref={el => {
+                          if (index + 2 === parseInt(this.props.rank, 10)) {
+                            setTimeout(() => {
+                              el.scrollIntoView()
+                            }, 200)
+                          }
+                        }}
                       >
                         <h2 className='name'>{highscore.get('name')}</h2>
                         <h1 className='score'>{highscore.get('score')}</h1>
@@ -213,6 +236,14 @@ class ScorePage extends PureComponent {
             animation: flashingTitle 0.1s linear infinite;
           }
 
+          .first-place .name h1 {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+          }
+
           .first-place .score {
             position: absolute;
             top: 6rem;
@@ -263,6 +294,10 @@ class ScorePage extends PureComponent {
             right: 1.4rem;
             margin-top: 0;
             color: #ff3bff;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 92%;
           }
           .list-item .score {
             position: absolute;
@@ -381,6 +416,6 @@ export default connect(state => {
     highscores: state.game.get('highscores'),
     isFetchingHighscores: state.game.get('isFetchingHighscores'),
     highscoresFetched: state.game.get('highscoresFetched'),
-    highscoreFetchError: state.game.get('highscoreFetchError')
+    highscoresFetchError: state.game.get('highscoresFetchError')
   }
 })(ScorePage)

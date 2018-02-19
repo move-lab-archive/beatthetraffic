@@ -24,10 +24,12 @@ class Win extends Component {
 
     this.state = {
       showAddScorePopup: false,
+      rank: null,
       showScore: false
     }
 
     this.closePopupAddScore = this.closePopupAddScore.bind(this)
+    this.showScore = this.showScore.bind(this)
     this.hideScore = this.hideScore.bind(this)
   }
 
@@ -39,6 +41,7 @@ class Win extends Component {
       // console.log('Show highscore')
       this.setState({
         showScore: true,
+        rank: newProps.url.query.rank,
         showAddScorePopup: false
       })
     }
@@ -113,8 +116,8 @@ class Win extends Component {
     )
   }
 
-  showScore () {
-    Router.replace('/?show=win&page=score', `/highscores`, {
+  showScore (rank) {
+    Router.replace(`/?show=win&page=score&rank=${rank}`, `/highscores`, {
       shallow: true
     })
   }
@@ -149,16 +152,20 @@ class Win extends Component {
           title={`Save your score`}
           onClick={() => this.showPopupAddScore()}
         />
-        <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
+        {!this.state.showScore &&
+          <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
+        }
         {this.state.showAddScorePopup && (
           <PopUpAddScore
             onClose={this.closePopupAddScore}
-            onSuccess={() => this.showScore()}
+            onSuccess={this.showScore}
             score={this.props.score}
             city={this.props.currentCity}
           />
         )}
-        {this.state.showScore && <ScorePage onClose={() => this.hideScore()} />}
+        {this.state.showScore && (
+          <ScorePage onClose={() => this.hideScore()} rank={this.state.rank} />
+        )}
         <style jsx>{`
           .instructions-win {
             color: #262626;

@@ -63,6 +63,7 @@ class DBManager {
         db
           .collection('highscores')
           .find({})
+          .project({ name: 1, score: 1, link: 1, city: 1 })
           .sort({ score: -1 })
           .limit(limit)
           .toArray(function (err, docs) {
@@ -81,11 +82,11 @@ class DBManager {
       this.getDB().then(db => {
         db
           .collection('highscores')
-          .count({ score: { $gt: score } }, (err, result) => {
+          .count({ score: { $gte: score } }, (err, result) => {
             if (err) {
               reject(err)
             } else {
-              resolve(result)
+              resolve(result - 1)
             }
           })
       })
