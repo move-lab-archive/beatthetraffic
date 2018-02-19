@@ -38,19 +38,23 @@ class ChangeCityButton extends Component {
             ${this.props.noAnim ? '' : 'anim'}
           `}
       >
-        <h4 className='change-city'>{this.props.label}</h4>
-        <svg
-          className='change-city-icon'
-          width='11'
-          height='5'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            fill={`${this.props.white ? '#FFFFFF' : '#262626'}`}
-            d='M5.5 0L0 5h11z'
-            fillRule='evenodd'
-          />
-        </svg>
+        {this.props.label && (
+          <React.Fragment>
+            <h4 className='change-city'>{this.props.label}</h4>
+            <svg
+              className='change-city-icon'
+              width='11'
+              height='5'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                fill={`${this.props.white ? '#FFFFFF' : '#262626'}`}
+                d='M5.5 0L0 5h11z'
+                fillRule='evenodd'
+              />
+            </svg>
+          </React.Fragment>
+        )}
         <style jsx>{`
           .change-city-container {
             position: fixed;

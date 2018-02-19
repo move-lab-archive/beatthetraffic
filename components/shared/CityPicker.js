@@ -85,7 +85,7 @@ class CityPicker extends PureComponent {
             z-index: 10;
             position: fixed;
             border: 4px solid #262626;
-            transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
             transition-delay: 150ms;
             z-index: 15;
             cursor: default;
@@ -100,7 +100,6 @@ class CityPicker extends PureComponent {
             left: 0;
             z-index: 10;
             opacity: 0.93;
-            transition: all 200ms; /*transition not working @tdurant any idea why? But its nothing important for now;) micro detail*/
             cursor: default;
           }
 

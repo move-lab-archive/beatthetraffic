@@ -4,9 +4,9 @@ import ButtonClose from '../shared/ButtonClose'
 
 import Button from '../shared/Button'
 import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
+import { showCityPicker } from '../../statemanagement/app/AppStateManagement'
 
 class ScorePage extends PureComponent {
-
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
   }
@@ -131,19 +131,25 @@ class ScorePage extends PureComponent {
                       </React.Fragment>
                     )}
                 </div>
-
-                <h1 className='reminder'>Not on the list?</h1>
-                <div className='align-center'>
-                  <Button
-                    medium
-                    title={`Play again`}
-                    onClick={this.props.onClose}
-                  />
-                </div>
               </React.Fragment>
             )}
           </div>
         </div>
+
+        {this.props.scoreData && (
+          <div
+            className='play-fixed-cta'
+            onClick={() => this.props.dispatch(showCityPicker())}
+          >
+            PLAY AGAIN
+          </div>
+        )}
+
+        {!this.props.scoreData && (
+          <div className='play-fixed-cta' onClick={() => this.props.onClose()}>
+            PLAY GAME
+          </div>
+        )}
 
         <style jsx>{`
           .highscore-page {
@@ -440,6 +446,21 @@ class ScorePage extends PureComponent {
             100% {
               color: #fffe4a;
             }
+          }
+
+          .play-fixed-cta {
+            will-change: transform;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 9rem;
+            background-color: #4effff;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
           }
         `}</style>
       </div>
