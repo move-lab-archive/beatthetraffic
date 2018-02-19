@@ -46,7 +46,7 @@ class Layout extends Component {
             font-weight: 700;
             background-color: white;
             cursor: -webkit-image-set(
-                  url(../../static/assets/cursor/magic-wand.png) 2x
+                  url(/static/assets/cursor/magic-wand.png) 2x
                 )10 10,
               pointer;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

@@ -107,7 +107,7 @@ class Menu extends PureComponent {
   }
 
   showScore () {
-    Router.push('/?show=menu&page=score', `/highscore`, {
+    Router.push('/?show=menu&page=score', `/highscores`, {
       shallow: true
     })
   }

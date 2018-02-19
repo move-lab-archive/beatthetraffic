@@ -7,8 +7,11 @@ const Geo = require('./geo')
 const availableCities = require('../gameconfig.json').availableCities
 const defaultCity = require('../gameconfig.json').defaultSelectedCity
 const DBManager = require('./db/DBManager')
+const nextApp = require('next')
 
 const app = express()
+const nextInstance = nextApp()
+const handle = nextInstance.getRequestHandler()
 
 // Init connection to db
 DBManager.init().then(
@@ -52,8 +55,13 @@ app.get('/', (req, res) => {
 app.get('/:city', (req, res, next) => {
   if (Object.keys(availableCities).indexOf(req.params.city) > -1) {
     res.redirect(`/${req.params.city}/level/1`)
-  } else {
+  } else if (req.params.city === 'about') {
+    console.log('about page')
     next()
+  } else {
+    console.log('highscores')
+    // SSR render highscores
+    handle(req, res)
   }
 })
 
@@ -63,7 +71,7 @@ var saveHighscoreLimiter = new RateLimit({
   message: 'Too many highscore are being recorded from that IP address'
 })
 
-app.post('/api/highscore', saveHighscoreLimiter, (req, res) => {
+app.post('/api/highscores', saveHighscoreLimiter, (req, res) => {
   let highscoreData = req.body
 
   let highscore = {
@@ -86,7 +94,7 @@ app.post('/api/highscore', saveHighscoreLimiter, (req, res) => {
   })
 })
 
-app.get('/api/highscore', (req, res) => {
+app.get('/api/highscores', (req, res) => {
   DBManager.getHighscores(10).then(highscores => {
     res.json(highscores)
   })

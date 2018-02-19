@@ -24,7 +24,7 @@ module.exports = {
 
     routes.set('/', { page: '/' })
     routes.set('/about', { page: '/about' })
-    routes.set('/highscore', { page: '/highscore' })
+    routes.set('/highscores', { page: '/highscores' })
 
     let allCitiesRoutes = cities.map(city => getCityRoutes(city))
 

@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable'
+import axios from 'axios'
 import Router from 'next/router'
 
 import { playVideo, pauseVideo, resetVideo } from './VideoStateManagement'
@@ -6,7 +7,7 @@ import { selectVideoForLevel, selectCity } from './AppStateManagement'
 
 import SoundsManager from './SoundsManager'
 import GameEngineStateManager from './GameEngineStateManager'
-import { COLLECTABLE_TYPES } from '../../components/game/core/engines/CollectableItemsEngine';
+import { COLLECTABLE_TYPES } from '../../components/game/core/engines/CollectableItemsEngine'
 
 // Initial state
 const initialState = fromJS({
@@ -18,7 +19,11 @@ const initialState = fromJS({
   isPlaying: false,
   finished: false,
   failed: false,
-  nbTotalLevel: 3
+  nbTotalLevel: 3,
+  highscores: [],
+  isFetchingHighscores: false,
+  highscoresFetched: false,
+  highscoreFetchError: false
 })
 
 // Actions
@@ -34,6 +39,10 @@ const FAILED_LEVEL = 'Game/FAILED_LEVEL'
 const RETRY = 'Game/RETRY'
 const FINISHED_LEVEL = 'Game/FINISHED_LEVEL'
 const SET_CURRENT_LEVEL = 'Game/SET_CURRENT_LEVEL'
+
+const FETCH_HIGHSCORES_START = 'Game/FETCH_HIGHSCORES_START'
+const FETCH_HIGHSCORES_SUCCESS = 'Game/FETCH_HIGHSCORES_SUCCESS'
+const FETCH_HIGHSCORES_ERROR = 'Game/FETCH_HIGHSCORES_ERROR'
 
 export function incrementScore () {
   return {
@@ -73,9 +82,11 @@ export function removeMissedItem () {
 export function collectItem (itemToCollect) {
   return (dispatch, getState) => {
     itemToCollect.collect()
-    if (itemToCollect.type === COLLECTABLE_TYPES.BANANA || 
-        itemToCollect.type === COLLECTABLE_TYPES.CARROT ||
-        itemToCollect.type === COLLECTABLE_TYPES.CHERRY) {
+    if (
+      itemToCollect.type === COLLECTABLE_TYPES.BANANA ||
+      itemToCollect.type === COLLECTABLE_TYPES.CARROT ||
+      itemToCollect.type === COLLECTABLE_TYPES.CHERRY
+    ) {
       dispatch(incrementScore())
       SoundsManager.playSound('win-point-withitem')
     } else {
@@ -228,6 +239,45 @@ export function getSmokeLevel (nbMissed, maxMissed) {
   return nbMissed * 100 / maxMissed
 }
 
+export function fetchHighscoresStart () {
+  return {
+    type: FETCH_HIGHSCORES_START
+  }
+}
+
+export function fetchHighscoresError (error) {
+  return {
+    type: FETCH_HIGHSCORES_ERROR,
+    payload: new Error(error)
+  }
+}
+
+export function fetchHighscoresSuccess (highscores) {
+  return {
+    type: FETCH_HIGHSCORES_SUCCESS,
+    payload: highscores
+  }
+}
+
+export function fetchHighscores () {
+  return (dispatch, getState) => {
+    return new Promise((resolve, reject) => {
+      dispatch(fetchHighscoresStart())
+
+      axios.get('/api/highscores').then(
+        results => {
+          dispatch(fetchHighscoresSuccess(results.data))
+          resolve(results.data)
+        },
+        error => {
+          dispatch(fetchHighscoresError(error))
+          reject(error)
+        }
+      )
+    })
+  }
+}
+
 // Reducer
 export default function GameReducer (state = initialState, action = {}) {
   switch (action.type) {
@@ -266,6 +316,22 @@ export default function GameReducer (state = initialState, action = {}) {
         .set('nbItemsMissed', 0) // reset smoke bar
     case RETRY:
       return state.merge(initialState)
+    case FETCH_HIGHSCORES_START:
+      return state
+        .set('isFetchingHighscores', true)
+        .set('highscoresFetched', false)
+        .set('highscoreFetchError', false)
+        .set('highscores', fromJS([]))
+    case FETCH_HIGHSCORES_SUCCESS:
+      return state
+        .set('isFetchingHighscores', false)
+        .set('highscoresFetched', true)
+        .set('highscores', fromJS(action.payload))
+    case FETCH_HIGHSCORES_ERROR:
+      return state
+        .set('isFetchingHighscores', false)
+        .set('highscoresFetched', true)
+        .set('highscoreFetchError', true)
     default:
       return state
   }

@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import ButtonClose from '../shared/ButtonClose'
 
 import Button from '../shared/Button'
+import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 
-// TODO handle logic of retriving scores, for now style everything static
+class ScorePage extends PureComponent {
+  componentDidMount () {
+    this.props.dispatch(fetchHighscores())
+  }
 
-class ScorePage extends Component {
   render () {
     return (
       <div className={`highscore-page`}>
@@ -32,132 +36,69 @@ class ScorePage extends Component {
         <div className={`highscore-container`}>
           <div className={`highscore-inner`}>
             <h2 className='headline'>HIGH SCORES</h2>
+            {this.props.highscores.size === 0 &&
+              this.props.isFetchingHighscores && (
+                <div>Fetching highscore ....</div>
+              )}
+            {this.props.highscores.size === 0 &&
+              this.props.highscoresFetched && <div>No highscores yet.</div>}
+            {this.props.highscores.size > 0 && (
+              <React.Fragment>
+                <div className='first-place-wrapper'>
+                  <div className='first-place-container'>
+                    <img
+                      className='cup'
+                      src='/static/assets/about-highscores/cup.gif' // maybe better with sprints? need to add transparent backrgound
+                    />
 
-            <div className='first-place-wrapper'>
-              <div className='first-place-container'>
-                <img
-                  className='cup'
-                  src='/static/assets/about-highscores/cup.gif' // maybe better with sprints? need to add transparent backrgound
-                />
-
-                <div className='first-place'>
-                  <div className='name'>
-                    <h1>Carla</h1>
-                  </div>
-                  <div className='score'>
-                    <h2>886</h2>
-                    <img src='/static/assets/icons/icon-star.svg' />
-                  </div>
-                  <div className='city'>
-                    <p>Berlin</p>
+                    <div className='first-place'>
+                      <div className='name'>
+                        <h1>{this.props.highscores.first().get('name')}</h1>
+                      </div>
+                      <div className='score'>
+                        <h2>{this.props.highscores.first().get('score')}</h2>
+                        <img src='/static/assets/icons/icon-star.svg' />
+                      </div>
+                      <div className='city'>
+                        <p>{this.props.highscores.first().get('city')}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div className='list-container'>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>2</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>3</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>4</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>5</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@b-g</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>6</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>7</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@mmmmm</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>8</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>9</h2>
-              </div>
-              <div className='list-item'>
-                <h2 className='name'>@tdurand</h2>
-                <h1 className='score'>765</h1>
-                <img
-                  className='star'
-                  src='/static/assets/icons/icon-star.svg'
-                />
-                <p className='city'>Stuttgart</p>
-                <h2 className='number'>10</h2>
-              </div>
-            </div>
+                <div className='list-container'>
+                  {this.props.highscores
+                    .filter((value, index) => index > 1)
+                    .map((highscore, index) => (
+                      <div
+                        className='list-item'
+                        key={`${index}-${highscore.get('name')}`}
+                      >
+                        <h2 className='name'>{highscore.get('name')}</h2>
+                        <h1 className='score'>{highscore.get('score')}</h1>
+                        <img
+                          className='star'
+                          src='/static/assets/icons/icon-star.svg'
+                        />
+                        <p className='city'>{highscore.get('city')}</p>
+                        <h2 className='number'>{index + 2}</h2>
+                      </div>
+                    ))}
+                </div>
 
-            <h1 className='reminder'>Not on the list?</h1>
-            <div className='align-center'>
-              <Button
-                medium
-                title={`Play again`}
-                onClick={() => this.props.dispatch(retry())}
-              />
-            </div>
+                <h1 className='reminder'>Not on the list?</h1>
+                <div className='align-center'>
+                  <Button
+                    medium
+                    title={`Play again`}
+                    onClick={() => this.props.dispatch(retry())}
+                  />
+                </div>
+              </React.Fragment>
+            )}
           </div>
         </div>
+
         <style jsx>{`
           .highscore-page {
             position: fixed;
@@ -435,4 +376,11 @@ class ScorePage extends Component {
   }
 }
 
-export default ScorePage
+export default connect(state => {
+  return {
+    highscores: state.game.get('highscores'),
+    isFetchingHighscores: state.game.get('isFetchingHighscores'),
+    highscoresFetched: state.game.get('highscoresFetched'),
+    highscoreFetchError: state.game.get('highscoreFetchError')
+  }
+})(ScorePage)

@@ -43,7 +43,7 @@ class PopUpAddScore extends Component {
     }
 
     axios
-      .post('/api/highscore', {
+      .post('/api/highscores', {
         name: this.state.formData.name,
         link: this.state.formData.link,
         email: this.state.formData.email,
