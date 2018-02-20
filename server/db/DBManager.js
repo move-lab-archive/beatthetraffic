@@ -7,6 +7,11 @@ if (process.env.DOCKER_DEPLOY) {
   mongoURL = 'mongodb://mongo:27017'
 }
 
+if (process.env.NOW_DEPLOY) {
+  mongoURL =
+    'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic'
+}
+
 class DBManager {
   contructor () {
     this.db = null
