@@ -31,7 +31,10 @@ class Gameover extends Component {
         <div className='title'>GAME OVER</div>
         <div className='content'>
           <h4>Your score</h4>
-          <ScoreBox score={this.props.score} />
+          <ScoreBox
+            score={this.props.score}
+            nbCarsConverted={this.props.nbCarsConverted}
+          />
         </div>
         <div className='cta'>
           <Button
@@ -124,6 +127,7 @@ class Gameover extends Component {
 export default connect(state => {
   return {
     score: state.game.get('score'),
-    currentLevel: state.game.get('currentLevel')
+    currentLevel: state.game.get('currentLevel'),
+    nbCarsConverted: state.game.get('nbCarsConverted')
   }
 })(Gameover)

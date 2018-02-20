@@ -12,6 +12,7 @@ import { COLLECTABLE_TYPES } from '../../components/game/core/engines/Collectabl
 // Initial state
 const initialState = fromJS({
   score: 0,
+  nbCarsConverted: 0,
   killedItems: [],
   nbItemsMissed: 0,
   maxMissed: 10,
@@ -44,9 +45,10 @@ const FETCH_HIGHSCORES_START = 'Game/FETCH_HIGHSCORES_START'
 const FETCH_HIGHSCORES_SUCCESS = 'Game/FETCH_HIGHSCORES_SUCCESS'
 const FETCH_HIGHSCORES_ERROR = 'Game/FETCH_HIGHSCORES_ERROR'
 
-export function incrementScore () {
+export function incrementScore (increment = 1) {
   return {
-    type: INCREMENT_SCORE
+    type: INCREMENT_SCORE,
+    payload: increment
   }
 }
 
@@ -87,7 +89,13 @@ export function collectItem (itemToCollect) {
       itemToCollect.type === COLLECTABLE_TYPES.CARROT ||
       itemToCollect.type === COLLECTABLE_TYPES.CHERRY
     ) {
-      dispatch(incrementScore())
+      if(itemToCollect.type === COLLECTABLE_TYPES.BANANA) {
+        dispatch(incrementScore(1))
+      } else if(itemToCollect.type === COLLECTABLE_TYPES.CARROT) {
+        dispatch(incrementScore(2))
+      } else if(itemToCollect.type === COLLECTABLE_TYPES.CHERRY) {
+        dispatch(incrementScore(3))
+      }
       SoundsManager.playSound('win-point-withitem')
     } else {
       dispatch(removeMissedItem())
@@ -282,7 +290,7 @@ export function fetchHighscores () {
 export default function GameReducer (state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT_SCORE:
-      return state.set('score', state.get('score') + 1)
+      return state.set('score', state.get('score') + action.payload)
     case RESET_SCORE:
       return state.set('score', 0)
     case ADD_MISSED_ITEM:
@@ -295,9 +303,9 @@ export default function GameReducer (state = initialState, action = {}) {
       }
       return state.set('nbItemsMissed', nbItemsMissed)
     case ADD_KILLED_ITEM:
-      return state.update('killedItems', killedItems =>
-        killedItems.push(action.payload)
-      )
+      return state
+        .update('killedItems', killedItems => killedItems.push(action.payload))
+        .set('nbCarsConverted', state.get('nbCarsConverted') + 1)
     case START_LEVEL:
       return state
         .set('isPlaying', true)
@@ -306,7 +314,10 @@ export default function GameReducer (state = initialState, action = {}) {
     case FAILED_LEVEL:
       return state.set('failed', true).set('isPlaying', false)
     case FINISHED_LEVEL:
-      return state.set('finished', true).set('isPlaying', false)
+      return state
+        .set('finished', true)
+        .set('isPlaying', false)
+        .set('killedItems', fromJS([]))
     case SET_CURRENT_LEVEL:
       return state
         .set('currentLevel', action.payload)

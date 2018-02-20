@@ -159,7 +159,7 @@ class Win extends Component {
         <div className='title'>YOU WON</div>
         <div className='content'>
           <h4>Your score</h4>
-          <ScoreBox color='pink' score={this.props.score} />
+          <ScoreBox color='pink' score={this.props.score} nbCarsConverted={this.props.nbCarsConverted} />
         </div>
         <Button
           large
@@ -269,6 +269,7 @@ export default connect(state => {
   return {
     score: state.game.get('score'),
     currentLevel: state.game.get('currentLevel'),
-    currentCity: state.app.get('selectedCity')
+    currentCity: state.app.get('selectedCity'),
+    nbCarsConverted: state.game.get('nbCarsConverted')
   }
 })(Win)

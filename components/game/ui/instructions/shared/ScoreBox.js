@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 class ScoreBox extends Component {
   static propTypes = {
     score: PropTypes.number,
+    nbCarsConverted: PropTypes.number,
     color: PropTypes.oneOf(['pink'])
   }
 
@@ -17,12 +18,16 @@ class ScoreBox extends Component {
       value: props.score
     })
     scoreBox.push({
+      icon: 'car',
+      value: props.nbCarsConverted
+    })
+    scoreBox.push({
       icon: 'bus',
-      value: Math.round(props.score / 10)
+      value: Math.round(props.nbCarsConverted / 10)
     })
     scoreBox.push({
       icon: 'train',
-      value: Math.round(props.score / 20)
+      value: Math.round(props.nbCarsConverted / 20)
     })
 
     this.state = {
