@@ -146,9 +146,8 @@ class Menu extends PureComponent {
                 <h1>HIGH SCORES</h1>
               </div>
               <div className='link'>
-                <h1>SHARE</h1>
+                <SocialShareButtons />
               </div>
-              <SocialShareButtons />
             </div>
 
             <div className='city-selector-items'>
