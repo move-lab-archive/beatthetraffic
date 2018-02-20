@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { loadCity } from '../../statemanagement/app/GameStateManagement'
+import { loadCity, retry } from '../../statemanagement/app/GameStateManagement'
 import { hideCityPicker } from '../../statemanagement/app/AppStateManagement'
 import ButtonClose from './ButtonClose'
 import ChangeCityButton from './ChangeCityButton'
@@ -51,8 +51,14 @@ class CityPicker extends PureComponent {
             {Object.keys(availableCities).map(cityId => (
               <h3
                 onClick={() => {
-                  // TODO IMPROVE WITHOUT HARD RELOAD
-                  window.location.href = `/${cityId}/level/1`
+                  if (cityId === this.props.selectedCity) {
+                    this.props.dispatch(retry())
+                    this.handleClose()
+                    // Do nothing
+                  } else {
+                    // Hard reload, this makes sure javascript is cleaned up
+                    window.location.href = `/${cityId}/level/1`
+                  }
                 }}
                 key={cityId}
                 className={cityId === this.props.selectedCity ? 'selected' : ''}
@@ -119,8 +125,10 @@ class CityPicker extends PureComponent {
             font-size: 2rem;
           }
 
-          .more-cities a,.more-cities a:hover,.more-cities a.selected {
-            color: #4EFFFF;
+          .more-cities a,
+          .more-cities a:hover,
+          .more-cities a.selected {
+            color: #4effff;
           }
 
           .cities h3 {
