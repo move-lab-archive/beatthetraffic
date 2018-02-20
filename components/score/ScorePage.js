@@ -7,8 +7,21 @@ import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 import { showCityPicker } from '../../statemanagement/app/AppStateManagement'
 
 class ScorePage extends PureComponent {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      mountAnimation: false
+    }
+  }
+
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
+    setTimeout(() => {
+      this.setState({
+        mountAnimation: true
+      })
+    }, 50)
   }
 
   getCityLabel (city) {
@@ -36,11 +49,15 @@ class ScorePage extends PureComponent {
         <ButtonClose onClick={this.props.onClose} />
 
         <img
-          className={`rightcloud`}
+          className={`rightcloud ${
+            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
         <img
-          className={`leftcloud`}
+          className={`leftcloud ${
+            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
         <img
@@ -73,7 +90,11 @@ class ScorePage extends PureComponent {
 
                     <div className='first-place'>
                       <div
-                        className={`name ${this.props.highscores.first().get('link') ? 'clickable' : ''}`}
+                        className={`name ${
+                          this.props.highscores.first().get('link')
+                            ? 'clickable'
+                            : ''
+                        }`}
                         onClick={this.followLink.bind(
                           this,
                           this.props.highscores.first().get('link')
@@ -120,7 +141,9 @@ class ScorePage extends PureComponent {
                         }}
                       >
                         <h2
-                          className={`name ${highscore.get('link') ? 'clickable' : ''}`}
+                          className={`name ${
+                            highscore.get('link') ? 'clickable' : ''
+                          }`}
                           onClick={this.followLink.bind(
                             this,
                             highscore.get('link')
@@ -157,7 +180,9 @@ class ScorePage extends PureComponent {
                         </div>
                         <div className={`list-item selected`}>
                           <h2
-                            className={`name ${this.props.scoreData.link ? 'clickable' : ''}`}
+                            className={`name ${
+                              this.props.scoreData.link ? 'clickable' : ''
+                            }`}
                             onClick={this.followLink.bind(
                               this,
                               this.props.scoreData.link
@@ -241,6 +266,7 @@ class ScorePage extends PureComponent {
             width: 60%;
             right: -5%;
             z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .leftcloud {
             position: absolute;
@@ -248,6 +274,7 @@ class ScorePage extends PureComponent {
             width: 80%;
             left: -10%;
             z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .thirdcloud {
             position: absolute;
@@ -255,6 +282,15 @@ class ScorePage extends PureComponent {
             width: 50%;
             left: 70%;
           }
+
+          .hiddencloud {
+            transform: translateX(50%);
+          }
+
+          .visiblecloud {
+            transform: translateX(0%);
+          }
+
           .fourthcloud {
             position: absolute;
             bottom: -1%;
@@ -512,7 +548,7 @@ class ScorePage extends PureComponent {
             box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
           }
 
-          .name.clickable { 
+          .name.clickable {
             cursor: pointer;
           }
 

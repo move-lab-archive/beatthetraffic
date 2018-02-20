@@ -2,17 +2,37 @@ import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
 class AboutPage extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      mountAnimation: false
+    }
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({
+        mountAnimation: true
+      })
+    }, 50)
+  }
+
   render () {
     return (
       <div className={`about-page`}>
         <ButtonClose onClick={this.props.onClose} />
 
         <img
-          className={`rightcloud`}
+          className={`rightcloud ${
+            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
         <img
-          className={`leftcloud`}
+          className={`leftcloud ${
+            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+          }`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
         <img
@@ -96,6 +116,7 @@ class AboutPage extends Component {
             width: 60%;
             right: -5%;
             z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .leftcloud {
             position: absolute;
@@ -103,7 +124,17 @@ class AboutPage extends Component {
             width: 80%;
             left: -10%;
             z-index: -1;
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
+
+          .hiddencloud {
+            transform: translateX(50%);
+          }
+
+          .visiblecloud {
+            transform: translateX(0%);
+          }
+
           .thirdcloud {
             position: absolute;
             bottom: -1%;
