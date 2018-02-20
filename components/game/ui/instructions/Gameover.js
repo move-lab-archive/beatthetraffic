@@ -11,6 +11,7 @@ import {
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
 import ChangeCityButton from '../../../shared/ChangeCityButton'
+import ScoreBox from './shared/ScoreBox'
 
 class Gameover extends Component {
   componentDidMount () {
@@ -29,20 +30,15 @@ class Gameover extends Component {
       <div className='instructions-gameover'>
         <div className='title'>GAME OVER</div>
         <div className='content'>
-          <div className='message'>
-            <h4>Your score</h4>
-            <div className='score'>
-              <h1>{this.props.score}</h1>
-              <img src='/static/assets/icons/icon-star.svg' />
-            </div>
-          </div>
-          <div className='cta'>
-            <Button
-              large
-              title={`Play again`}
-              onClick={() => this.props.dispatch(retry())}
-            />
-          </div>
+          <h4>Your score</h4>
+          <ScoreBox score={this.props.score} />
+        </div>
+        <div className='cta'>
+          <Button
+            large
+            title={`Play again`}
+            onClick={() => this.props.dispatch(retry())}
+          />
         </div>
         <ChangeCityButton label='PLAY ANOTHER CITY' white noAnim />
         <style jsx>{`
@@ -74,6 +70,8 @@ class Gameover extends Component {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
           }
 
           .cta {
@@ -82,43 +80,13 @@ class Gameover extends Component {
             align-items: center;
           }
 
-          .message {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 1rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            border-bottom: 4px solid white;
-
-            // increase vertical spacing between flex-box item
-            margin-top: 4rem;
-            margin-bottom: 4rem;
-          }
-
-          .message h4 {
-            margin-bottom: 0.4rem;
-          }
-
-          .score {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .score h1 {
-            margin: 0;
-            margin-right: 0.5rem;
-          }
-
           @media (max-height: 575px) {
             .title {
               font-size: 7rem;
               line-height: 8rem;
             }
 
-            .message {
+            .content {
               margin-top: 2rem;
               margin-bottom: 2rem;
             }
@@ -130,7 +98,7 @@ class Gameover extends Component {
               line-height: 7rem;
             }
 
-            .message {
+            .content {
               margin-top: 0rem;
               margin-bottom: 0rem;
             }

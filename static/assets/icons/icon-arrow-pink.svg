@@ -1,0 +1,18 @@
+<svg width="25" height="22" viewBox="0 0 25 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 4</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-7354 -2442)">
+<g id="Group 4">
+<g id="Triangle 2">
+<use xlink:href="#path0_fill" transform="matrix(-1 0 0 -1 7379 2464)" fill="#FF3BFF"/>
+</g>
+<g id="Path 23">
+<use xlink:href="#path1_stroke" transform="translate(7354 2452)" fill="#FF3BFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 11L 10 0L 10 22L 0 11Z"/>
+<path id="path1_stroke" d="M 15.8959 -1L 0 -1L 0 3L 15.8959 3L 15.8959 -1Z"/>
+</defs>
+</svg>

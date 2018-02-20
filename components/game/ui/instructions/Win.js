@@ -17,6 +17,7 @@ import {
   blockCanvasScrolling,
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
+import ScoreBox from './shared/ScoreBox'
 
 class Win extends Component {
   constructor (props) {
@@ -102,6 +103,27 @@ class Win extends Component {
     })
   }
 
+  startAnimatingScoreBox () {
+    this.scoreBoxAnimation = setInterval(() => {
+      let nextIndex = this.state.scoreBoxIndex + 1
+      if (nextIndex > this.state.scoreBox.length - 1) {
+        nextIndex = 0
+      }
+
+      this.setState({
+        scoreBoxIndex: nextIndex
+      })
+    }, 2000)
+  }
+
+  getNextScoreBoxData (index) {
+    if (index + 1 > this.state.scoreBox.length - 1) {
+      return this.state.scoreBox[0]
+    } else {
+      return this.state.scoreBox[index + 1]
+    }
+  }
+
   closePopupAddScore () {
     // console.log('back')
     window.history.back()
@@ -136,21 +158,8 @@ class Win extends Component {
       <div className='instructions-win'>
         <div className='title'>YOU WON</div>
         <div className='content'>
-          <div className='message'>
-            <div className='ranking-container'>
-              <h4>Ranking</h4>
-              <div className='score'>
-                <h1>{this.props.score}</h1>
-              </div>
-            </div>
-            <div className='score-container'>
-              <h4>Your score</h4>
-              <div className='score'>
-                <h1>{this.props.score}</h1>
-                <img src='/static/assets/icons/icon-star-purple.svg' />
-              </div>
-            </div>
-          </div>
+          <h4>Your score</h4>
+          <ScoreBox color='pink' score={this.props.score} />
         </div>
         <Button
           large
@@ -203,45 +212,8 @@ class Win extends Component {
             display: flex;
             flex-direction: column;
             align-items: center;
-          }
-
-          .message {
-            display: flex;
-            flex-direction: row;
-            padding-bottom: 1rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            border-bottom: 4px solid white;
-
-            // increase vertical spacing between flex-box item
-            margin-top: 4rem;
             margin-bottom: 4rem;
-          }
-
-          .message h4 {
-            margin-bottom: 0.4rem;
-          }
-
-          .score-container,
-          .ranking-container {
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .ranking-container {
-            margin-right: 2rem;
-          }
-
-          .score {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .score h1 {
-            margin: 0;
-            margin-right: 0.5rem;
+            margin-top: 4rem;
           }
 
           .cta-secondary {
@@ -258,7 +230,7 @@ class Win extends Component {
               line-height: 8rem;
             }
 
-            .message {
+            .content {
               margin-top: 2rem;
               margin-bottom: 2rem;
             }
@@ -270,7 +242,7 @@ class Win extends Component {
               line-height: 7rem;
             }
 
-            .message {
+            .content {
               margin-top: 0rem;
               margin-bottom: 0rem;
             }

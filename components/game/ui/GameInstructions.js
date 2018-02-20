@@ -32,7 +32,7 @@ class GameInstructions extends PureComponent {
             <Win url={this.props.url} />
           )}
         {!this.props.isPlaying &&
-          this.props.failed && <Win url={this.props.url} />}
+          this.props.failed && <Gameover url={this.props.url} />}
         <style jsx>{`
           .game-instructions {
             position: fixed;
