@@ -28,7 +28,8 @@ class Intro extends Component {
       .to('.cars', 0, { opacity: 0 }, '+=1')
       .to('.logo', 0, { opacity: 1 })
       .to('.logo', 0, { opacity: 0 }, '+=1')
-      .to('.logo', 0, { opacity: 0 }, '+=2.5')
+      .to('.level', 0, { opacity: 1 })
+      .to('.level', 0, { opacity: 0 }, '+=1')
 
     timeline.play()
   }
@@ -55,6 +56,7 @@ class Intro extends Component {
         <div className='title logo'>
           <img src='/static/assets/logo/logo-moovel-shiny-patrol.svg' />
         </div>
+        <div className='title level'>LEVEL {this.props.currentLevel}</div>
 
         <style jsx>{`
           .game-landing {
@@ -97,6 +99,11 @@ class Intro extends Component {
           }
           .cars {
             font-size: 13rem;
+          }
+
+          .level {
+            font-size: 5rem;
+            color: white;
           }
 
           .highlight {
@@ -186,6 +193,7 @@ export default connect(state => {
     selectedCity: state.app
       .get('availableCities')
       .get(state.app.get('selectedCity'))
-      .get('label')
+      .get('label'),
+    currentLevel: state.game.get('currentLevel')
   }
 })(Intro)
