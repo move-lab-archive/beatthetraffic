@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Star</title>
+    <title>Group 19</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-2460.000000, -4656.000000)">
-        <polygon id="Star" fill="#FF3BFF" points="2472.5 4675.90031 2464.77458 4680 2466.25 4671.31672 2460 4665.16718 2468.63729 4663.90031 2472.5 4656 2476.36271 4663.90031 2485 4665.16718 2478.75 4671.31672 2480.22542 4680"></polygon>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1293.000000, -6328.000000)">
+        <g id="Group-19" transform="translate(1293.000000, 6328.000000)">
+            <polygon id="Path-9" fill="#FF3BFF" points="4.62073253 20.2642982 4.62073253 24 1.28502235 24 1.28502235 20.2642982 0 20.2642982 0 12.578326 2.01438286 9.04944587 3.00896537 0 21.8197273 0 22.9297466 9.04944587 25 12.578326 25 20.2642982 23.7297605 20.2642982 23.7297605 24 20.3892676 24 20.3892676 20.2642982"></polygon>
+            <polygon id="Path-10" fill="#FFFE4A" points="4.73318323 2 4 8.9000001 21 8.9000001 20.2593989 2"></polygon>
+            <polygon id="Path-22" fill="#FFFE4A" points="3 15 3 17 7 17 7 15"></polygon>
+            <polygon id="Path-22" fill="#FFFE4A" points="18 15 18 17 22 17 22 15"></polygon>
+        </g>
     </g>
 </svg>
