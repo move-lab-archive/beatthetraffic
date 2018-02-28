@@ -27,10 +27,10 @@ Resources:
       ImageId: ami-db1688a2
       InstanceInitiatedShutdownBehavior: terminate
       InstanceType: t2.medium
-      KeyName: lab--squad
+      KeyName: web--squad
       Monitoring: true
       SecurityGroupIds:
-        - !ImportValue 'lab-squad-security-groups-ec2'
+        - !ImportValue 'web-squad-security-groups-ec2'
       SubnetId: subnet-ef5a2898
       UserData:
         Fn::Base64: !Sub |
