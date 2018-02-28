@@ -60,6 +60,7 @@ class Layout extends Component {
 
           :global(html) {
             box-sizing: border-box;
+            -webkit-user-select: none;
           }
 
           :global(*, *:before, *:after) {

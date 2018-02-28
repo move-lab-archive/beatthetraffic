@@ -7,20 +7,20 @@ class Button extends Component {
     onClick: PropTypes.func
   }
 
-  render() {
+  render () {
     return (
       <a
         className={this.props.large ? 'btn' : 'btn'}
         onClick={this.props.onClick}
       >
-        <div className="inner" />
-        <div className="outer">
+        <div className='inner' />
+        <div className='outer'>
           <h4>{this.props.title}</h4>
         </div>
 
         <style jsx>{`
           .btn {
-            width: 24rem;
+            width: 30rem;
             height: 6rem;
             will-change: transform;
             position: relative;

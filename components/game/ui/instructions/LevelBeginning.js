@@ -114,7 +114,7 @@ class LevelBeginning extends Component {
         {this.props.isGameReadyToPlay && (
           <ButtonLevelBeginning
             onClick={() => this.manualStart()}
-            title={`Starting in ${this.state.timerAutoStart}s`}
+            title={`Game starts in ${this.state.timerAutoStart}s`}
           />
         )}
         {!this.props.isGameReadyToPlay && <Loading />}
@@ -128,7 +128,7 @@ class LevelBeginning extends Component {
             position: fixed;
             width: 100%;
             height: 100%;
-            background-color: rgba(38, 38, 38, 0.5);
+            background-color: rgba(38, 38, 38, 0.7);
           }
           .instructions-level-beginning .level-title {
             color: white;

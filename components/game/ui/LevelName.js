@@ -8,7 +8,7 @@ class LevelName extends PureComponent {
         className={`level-name
         ${this.props.introAnimPlayed ? '' : 'hidden'}`}
       >
-        <h4>{`${this.props.levelName} LEVEL ${this.props.levelNb}`}</h4>
+        <h4>{`${this.props.levelName} | LEVEL ${this.props.levelNb}`}</h4>
         <style jsx>{`
           .level-name {
             position: fixed;
@@ -18,6 +18,7 @@ class LevelName extends PureComponent {
             z-index: 5;
             opacity: 1;
             transition: opacity 0.3s;
+            text-transform: uppercase;
           }
 
           .hidden {

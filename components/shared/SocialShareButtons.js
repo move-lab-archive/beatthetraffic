@@ -26,7 +26,7 @@ class SocialShareButtons extends React.Component {
   render () {
     return (
       <div className='List'>
-        <h1 onClick={() => window.open(this.twitterUrl(), '_blank')}>SHARE</h1>
+        <h1>SHARE</h1>
         <a className='Button' href={this.facebookUrl()} target='_blank'>
           <img alt='FacebookIcon' src={FacebookIcon} />
         </a>
@@ -43,12 +43,13 @@ class SocialShareButtons extends React.Component {
           h1 {
             margin: 0;
             margin-right: 2rem;
+            cursor: default;
           }
 
           .Button {
             list-style: none;
             cursor: pointer;
-            padding: 0 5px 0 0;
+            padding: 5px 5px 0 0;
           }
 
           .Button:hover,

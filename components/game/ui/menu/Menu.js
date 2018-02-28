@@ -166,6 +166,7 @@ class Menu extends PureComponent {
                   {availableCities[cityId].label}
                 </h2>
               ))}
+              <br />
               <h4>Want to play a new city?</h4>
               <h4>
                 Ping us{' '}
@@ -173,6 +174,7 @@ class Menu extends PureComponent {
                   @moovellab
                 </a>
               </h4>
+              <br />
             </div>
           </div>
         </div>
@@ -213,10 +215,6 @@ class Menu extends PureComponent {
             line-height: 2.8rem;
           }
 
-          h4 {
-            font-size: 2rem;
-          }
-
           a,
           a:hover,
           a:active {
@@ -249,7 +247,7 @@ class Menu extends PureComponent {
           }
 
           .city-selector-items {
-            margin-top: 5rem;
+            margin-top: 10rem;
             margin-bottom: 5rem;
           }
 
