@@ -1,0 +1,137 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Resources for beatthetraffic.moovellab.com
+Resources:
+  DNSName:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: moovellab.com.
+      Name: beatthetraffic.moovellab.com
+      Type: A
+      AliasTarget:
+          DNSName: !GetAtt LoadBalancer.DNSName
+          HostedZoneId: Z32O12XQLNTSW2
+          EvaluateTargetHealth: false
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      AvailabilityZone: eu-west-1c
+      BlockDeviceMappings:
+      - DeviceName: '/dev/xvda'
+        Ebs:
+          VolumeSize: '8'
+          VolumeType: 'gp2'
+          DeleteOnTermination: 'true'
+      EbsOptimized: false
+      IamInstanceProfile:
+        !Ref EC2InstanceProfile
+      ImageId: ami-db1688a2
+      InstanceInitiatedShutdownBehavior: terminate
+      InstanceType: t2.medium
+      KeyName: lab--squad
+      Monitoring: true
+      SecurityGroupIds:
+        - !ImportValue 'lab-squad-security-groups-ec2'
+      SubnetId: subnet-ef5a2898
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -x
+          yum update -y
+          yum install -y docker git
+          service docker start
+          usermod -a -G docker ec2-user
+          sudo systemctl enable docker.service
+          sudo systemctl start docker.service
+          sudo yum install epel-release
+          sudo yum install -y python-pip
+          git clone https://0e85bfb622f8794109fdc72c03cfa1e6a9cac0a6@github.com/moovel/lab-beat-the-traffic.git /home/ec2-user/lab-beat-the-traffic
+          chown -R ec2-user:ec2-user /home/ec2-user/lab-beat-the-traffic
+          cd /home/ec2-user/lab-beat-the-traffic
+          docker-compose up
+      Tags:
+      - Key: CostCenter
+        Value: '7000'
+      - Key: Name
+        Value: !Join
+          - '-'
+          - - Ref: AWS::Region
+            - 'beatthetraffic'
+            - 'app-ec2'
+      - Key: Squad
+        Value: Lab
+  Repository:
+    Type: 'AWS::ECR::Repository'
+    Properties:
+      RepositoryName: 'lab/beatthetraffic-moovellab-com'
+      LifecyclePolicy:
+        LifecyclePolicyText: '{"rules":[{"rulePriority":10,"description":"Keepthelast20images.","selection":{"tagStatus":"untagged","countType":"imageCountMoreThan","countNumber":20},"action":{"type":"expire"}}]}'
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Instances:
+      - Ref: EC2Instance
+      Listeners:
+      - LoadBalancerPort: '80'
+        InstancePort: '80'
+        Protocol: HTTP
+      - LoadBalancerPort: '443'
+        InstancePort: '80'
+        Protocol: HTTPS
+        SSLCertificateId: arn:aws:acm:eu-west-1:330561757506:certificate/a63bd6f5-dceb-4521-8bc1-8271069fc3d7
+      HealthCheck:
+        Target: TCP:80
+        HealthyThreshold: '3'
+        UnhealthyThreshold: '5'
+        Interval: '30'
+        Timeout: '5'
+      LoadBalancerName: !Join
+          - '-'
+          - - Ref: AWS::Region
+            - 'beatthetraffic'
+            - 'elb'
+      SecurityGroups:
+        -  !ImportValue 'web-squad-security-groups-lb-office'
+      Subnets:
+        - subnet-ef5a2898
+        - subnet-9c662cf9
+      Tags:
+      - Key: CostCenter
+        Value: '7000'
+      - Key: Name
+        Value: !Join
+          - '-'
+          - - Ref: AWS::Region
+            - 'beatthetraffic'
+            - 'elb'
+      - Key: Squad
+        Value: Lab
+  EC2Role:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ec2.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+      Path: "/lab-squad/beatthetraffic/"
+      RoleName: !Join
+        - '-'
+        - - Ref: AWS::Region
+          - 'beatthetraffic'
+          - 'app-ec2-role'
+  EC2InstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Path: "/lab-squad/beatthetraffic/"
+      InstanceProfileName: !Join
+        - '-'
+        - - Ref: AWS::Region
+          - 'beatthetraffic'
+          - 'app-ec2-instance-profile'
+      Roles:
+        - Ref: "EC2Role"
