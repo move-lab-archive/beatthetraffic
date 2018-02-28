@@ -46,7 +46,6 @@ Resources:
           git clone https://0e85bfb622f8794109fdc72c03cfa1e6a9cac0a6@github.com/moovel/lab-beat-the-traffic.git -b feature/cloudformation /home/ec2-user/lab-beat-the-traffic
           chown -R ec2-user:ec2-user /home/ec2-user/lab-beat-the-traffic
           cd /home/ec2-user/lab-beat-the-traffic
-          docker-compose up
       Tags:
       - Key: CostCenter
         Value: '7000'
