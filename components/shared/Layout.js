@@ -98,6 +98,10 @@ class Layout extends Component {
             font-size: 2rem;
             line-height: 2.9rem;
           }
+          :global(a) {
+            text-decoration: none;
+            color: #262626;
+          }
 
           :global(html) {
             font-size: 60%;
