@@ -99,15 +99,12 @@ class ChangeCityButton extends Component {
           @keyframes fadeIn {
             0% {
               opacity: 0;
-              transform: scale(0.8);
             }
             70% {
               opacity: 0;
-              transform: scale(0.8);
             }
             100% {
               opacity: 1;
-              transform: scale(1);
             }
           }
         `}</style>

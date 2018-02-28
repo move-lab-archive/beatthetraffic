@@ -92,6 +92,14 @@ class Landing extends Component {
             >
               <h4>ABOUT</h4>
             </div>
+            <div className='powered'>
+              <h4>
+                POWERED BY{' '}
+                <a href='https://www.google.de/' target='_blank'>
+                  OPEN DATA CAM
+                </a>
+              </h4>
+            </div>
             <LeftCloud />
             <RightCloud />
             <div className='mobility-assets'>
@@ -123,7 +131,7 @@ class Landing extends Component {
 
           .landing-headline {
             position: absolute;
-            margin-top: -45px;
+            margin-top: -10px;
             width: 80%;
             z-index: 2;
             animation: fadeInHeadline 1.3s;
@@ -148,6 +156,17 @@ class Landing extends Component {
             color: #ff3bff;
           }
 
+          .powered {
+            position: fixed;
+            top: 1.5rem;
+            animation: fadeIn 2s;
+            z-index: 14;
+            margin: 0;
+            padding: 0;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+
           .mobility-assets .unicorn {
             animation: fadeIn 2s;
             width: 8.5rem;
@@ -164,7 +183,7 @@ class Landing extends Component {
             width: 7rem;
             opacity: 1;
             left: 50%;
-            transform: translateX(-50%) translateY(-150px);
+            transform: translateX(-50%) translateY(-125px);
             z-index: 100;
             position: absolute;
           }
@@ -172,15 +191,12 @@ class Landing extends Component {
           @keyframes fadeIn {
             0% {
               opacity: 0;
-              transform: scale(0.8);
             }
             70% {
               opacity: 0;
-              transform: scale(0.8);
             }
             100% {
               opacity: 1;
-              transform: scale(1);
             }
           }
 
@@ -231,7 +247,7 @@ class Landing extends Component {
 
           @media (max-height: 400px) {
             .tree {
-              transform: translateX(-50%) translateY(-110px);
+              transform: translateX(-50%) translateY(-90px);
             }
           }
         `}</style>

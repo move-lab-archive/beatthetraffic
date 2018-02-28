@@ -67,7 +67,7 @@ class BtnLanding extends Component {
             position: absolute;
             width: 180px;
             height: 60px;
-            transform: translateX(-50%) translateY(110px);
+            transform: translateX(-50%) translateY(120px);
             //GPU accelerate
             will-change: transform;
             animation: 1.3s fadeIn;
