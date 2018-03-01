@@ -93,7 +93,7 @@ Resources:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
       Instances:
-      - Ref: EC2Instance
+      - Ref: AppEC2Instance
       Listeners:
       - LoadBalancerPort: '80'
         InstancePort: '80'
