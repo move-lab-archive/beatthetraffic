@@ -13,7 +13,7 @@ if (process.env.NOW_DEPLOY) {
 }
 
 if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY ) {
-  mongoURL = process.env.MONGO_INSTANCE
+  mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE
 }
 
 class DBManager {
