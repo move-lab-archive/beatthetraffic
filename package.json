@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "node server/server-static-generation.js",
     "build": "next build",
+    "build-aws": "next build",
     "start": "NODE_ENV=production node server/server-static-generation.js",
+    "start-aws":
+      "NODE_ENV=production MONGO_INSTANCE=mongodb://mongo:27017 node server/server-static-generation.js",
     "export": "next build && NODE_ENV=production next export",
     "static": "serve out",
     "deploy": "now -n traffic-cam out",

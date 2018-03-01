@@ -1,6 +1,32 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Resources for beatthetraffic.moovellab.com
 Resources:
+  MongoEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      AvailabilityZone: eu-west-1c
+      BlockDeviceMappings:
+      - DeviceName: '/dev/xvda'
+        Ebs:
+          VolumeSize: '24'
+          VolumeType: 'gp2'
+          DeleteOnTermination: 'false'
+      EbsOptimized: false
+      ImageId: ami-0ebbb468
+      InstanceInitiatedShutdownBehavior: stop
+      InstanceType: t2.medium
+      KeyName: lab-squad
+      Monitoring: true
+      SecurityGroupIds:
+        - !ImportValue 'web-squad-security-groups-ec2'
+      SubnetId: subnet-ef5a2898
+      Tags:
+      - Key: CostCenter
+        Value: '7000'
+      - Key: Name
+        Value: beatthetraffic-mongo-db
+      - Key: Squad
+        Value: Lab
   DNSName:
     Type: AWS::Route53::RecordSet
     Properties:
@@ -11,7 +37,7 @@ Resources:
           DNSName: !GetAtt LoadBalancer.DNSName
           HostedZoneId: Z32O12XQLNTSW2
           EvaluateTargetHealth: false
-  EC2Instance:
+  AppEC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
       AvailabilityZone: eu-west-1c
@@ -27,7 +53,7 @@ Resources:
       ImageId: ami-db1688a2
       InstanceInitiatedShutdownBehavior: terminate
       InstanceType: t2.medium
-      KeyName: web--squad
+      KeyName: lab-squad
       Monitoring: true
       SecurityGroupIds:
         - !ImportValue 'web-squad-security-groups-ec2'
@@ -39,13 +65,13 @@ Resources:
           yum install -y docker git
           service docker start
           usermod -a -G docker ec2-user
-          sudo systemctl enable docker.service
-          sudo systemctl start docker.service
-          sudo yum install epel-release
-          sudo yum install -y python-pip
-          git clone https://0e85bfb622f8794109fdc72c03cfa1e6a9cac0a6@github.com/moovel/lab-beat-the-traffic.git -b feature/cloudformation /home/ec2-user/lab-beat-the-traffic
-          chown -R ec2-user:ec2-user /home/ec2-user/lab-beat-the-traffic
-          cd /home/ec2-user/lab-beat-the-traffic
+          #sudo systemctl enable docker.service
+          #sudo systemctl start docker.service
+          #sudo yum install epel-release
+          #sudo yum install -y python-pip
+          git clone https://0e85bfb622f8794109fdc72c03cfa1e6a9cac0a6@github.com/moovel/web-docker-automation.git /home/ec2-user/web-docker-automation
+          chown -R ec2-user:ec2-user /home/ec2-user/web-docker-automation
+          docker run -d --name web-test -p 80:8000 crccheck/hello-world
       Tags:
       - Key: CostCenter
         Value: '7000'
