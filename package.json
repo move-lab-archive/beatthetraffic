@@ -2,22 +2,20 @@
   "name": "beat-the-traffic",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server/server-static-generation.js",
-    "build": "next build",
     "build-aws": "next build",
-    "start": "NODE_ENV=production node server/server-static-generation.js",
-    "start-aws":
-      "NODE_ENV=production MONGO_INSTANCE=mongodb://mongo:27017 node server/server-static-generation.js",
-    "export": "next build && NODE_ENV=production next export",
-    "static": "serve out",
-    "deploy": "now -n traffic-cam out",
+    "build": "next build",
+    "cfn:lint": "cfn-lint validate cloudformation.yaml",
+    "cfn:update": "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait",
     "deploy-prod": "now",
+    "deploy": "now -n traffic-cam out",
+    "dev": "node server/server-static-generation.js",
+    "export": "next build && NODE_ENV=production next export",
     "now-build": "next build && NODE_ENV=production next export",
     "now-start": "NODE_ENV=production NOW_DEPLOY=true node server/server.js",
     "precommit": "npm run cfn:lint",
-    "cfn:lint": "cfn-lint validate cloudformation.yaml",
-    "cfn:update":
-      "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait"
+    "start-aws": "NODE_ENV=production MONGO_INSTANCE=ec2-54-246-254-133.eu-west-1.compute.amazonaws.com:27017/db node server/server-static-generation.js",
+    "start": "NODE_ENV=production node server/server-static-generation.js",
+    "static": "serve out"
   },
   "dependencies": {
     "@turf/distance": "^5.1.5",

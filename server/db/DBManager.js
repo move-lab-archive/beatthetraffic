@@ -12,7 +12,7 @@ if (process.env.NOW_DEPLOY) {
     'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic'
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY ) {
   mongoURL = process.env.MONGO_INSTANCE
 }
 

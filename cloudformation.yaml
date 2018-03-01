@@ -1,6 +1,16 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Resources for beatthetraffic.moovellab.com
 Resources:
+  DNSName:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: moovellab.com.
+      Name: beatthetraffic.moovellab.com
+      Type: A
+      AliasTarget:
+          DNSName: !GetAtt LoadBalancer.DNSName
+          HostedZoneId: Z32O12XQLNTSW2
+          EvaluateTargetHealth: false
   MongoEC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
@@ -27,16 +37,6 @@ Resources:
         Value: beatthetraffic-mongo-db
       - Key: Squad
         Value: Lab
-  DNSName:
-    Type: AWS::Route53::RecordSet
-    Properties:
-      HostedZoneName: moovellab.com.
-      Name: beatthetraffic.moovellab.com
-      Type: A
-      AliasTarget:
-          DNSName: !GetAtt LoadBalancer.DNSName
-          HostedZoneId: Z32O12XQLNTSW2
-          EvaluateTargetHealth: false
   AppEC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
@@ -65,10 +65,6 @@ Resources:
           yum install -y docker git
           service docker start
           usermod -a -G docker ec2-user
-          #sudo systemctl enable docker.service
-          #sudo systemctl start docker.service
-          #sudo yum install epel-release
-          #sudo yum install -y python-pip
           git clone https://0e85bfb622f8794109fdc72c03cfa1e6a9cac0a6@github.com/moovel/web-docker-automation.git /home/ec2-user/web-docker-automation
           chown -R ec2-user:ec2-user /home/ec2-user/web-docker-automation
           docker run -d --name web-test -p 80:8000 crccheck/hello-world
