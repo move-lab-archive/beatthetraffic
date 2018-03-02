@@ -165,6 +165,7 @@ class Landing extends Component {
             padding: 0;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
           }
 
           .mobility-assets .unicorn {
