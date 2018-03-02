@@ -3,3 +3,5 @@ node_modules/
 out/
 .next/
 static/videos
+cloudformation.yaml
+
