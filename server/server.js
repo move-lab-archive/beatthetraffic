@@ -49,12 +49,12 @@ app.get('/', (req, res) => {
     console.log('Cant guess IP, fallback to default city')
   }
 
-  res.redirect(`/${cityToRedirectTo}/level/1`)
+  res.redirect(`/${cityToRedirectTo}/level/1/`)
 })
 
 app.get('/:city', (req, res, next) => {
   if (Object.keys(availableCities).indexOf(req.params.city) > -1) {
-    res.redirect(`/${req.params.city}/level/1`)
+    res.redirect(`/${req.params.city}/level/1/`)
   } else if (req.params.city === 'about') {
     // About page is rendered static
     // next() tells express to wait for the next route match which will be
