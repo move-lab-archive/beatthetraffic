@@ -65,8 +65,7 @@ class GamePage extends React.PureComponent {
     this.props.dispatch(updateUrlToMatchLevelAndCity())
 
     // Preload game sounds
-    // TODO IMPROVE ONLY LEVEL 1 SOUNDS
-    SoundsManager.preloadGameSounds()
+    SoundsManager.preloadEssentialSounds(this.props.levelNb)
 
     if (this.props.introAnimPlayed) {
       this.setState({
@@ -171,6 +170,7 @@ class GamePage extends React.PureComponent {
   }
 
   handleFinishIntro (delayHideIntro) {
+    SoundsManager.preloadOtherSounds(this.props.levelNb)
     if (delayHideIntro) {
       this.setState({
         showLanding: false,

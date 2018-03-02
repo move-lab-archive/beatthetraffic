@@ -12,41 +12,9 @@ class SoundsManager {
     this.addSound('ambient', 'intro', '/static/assets/sounds/intro-small.mp3')
   }
 
-  preloadGameSounds () {
-    this.addSound(
-      'ambient',
-      'main_level1',
-      '/static/assets/sounds/main_level1.mp3',
-      {
-        loop: true
-      }
-    )
-    this.addSound(
-      'ambient',
-      'main_level2',
-      '/static/assets/sounds/main_level2.mp3',
-      {
-        loop: true
-      }
-    )
-    this.addSound(
-      'ambient',
-      'main_level3',
-      '/static/assets/sounds/main_level3.mp3',
-      {
-        loop: true
-      }
-    )
-    this.addSound(
-      'punctual',
-      'nextlevel',
-      '/static/assets/sounds/nextlevel.mp3'
-    )
-    this.addSound(
-      'punctual',
-      'healthrecovery',
-      '/static/assets/sounds/healthrecovery.mp3'
-    )
+  preloadEssentialSounds (level = 1) {
+    this.preloadLevelSpecific(1)
+
     this.addSound('punctual', 'carhit', '/static/assets/sounds/carhit.mp3')
     this.addSound(
       'punctual',
@@ -58,7 +26,26 @@ class SoundsManager {
       'carmissed',
       '/static/assets/sounds/carmissed.mp3'
     )
-    this.addSound('punctual', 'youwin', '/static/assets/sounds/youwin.mp3')
+    this.addSound(
+      'punctual',
+      'win-point-withitem',
+      '/static/assets/sounds/win-point-withitem.mp3'
+    )
+  }
+
+  preloadOtherSounds (level = 1) {
+    this.addSound(
+      'punctual',
+      'nextlevel',
+      '/static/assets/sounds/nextlevel.mp3'
+    )
+
+    this.addSound(
+      'punctual',
+      'healthrecovery',
+      '/static/assets/sounds/healthrecovery.mp3'
+    )
+
     this.addSound('punctual', 'youlose', '/static/assets/sounds/youlose.mp3')
     this.addSound(
       'punctual',
@@ -79,23 +66,34 @@ class SoundsManager {
         loop: true
       }
     )
+
+    this.addSound('ambient', 'alert', '/static/assets/sounds/alert.mp3', {
+      loop: true
+    })
+  }
+
+  preloadLevelSpecific (level = 1) {
+    // Level main sound
     this.addSound(
       'ambient',
-      'youwinloop',
-      '/static/assets/sounds/youwinloop.mp3',
+      `main_level${level}`,
+      `/static/assets/sounds/main_level${level}.mp3`,
       {
         loop: true
       }
     )
-    this.addSound('ambient', 'alert', '/static/assets/sounds/alert.mp3', {
-      loop: true
-    })
 
-    this.addSound(
-      'punctual',
-      'win-point-withitem',
-      '/static/assets/sounds/win-point-withitem.mp3'
-    )
+    if (level === 3) {
+      this.addSound('punctual', 'youwin', '/static/assets/sounds/youwin.mp3')
+      this.addSound(
+        'ambient',
+        'youwinloop',
+        '/static/assets/sounds/youwinloop.mp3',
+        {
+          loop: true
+        }
+      )
+    }
   }
 
   addSound (soundType, soundName, soundSrc, options) {

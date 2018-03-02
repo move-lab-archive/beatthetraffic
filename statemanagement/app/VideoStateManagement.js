@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable'
+import SoundsManager from '../../statemanagement/app/SoundsManager'
 
 import { levelFinished } from '../../statemanagement/app/GameStateManagement'
 import { getFirstFrameImgPath } from '../../statemanagement/app/AppStateManagement'
@@ -120,8 +121,10 @@ export function prefetchNextLevelFirstFrame () {
         return video.get('city') === city && video.get('level') === nextLevel
       })
 
-    if(nextLevelVideo) {
+    if (nextLevelVideo) {
       dispatch(prefetchImgFirstFrame(nextLevelVideo.get('name')))
+      // Preload next level sound
+      SoundsManager.preloadLevelSpecific(nextLevel)
     }
   }
 }
