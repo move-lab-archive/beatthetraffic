@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Head from 'next/head'
+// import ReactGA from 'react-ga'
+// import Router from 'next/router'
 
 class Layout extends Component {
   recordFirstPaint () {
     return {
       __html: '<script>window.firstPaint = new Date().getTime()</script>'
     }
+  }
+
+  componentDidMount () {
+    // ReactGA.initialize("ga-id");
+    // ReactGA.set({ page: Router.pathname });
+    // ReactGA.pageview(Router.pathname);
   }
 
   render () {

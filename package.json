@@ -4,8 +4,7 @@
   "scripts": {
     "build": "next build",
     "cfn:lint": "cfn-lint validate cloudformation.yaml",
-    "cfn:update":
-      "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait",
+    "cfn:update": "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait",
     "deploy-prod": "now",
     "deploy": "now -n traffic-cam out",
     "dev": "node server/server-static-generation.js",
@@ -13,8 +12,7 @@
     "now-build": "next build && NODE_ENV=production next export",
     "now-start": "NODE_ENV=production NOW_DEPLOY=true node server/server.js",
     "precommit": "npm run cfn:lint",
-    "start-aws":
-      "NODE_ENV=production MONGO_INSTANCE=ec2-54-246-254-133.eu-west-1.compute.amazonaws.com:27017/db node server/server.js",
+    "start-aws": "NODE_ENV=production MONGO_INSTANCE=ec2-54-246-254-133.eu-west-1.compute.amazonaws.com:27017/db node server/server.js",
     "start": "NODE_ENV=production node server/server-static-generation.js",
     "static": "serve out"
   },
@@ -40,6 +38,7 @@
     "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-ga": "^2.4.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
