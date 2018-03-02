@@ -21,16 +21,41 @@ class Layout extends Component {
     return (
       <div>
         <Head>
-          <title>Beat the traffic {this.props.selectedCity}</title>
+          <title>Beat the traffic {this.props.selectedCity} - moovel lab</title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
+          <meta name='description' content='Beat the traffic blablabla' />
+          <link
+            rel='apple-touch-icon'
+            href='/static/assets/favicon/apple-touch-icon.png'
+          />
           <link
             rel='icon'
             type='image/png'
-            href='/static/assets/icons/icon-favicon.png'
+            href='/static/assets/favicon/favicon.png'
+          />
+          <meta property='og:title' content='Beat the traffic - moovel lab' />
+          <meta
+            property='og:url'
+            content='https://beatthetraffic.moovellab.com'
+          />
+          <meta
+            property='og:image'
+            content='https://beatthetraffic.moovellab.com/static/images/cover.png'
+          />
+          <meta property='og:description' content='' />
+          <meta property='og:type' content='website' />
+          <meta property='og:site_name' content='moovel lab' />
+          <meta name='twitter:card' content='summary' />
+          <meta name='twitter:site' content='@moovelLab' />
+          <meta name='twitter:title' content='Beat the traffic - moovel lab' />
+          <meta name='twitter:description' content='' />
+          <meta
+            name='twitter:image'
+            content='https://whatthestreet.moovellab.com/static/images/cover.png'
           />
           <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'
