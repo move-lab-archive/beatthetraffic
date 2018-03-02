@@ -56,11 +56,12 @@ app.get('/:city', (req, res, next) => {
   if (Object.keys(availableCities).indexOf(req.params.city) > -1) {
     res.redirect(`/${req.params.city}/level/1`)
   } else if (req.params.city === 'about') {
-    console.log('about page')
+    // About page is rendered static
+    // next() tells express to wait for the next route match which will be
+    // app.use(express.static('out'))
     next()
   } else {
-    console.log('highscores')
-    // SSR render highscores
+    // Overwise, handle the request normaly, SSR for highscore or get assets /static
     handle(req, res)
   }
 })
