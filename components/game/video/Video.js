@@ -165,6 +165,12 @@ class Video extends Component {
       }
 
       // console.log('registerListeners')
+
+      // In case the video is already ready
+      if (this.videoEl.readyState > 3) {
+        this.handleCanPlay()
+      }
+    
       this.videoEl.addEventListener('canplay', this.handleCanPlay)
       this.videoEl.addEventListener('play', this.handlePlay)
       this.videoEl.addEventListener('pause', this.handlePause)
@@ -248,10 +254,7 @@ class Video extends Component {
               playsInline
               autoPlay
             >
-              <source
-                src={`${this.props.src}&date=${new Date().toISOString()}`}
-                type='video/mp4'
-              />
+              <source src={`${this.props.src}&date=${new Date().toISOString()}`} type='video/mp4' />
               Your browser does not support the video tag.
             </video>
           )}
