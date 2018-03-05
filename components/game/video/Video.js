@@ -31,6 +31,8 @@ class Video extends Component {
     this.handleFinishBuffering = this.handleFinishBuffering.bind(this)
     this.isMonitoring = false
     this.lastCurrentTime = 0
+    this.videoEl = null
+    this.videoSrc = ''
 
     this.state = {
       canRenderVideo: false,
@@ -153,13 +155,15 @@ class Video extends Component {
     el.removeEventListener('playing', this.handleFinishBuffering)
   }
 
-  registerListeners (el) {
-    if (this.videoEl) {
+  registerListeners (el, src) {
+    console.log('register liteners')
+    if (el && this.videoSrc !== src) {
+      console.log('actually registering listeners')
+      this.videoEl = el
+      this.videoSrc = src
       // Clean previous listeners
       this.cleanListeners(this.videoEl)
-    }
-    this.videoEl = el
-    if (this.videoEl) {
+
       if (this.props.playbackRate) {
         this.videoEl.playbackRate = this.props.playbackRate
       }
@@ -170,7 +174,7 @@ class Video extends Component {
       if (this.videoEl.readyState > 3) {
         this.handleCanPlay()
       }
-    
+
       this.videoEl.addEventListener('canplay', this.handleCanPlay)
       this.videoEl.addEventListener('play', this.handlePlay)
       this.videoEl.addEventListener('pause', this.handlePause)
@@ -247,17 +251,20 @@ class Video extends Component {
             <video
               key={this.props.src}
               ref={el => {
-                this.registerListeners(el)
+                this.registerListeners(el, this.props.src)
               }}
               className='video'
               muted
               playsInline
               autoPlay
             >
-              {this.props.srcHLS &&
-                <source src={`${this.props.srcHLS}&date=${new Date().toISOString()}`} type='application/x-mpegURL' />
-              }
-              <source src={`${this.props.src}&date=${new Date().toISOString()}`} type='video/mp4' />
+              {this.props.srcHLS && (
+                <source
+                  src={`${this.props.srcHLS}`}
+                  type='application/x-mpegURL'
+                />
+              )}
+              <source src={`${this.props.src}`} type='video/mp4' />
               Your browser does not support the video tag.
             </video>
           )}
