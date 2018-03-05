@@ -205,7 +205,12 @@ export function selectVideo (name) {
         if (window.innerHeight < 550 && window.innerWidth < 1000) {
           quality = 'sd'
         }
-        dispatch(setVideoSrc(videoSelected.getIn(['sources', quality])))
+        dispatch(
+          setVideoSrc(
+            videoSelected.getIn(['sources', quality]),
+            videoSelected.getIn(['sources', 'hls'])
+          )
+        )
       }
     })
   }
@@ -227,7 +232,12 @@ export function fetchRemainingData () {
     if (window.innerHeight < 550 && window.innerWidth < 1000) {
       quality = 'sd'
     }
-    dispatch(setVideoSrc(videoSelected.getIn(['sources', quality])))
+    dispatch(
+      setVideoSrc(
+        videoSelected.getIn(['sources', quality]),
+        videoSelected.getIn(['sources', 'hls'])
+      )
+    )
     // Do not load raw detections in prod
     if (process.env.NODE_ENV !== 'production') {
       dispatch(fetchRawDetections(getRawDetectionPath(videoSelectedName)))

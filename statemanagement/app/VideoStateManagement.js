@@ -7,6 +7,7 @@ import { getFirstFrameImgPath } from '../../statemanagement/app/AppStateManageme
 // Initial state
 const initialState = fromJS({
   src: null,
+  srcHLS: null,
   isPlaying: false,
   isPaused: false,
   isReadyToPlay: false,
@@ -29,10 +30,13 @@ const PAUSE_VIDEO = 'Video/PAUSE_VIDEO'
 const RESET_VIDEO = 'Video/RESET_VIDEO'
 const UPDATE_CURRENTTIME = 'Video/UPDATE_CURRENTTIME'
 
-export function setVideoSrc (src) {
+export function setVideoSrc (src, srcHLS) {
   return {
     type: SET_VIDEO_SRC,
-    payload: src
+    payload: {
+      src: src,
+      srcHLS: srcHLS
+    }
   }
 }
 
@@ -133,7 +137,10 @@ export function prefetchNextLevelFirstFrame () {
 export default function VideoReducer (state = initialState, action = {}) {
   switch (action.type) {
     case SET_VIDEO_SRC:
-      return state.merge(initialState).set('src', action.payload)
+      return state
+        .merge(initialState)
+        .set('src', action.payload.src)
+        .set('srcHLS', action.payload.srcHLS)
     case SET_VIDEO_READY:
       return state
         .set('isReadyToPlay', true)

@@ -254,6 +254,9 @@ class Video extends Component {
               playsInline
               autoPlay
             >
+              {this.props.srcHLS &&
+                <source src={`${this.props.srcHLS}&date=${new Date().toISOString()}`} type='application/x-mpegURL' />
+              }
               <source src={`${this.props.src}&date=${new Date().toISOString()}`} type='video/mp4' />
               Your browser does not support the video tag.
             </video>
@@ -324,6 +327,7 @@ export default connect(state => {
     isPlaying: state.video.get('isPlaying'),
     isAtBeggining: state.video.get('isAtBeggining'),
     src: state.video.get('src'),
+    srcHLS: state.video.get('srcHLS'),
     currentTime: state.video.get('currentTime'),
     duration: state.video.get('duration'),
     videoFPS: selectedVideo.get('videoFPS'),

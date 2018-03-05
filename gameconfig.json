@@ -67,7 +67,9 @@
         "hd":
           "https://player.vimeo.com/external/253212378.hd.mp4?s=3cfa88f1fa200f79bf1b829b64f0d32f0490b6d7&profile_id=175",
         "sd":
-          "https://player.vimeo.com/external/253212378.sd.mp4?s=123424d1ed48cfd2592fa68a435a4eff207df1cb&profile_id=165"
+          "https://player.vimeo.com/external/253212378.sd.mp4?s=123424d1ed48cfd2592fa68a435a4eff207df1cb&profile_id=165",
+        "hls":
+          "https://player.vimeo.com/external/253212378.m3u8?s=39ae97b5588eca161526a065d3edfbec37bf835f"
       }
     },
     {
