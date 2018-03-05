@@ -127,8 +127,12 @@ better to add the things in order 😉
   },
   "sources": {
     // The urls of the video, please read https://help.vimeo.com/hc/en-us/articles/224823567-Direct-links to know how to get those links, or use your own server
+    // hd: 1280x720
+    // sd: 960x540
+    // hls: HTTP Live Streaming
     "hd": "https://player.vimeo.com/external/{vimeoId}.hd.mp4?s=XXXXXXX"
-    "sd": "https://player.vimeo.com/external/{vimeoId}.hd.mp4?s=XXXXXXX"
+    "sd": "https://player.vimeo.com/external/{vimeoId}.sd.mp4?s=XXXXXXX"
+    "hls": "https://player.vimeo.com/external/{vimeoId}.m3u8?s=XXXXXXX"
   }
 }
 ```
