@@ -48,7 +48,7 @@ class Video extends Component {
       nextState.isBuffering !== this.state.isBuffering
     ) {
       // console.log('firstFrameLoaded, re-render')
-      return true
+      return true;
     } else if (
       nextProps.src !== this.props.src ||
       nextState.canRenderVideo !== this.state.canRenderVideo
@@ -129,7 +129,9 @@ class Video extends Component {
 
   handleFirstFrameLoaded () {
     // console.log('first frame loaded')
-    this.props.dispatch(firstFrameLoaded())
+    setTimeout(() => {
+      this.props.dispatch(firstFrameLoaded())
+    }, 500)
   }
 
   handleBuffering () {
@@ -156,9 +158,9 @@ class Video extends Component {
   }
 
   registerListeners (el, src) {
-    console.log('register liteners')
+    // console.log('register liteners')
     if (el && this.videoSrc !== src) {
-      console.log('actually registering listeners')
+      // console.log('actually registering listeners')
       this.videoEl = el
       this.videoSrc = src
       // Clean previous listeners
@@ -237,9 +239,12 @@ class Video extends Component {
   render () {
     return (
       <div className='video-container'>
-        {!this.props.firstFrameLoaded && (
-          <img className='img-firstframe' src={this.props.srcFirstFrame} />
-        )}
+        <img
+          className={`img-firstframe ${
+            this.props.firstFrameLoaded ? 'hidden' : ''
+          }`}
+          src={this.props.srcFirstFrame}
+        />
         {this.props.isPlaying &&
           this.state.isBuffering && (
             <div className='buffering'>
@@ -294,6 +299,10 @@ class Video extends Component {
             position: absolute;
             top: 0;
             left: 0;
+          }
+
+          .hidden {
+            visibility: hidden;
           }
 
           .video-container {
