@@ -89,11 +89,12 @@ export default function detectMissedItemsThisFrame (
       let sameObjectFiveFrameBefore = objectTrackerData[currentFrame - 3].find(
         item => item.id === objectTracked.id
       )
+
       return {
         ...objectTracked,
         disappearingHint: {
-          x: sameObjectFiveFrameBefore.x,
-          y: sameObjectFiveFrameBefore.y
+          x: sameObjectFiveFrameBefore ? sameObjectFiveFrameBefore.x : -10,
+          y: sameObjectFiveFrameBefore ? sameObjectFiveFrameBefore.y : -10
         }
       }
     })

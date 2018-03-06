@@ -83,7 +83,8 @@ class ScoreBox extends Component {
       onComplete: () => {
         this.timeoutRestartScoreBoxAmimation = setTimeout(() => {
           let nextIndex = this.state.scoreBoxIndex + 1
-          if (nextIndex > this.state.scoreBox.length - 1) {
+          // We directly go to the first anim
+          if (nextIndex === this.state.scoreBox.length - 1) {
             nextIndex = 0
           }
           // Init values for next animation
@@ -123,7 +124,7 @@ class ScoreBox extends Component {
     let rightIcon = this.getNextScoreBoxData(this.state.scoreBoxIndex).icon
 
     return (
-      <div className={`score-box ${this.props.color}`}>
+      <div className={`score-box ${this.props.color} ${this.props.score >= 100 ? 'threedigits' : ''}`}>
         <div className='score-component left'>
           <h1 ref={el => (this.refScoreLeft = el)}>
             {this.scoreToDisplay.left}
@@ -147,6 +148,9 @@ class ScoreBox extends Component {
             justify-content: space-between;
             padding-bottom: 10px;
             border-bottom: 4px solid white;
+          }
+
+          .score-box.threedigits {
             min-width: 260px;
           }
 
