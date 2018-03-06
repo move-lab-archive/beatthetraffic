@@ -78,7 +78,12 @@ export function blockCanvasScrolling () {
       })
     )
 
-    document.documentElement.className = 'overflow-hidden'
+    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    if (isFirefox) {
+      document.body.className = 'overflow-hidden'
+    } else {
+      document.documentElement.className = 'overflow-hidden'
+    }
   }
 }
 
@@ -88,7 +93,12 @@ export function restoreCanvasScrolling (smooth = false) {
       .viewport.get('canvasScrollingPositionToRestore')
       .toJS()
 
-    document.documentElement.className = ''
+    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    if (isFirefox) {
+      document.body.className = ''
+    } else {
+      document.documentElement.className = ''
+    }
 
     dispatch(scrollToPosition(canvasScrollingPositionToRestore, smooth))
   }

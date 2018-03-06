@@ -78,15 +78,21 @@ class Layout extends Component {
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             background-color: white;
+            // Max size of the cursor is 128px x 128px
+            cursor: url(/static/assets/cursor/magic-wand.png) 10 10, auto;
             cursor: -webkit-image-set(
-                  url(/static/assets/cursor/magic-wand.png) 2x
-                )10 10,
+                  url(/static/assets/cursor/magic-wand.png) 1x,
+                  url(/static/assets/cursor/magic-wand2x.png) 2x
+                )
+                10 10,
               pointer;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             color: #262626;
+            position: relative;
           }
 
-          :global(html.overflow-hidden, html.overflow-hidden body) {
+          :global(html.overflow-hidden, html.overflow-hidden
+              body, body.overflow-hidden) {
             overflow: hidden;
             position: relative;
           }

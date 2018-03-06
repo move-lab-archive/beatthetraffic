@@ -30,8 +30,8 @@ class Sound extends Component {
 
   componentDidMount () {
     // Prefetch sound on / off image depending on enabled / disabled
-    const soundOn = new Image()
-    soundOn.src = `/static/assets/icons/icon-sound-${
+    const soundPrefetch = new Image()
+    soundPrefetch.src = `/static/assets/icons/icon-sound-${
       this.props.soundEnabled ? 'off' : 'on'
     }.svg`
   }
@@ -53,7 +53,7 @@ class Sound extends Component {
             cursor: pointer;
             border-radius: 0.2rem;
             background-repeat: no-repeat;
-            background-size: 3rem 3rem;
+            background-size: 3rem;
             background-position: center;
           }
 
