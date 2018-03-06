@@ -143,6 +143,7 @@ class ScoreBox extends Component {
             justify-content: space-between;
             padding-bottom: 10px;
             border-bottom: 4px solid white;
+            min-width: 270px;
           }
 
           .score-box.pink {
