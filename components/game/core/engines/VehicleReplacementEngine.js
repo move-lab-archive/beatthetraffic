@@ -224,7 +224,7 @@ class VehicleReplacementEngine {
         return (
           GameEngineStateManager.getItemsMasked().find(
             itemMasked => itemMasked.id === objectTracked.id
-          ) && objectTracked.isZombie !== true
+          )
         )
       })
       .map(objectTracked => {
