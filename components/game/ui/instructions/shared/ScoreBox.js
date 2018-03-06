@@ -43,7 +43,7 @@ class ScoreBox extends Component {
   }
 
   componentDidMount () {
-    setTimeout(() => {
+    this.scoreBoxAnimation = setTimeout(() => {
       this.animateScoreBox()
     }, 2000)
   }
@@ -51,6 +51,14 @@ class ScoreBox extends Component {
   componentWillUnmount () {
     if (this.scoreBoxAnimation) {
       clearInterval(this.scoreBoxAnimation)
+    }
+
+    if (this.timeoutRestartScoreBoxAmimation) {
+      clearInterval(this.timeoutRestartScoreBoxAmimation)
+    }
+
+    if (this.countingAnimation) {
+      this.countingAnimation.kill()
     }
   }
 
@@ -63,7 +71,7 @@ class ScoreBox extends Component {
   }
 
   animateScoreBox (index = 0) {
-    TweenLite.to(this.scoreToDisplay, 2, {
+    this.countingAnimation = TweenLite.to(this.scoreToDisplay, 2, {
       left: 0,
       right: this.getNextScoreBoxData(index).value,
       roundProps: ['left', 'right'],
@@ -71,13 +79,9 @@ class ScoreBox extends Component {
       onUpdate: () => {
         this.refScoreLeft.innerText = this.scoreToDisplay.left
         this.refScoreRight.innerText = this.scoreToDisplay.right
-        // this.setState({
-        //   leftValue: this.scoreToDisplay.left,
-        //   rightValue: this.scoreToDisplay.right
-        // })
       },
       onComplete: () => {
-        setTimeout(() => {
+        this.timeoutRestartScoreBoxAmimation = setTimeout(() => {
           let nextIndex = this.state.scoreBoxIndex + 1
           if (nextIndex > this.state.scoreBox.length - 1) {
             nextIndex = 0
@@ -96,7 +100,7 @@ class ScoreBox extends Component {
             scoreBoxIndex: nextIndex
           })
 
-          setTimeout(() => {
+          this.scoreBoxAnimation = setTimeout(() => {
             this.animateScoreBox(nextIndex)
           }, 1000)
         }, 1000)
@@ -143,7 +147,7 @@ class ScoreBox extends Component {
             justify-content: space-between;
             padding-bottom: 10px;
             border-bottom: 4px solid white;
-            min-width: 270px;
+            min-width: 260px;
           }
 
           .score-box.pink {
