@@ -203,14 +203,6 @@ class GameEngine extends PureComponent {
       // Get data from tracker
       let objectTrackerDataForThisFrame = this.props.objectTrackerData[frame]
 
-      // Filter out non allowed items
-      const allowedItems = ['car', 'motorbike', 'truck']
-      if (objectTrackerDataForThisFrame) {
-        objectTrackerDataForThisFrame = objectTrackerDataForThisFrame.filter(objectTracked => {
-          return allowedItems.indexOf(objectTracked.name) > -1
-        })
-      }
-
       // Update masks
       const remainingPotentialObjectToMask = updateMasking(
         objectTrackerDataForThisFrame,
