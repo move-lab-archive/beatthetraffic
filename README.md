@@ -193,15 +193,19 @@ Ex: `/static/levels/stuttgart-level1/rawdetections.txt`
 #### 2.c Run node-moving-things-tracker to generate the tracking data
 
 ```bash
-# 1. Install node-tracker-by-detections command line tool
+# 1. Install node-tracker-by-detections command line tool (>= 0.4.1)
 
 npm install -g node-moving-things-tracker
 
 # 2. Generate the tracker.json file from the rawdetections.txt detections file
 
-node-moving-things-tracker /static/assets/levels/$cityname-level$levelNb/rawdetections.txt
+node-moving-things-tracker --mode=beatthetraffic --input /static/assets/levels/$cityname-level$levelNb/rawdetections.txt
 
 # This outputs a tracker.json file in the same directory
+
+# 2-bis You can use the script generateTrackingData.js to generate all cities of the gameconfig.json at once
+
+node generateTrackingData.js
 ```
 
 ### 3. Export level specific assets
