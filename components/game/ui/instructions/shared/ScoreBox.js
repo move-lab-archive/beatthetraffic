@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { TweenLite, TimelineLite } from 'gsap'
 
 class ScoreBox extends Component {
   static propTypes = {
@@ -34,10 +35,17 @@ class ScoreBox extends Component {
       scoreBox,
       scoreBoxIndex: 0
     }
+
+    this.scoreToDisplay = {
+      left: this.state.scoreBox[this.state.scoreBoxIndex].value,
+      right: 0
+    }
   }
 
   componentDidMount () {
-    this.startAnimatingScoreBox()
+    setTimeout(() => {
+      this.animateScoreBox()
+    }, 2000)
   }
 
   componentWillUnmount () {
@@ -54,17 +62,40 @@ class ScoreBox extends Component {
     }
   }
 
-  startAnimatingScoreBox () {
-    this.scoreBoxAnimation = setInterval(() => {
-      let nextIndex = this.state.scoreBoxIndex + 1
-      if (nextIndex > this.state.scoreBox.length - 1) {
-        nextIndex = 0
-      }
+  animateScoreBox (index = 0) {
+    // Init values
+    this.scoreToDisplay = {
+      left: this.state.scoreBox[index].value,
+      right: 0
+    }
 
-      this.setState({
-        scoreBoxIndex: nextIndex
-      })
-    }, 2000)
+    TweenLite.to(this.scoreToDisplay, 2, {
+      left: 0,
+      right: this.getNextScoreBoxData(index).value,
+      roundProps: ['left', 'right'],
+      ease: Linear.easeNone,
+      onUpdate: () => {
+        this.refScoreLeft.innerText = this.scoreToDisplay.left
+        this.refScoreRight.innerText = this.scoreToDisplay.right
+        // this.setState({
+        //   leftValue: this.scoreToDisplay.left,
+        //   rightValue: this.scoreToDisplay.right
+        // })
+      },
+      onComplete: () => {
+        let nextIndex = this.state.scoreBoxIndex + 1
+        if (nextIndex > this.state.scoreBox.length - 1) {
+          nextIndex = 0
+        }
+        setTimeout(() => {
+          this.setState({
+            scoreBoxIndex: nextIndex
+          })
+
+          this.animateScoreBox(nextIndex)
+        }, 2000)
+      }
+    })
   }
 
   getNextScoreBoxData (index) {
@@ -76,22 +107,26 @@ class ScoreBox extends Component {
   }
 
   render () {
-    let leftValue = this.state.scoreBox[this.state.scoreBoxIndex].value
-    let rightValue = this.getNextScoreBoxData(this.state.scoreBoxIndex).value
+    // let leftValue = this.state.scoreBox[this.state.scoreBoxIndex].value
+    // let rightValue = this.getNextScoreBoxData(this.state.scoreBoxIndex).value
     let leftIcon = this.state.scoreBox[this.state.scoreBoxIndex].icon
     let rightIcon = this.getNextScoreBoxData(this.state.scoreBoxIndex).icon
 
     return (
       <div className={`score-box ${this.props.color}`}>
         <div className='score-component left'>
-          <h1>{leftValue}</h1>
+          <h1 ref={el => (this.refScoreLeft = el)}>
+            {this.scoreToDisplay.left}
+          </h1>
           <img src={this.getIconSrc(leftIcon, this.props.color)} />
         </div>
         <div className='separator'>
           <img src={`/static/assets/icons/icon-arrow-pink.svg`} />
         </div>
         <div className='score-component right'>
-          <h1>{rightValue}</h1>
+          <h1 ref={el => (this.refScoreRight = el)}>
+            {this.scoreToDisplay.right}
+          </h1>
           <img src={this.getIconSrc(rightIcon, this.props.color)} />
         </div>
         <style jsx>{`
