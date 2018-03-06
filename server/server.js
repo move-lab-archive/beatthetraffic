@@ -66,6 +66,15 @@ app.get('/:city', (req, res, next) => {
   }
 })
 
+app.get('/:city/level/:level', (req, res, next) => {
+  if (req.params.level > 1) {
+    // Avoid loading level directly
+    res.redirect(`/${req.params.city}/level/1/`)
+  } else {
+    next()
+  }
+})
+
 var saveHighscoreLimiter = new RateLimit({
   windowMs: 60000, // 1 min
   max: 1, // start blocking after 1 requests
