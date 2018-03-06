@@ -63,12 +63,6 @@ class ScoreBox extends Component {
   }
 
   animateScoreBox (index = 0) {
-    // Init values
-    this.scoreToDisplay = {
-      left: this.state.scoreBox[index].value,
-      right: 0
-    }
-
     TweenLite.to(this.scoreToDisplay, 2, {
       left: 0,
       right: this.getNextScoreBoxData(index).value,
@@ -83,17 +77,29 @@ class ScoreBox extends Component {
         // })
       },
       onComplete: () => {
-        let nextIndex = this.state.scoreBoxIndex + 1
-        if (nextIndex > this.state.scoreBox.length - 1) {
-          nextIndex = 0
-        }
         setTimeout(() => {
+          let nextIndex = this.state.scoreBoxIndex + 1
+          if (nextIndex > this.state.scoreBox.length - 1) {
+            nextIndex = 0
+          }
+          // Init values for next animation
+          this.scoreToDisplay = {
+            left: this.state.scoreBox[nextIndex].value,
+            right: 0
+          }
+
+          // Set them in the dom
+          this.refScoreLeft.innerText = this.scoreToDisplay.left
+          this.refScoreRight.innerText = this.scoreToDisplay.right
+
           this.setState({
             scoreBoxIndex: nextIndex
           })
 
-          this.animateScoreBox(nextIndex)
-        }, 2000)
+          setTimeout(() => {
+            this.animateScoreBox(nextIndex)
+          }, 1000)
+        }, 1000)
       }
     })
   }
