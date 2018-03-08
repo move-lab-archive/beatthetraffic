@@ -33,17 +33,17 @@
     "moscow": {
       "location": [37.6173, 55.755826],
       "label": "Moscow"
-    }
-  },
-  "futureCitiesToCopyToAvailableCities": {
-    "tokyo": {
-      "location": [139.691706, 35.689488],
-      "label": "Tokyo"
     },
     "losangeles": {
       "location": [-118.243685, 34.052234],
       "label": "Los Angeles"
     },
+    "tokyo": {
+      "location": [139.691706, 35.689488],
+      "label": "Tokyo"
+    }
+  },
+  "futureCitiesToCopyToAvailableCities": {
     "addisabeba": {
       "location": [38.757761, 8.980603],
       "label": "Addis Abeba"
@@ -382,7 +382,7 @@
       "city": "barcelona",
       "level": 3,
       "levelName": "Gran Via",
-      "playbackRate": 1.6,
+      "playbackRate": 1.4,
       "videoMobileOffset": {
         "x": 0,
         "y": 0
@@ -508,6 +508,120 @@
           "https://player.vimeo.com/external/257858896.sd.mp4?s=0d344c1dbcec6c27ed16755fd77162e780b674dd&profile_id=165",
         "hls":
           "https://player.vimeo.com/external/257858896.m3u8?s=f38e664c37c54a3148ed7968552af0ed8da32767"
+      }
+    },
+    {
+      "name": "losangeles-level1",
+      "city": "losangeles",
+      "level": 1,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.4,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259013880.hd.mp4?s=df3ec9f9c63b7faa4a17aa91d0f9be8043c7ba70&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259013880.sd.mp4?s=48cf51cc5f67f2c6f146e3f01087ab25f8607877&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259013880.m3u8?s=8d9f846af35c7fc3a1bdc642094c4b9614d7ab00"
+      }
+    },
+    {
+      "name": "losangeles-level2",
+      "city": "losangeles",
+      "level": 2,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.3,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259013899.hd.mp4?s=ad48a932e74312b7226d1f4967484ce3d4883346&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259013899.sd.mp4?s=ed741762bb1b6c1d1add678bf7df468bf7e80427&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259013899.m3u8?s=304111483d20679bc1374babbf339f9283a34759"
+      }
+    },
+    {
+      "name": "losangeles-level3",
+      "city": "losangeles",
+      "level": 3,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.4,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259013916.hd.mp4?s=4b0a379e41a1088eed003fceec715f3e7c0f7f60&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259013916.sd.mp4?s=8874c90ba2749f7c5b71a27f9d6d4b837e46dc4b&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259013916.m3u8?s=c24fd703dd92a3e248769dad8db775304c7fa5bc"
+      }
+    },
+    {
+      "name": "tokyo-level1",
+      "city": "tokyo",
+      "level": 1,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.2,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259018121.hd.mp4?s=82cef05b3e31a3faf549eebfe6efde3ef52b8874&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259018121.sd.mp4?s=9b736740e96192169eef164d169eb2747014007f&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259018121.m3u8?s=23103215a4d13ec05e3ffd05a50e0f970b78702b"
+      }
+    },
+    {
+      "name": "tokyo-level2",
+      "city": "tokyo",
+      "level": 2,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.3,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259018133.hd.mp4?s=54001276d45047049b1cd26b9d7615ef84d5d1ed&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259018133.sd.mp4?s=3be12fb7e7e275c83a29f1dc8518e4b35482593c&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259018133.m3u8?s=1adb418f9900d14408b436e886c31b364e24362f"
+      }
+    },
+    {
+      "name": "tokyo-level3",
+      "city": "tokyo",
+      "level": 3,
+      "levelName": "Cannstatter Straße",
+      "playbackRate": 1.4,
+      "videoMobileOffset": {
+        "x": 0,
+        "y": 0
+      },
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259018146.hd.mp4?s=8f2ab1711e38a7da841595d0d2e91bd1a4ae148e&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259018146.sd.mp4?s=f053bddc8bc9d8ce99471b7ab6daca4e61237730&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259018146.m3u8?s=b706b1f8c558f40b21d3509298ce35b879e96b72"
       }
     }
   ]
