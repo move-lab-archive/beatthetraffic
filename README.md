@@ -208,6 +208,10 @@ node-moving-things-tracker --mode=beatthetraffic --input /static/assets/levels/$
 node generateTrackingData.js
 ```
 
+#### 2.d Censor license plates (lab linux machine only)
+
+See [this guide](./lpc_howto.md)
+
 ### 3. Export level specific assets
 
 In addition to the tracking data, the game needs two level specific assets:
