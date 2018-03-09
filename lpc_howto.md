@@ -23,7 +23,7 @@ To create a video file out of the single frames we can use `ffmpeg`.
 Go inside the folder with the censored frames (`./export/<timestamp>`) and use the following command to create the video file:
 
 ```
-ffmpeg -framerate 30 -i %07d.png output.mp4
+ffmpeg -framerate 30 -i %07d.png output.mp4 -vcodec libx264
 ```
 
 Be sure to use the same framerate as the original video file!
