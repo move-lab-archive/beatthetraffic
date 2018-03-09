@@ -1,4 +1,5 @@
 const RateLimit = require('express-rate-limit')
+const basicAuth = require('express-basic-auth')
 const geoip = require('geoip-lite')
 const express = require('express')
 const compression = require('compression')
@@ -28,6 +29,18 @@ app.use(bodyParser.json())
 // TODO WE COULD CONFIGURE THE BUILD PROCESS TO PRE-COMPRESS
 // OUT/ directory to avoid doing it on the fly and use CPU
 app.use(compression())
+
+// Credentials allowed
+let usersCredentials = {}
+usersCredentials['moovellab'] = 'beatthetraffic'
+
+app.use(
+  basicAuth({
+    users: usersCredentials,
+    challenge: true,
+    realm: 'beatthetraffic'
+  })
+)
 
 app.get('/', (req, res) => {
   // Default city

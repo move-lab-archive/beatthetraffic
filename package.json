@@ -23,6 +23,7 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "express": "^4.16.2",
+    "express-basic-auth": "^1.1.4",
     "express-rate-limit": "^2.11.0",
     "geoip-lite": "^1.2.1",
     "gl-react": "2.3.1",
