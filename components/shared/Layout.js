@@ -27,7 +27,7 @@ class Layout extends Component {
             name='viewport'
             content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0,initial-scale=1'
           />
-          <meta name='description' content='Beat the traffic blablabla' />
+          <meta name='description' content='Beat the Traffic X – moovel lab' />
           <link
             rel='apple-touch-icon'
             href='/static/assets/favicon/apple-touch-icon.png'
