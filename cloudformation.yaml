@@ -110,7 +110,7 @@ Resources:
             - 'beatthetraffic'
             - 'elb'
       SecurityGroups:
-        -  !ImportValue 'web-squad-security-groups-lb-office'
+        -  !ImportValue 'web-squad-security-groups-lb-public'
       Subnets:
         - subnet-ef5a2898
         - subnet-9c662cf9
