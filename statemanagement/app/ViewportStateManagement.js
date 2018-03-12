@@ -52,13 +52,22 @@ export function handleFullScreenChange (dispatch) {
 
 export function scrollToPosition (position, smooth = false) {
   return (dispatch, getState) => {
+    // let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    // if (isFirefox) {
+    //   document.body.className = ''
+    // } else {
+    //   document.documentElement.className = ''
+    // }
+    document.body.className = ''
+    // console.log('scroll to position ' + position.x)
+
     window.scroll({
       top: position.y,
       left: position.x,
       behavior: smooth ? 'smooth' : 'auto'
     })
-
-    dispatch(saveScrollPosition(position))
+    dispatch(blockCanvasScrolling())
+    // dispatch(saveScrollPosition(position))
   }
 }
 
@@ -78,12 +87,13 @@ export function blockCanvasScrolling () {
       })
     )
 
-    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
-      document.body.className = 'overflow-hidden'
-    } else {
-      document.documentElement.className = 'overflow-hidden'
-    }
+    // let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    // if (isFirefox) {
+    //   document.body.className = 'overflow-hidden'
+    // } else {
+    //   document.documentElement.className = 'overflow-hidden'
+    // }
+    document.body.className = 'overflow-hidden'
   }
 }
 
@@ -92,14 +102,6 @@ export function restoreCanvasScrolling (smooth = false) {
     const canvasScrollingPositionToRestore = getState()
       .viewport.get('canvasScrollingPositionToRestore')
       .toJS()
-
-    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
-      document.body.className = ''
-    } else {
-      document.documentElement.className = ''
-    }
-
     dispatch(scrollToPosition(canvasScrollingPositionToRestore, smooth))
   }
 }
