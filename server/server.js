@@ -46,8 +46,10 @@ app.get('/', (req, res) => {
   // Default city
   let cityToRedirectTo = defaultCity
 
-  const clientIP =
-    req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  let clientIP = req.connection.remoteAddress
+  if (req.headers['X-Forwarded-For']) {
+    clientIP = req.headers['X-Forwarded-For'].split(',')[0]
+  }
   // Try to get closest city from api
   console.log('Client ip is: ' + clientIP)
 
