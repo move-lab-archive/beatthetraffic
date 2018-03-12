@@ -47,29 +47,24 @@ app.get('/', (req, res) => {
   let cityToRedirectTo = defaultCity
 
   let clientIP = req.connection.remoteAddress
-  if (req.headers['X-Forwarded-For']) {
-    clientIP = req.headers['X-Forwarded-For'].split(',')[0]
+  if (req.headers['x-forwarded-for']) {
+    clientIP = req.headers['x-forwarded-for']
   }
 
-  console.log('X-Forwarded-For')
-  console.log(req.headers['X-Forwarded-For'])
-  console.log('x-forwarded-for')
-  console.log(req.headers['x-forwarded-for'])
-  console.log('connection.remoteAddress')
-  console.log(req.connection.remoteAddress)
-
   // Try to get closest city from api
-  console.log('Client ip is: ' + clientIP)
+  // console.log('Client ip is: ' + clientIP)
 
   const geo = geoip.lookup(clientIP)
+
+  // console.log(geo)
 
   if (geo) {
     cityToRedirectTo = Geo.getClosestCityToIPLngLat(geo.ll, availableCities)
       .slug
-    console.log('Closest city is ' + cityToRedirectTo)
+    // console.log('Closest city is ' + cityToRedirectTo)
   } else {
     // Can't get IP, default to default city
-    console.log('Cant guess IP, fallback to default city')
+    // console.log('Cant guess IP, fallback to default city')
   }
 
   res.redirect(`/${cityToRedirectTo}/level/1/`)

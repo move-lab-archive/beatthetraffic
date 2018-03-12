@@ -1,13 +1,13 @@
 const minBy = require('lodash.minby')
 const distance = require('@turf/distance')
 
-exports.getClosestCityToIPLngLat = (lnglat, cities) => {
+exports.getClosestCityToIPLngLat = (latlng, cities) => {
   const ipPoint = {
     type: 'Feature',
     properties: {},
     geometry: {
       type: 'Point',
-      coordinates: lnglat
+      coordinates: [latlng[1], latlng[0]]
     }
   }
 
