@@ -15,6 +15,10 @@ const initialState = fromJS({
   canvasResolution: {
     w: 1280,
     h: 720
+  },
+  viewportSize: {
+    w: 0,
+    h: 0
   }
 })
 
@@ -50,23 +54,24 @@ export function handleFullScreenChange (dispatch) {
   }
 }
 
-export function scrollToPosition (position, smooth = false) {
+export function scrollToPosition (position, isGame = false) {
   return (dispatch, getState) => {
-    // let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    // if (isFirefox) {
-    //   document.body.className = ''
-    // } else {
-    //   document.documentElement.className = ''
-    // }
-    document.body.className = ''
-    // console.log('scroll to position ' + position.x)
+    let isMobileSafari = /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+      navigator.userAgent
+    )
+    if (!isMobileSafari) {
+      document.body.className = ''
+    } else {
+      document.documentElement.className = ''
+    }
 
     window.scroll({
       top: position.y,
       left: position.x,
-      behavior: smooth ? 'smooth' : 'auto'
+      behavior: 'auto'
     })
-    dispatch(blockCanvasScrolling())
+    // TODO if mobile portrait, block canvas scroll, otherwise, let user scroll
+    dispatch(blockCanvasScrolling(isGame))
     // dispatch(saveScrollPosition(position))
   }
 }
@@ -78,7 +83,7 @@ export function saveScrollPosition (position) {
   }
 }
 
-export function blockCanvasScrolling () {
+export function blockCanvasScrolling (isGame = false) {
   return (dispatch, getState) => {
     dispatch(
       saveScrollPosition({
@@ -87,22 +92,38 @@ export function blockCanvasScrolling () {
       })
     )
 
-    // let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    // if (isFirefox) {
-    //   document.body.className = 'overflow-hidden'
-    // } else {
-    //   document.documentElement.className = 'overflow-hidden'
-    // }
-    document.body.className = 'overflow-hidden'
+    let isMobileSafari = /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+      navigator.userAgent
+    )
+    if (!isMobileSafari) {
+      document.body.className = 'overflow-hidden'
+    } else {
+      if (!isGame) {
+        // For pages (don't need to keep the body/html position) and we want:
+        // to be able to scroll inside the page
+        document.documentElement.className = 'overflow-hidden'
+        // Restore the touch event hack
+        document.ontouchmove = function (e) {
+          return true
+        }
+      } else {
+        // For game:
+        // Totally prevent scrolling without setting overflow hidden 
+        // because Safari Mobile wouldn't keep the current scroll position
+        document.ontouchmove = function (e) {
+          e.preventDefault()
+        }
+      }
+    }
   }
 }
 
-export function restoreCanvasScrolling (smooth = false) {
+export function restoreCanvasScrolling () {
   return (dispatch, getState) => {
     const canvasScrollingPositionToRestore = getState()
       .viewport.get('canvasScrollingPositionToRestore')
       .toJS()
-    dispatch(scrollToPosition(canvasScrollingPositionToRestore, smooth))
+    dispatch(scrollToPosition(canvasScrollingPositionToRestore, true))
   }
 }
 
@@ -153,7 +174,33 @@ export function initViewportListeners () {
 
       // init canvas
       dispatch(setCanvasResolution(getCanvasResolution()))
-      // TODO ADD RESIZE EVENT HANDLER AND ORIENTATION CHANGE TO SET CANVAS SIZE
+
+      // For IOS 10+ as user-scalable : 0 does not work
+      // https://community.esri.com/thread/184701-ios-10-user-scalableno
+      // Disable pinch zoom on document
+      document.documentElement.addEventListener(
+        'touchstart',
+        function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault()
+          }
+        },
+        false
+      )
+
+      // Disable double tap on document
+      var lastTouchEnd = 0
+      document.documentElement.addEventListener(
+        'touchend',
+        function (event) {
+          var now = new Date().getTime()
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault()
+          }
+          lastTouchEnd = now
+        },
+        false
+      )
     }
   }
 }
