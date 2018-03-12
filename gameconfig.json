@@ -99,7 +99,7 @@
       "levelName": "Cannstatter Straße",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 106,
         "y": 0
       },
       "sources": {
@@ -118,7 +118,7 @@
       "levelName": "Moti-Bagh",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 350,
+        "x": 169,
         "y": 0
       },
       "sources": {
@@ -137,7 +137,7 @@
       "levelName": "AIIMS",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 400,
+        "x": 131,
         "y": 0
       },
       "sources": {
@@ -156,7 +156,7 @@
       "levelName": "South Extension",
       "playbackRate": 1.4,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 237,
         "y": 0
       },
       "sources": {
@@ -175,7 +175,7 @@
       "levelName": "Halensee",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 249,
         "y": 0
       },
       "sources": {
@@ -194,7 +194,7 @@
       "levelName": "Yorckstraße",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 393,
         "y": 0
       },
       "sources": {
@@ -213,7 +213,7 @@
       "levelName": "Hohenzollerndamm",
       "playbackRate": 1.4,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 170,
         "y": 0
       },
       "sources": {
@@ -232,7 +232,7 @@
       "levelName": "Brooklyn-Queens Expressway",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 324,
         "y": 0
       },
       "sources": {
@@ -251,7 +251,7 @@
       "levelName": "Rector Manhattan",
       "playbackRate": 1.5,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 87,
         "y": 0
       },
       "sources": {
@@ -270,7 +270,7 @@
       "levelName": "Chambers Street",
       "playbackRate": 1.7,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 242,
         "y": 0
       },
       "sources": {
@@ -289,7 +289,7 @@
       "levelName": "Burside Bridge",
       "playbackRate": 1.1,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 294,
         "y": 0
       },
       "sources": {
@@ -308,7 +308,7 @@
       "levelName": "Southeast Division",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 138,
         "y": 0
       },
       "sources": {
@@ -327,7 +327,7 @@
       "levelName": "84W",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 256,
         "y": 0
       },
       "sources": {
@@ -346,7 +346,7 @@
       "levelName": "El Forum",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 320,
         "y": 0
       },
       "sources": {
@@ -365,7 +365,7 @@
       "levelName": "Marbella",
       "playbackRate": 1.4,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 246,
         "y": 0
       },
       "sources": {
@@ -384,7 +384,7 @@
       "levelName": "Gran Via",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 155,
         "y": 0
       },
       "sources": {
@@ -403,7 +403,7 @@
       "levelName": "Tunel del Libertador",
       "playbackRate": 1.4,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 54,
         "y": 0
       },
       "sources": {
@@ -422,7 +422,7 @@
       "levelName": "Avenida Figueroa Alcorta",
       "playbackRate": 1,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 187,
         "y": 0
       },
       "sources": {
@@ -441,7 +441,7 @@
       "levelName": "Avenida General Paz",
       "playbackRate": 1,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 266,
         "y": 0
       },
       "sources": {
@@ -460,7 +460,7 @@
       "levelName": "Krimsky",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 213,
         "y": 0
       },
       "sources": {
@@ -479,7 +479,7 @@
       "levelName": "Kremlevskaya",
       "playbackRate": 1.3,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 417,
         "y": 0
       },
       "sources": {
@@ -498,7 +498,7 @@
       "levelName": "Moskvoretskaya",
       "playbackRate": 1.6,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 290,
         "y": 0
       },
       "sources": {
@@ -517,7 +517,7 @@
       "levelName": "Vermont SB",
       "playbackRate": 1.4,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 290,
         "y": 0
       },
       "sources": {
@@ -536,7 +536,7 @@
       "levelName": "Grand WB",
       "playbackRate": 1.5,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 183,
         "y": 0
       },
       "sources": {
@@ -555,7 +555,7 @@
       "levelName": "405 SB",
       "playbackRate": 1.1,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 224,
         "y": 0
       },
       "sources": {
@@ -574,7 +574,7 @@
       "levelName": "?",
       "playbackRate": 1.2,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 314,
         "y": 0
       },
       "sources": {
@@ -593,7 +593,7 @@
       "levelName": "Shibuya",
       "playbackRate": 1.5,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 104,
         "y": 0
       },
       "sources": {
@@ -612,7 +612,7 @@
       "levelName": "Mita",
       "playbackRate": 1.6,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 338,
         "y": 0
       },
       "sources": {
@@ -631,7 +631,7 @@
       "levelName": "Acton",
       "playbackRate": 1.6,
       "videoMobileOffset": {
-        "x": 0,
+        "x": 121,
         "y": 0
       },
       "sources": {
