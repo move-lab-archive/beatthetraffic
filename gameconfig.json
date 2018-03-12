@@ -1,6 +1,6 @@
 {
-  "defaultSelectedCity": "stuttgart",
-  "defaultSelectedVideo": "stuttgart-level1",
+  "defaultSelectedCity": "moscow",
+  "defaultSelectedVideo": "moscow-level1",
   "availableCities": {
     "stuttgart": {
       "location": [9.1829321, 48.7758459],

@@ -50,6 +50,14 @@ app.get('/', (req, res) => {
   if (req.headers['X-Forwarded-For']) {
     clientIP = req.headers['X-Forwarded-For'].split(',')[0]
   }
+
+  console.log('X-Forwarded-For')
+  console.log(req.headers['X-Forwarded-For'])
+  console.log('x-forwarded-for')
+  console.log(req.headers['x-forwarded-for'])
+  console.log('connection.remoteAddress')
+  console.log(req.connection.remoteAddress)
+
   // Try to get closest city from api
   console.log('Client ip is: ' + clientIP)
 
