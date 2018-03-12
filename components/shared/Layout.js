@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Head from 'next/head'
-// import ReactGA from 'react-ga'
-// import Router from 'next/router'
+import ReactGA from 'react-ga'
+import Router from 'next/router'
 
 class Layout extends Component {
   recordFirstPaint () {
@@ -12,9 +12,9 @@ class Layout extends Component {
   }
 
   componentDidMount () {
-    // ReactGA.initialize("ga-id");
-    // ReactGA.set({ page: Router.pathname });
-    // ReactGA.pageview(Router.pathname);
+    ReactGA.initialize('UA-79250234-6')
+    ReactGA.set({ page: Router.pathname })
+    ReactGA.pageview(Router.pathname)
   }
 
   render () {
