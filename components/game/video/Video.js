@@ -48,7 +48,7 @@ class Video extends Component {
       nextState.isBuffering !== this.state.isBuffering
     ) {
       // console.log('firstFrameLoaded, re-render')
-      return true;
+      return true
     } else if (
       nextProps.src !== this.props.src ||
       nextState.canRenderVideo !== this.state.canRenderVideo
@@ -232,7 +232,10 @@ class Video extends Component {
 
   componentDidMount () {
     this.setState({
-      canRenderVideo: true
+      canRenderVideo: true,
+      isMobileSafari: /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+        navigator.userAgent
+      )
     })
   }
 
@@ -263,12 +266,13 @@ class Video extends Component {
               playsInline
               autoPlay
             >
-              {this.props.srcHLS && (
-                <source
-                  src={`${this.props.srcHLS}`}
-                  type='application/x-mpegURL'
-                />
-              )}
+              {this.props.srcHLS &&
+                this.state.isMobileSafari && (
+                  <source
+                    src={`${this.props.srcHLS}`}
+                    type='application/x-mpegURL'
+                  />
+                )}
               <source src={`${this.props.src}`} type='video/mp4' />
               Your browser does not support the video tag.
             </video>
