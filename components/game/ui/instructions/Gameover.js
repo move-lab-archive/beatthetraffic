@@ -30,7 +30,6 @@ class Gameover extends Component {
       <div className='instructions-gameover'>
         <div className='title'>GAME OVER</div>
         <div className='content'>
-          <h4>Your score</h4>
           <ScoreBox
             score={this.props.score}
             nbCarsConverted={this.props.nbCarsConverted}
