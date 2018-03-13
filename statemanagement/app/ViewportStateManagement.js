@@ -108,7 +108,7 @@ export function blockCanvasScrolling (isGame = false) {
         }
       } else {
         // For game:
-        // Totally prevent scrolling without setting overflow hidden 
+        // Totally prevent scrolling without setting overflow hidden
         // because Safari Mobile wouldn't keep the current scroll position
         document.ontouchmove = function (e) {
           e.preventDefault()
@@ -266,6 +266,57 @@ export function setFullScreenStatus (status) {
   return {
     type: SET_FULLSCREEN_STATUS,
     payload: status
+  }
+}
+
+// prettier-ignore-next-block
+export function scrollToVisiblePart () {
+  return (dispatch, getState) => {
+    const selectedVideo = getState()
+      .app.get('availableVideos')
+      .find(video => {
+        return video.get('name') === getState().app.get('selectedVideo')
+      })
+
+    const videoMobileOffset = selectedVideo.get('videoMobileOffset').toJS()
+
+    let offsetXToApply = 0
+    let offsetYToApply = 0
+    // Apply video Mobile offset from reference of 320 / 480
+    // For 320 / 480, we are seeing only 37,5% of the 16/9 ratio if height is maximized to 480
+    const refRelativeWidth = 37.5 / 100
+    // Compute relXOffset from absolute value defined in gameconfig.json
+    const refRelativeXOffset = videoMobileOffset.x * (9 / 16) * (1 / 480)
+    // Compute relative innerWidth of the current aspect ratio
+    const relativeInnerWidth = window.innerWidth / window.innerHeight * (9 / 16)
+    // If relativeInnerWidth > refRelativeWidth it means with current aspect ratio we
+    // see more of the full video than for the reference aspect ratio of 320 / 480
+    if (relativeInnerWidth > refRelativeWidth) {
+      // We have extra space we can distribute on the side of the reference offset
+      const extraRelativeSpace = relativeInnerWidth - refRelativeWidth
+      const relativeXOffset = refRelativeXOffset - extraRelativeSpace / 2
+      offsetXToApply = relativeXOffset * (16 / 9) * window.innerHeight
+    } else {
+      // We have less space than the reference, just apply the refXOffset we can't show more
+      // on the left side of it
+      offsetXToApply = refRelativeXOffset * (16 / 9) * window.innerHeight
+    }
+
+    // Aspect ratio > 16 /9 , landscape
+    if (relativeInnerWidth > 1) {
+      const correctAspectRatioHeight = window.innerWidth * 9 / 16
+      offsetYToApply = correctAspectRatioHeight - window.innerHeight
+    }
+
+    dispatch(
+      scrollToPosition(
+        {
+          x: offsetXToApply,
+          y: offsetYToApply
+        },
+        true
+      )
+    )
   }
 }
 
