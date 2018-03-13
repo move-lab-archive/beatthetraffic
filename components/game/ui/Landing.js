@@ -33,27 +33,28 @@ class Landing extends Component {
 
   handleStartGame () {
     this.props.dispatch(restoreCanvasScrolling())
+    // TweenLite.to('.game-landing', 0.3, {
+    //   opacity: 0,
+    //   delay: 0.5
+    // })
+    // TweenLite.to(
+    //   '.landing-headline,.btn-landing,.about,.mobility-assets',
+    //   0.3,
+    //   {
+    //     opacity: 0,
+    //     delay: 0.5
+    //   }
+    // )
 
-    TweenLite.to('.game-landing', 0.3, {
-      opacity: 0,
-      delay: 0.5
-    })
-    TweenLite.to(
-      '.landing-headline,.btn-landing,.about,.mobility-assets',
-      0.3,
-      {
-        opacity: 0,
-        delay: 0.5
-      }
-    )
+    // const backgroundOpacityAnimationDuration = 0.5
 
-    const backgroundOpacityAnimationDuration = 0.5
+    // TweenLite.to('.leftcloud, .rightcloud', 0.3, {
+    //   opacity: 0,
+    //   delay: 0.5,
+    //   onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
+    // })
 
-    TweenLite.to('.leftcloud, .rightcloud', 0.3, {
-      opacity: 0,
-      delay: 0.5,
-      onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
-    })
+    this.props.handleStart()
 
     /*  TweenLite.to('.game-landing', backgroundOpacityAnimationDuration, {
       //opacity: 0, // NOTE: changed to general opacity, background color animation is slower

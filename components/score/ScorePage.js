@@ -50,13 +50,13 @@ class ScorePage extends PureComponent {
 
         <img
           className={`rightcloud ${
-            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+            this.state.mountAnimation ? 'visiblerightcloud' : 'hiddencloud'
           }`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
         <img
           className={`leftcloud ${
-            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+            this.state.mountAnimation ? 'visibleleftcloud' : 'hiddencloud'
           }`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
@@ -210,20 +210,18 @@ class ScorePage extends PureComponent {
           </div>
         </div>
 
-        {this.props.scoreData && (
-          <div
-            className='play-fixed-cta'
-            onClick={() => this.props.dispatch(showCityPicker())}
-          >
-            PLAY AGAIN
-          </div>
-        )}
-
-        {!this.props.scoreData && (
-          <div className='play-fixed-cta' onClick={() => this.props.onClose()}>
-            PLAY GAME
-          </div>
-        )}
+        <div
+          className='play-fixed-cta'
+          onClick={() => {
+            if (this.props.scoreData) {
+              this.props.dispatch(showCityPicker())
+            } else {
+              window.location.href = '/'
+            }
+          }}
+        >
+          {this.props.scoreData ? 'PLAY AGAIN' : 'PLAY GAME'}
+        </div>
 
         <style jsx>{`
           .highscore-page {
@@ -262,17 +260,17 @@ class ScorePage extends PureComponent {
 
           .rightcloud {
             position: absolute;
-            top: -15%;
+            top: 0%;
             width: 60%;
-            right: -5%;
+            right: 0%;
             z-index: -1;
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .leftcloud {
             position: absolute;
-            bottom: -1%;
-            width: 80%;
-            left: -10%;
+            bottom: 0%;
+            width: 110%;
+            left: 2%;
             z-index: -1;
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
@@ -284,11 +282,15 @@ class ScorePage extends PureComponent {
           }
 
           .hiddencloud {
-            transform: translateX(50%);
+            transform: translate(0%, 0%);
           }
 
-          .visiblecloud {
-            transform: translateX(0%);
+          .visiblerightcloud {
+            transform: translate(30%, -30%);
+          }
+
+          .visibleleftcloud {
+            transform: translate(-30%, 30%);
           }
 
           .fourthcloud {
@@ -465,12 +467,10 @@ class ScorePage extends PureComponent {
 
           @media (min-width: 550px) {
             .rightcloud {
-              width: 35%;
-              right: -10%;
+              width: 40%;
             }
             .leftcloud {
-              width: 42%;
-              left: -5%;
+              width: 45%;
             }
             .thirdcloud {
               width: 42%;
@@ -546,6 +546,7 @@ class ScorePage extends PureComponent {
             align-items: center;
             justify-content: center;
             box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
           }
 
           .name.clickable {

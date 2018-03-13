@@ -15,8 +15,14 @@ const initialState = fromJS({
   canvasResolution: {
     w: 1280,
     h: 720
+  },
+  viewportSize: {
+    w: 0,
+    h: 0
   }
 })
+
+let resizeDebounceTimeout = null;
 
 // Actions
 const SET_PORTRAIT = 'Viewport/SET_PORTRAIT'
@@ -32,12 +38,10 @@ export function handleOrientationChange (dispatch) {
   if (window.orientation === -90 || window.orientation === 90) {
     // console.log('landscape')
     dispatch(setLandscape())
-    // Scroll to bottom ?
-    window.scrollTo(0, document.body.scrollHeight)
   } else if (window.orientation !== undefined) {
-    // console.log('portrait')
     dispatch(setPortrait())
   }
+  dispatch(scrollToVisiblePart())
 }
 
 export function handleFullScreenChange (dispatch) {
@@ -50,15 +54,25 @@ export function handleFullScreenChange (dispatch) {
   }
 }
 
-export function scrollToPosition (position, smooth = false) {
+export function scrollToPosition (position, isGame = false) {
   return (dispatch, getState) => {
+    let isMobileSafari = /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+      navigator.userAgent
+    )
+    if (!isMobileSafari) {
+      document.body.className = ''
+    } else {
+      document.documentElement.className = ''
+    }
+
     window.scroll({
       top: position.y,
       left: position.x,
-      behavior: smooth ? 'smooth' : 'auto'
+      behavior: 'auto'
     })
-
-    dispatch(saveScrollPosition(position))
+    // TODO if mobile portrait, block canvas scroll, otherwise, let user scroll
+    dispatch(blockCanvasScrolling(isGame))
+    // dispatch(saveScrollPosition(position))
   }
 }
 
@@ -69,7 +83,7 @@ export function saveScrollPosition (position) {
   }
 }
 
-export function blockCanvasScrolling () {
+export function blockCanvasScrolling (isGame = false) {
   return (dispatch, getState) => {
     dispatch(
       saveScrollPosition({
@@ -78,29 +92,38 @@ export function blockCanvasScrolling () {
       })
     )
 
-    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
+    let isMobileSafari = /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+      navigator.userAgent
+    )
+    if (!isMobileSafari) {
       document.body.className = 'overflow-hidden'
     } else {
-      document.documentElement.className = 'overflow-hidden'
+      if (!isGame) {
+        // For pages (don't need to keep the body/html position) and we want:
+        // to be able to scroll inside the page
+        document.documentElement.className = 'overflow-hidden'
+        // Restore the touch event hack
+        document.ontouchmove = function (e) {
+          return true
+        }
+      } else {
+        // For game:
+        // Totally prevent scrolling without setting overflow hidden
+        // because Safari Mobile wouldn't keep the current scroll position
+        document.ontouchmove = function (e) {
+          e.preventDefault()
+        }
+      }
     }
   }
 }
 
-export function restoreCanvasScrolling (smooth = false) {
+export function restoreCanvasScrolling () {
   return (dispatch, getState) => {
     const canvasScrollingPositionToRestore = getState()
       .viewport.get('canvasScrollingPositionToRestore')
       .toJS()
-
-    let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
-      document.body.className = ''
-    } else {
-      document.documentElement.className = ''
-    }
-
-    dispatch(scrollToPosition(canvasScrollingPositionToRestore, smooth))
+    dispatch(scrollToPosition(canvasScrollingPositionToRestore, true))
   }
 }
 
@@ -149,9 +172,46 @@ export function initViewportListeners () {
         dispatch(setFullscreenAvailable())
       }
 
+      // window.resize event listener
+      // debounced 250 ms
+      window.addEventListener('resize', () => {
+        if (resizeDebounceTimeout) {
+          // clear the timeout
+          clearTimeout(resizeDebounceTimeout);
+        }
+        // start timing for event "completion"
+        resizeDebounceTimeout = setTimeout(() => dispatch(scrollToVisiblePart()), 250)
+      })
+
       // init canvas
       dispatch(setCanvasResolution(getCanvasResolution()))
-      // TODO ADD RESIZE EVENT HANDLER AND ORIENTATION CHANGE TO SET CANVAS SIZE
+
+      // For IOS 10+ as user-scalable : 0 does not work
+      // https://community.esri.com/thread/184701-ios-10-user-scalableno
+      // Disable pinch zoom on document
+      document.documentElement.addEventListener(
+        'touchstart',
+        function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault()
+          }
+        },
+        false
+      )
+
+      // Disable double tap on document
+      var lastTouchEnd = 0
+      document.documentElement.addEventListener(
+        'touchend',
+        function (event) {
+          var now = new Date().getTime()
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault()
+          }
+          lastTouchEnd = now
+        },
+        false
+      )
     }
   }
 }
@@ -217,6 +277,54 @@ export function setFullScreenStatus (status) {
   return {
     type: SET_FULLSCREEN_STATUS,
     payload: status
+  }
+}
+
+// prettier-ignore-next-block
+export function scrollToVisiblePart () {
+  // prettier-ignore-next-block
+  return (dispatch, getState) => {
+    const selectedVideo = getState()
+      .app.get('availableVideos')
+      .find(video => {
+        return video.get('name') === getState().app.get('selectedVideo')
+      })
+
+    const videoPortraitOffset = selectedVideo.get('videoPortraitOffset')
+
+    let offsetXToApply = 0
+    let offsetYToApply = 0
+    // Apply video Mobile offset from offsetX reference of 320x480
+    // Compute relative innerWidth of the current aspect ratio
+    const relativeInnerWidth = window.innerWidth / window.innerHeight * (9 / 16)
+
+    // Aspect ratio < 16 /9 , portrait
+    // Scroll to the interesting part of the video
+    if (relativeInnerWidth <= 1) {
+      const refRelativeXOffsetCenter =
+        (videoPortraitOffset + 160) * (9 / 16) * (1 / 480)
+      offsetXToApply =
+        (refRelativeXOffsetCenter - relativeInnerWidth / 2) *
+        (16 / 9) *
+        window.innerHeight
+    }
+
+    // Aspect ratio > 16 /9 , landscape
+    // Scroll to bottom of video
+    if (relativeInnerWidth > 1) {
+      const correctAspectRatioHeight = window.innerWidth * 9 / 16
+      offsetYToApply = correctAspectRatioHeight - window.innerHeight
+    }
+
+    dispatch(
+      scrollToPosition(
+        {
+          x: offsetXToApply,
+          y: offsetYToApply
+        },
+        true
+      )
+    )
   }
 }
 

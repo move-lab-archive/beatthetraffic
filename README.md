@@ -120,11 +120,9 @@ better to add the things in order 😉
     "w": 1920,
     "h": 1080
   },
-  "videoMobileOffset": {
-    // The offset for mobile device to scroll to the interesting part of the video. In pixels of the original video resolution
-    "x": 350,
-    "y": 0
-  },
+  // The offset for mobile device to scroll to the interesting part of the video.
+  // Defined by the window.scrollX value when the viewport is 320x480
+  "videoPortraitOffset": 350,
   "sources": {
     // The urls of the video, please read https://help.vimeo.com/hc/en-us/articles/224823567-Direct-links to know how to get those links, or use your own server
     // hd: 1280x720
@@ -193,13 +191,15 @@ Ex: `/static/levels/stuttgart-level1/rawdetections.txt`
 #### 2.c Run node-moving-things-tracker to generate the tracking data
 
 ```bash
-# 1. Install node-tracker-by-detections command line tool (>= 0.4.1)
+# 1. Install node-tracker-by-detections command line tool (>= 0.4.2)
 
 npm install -g node-moving-things-tracker
 
 # 2. Generate the tracker.json file from the rawdetections.txt detections file
 
 node-moving-things-tracker --mode=beatthetraffic --input /static/assets/levels/$cityname-level$levelNb/rawdetections.txt
+
+# For some levels, we may want to use --busastruck and --personasmotorbike options
 
 # This outputs a tracker.json file in the same directory
 

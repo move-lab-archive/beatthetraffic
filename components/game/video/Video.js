@@ -11,7 +11,11 @@ import {
 
 import { getFirstFrameImgPath } from '../../../statemanagement/app/AppStateManagement'
 
-import { scrollToPosition } from '../../../statemanagement/app/ViewportStateManagement'
+import {
+  scrollToPosition,
+  blockCanvasScrolling,
+  scrollToVisiblePart
+} from '../../../statemanagement/app/ViewportStateManagement'
 
 import GameEngineStateManager from '../../../statemanagement/app/GameEngineStateManager'
 import Loading from '../../shared/Loading'
@@ -44,23 +48,15 @@ class Video extends Component {
     // We want to re-render the video item if the firstFrameLoaded has loaded
     // to mask the first frame image trick
     if (
-      nextProps.firstFrameLoaded !== this.props.firstFrameLoaded ||
-      nextState.isBuffering !== this.state.isBuffering
-    ) {
-      // console.log('firstFrameLoaded, re-render')
-      return true
-    } else if (
       nextProps.src !== this.props.src ||
       nextState.canRenderVideo !== this.state.canRenderVideo
     ) {
       // We want to re-render the video item if the src has changed
-      // console.log('Render video')
-      setTimeout(() => {
-        this.props.dispatch(
-          scrollToPosition(this.props.videoMobileOffset),
-          true
-        )
-      }, 500)
+      return true
+    } else if (
+      nextProps.firstFrameLoaded !== this.props.firstFrameLoaded ||
+      nextState.isBuffering !== this.state.isBuffering
+    ) {
       return true
     } else {
       return false
@@ -160,6 +156,7 @@ class Video extends Component {
   registerListeners (el, src) {
     // console.log('register liteners')
     if (el && this.videoSrc !== src) {
+      this.props.dispatch(scrollToVisiblePart())
       // console.log('actually registering listeners')
       this.videoEl = el
       this.videoSrc = src
@@ -353,7 +350,6 @@ export default connect(state => {
     videoFPS: selectedVideo.get('videoFPS'),
     playbackRate: selectedVideo.get('playbackRate'),
     firstFrameLoaded: state.video.get('firstFrameLoaded'),
-    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),
-    videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS()
+    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name'))
   }
 })(Video)

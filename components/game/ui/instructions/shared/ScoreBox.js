@@ -70,6 +70,18 @@ class ScoreBox extends Component {
     }
   }
 
+  getTextLabel (leftIcon) {
+    if (leftIcon === 'star') {
+      return `You converted ${this.props.nbCarsConverted} cars`
+    } else if (leftIcon === 'car') {
+      return `Which could be replaced by ${Math.round(this.props.nbCarsConverted / 10)} bus`
+    } else if (leftIcon === 'bus') {
+      return `And only ${Math.round(this.props.nbCarsConverted / 20)} train`
+    } else if (leftIcon === 'train') {
+      return ``
+    }
+  }
+
   animateScoreBox (index = 0) {
     this.countingAnimation = TweenLite.to(this.scoreToDisplay, 2, {
       left: 0,
@@ -124,73 +136,80 @@ class ScoreBox extends Component {
     let rightIcon = this.getNextScoreBoxData(this.state.scoreBoxIndex).icon
 
     return (
-      <div className={`score-box ${this.props.color} ${this.props.score >= 100 ? 'threedigits' : ''}`}>
-        <div className='score-component left'>
-          <h1 ref={el => (this.refScoreLeft = el)}>
-            {this.scoreToDisplay.left}
-          </h1>
-          <img src={this.getIconSrc(leftIcon, this.props.color)} />
+      <React.Fragment>
+        <h4>{this.getTextLabel(leftIcon)}</h4>
+        <div
+          className={`score-box ${this.props.color} ${
+            this.props.score >= 100 ? 'threedigits' : ''
+          }`}
+        >
+          <div className='score-component left'>
+            <h1 ref={el => (this.refScoreLeft = el)}>
+              {this.scoreToDisplay.left}
+            </h1>
+            <img src={this.getIconSrc(leftIcon, this.props.color)} />
+          </div>
+          <div className='separator'>
+            <img src={`/static/assets/icons/icon-arrow-pink.svg`} />
+          </div>
+          <div className='score-component right'>
+            <h1 ref={el => (this.refScoreRight = el)}>
+              {this.scoreToDisplay.right}
+            </h1>
+            <img src={this.getIconSrc(rightIcon, this.props.color)} />
+          </div>
+          <style jsx>{`
+            .score-box {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-between;
+              padding-bottom: 10px;
+              border-bottom: 4px solid white;
+            }
+
+            .score-box.threedigits {
+              min-width: 260px;
+            }
+
+            .score-box.pink {
+              border-bottom: 4px solid #262626;
+            }
+
+            .separator {
+              margin-left: 1rem;
+              margin-right: 1rem;
+            }
+
+            .score-component {
+              display: flex;
+              flex-direction: row;
+              min-width: 12rem;
+            }
+
+            .score-component h1 {
+              margin: 0;
+            }
+
+            .score-component img {
+              margin-left: 0.5rem;
+            }
+
+            .score-component.left {
+              justify-content: flex-start;
+            }
+
+            .score-component.right {
+              justify-content: flex-end;
+            }
+
+            .score h1 {
+              margin: 0;
+              margin-right: 0.5rem;
+            }
+          `}</style>
         </div>
-        <div className='separator'>
-          <img src={`/static/assets/icons/icon-arrow-pink.svg`} />
-        </div>
-        <div className='score-component right'>
-          <h1 ref={el => (this.refScoreRight = el)}>
-            {this.scoreToDisplay.right}
-          </h1>
-          <img src={this.getIconSrc(rightIcon, this.props.color)} />
-        </div>
-        <style jsx>{`
-          .score-box {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 10px;
-            border-bottom: 4px solid white;
-          }
-
-          .score-box.threedigits {
-            min-width: 260px;
-          }
-
-          .score-box.pink {
-            border-bottom: 4px solid #262626;
-          }
-
-          .separator {
-            margin-left: 1rem;
-            margin-right: 1rem;
-          }
-
-          .score-component {
-            display: flex;
-            flex-direction: row;
-            min-width: 12rem;
-          }
-
-          .score-component h1 {
-            margin: 0;
-          }
-
-          .score-component img {
-            margin-left: 0.5rem;
-          }
-
-          .score-component.left {
-            justify-content: flex-start;
-          }
-
-          .score-component.right {
-            justify-content: flex-end;
-          }
-
-          .score h1 {
-            margin: 0;
-            margin-right: 0.5rem;
-          }
-        `}</style>
-      </div>
+      </React.Fragment>
     )
   }
 }

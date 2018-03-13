@@ -7,6 +7,10 @@ class SocialShareButtons extends React.Component {
   constructor (props) {
     super(props)
     this.websiteUrl = 'https://beatthetraffic.moovellab.com'
+
+    this.state = {
+      showIcons: false
+    }
   }
 
   twitterUrl () {
@@ -23,16 +27,26 @@ class SocialShareButtons extends React.Component {
     return `https://www.facebook.com/sharer.php?u=${encodeURI(this.websiteUrl)}`
   }
 
+  toggleIcons () {
+    this.setState({
+      showIcons: !this.state.showIcons
+    })
+  }
+
   render () {
     return (
       <div className='List'>
-        <h1>SHARE</h1>
-        <a className='Button' href={this.facebookUrl()} target='_blank'>
-          <img alt='FacebookIcon' src={FacebookIcon} />
-        </a>
-        <a className='Button' href={this.twitterUrl()} target='_blank'>
-          <img alt='TwitterIcon' src={TwitterIcon} />
-        </a>
+        <h1 onClick={() => this.toggleIcons()}>SHARE</h1>
+        {this.state.showIcons && (
+          <React.Fragment>
+            <a className='Button' href={this.facebookUrl()} target='_blank'>
+              <img alt='FacebookIcon' src={FacebookIcon} />
+            </a>
+            <a className='Button' href={this.twitterUrl()} target='_blank'>
+              <img alt='TwitterIcon' src={TwitterIcon} />
+            </a>
+          </React.Fragment>
+        )}
         <style jsx>{`
           .List {
             display: flex;
@@ -43,7 +57,7 @@ class SocialShareButtons extends React.Component {
           h1 {
             margin: 0;
             margin-right: 2rem;
-            cursor: default;
+            cursor: pointer;
           }
 
           .Button {
