@@ -9,6 +9,7 @@ const availableCities = require('../gameconfig.json').availableCities
 const defaultCity = require('../gameconfig.json').defaultSelectedCity
 const DBManager = require('./db/DBManager')
 const nextApp = require('next')
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 const app = express()
 const nextInstance = nextApp()
@@ -23,6 +24,8 @@ DBManager.init().then(
     console.error(err)
   }
 )
+
+app.use(redirectToHTTPS([/localhost:(\d{4})/]))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
