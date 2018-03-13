@@ -25,13 +25,13 @@ class AboutPage extends Component {
 
         <img
           className={`rightcloud ${
-            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+            this.state.mountAnimation ? 'visiblerightcloud' : 'hiddencloud'
           }`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
         <img
           className={`leftcloud ${
-            this.state.mountAnimation ? 'visiblecloud' : 'hiddencloud'
+            this.state.mountAnimation ? 'visibleleftcloud' : 'hiddencloud'
           }`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
@@ -112,27 +112,31 @@ class AboutPage extends Component {
 
           .rightcloud {
             position: absolute;
-            top: -15%;
+            top: 0%;
             width: 60%;
-            right: -5%;
+            right: 0%;
             z-index: -1;
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
           .leftcloud {
             position: absolute;
-            bottom: -1%;
-            width: 80%;
-            left: -10%;
+            bottom: 0%;
+            width: 110%;
+            left: 2%;
             z-index: -1;
             transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
           }
 
           .hiddencloud {
-            transform: translateX(50%);
+            transform: translate(0%, 0%);
           }
 
-          .visiblecloud {
-            transform: translateX(0%);
+          .visiblerightcloud {
+            transform: translate(30%, -30%);
+          }
+
+          .visibleleftcloud {
+            transform: translate(-30%, 30%);
           }
 
           .thirdcloud {
@@ -190,12 +194,10 @@ class AboutPage extends Component {
 
           @media (min-width: 550px) {
             .rightcloud {
-              width: 35%;
-              right: -10%;
+              width: 40%;
             }
             .leftcloud {
-              width: 42%;
-              left: -5%;
+              width: 45%;
             }
             .thirdcloud {
               width: 42%;
