@@ -350,7 +350,6 @@ export default connect(state => {
     videoFPS: selectedVideo.get('videoFPS'),
     playbackRate: selectedVideo.get('playbackRate'),
     firstFrameLoaded: state.video.get('firstFrameLoaded'),
-    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name')),
-    videoMobileOffset: selectedVideo.get('videoMobileOffset').toJS()
+    srcFirstFrame: getFirstFrameImgPath(selectedVideo.get('name'))
   }
 })(Video)

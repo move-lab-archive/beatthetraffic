@@ -59,10 +59,7 @@
       "city": "stuttgart",
       "level": 1,
       "levelName": "Neckartor",
-      "videoMobileOffset": {
-        "x": 350,
-        "y": 0
-      },
+      "videoPortraitOffset": 350,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/253212378.hd.mp4?s=3cfa88f1fa200f79bf1b829b64f0d32f0490b6d7&profile_id=174",
@@ -79,10 +76,7 @@
       "levelName": "Marienplatz",
       "playbackRate": 1.2,
       "videoFPS": 30,
-      "videoMobileOffset": {
-        "x": 400,
-        "y": 0
-      },
+      "videoPortraitOffset": 400,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/251165418.hd.mp4?s=74c118918a19318529750d354c5b79941a02a96e&profile_id=174",
@@ -98,10 +92,7 @@
       "level": 3,
       "levelName": "Cannstatter Straße",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 106,
-        "y": 0
-      },
+      "videoPortraitOffset": 106,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/253213722.hd.mp4?s=39cc6f45d260d133207ae958aaf0b7c7c2bfdc3b&profile_id=174",
@@ -117,10 +108,7 @@
       "level": 1,
       "levelName": "Moti-Bagh",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 169,
-        "y": 0
-      },
+      "videoPortraitOffset": 169,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257747636.hd.mp4?s=b859d6826a4dc47076adf172fd923f756adadf7c&profile_id=174",
@@ -136,10 +124,7 @@
       "level": 2,
       "levelName": "AIIMS",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 131,
-        "y": 0
-      },
+      "videoPortraitOffset": 131,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257747640.hd.mp4?s=b93cb6b9609f5e2e660ae8bcea6c93424cd4e329&profile_id=174",
@@ -155,10 +140,7 @@
       "level": 3,
       "levelName": "South Extension",
       "playbackRate": 1.4,
-      "videoMobileOffset": {
-        "x": 237,
-        "y": 0
-      },
+      "videoPortraitOffset": 237,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257747655.hd.mp4?s=d099cd59b83f6cbff3529d5290f197cf843d19c3&profile_id=174",
@@ -174,10 +156,7 @@
       "level": 1,
       "levelName": "Halensee",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 249,
-        "y": 0
-      },
+      "videoPortraitOffset": 249,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858774.hd.mp4?s=47ef0d83372f594573f4e919e6a62d285d64ce6a&profile_id=174",
@@ -193,10 +172,7 @@
       "level": 2,
       "levelName": "Yorckstraße",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 393,
-        "y": 0
-      },
+      "videoPortraitOffset": 393,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858783.hd.mp4?s=bcd9868b94dab5ec26e7a6777757d7ef377b26ed&profile_id=174",
@@ -212,10 +188,7 @@
       "level": 3,
       "levelName": "Hohenzollerndamm",
       "playbackRate": 1.4,
-      "videoMobileOffset": {
-        "x": 170,
-        "y": 0
-      },
+      "videoPortraitOffset": 170,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858794.hd.mp4?s=1a589ef798faf4191065958e8cf6acf77b691cab&profile_id=174",
@@ -231,10 +204,7 @@
       "level": 1,
       "levelName": "Brooklyn-Queens Expressway",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 358,
-        "y": 0
-      },
+      "videoPortraitOffset": 358,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858897.hd.mp4?s=3d6d948873d59d06fc5b8e1555a6968a9627827f&profile_id=174",
@@ -250,10 +220,7 @@
       "level": 2,
       "levelName": "Rector Manhattan",
       "playbackRate": 1.5,
-      "videoMobileOffset": {
-        "x": 87,
-        "y": 0
-      },
+      "videoPortraitOffset": 87,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858917.hd.mp4?s=bd44fcbc43e68831f78781c6efbf2230145f89c4&profile_id=174",
@@ -269,10 +236,7 @@
       "level": 3,
       "levelName": "Chambers Street",
       "playbackRate": 1.7,
-      "videoMobileOffset": {
-        "x": 242,
-        "y": 0
-      },
+      "videoPortraitOffset": 242,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858921.hd.mp4?s=f2a28d9f09b7d612539813c34e1f1bb05bed1bd7&profile_id=174",
@@ -288,10 +252,7 @@
       "level": 1,
       "levelName": "Burside Bridge",
       "playbackRate": 1.1,
-      "videoMobileOffset": {
-        "x": 294,
-        "y": 0
-      },
+      "videoPortraitOffset": 294,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858927.hd.mp4?s=ad418837f87a61ce87ef8c02eeb793e169ec5da7&profile_id=174",
@@ -307,10 +268,7 @@
       "level": 2,
       "levelName": "Southeast Division",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 138,
-        "y": 0
-      },
+      "videoPortraitOffset": 138,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858943.hd.mp4?s=dd230ef325cc4cd6c53cb9a80d26bd5dd7521ed2&profile_id=174",
@@ -326,10 +284,7 @@
       "level": 3,
       "levelName": "84W",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 256,
-        "y": 0
-      },
+      "videoPortraitOffset": 256,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858955.hd.mp4?s=0158ca6ee6c2e0cb32f216bad250b337adadbfab&profile_id=174",
@@ -345,10 +300,7 @@
       "level": 1,
       "levelName": "El Forum",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 320,
-        "y": 0
-      },
+      "videoPortraitOffset": 320,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858745.hd.mp4?s=29484df13f5401e733f6612a86858d8d136e0721&profile_id=174",
@@ -364,10 +316,7 @@
       "level": 2,
       "levelName": "Marbella",
       "playbackRate": 1.4,
-      "videoMobileOffset": {
-        "x": 246,
-        "y": 0
-      },
+      "videoPortraitOffset": 246,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858758.hd.mp4?s=3d89ca818aab768e72752af469d5707445356dad&profile_id=174",
@@ -383,10 +332,7 @@
       "level": 3,
       "levelName": "Gran Via",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 155,
-        "y": 0
-      },
+      "videoPortraitOffset": 155,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858762.hd.mp4?s=d30022f6a142b8f5abb3d5e56590f6db09a69fea&profile_id=174",
@@ -402,10 +348,7 @@
       "level": 1,
       "levelName": "Tunel del Libertador",
       "playbackRate": 1.4,
-      "videoMobileOffset": {
-        "x": 54,
-        "y": 0
-      },
+      "videoPortraitOffset": 54,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858806.hd.mp4?s=f6bb3205cc693bd8c0a3ee8dcf00542e9980298d&profile_id=174",
@@ -421,10 +364,7 @@
       "level": 2,
       "levelName": "Avenida Figueroa Alcorta",
       "playbackRate": 1,
-      "videoMobileOffset": {
-        "x": 187,
-        "y": 0
-      },
+      "videoPortraitOffset": 187,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858816.hd.mp4?s=8890432a836a4189ef6d911d1ff87b8846298153&profile_id=174",
@@ -440,10 +380,7 @@
       "level": 3,
       "levelName": "Avenida General Paz",
       "playbackRate": 1,
-      "videoMobileOffset": {
-        "x": 266,
-        "y": 0
-      },
+      "videoPortraitOffset": 266,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858820.hd.mp4?s=31d033275a04b67c220c946ec0026eb21d8acdc5&profile_id=174",
@@ -459,10 +396,7 @@
       "level": 1,
       "levelName": "Krimsky",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 213,
-        "y": 0
-      },
+      "videoPortraitOffset": 213,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858864.hd.mp4?s=898fedc7caf4792009d8f783e2edc32c1005d64b&profile_id=174",
@@ -478,10 +412,7 @@
       "level": 2,
       "levelName": "Kremlevskaya",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 417,
-        "y": 0
-      },
+      "videoPortraitOffset": 417,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858876.hd.mp4?s=5f74568d62bcde064d85bc6e3ef2f708a9e4f8f4&profile_id=174",
@@ -497,10 +428,7 @@
       "level": 3,
       "levelName": "Moskvoretskaya",
       "playbackRate": 1.6,
-      "videoMobileOffset": {
-        "x": 290,
-        "y": 0
-      },
+      "videoPortraitOffset": 290,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858896.hd.mp4?s=e5c02c4b57a256b6153eee04174165d429c0df03&profile_id=174",
@@ -516,10 +444,7 @@
       "level": 1,
       "levelName": "Vermont SB",
       "playbackRate": 1.4,
-      "videoMobileOffset": {
-        "x": 290,
-        "y": 0
-      },
+      "videoPortraitOffset": 290,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259013880.hd.mp4?s=df3ec9f9c63b7faa4a17aa91d0f9be8043c7ba70&profile_id=174",
@@ -535,10 +460,7 @@
       "level": 2,
       "levelName": "Grand WB",
       "playbackRate": 1.5,
-      "videoMobileOffset": {
-        "x": 183,
-        "y": 0
-      },
+      "videoPortraitOffset": 183,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259013899.hd.mp4?s=ad48a932e74312b7226d1f4967484ce3d4883346&profile_id=174",
@@ -554,10 +476,7 @@
       "level": 3,
       "levelName": "405 SB",
       "playbackRate": 1.1,
-      "videoMobileOffset": {
-        "x": 224,
-        "y": 0
-      },
+      "videoPortraitOffset": 224,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259013916.hd.mp4?s=4b0a379e41a1088eed003fceec715f3e7c0f7f60&profile_id=174",
@@ -573,10 +492,7 @@
       "level": 1,
       "levelName": "?",
       "playbackRate": 1.2,
-      "videoMobileOffset": {
-        "x": 314,
-        "y": 0
-      },
+      "videoPortraitOffset": 314,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259018121.hd.mp4?s=82cef05b3e31a3faf549eebfe6efde3ef52b8874&profile_id=174",
@@ -592,10 +508,7 @@
       "level": 2,
       "levelName": "Shibuya",
       "playbackRate": 1.5,
-      "videoMobileOffset": {
-        "x": 104,
-        "y": 0
-      },
+      "videoPortraitOffset": 104,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259018133.hd.mp4?s=54001276d45047049b1cd26b9d7615ef84d5d1ed&profile_id=174",
@@ -611,10 +524,7 @@
       "level": 3,
       "levelName": "Mita",
       "playbackRate": 1.6,
-      "videoMobileOffset": {
-        "x": 338,
-        "y": 0
-      },
+      "videoPortraitOffset": 338,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259018146.hd.mp4?s=8f2ab1711e38a7da841595d0d2e91bd1a4ae148e&profile_id=174",
@@ -630,10 +540,7 @@
       "level": 1,
       "levelName": "Acton",
       "playbackRate": 1.6,
-      "videoMobileOffset": {
-        "x": 121,
-        "y": 0
-      },
+      "videoPortraitOffset": 121,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259332787.hd.mp4?s=80c90b464bd0413e3188fdf542b25963273cf055&profile_id=174",
@@ -649,10 +556,7 @@
       "level": 2,
       "levelName": "Vauxhall",
       "playbackRate": 1.3,
-      "videoMobileOffset": {
-        "x": 0,
-        "y": 0
-      },
+      "videoPortraitOffset": 0,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259332811.hd.mp4?s=44f009b677c74c0414d27e3400311eb63df46ca2&profile_id=174",
@@ -668,10 +572,7 @@
       "level": 3,
       "levelName": "Wembley",
       "playbackRate": 1.7,
-      "videoMobileOffset": {
-        "x": 0,
-        "y": 0
-      },
+      "videoPortraitOffset": 0,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259332834.hd.mp4?s=c011d4f2205cc5ad9110ac09a1a6c395b3622c86&profile_id=174",

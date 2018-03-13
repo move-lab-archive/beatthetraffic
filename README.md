@@ -120,11 +120,9 @@ better to add the things in order 😉
     "w": 1920,
     "h": 1080
   },
-  "videoMobileOffset": {
-    // The offset for mobile device to scroll to the interesting part of the video. In pixels of the original video resolution
-    "x": 350,
-    "y": 0
-  },
+  // The offset for mobile device to scroll to the interesting part of the video.
+  // Defined by the window.scrollX value when the viewport is 320x480
+  "videoPortraitOffset": 350,
   "sources": {
     // The urls of the video, please read https://help.vimeo.com/hc/en-us/articles/224823567-Direct-links to know how to get those links, or use your own server
     // hd: 1280x720
