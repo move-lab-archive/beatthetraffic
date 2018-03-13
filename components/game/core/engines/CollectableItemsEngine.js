@@ -15,7 +15,7 @@ export const COLLECTABLE_TYPES = {
 
 const PERCENTAGE_SIZE_BBOX = 50 / 100
 const MAX_PERCENTAGE_SIZE_CANVAS = 10 / 100
-const MIN_PERCENTAGE_SIZE_CANVAS = 5 / 100
+const MIN_PERCENTAGE_SIZE_CANVAS = 7 / 100
 
 class CollectableItemsEngine {
   constructor () {

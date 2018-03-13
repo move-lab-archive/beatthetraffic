@@ -7,8 +7,7 @@ class MenuBtn extends Component {
   render () {
     return (
       <div
-        className={`menu-button
-        ${this.props.introAnimPlayed ? '' : 'hidden'}`}
+        className={`menu-button ${this.props.isShowingIntro ? 'hidden' : ''}`}
         onClick={() => this.props.dispatch(showMenu())}
       >
         <svg width='30px' height='22px' viewBox='0 0 30 22' version='1.1'>
@@ -22,7 +21,7 @@ class MenuBtn extends Component {
             <g
               id='Layout'
               transform='translate(-3332.000000, -2077.000000)'
-              stroke='#FFFE4A'
+              stroke={`${this.props.introAnimPlayed ? '#FFFE4A' : '#000000'}`}
               strokeWidth='4'
             >
               <path d='M3332,2079 L3362,2079' id='Path-15-Copy-2' />
@@ -41,6 +40,8 @@ class MenuBtn extends Component {
             width: 4.4rem;
             height: 4.4rem;
             cursor: default;
+            opacity: 1;
+            animation: fadeInHeadline 3s;
           }
           .menu-button svg {
             cursor: pointer;
@@ -52,6 +53,18 @@ class MenuBtn extends Component {
 
           .hidden {
             display: none;
+          }
+
+          @keyframes fadeInHeadline {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
           }
         `}</style>
       </div>
