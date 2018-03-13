@@ -6,16 +6,17 @@ import withRedux from 'next-redux-wrapper'
 import Layout from '../components/shared/Layout'
 import ScorePage from '../components/score/ScorePage'
 
-import { fetchHighscores } from '../statemanagement/app/GameStateManagement'
+// import { fetchHighscores } from '../statemanagement/app/GameStateManagement'
 
 class HighScore extends React.Component {
-  static async getInitialProps ({ store, query, isServer }) {
-    try {
-      await store.dispatch(fetchHighscores())
-    } catch (error) {
-      console.log('Unable to SSR highscores')
-    }
-  }
+  // Do not SSR highscore
+  // static async getInitialProps ({ store, query, isServer }) {
+  //   try {
+  //     await store.dispatch(fetchHighscores())
+  //   } catch (error) {
+  //     console.log('Unable to SSR highscores')
+  //   }
+  // }
 
   componentDidMount () {
     Router.prefetch('/')
