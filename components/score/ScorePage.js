@@ -210,20 +210,18 @@ class ScorePage extends PureComponent {
           </div>
         </div>
 
-        {this.props.scoreData && (
-          <div
-            className='play-fixed-cta'
-            onClick={() => this.props.dispatch(showCityPicker())}
-          >
-            PLAY AGAIN
-          </div>
-        )}
-
-        {!this.props.scoreData && (
-          <div className='play-fixed-cta' onClick={() => this.props.onClose()}>
-            PLAY GAME
-          </div>
-        )}
+        <div
+          className='play-fixed-cta'
+          onClick={() => {
+            if (this.props.scoreData) {
+              this.props.dispatch(showCityPicker())
+            } else {
+              window.location.href = '/'
+            }
+          }}
+        >
+          {this.props.scoreData ? 'PLAY AGAIN' : 'PLAY GAME'}
+        </div>
 
         <style jsx>{`
           .highscore-page {
@@ -548,6 +546,7 @@ class ScorePage extends PureComponent {
             align-items: center;
             justify-content: center;
             box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
           }
 
           .name.clickable {
