@@ -191,13 +191,15 @@ Ex: `/static/levels/stuttgart-level1/rawdetections.txt`
 #### 2.c Run node-moving-things-tracker to generate the tracking data
 
 ```bash
-# 1. Install node-tracker-by-detections command line tool (>= 0.4.1)
+# 1. Install node-tracker-by-detections command line tool (>= 0.4.2)
 
 npm install -g node-moving-things-tracker
 
 # 2. Generate the tracker.json file from the rawdetections.txt detections file
 
 node-moving-things-tracker --mode=beatthetraffic --input /static/assets/levels/$cityname-level$levelNb/rawdetections.txt
+
+# For some levels, we may want to use --busastruck and --personasmotorbike options
 
 # This outputs a tracker.json file in the same directory
 

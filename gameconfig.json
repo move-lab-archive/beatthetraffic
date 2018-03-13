@@ -56,6 +56,7 @@
   "availableVideos": [
     {
       "name": "stuttgart-level1",
+      "busastruck": true,
       "city": "stuttgart",
       "level": 1,
       "levelName": "Neckartor",
@@ -104,6 +105,7 @@
     },
     {
       "name": "delhi-level1",
+      "personasmotorbike": true,
       "city": "newdelhi",
       "level": 1,
       "levelName": "Moti-Bagh",
@@ -120,6 +122,7 @@
     },
     {
       "name": "delhi-level2",
+      "personasmotorbike": true,
       "city": "newdelhi",
       "level": 2,
       "levelName": "AIIMS",
@@ -136,6 +139,7 @@
     },
     {
       "name": "delhi-level3",
+      "personasmotorbike": true,
       "city": "newdelhi",
       "level": 3,
       "levelName": "South Extension",
@@ -152,6 +156,7 @@
     },
     {
       "name": "berlin-level1",
+      "busastruck": true,
       "city": "berlin",
       "level": 1,
       "levelName": "Halensee",
@@ -168,6 +173,7 @@
     },
     {
       "name": "berlin-level2",
+      "busastruck": true,
       "city": "berlin",
       "level": 2,
       "levelName": "Yorckstraße",
@@ -184,6 +190,7 @@
     },
     {
       "name": "berlin-level3",
+      "busastruck": true,
       "city": "berlin",
       "level": 3,
       "levelName": "Hohenzollerndamm",
@@ -200,6 +207,7 @@
     },
     {
       "name": "newyork-level1",
+      "busastruck": true,
       "city": "newyork",
       "level": 1,
       "levelName": "Brooklyn-Queens Expressway",
@@ -216,6 +224,7 @@
     },
     {
       "name": "newyork-level2",
+      "busastruck": true,
       "city": "newyork",
       "level": 2,
       "levelName": "Rector Manhattan",
@@ -232,6 +241,7 @@
     },
     {
       "name": "newyork-level3",
+      "busastruck": true,
       "city": "newyork",
       "level": 3,
       "levelName": "Chambers Street",
@@ -248,6 +258,7 @@
     },
     {
       "name": "portland-level1",
+      "busastruck": true,
       "city": "portland",
       "level": 1,
       "levelName": "Burside Bridge",
@@ -264,6 +275,7 @@
     },
     {
       "name": "portland-level2",
+      "busastruck": true,
       "city": "portland",
       "level": 2,
       "levelName": "Southeast Division",
@@ -280,6 +292,7 @@
     },
     {
       "name": "portland-level3",
+      "busastruck": true,
       "city": "portland",
       "level": 3,
       "levelName": "84W",
@@ -345,6 +358,7 @@
     {
       "name": "buenosaires-level1",
       "city": "buenosaires",
+      "personasmotorbike": true,
       "level": 1,
       "levelName": "Tunel del Libertador",
       "playbackRate": 1.4,
@@ -377,6 +391,7 @@
     {
       "name": "buenosaires-level3",
       "city": "buenosaires",
+      "personasmotorbike": true,
       "level": 3,
       "levelName": "Avenida General Paz",
       "playbackRate": 1,
@@ -392,6 +407,7 @@
     },
     {
       "name": "moscow-level1",
+      "busastruck": true,
       "city": "moscow",
       "level": 1,
       "levelName": "Krimsky",
@@ -408,6 +424,7 @@
     },
     {
       "name": "moscow-level2",
+      "busastruck": true,
       "city": "moscow",
       "level": 2,
       "levelName": "Kremlevskaya",
@@ -424,6 +441,7 @@
     },
     {
       "name": "moscow-level3",
+      "busastruck": true,
       "city": "moscow",
       "level": 3,
       "levelName": "Moskvoretskaya",
@@ -440,6 +458,7 @@
     },
     {
       "name": "losangeles-level1",
+      "busastruck": true,
       "city": "losangeles",
       "level": 1,
       "levelName": "Vermont SB",
@@ -456,6 +475,7 @@
     },
     {
       "name": "losangeles-level2",
+      "busastruck": true,
       "city": "losangeles",
       "level": 2,
       "levelName": "Grand WB",
@@ -472,6 +492,7 @@
     },
     {
       "name": "losangeles-level3",
+      "busastruck": true,
       "city": "losangeles",
       "level": 3,
       "levelName": "405 SB",
@@ -488,6 +509,7 @@
     },
     {
       "name": "tokyo-level1",
+      "busastruck": true,
       "city": "tokyo",
       "level": 1,
       "levelName": "?",
@@ -504,6 +526,7 @@
     },
     {
       "name": "tokyo-level2",
+      "busastruck": true,
       "city": "tokyo",
       "level": 2,
       "levelName": "Shibuya",
@@ -520,6 +543,7 @@
     },
     {
       "name": "tokyo-level3",
+      "busastruck": true,
       "city": "tokyo",
       "level": 3,
       "levelName": "Mita",
