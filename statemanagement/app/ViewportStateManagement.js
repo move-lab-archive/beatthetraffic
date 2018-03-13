@@ -189,29 +189,34 @@ export function initViewportListeners () {
       // For IOS 10+ as user-scalable : 0 does not work
       // https://community.esri.com/thread/184701-ios-10-user-scalableno
       // Disable pinch zoom on document
-      document.documentElement.addEventListener(
-        'touchstart',
-        function (event) {
-          if (event.touches.length > 1) {
-            event.preventDefault()
-          }
-        },
-        false
+      let isMobileSafari = /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
+        navigator.userAgent
       )
+      if(isMobileSafari) {
+        document.documentElement.addEventListener(
+          'touchstart',
+          function (event) {
+            if (event.touches.length > 1) {
+              event.preventDefault()
+            }
+          },
+          false
+        )
 
-      // Disable double tap on document
-      var lastTouchEnd = 0
-      document.documentElement.addEventListener(
-        'touchend',
-        function (event) {
-          var now = new Date().getTime()
-          if (now - lastTouchEnd <= 300) {
-            event.preventDefault()
-          }
-          lastTouchEnd = now
-        },
-        false
-      )
+        // Disable double tap on document
+        var lastTouchEnd = 0
+        document.documentElement.addEventListener(
+          'touchend',
+          function (event) {
+            var now = new Date().getTime()
+            if (now - lastTouchEnd <= 300) {
+              event.preventDefault()
+            }
+            lastTouchEnd = now
+          },
+          false
+        )
+      }
     }
   }
 }
