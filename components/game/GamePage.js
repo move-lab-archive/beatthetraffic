@@ -214,7 +214,7 @@ class GamePage extends React.PureComponent {
             <GameProgressBar />
             {this.state.showMenuAndSoundBtn && (
               <React.Fragment>
-                <MenuBtn />
+                <MenuBtn isShowingIntro={this.state.showIntro} />
                 <Sound />
               </React.Fragment>
             )}

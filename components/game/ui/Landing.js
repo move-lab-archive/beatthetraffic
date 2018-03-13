@@ -85,17 +85,8 @@ class Landing extends Component {
         {this.state.javascriptLoaded && (
           <div>
             <ChangeCityButton label='CHANGE CITY' />
-            <div
-              className='about'
-              onClick={() => {
-                this.props.dispatch(showMenu())
-              }}
-            >
-              <h4>ABOUT</h4>
-            </div>
-            <div className='powered'>
+            <div className='about'>
               <h4>
-                POWERED BY{' '}
                 <a href='https://www.google.de/' target='_blank'>
                   OPEN DATA CAM
                 </a>
@@ -132,7 +123,7 @@ class Landing extends Component {
 
           .landing-headline {
             position: absolute;
-            margin-top: -10px;
+            margin-top: -20px;
             width: 80%;
             z-index: 2;
             animation: fadeInHeadline 1.3s;
@@ -185,7 +176,7 @@ class Landing extends Component {
             width: 7rem;
             opacity: 1;
             left: 50%;
-            transform: translateX(-50%) translateY(-125px);
+            transform: translateX(-50%) translateY(-160px);
             z-index: 100;
             position: absolute;
           }
