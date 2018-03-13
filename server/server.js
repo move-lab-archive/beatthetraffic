@@ -81,8 +81,6 @@ app.get('/:city', (req, res, next) => {
     // next() tells express to wait for the next route match which will be
     // app.use(express.static('out'))
     next()
-  } else if (req.params.city === 'highscores') {
-    nextInstance.render(req, res, '/highscores')
   } else {
     // Overwise, handle the request normaly, SSR for highscore or get assets /static
     handle(req, res)
@@ -105,8 +103,6 @@ var saveHighscoreLimiter = new RateLimit({
 })
 
 app.post('/api/highscores', saveHighscoreLimiter, (req, res) => {
-  let highscoreData = req.body
-
   let highscore = {
     date: new Date(),
     name: req.body.name,

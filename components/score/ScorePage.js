@@ -74,9 +74,7 @@ class ScorePage extends PureComponent {
           <div className={`highscore-inner`}>
             <h2 className='headline'>HIGH SCORES</h2>
             {this.props.highscores.size === 0 &&
-              this.props.isFetchingHighscores && (
-                <div>Fetching highscore ....</div>
-              )}
+              this.props.isFetchingHighscores && <div>Loading ...</div>}
             {this.props.highscores.size === 0 &&
               this.props.highscoresFetched && <div>No highscores yet.</div>}
             {this.props.highscores.size > 0 && (
@@ -251,6 +249,7 @@ class ScorePage extends PureComponent {
             top: 0rem;
             position: absolute;
             padding-bottom: 20rem;
+            width: 100%;
           }
           .highscore-inner .headline {
             margin-top: 2.3rem;
