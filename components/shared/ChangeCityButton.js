@@ -39,7 +39,7 @@ class ChangeCityButton extends Component {
           `}
       >
         {this.props.label && (
-          <React.Fragment>
+          <div className='change-city-innercontainer'>
             <h4 className='change-city'>{this.props.label}</h4>
             <svg
               className='change-city-icon'
@@ -53,7 +53,7 @@ class ChangeCityButton extends Component {
                 fillRule='evenodd'
               />
             </svg>
-          </React.Fragment>
+          </div>
         )}
         <style jsx>{`
           .change-city-container {
@@ -62,6 +62,25 @@ class ChangeCityButton extends Component {
             bottom: 1.5rem;
             left: 3rem;
             cursor: pointer;
+          }
+
+          .change-city-container:not(.active) .change-city-innercontainer {
+            animation: scale 5s infinite;
+          }
+
+          @keyframes scale {
+            0% {
+              transform: scale(1);
+            }
+            80% {
+              transform: scale(1);
+            }
+            90% {
+              transform: scale(1.3);
+            }
+            100% {
+              transform: scale(1);
+            }
           }
 
           .change-city-container.anim {
