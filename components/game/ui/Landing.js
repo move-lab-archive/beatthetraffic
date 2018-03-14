@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { TweenLite } from 'gsap'
-
 import BtnLanding from './landing/BtnLanding'
 import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
-
-import { showMenu } from '../../../statemanagement/app/AppStateManagement'
 
 // import Gameover from './instructions/Gameover'
 /* import Loading from '../../shared/Loading' */
@@ -18,7 +14,7 @@ import {
   blockCanvasScrolling,
   restoreCanvasScrolling
 } from '../../../statemanagement/app/ViewportStateManagement'
-import ChangeCityButton from '../../shared/ChangeCityButton'
+import ChangeCityButtonLanding from '../../shared/ChangeCityButtonLanding'
 
 class Landing extends Component {
   constructor (props) {
@@ -84,7 +80,7 @@ class Landing extends Component {
         <img className='tree' src='/static/assets/landing/asset-tree.png' />
         {this.state.javascriptLoaded && (
           <div>
-            <ChangeCityButton label='CHANGE CITY' />
+            <ChangeCityButtonLanding />
             <div className='about'>
               <h4>
                 <a href='https://www.google.de/' target='_blank'>
@@ -92,6 +88,7 @@ class Landing extends Component {
                 </a>
               </h4>
             </div>
+
             <LeftCloud />
             <RightCloud />
             <div className='mobility-assets'>
