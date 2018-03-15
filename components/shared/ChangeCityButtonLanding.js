@@ -20,7 +20,8 @@ class ChangeCityButtonLanding extends Component {
     this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
 
     this.state = {
-      suggestedCity: ''
+      suggestedCity: '',
+      bubbleImageLoaded: false
     }
   }
 
@@ -58,6 +59,14 @@ class ChangeCityButtonLanding extends Component {
       () => this.setRandomCity(),
       4000
     )
+
+    const bubbleImage = new Image()
+    bubbleImage.onload = () => {
+      this.setState({
+        bubbleImageLoaded: true
+      })
+    }
+    bubbleImage.src = '/static/assets/landing/bubble.svg'
   }
 
   componentWillUnmount () {
@@ -80,15 +89,17 @@ class ChangeCityButtonLanding extends Component {
           className='unicorn'
           src='/static/assets/landing/asset-unicorn.png'
         />
-        <div className='bubble-hint'>
-          <div className='bubble-text'>OR PLAY</div>
-          <div className='bubble-text bubble-city'>
-            <span className='city'>
-              {this.state.suggestedCity.toUpperCase()}
-            </span>
-            <div className='arrow-down' />
+        {this.state.bubbleImageLoaded && (
+          <div className='bubble-hint'>
+            <div className='bubble-text'>OR PLAY</div>
+            <div className='bubble-text bubble-city'>
+              <span className='city'>
+                {this.state.suggestedCity.toUpperCase()}
+              </span>
+              <div className='arrow-down' />
+            </div>
           </div>
-        </div>
+        )}
         <style jsx>{`
           .change-city-container {
             position: fixed;
