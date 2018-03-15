@@ -45,7 +45,7 @@ class CityPicker extends PureComponent {
           }}
           className={`city-picker-container ${
             this.props.isVisible ? 'visible' : 'hidden'
-          }`}
+          } ${this.props.label ? '' : 'nolabel'}`}
         >
           <div className={`cities`}>
             {Object.keys(availableCities).map(cityId => (
@@ -101,6 +101,10 @@ class CityPicker extends PureComponent {
             transition-delay: 150ms;
             z-index: 15;
             cursor: default;
+          }
+
+          .city-picker-container.visible.nolabel {
+            bottom: 2rem;
           }
 
           .city-picker-overlay {

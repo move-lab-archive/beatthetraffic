@@ -232,7 +232,8 @@ class Video extends Component {
       canRenderVideo: true,
       isMobileSafari: /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(
         navigator.userAgent
-      )
+      ),
+      isDesktopSafari: navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1
     })
   }
 
@@ -264,7 +265,7 @@ class Video extends Component {
               autoPlay
             >
               {this.props.srcHLS &&
-                this.state.isMobileSafari && (
+                (this.state.isMobileSafari || this.state.isDesktopSafari) && (
                   <source
                     src={`${this.props.srcHLS}`}
                     type='application/x-mpegURL'
