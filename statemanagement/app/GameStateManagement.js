@@ -200,6 +200,13 @@ export function setCurrentLevel (level) {
 
 export function loadCity (city, level = 1) {
   return (dispatch, getState) => {
+    if (
+      city === getState().app.get('selectedCity') &&
+      parseInt(level, 10) === getState().game.get('currentLevel')
+    ) {
+      // this city and level is already loaded, do nothing
+      return
+    }
     // Select city
     dispatch(selectCity(city))
     dispatch(loadLevel(level))
