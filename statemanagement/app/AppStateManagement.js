@@ -156,10 +156,8 @@ export function selectCity (name) {
   }
 }
 
-export function selectVideoForLevel (level) {
+export function selectVideoForLevel (level = 1) {
   return (dispatch, getState) => {
-    // console.log(level)
-
     const city = getState().app.get('selectedCity')
 
     const videoToSelect = getState()
