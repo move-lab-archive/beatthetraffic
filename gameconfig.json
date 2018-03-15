@@ -178,7 +178,7 @@
       "level": 2,
       "levelName": "Yorckstraße",
       "playbackRate": 1.3,
-      "videoPortraitOffset": 393,
+      "videoPortraitOffset": 230,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858783.hd.mp4?s=bcd9868b94dab5ec26e7a6777757d7ef377b26ed&profile_id=174",
@@ -195,7 +195,7 @@
       "level": 3,
       "levelName": "Hohenzollerndamm",
       "playbackRate": 1.4,
-      "videoPortraitOffset": 170,
+      "videoPortraitOffset": 229,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858794.hd.mp4?s=1a589ef798faf4191065958e8cf6acf77b691cab&profile_id=174",
@@ -378,7 +378,7 @@
       "level": 2,
       "levelName": "Avenida Figueroa Alcorta",
       "playbackRate": 1,
-      "videoPortraitOffset": 187,
+      "videoPortraitOffset": 266,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858816.hd.mp4?s=8890432a836a4189ef6d911d1ff87b8846298153&profile_id=174",
@@ -395,7 +395,7 @@
       "level": 3,
       "levelName": "Avenida General Paz",
       "playbackRate": 1,
-      "videoPortraitOffset": 266,
+      "videoPortraitOffset": 187,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/257858820.hd.mp4?s=31d033275a04b67c220c946ec0026eb21d8acdc5&profile_id=174",
@@ -531,7 +531,7 @@
       "level": 2,
       "levelName": "Shibuya",
       "playbackRate": 1.5,
-      "videoPortraitOffset": 104,
+      "videoPortraitOffset": 338,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259018133.hd.mp4?s=54001276d45047049b1cd26b9d7615ef84d5d1ed&profile_id=174",
@@ -548,7 +548,7 @@
       "level": 3,
       "levelName": "Mita",
       "playbackRate": 1.6,
-      "videoPortraitOffset": 338,
+      "videoPortraitOffset": 104,
       "sources": {
         "hd":
           "https://player.vimeo.com/external/259018146.hd.mp4?s=8f2ab1711e38a7da841595d0d2e91bd1a4ae148e&profile_id=174",
