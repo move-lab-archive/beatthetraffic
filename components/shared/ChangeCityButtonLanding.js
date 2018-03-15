@@ -18,6 +18,10 @@ class ChangeCityButtonLanding extends Component {
     super(props)
 
     this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
+
+    this.state = {
+      suggestedCity: ''
+    }
   }
 
   handleChangeCityClick () {
@@ -25,6 +29,40 @@ class ChangeCityButtonLanding extends Component {
       this.props.dispatch(hideCityPicker())
     } else {
       this.props.dispatch(showCityPicker(this.props.label))
+    }
+  }
+
+  setRandomCity () {
+    const city = this.props.availableCities
+      .sortBy(Math.random)
+      .filter((cityLabel, cityKey) => {
+        if (cityKey === this.props.selectedCity) {
+          return false
+        } else if (cityKey === this.state.suggestedCity) {
+          return false
+        } else {
+          return true
+        }
+      })
+      .first()
+      .get('label')
+    this.setState({
+      suggestedCity: city
+    })
+  }
+
+  componentDidMount () {
+    this.setRandomCity()
+
+    this.intervalChangeSuggestedCity = setInterval(
+      () => this.setRandomCity(),
+      4000
+    )
+  }
+
+  componentWillUnmount () {
+    if (this.intervalChangeSuggestedCity) {
+      clearInterval(this.intervalChangeSuggestedCity)
     }
   }
 
@@ -45,7 +83,9 @@ class ChangeCityButtonLanding extends Component {
         <div className='bubble-hint'>
           <div className='bubble-text'>OR PLAY</div>
           <div className='bubble-text bubble-city'>
-            <span className='city'>BUENOS AIRES</span>
+            <span className='city'>
+              {this.state.suggestedCity.toUpperCase()}
+            </span>
             <div className='arrow-down' />
           </div>
         </div>
@@ -56,6 +96,7 @@ class ChangeCityButtonLanding extends Component {
             bottom: 1rem;
             left: 1.5rem;
             cursor: pointer;
+            animation: fadeIn 2s;
           }
 
           .unicorn {
@@ -136,6 +177,8 @@ class ChangeCityButtonLanding extends Component {
 
 export default connect(state => {
   return {
-    cityPickerVisible: state.app.get('showCityPicker')
+    cityPickerVisible: state.app.get('showCityPicker'),
+    availableCities: state.app.get('availableCities'),
+    selectedCity: state.app.get('selectedCity')
   }
 })(ChangeCityButtonLanding)
