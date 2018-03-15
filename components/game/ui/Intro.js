@@ -88,7 +88,6 @@ class Intro extends Component {
           .location {
             font-size: 6rem;
             line-height: 7rem;
-            word-break: break-all;
             min-width: 320px;
           }
           .click {

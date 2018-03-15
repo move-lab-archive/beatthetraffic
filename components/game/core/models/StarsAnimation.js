@@ -1,4 +1,4 @@
-import { TweenMax, TweenLite, TimelineLite } from 'gsap'
+import { TweenLite, TimelineLite } from 'gsap'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
 import StarsAnimationsEngine from '../engines/StarsAnimationsEngine'
 

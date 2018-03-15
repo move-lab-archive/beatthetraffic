@@ -7,7 +7,10 @@ class MenuBtn extends Component {
   render () {
     return (
       <div
-        className={`menu-button ${this.props.isShowingIntro ? 'hidden' : ''}`}
+        className={`menu-button
+          ${this.props.isLandingPage ? 'landing' : ''}
+          ${this.props.isShowingIntro ? 'hidden' : ''}
+        `}
         onClick={() => this.props.dispatch(showMenu())}
       >
         <svg width='30px' height='22px' viewBox='0 0 30 22' version='1.1'>
@@ -41,18 +44,26 @@ class MenuBtn extends Component {
             height: 4.4rem;
             cursor: default;
             opacity: 1;
+          }
+
+          .menu-button.landing {
             animation: fadeInHeadline 3s;
           }
+
+          .menu-button:not(.landing) {
+            transition: opacity 0.3s;
+          }
+
+          .hidden {
+            opacity: 0;
+          }
+
           .menu-button svg {
             cursor: pointer;
             transition: 0.1s;
           }
           .menu-button svg:hover g {
             stroke: #ff3bff;
-          }
-
-          .hidden {
-            display: none;
           }
 
           @keyframes fadeInHeadline {

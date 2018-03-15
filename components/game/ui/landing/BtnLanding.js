@@ -63,11 +63,9 @@ class BtnLanding extends Component {
         </div>
         <style jsx>{`
           .btn-landing {
-            left: 50%;
-            position: absolute;
+            position: relative;
             width: 180px;
             height: 60px;
-            transform: translateX(-50%) translateY(120px);
             //GPU accelerate
             will-change: transform;
             animation: 1.3s fadeIn;
@@ -125,12 +123,6 @@ class BtnLanding extends Component {
           @media (min-width: 600px) {
             .btn-landing {
               width: 200px;
-            }
-          }
-
-          @media (max-height: 400px) {
-            .btn-landing {
-              transform: translateX(-50%) translateY(80px);
             }
           }
 

@@ -54,7 +54,6 @@ class GamePage extends React.PureComponent {
   }
 
   componentDidMount () {
-    require('smoothscroll-polyfill').polyfill()
     this.props.dispatch(initViewportListeners())
     this.props.dispatch(setClientRendering())
     this.setState({ clientSide: true })
@@ -214,7 +213,10 @@ class GamePage extends React.PureComponent {
             <GameProgressBar />
             {this.state.showMenuAndSoundBtn && (
               <React.Fragment>
-                <MenuBtn isShowingIntro={this.state.showIntro} />
+                <MenuBtn
+                  isShowingIntro={this.state.playIntroAnim && !this.state.showLanding}
+                  isLandingPage={this.state.showLanding}
+                />
                 <Sound />
               </React.Fragment>
             )}
