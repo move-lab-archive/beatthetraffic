@@ -56,10 +56,10 @@ class ScorePage extends PureComponent {
         <div className={`highscore-container`}>
           <div className={`highscore-inner`}>
             <h2 className='headline'>HIGH SCORES</h2>
-            {this.props.highscores.size === 0 &&
+            {/* {this.props.highscores.size === 0 &&
               this.props.isFetchingHighscores && <div>Loading ...</div>}
             {this.props.highscores.size === 0 &&
-              this.props.highscoresFetched && <div>No highscores yet.</div>}
+              this.props.highscoresFetched && <div>No highscores yet.</div>} */}
             {this.props.highscores.size > 0 && (
               <React.Fragment>
                 <div className='first-place-wrapper'>
