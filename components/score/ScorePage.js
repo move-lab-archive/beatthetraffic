@@ -2,26 +2,13 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import ButtonClose from '../shared/ButtonClose'
 
-import Button from '../shared/Button'
 import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 import { showCityPicker } from '../../statemanagement/app/AppStateManagement'
 
 class ScorePage extends PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      mountAnimation: false
-    }
-  }
 
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
-    setTimeout(() => {
-      this.setState({
-        mountAnimation: true
-      })
-    }, 50)
   }
 
   getCityLabel (city) {
@@ -49,15 +36,11 @@ class ScorePage extends PureComponent {
         <ButtonClose onClick={this.props.onClose} />
 
         <img
-          className={`rightcloud ${
-            this.state.mountAnimation ? 'visiblerightcloud' : 'hiddencloud'
-          }`}
+          className={`rightcloud`}
           src='/static/assets/menu/menu-rightcloud.svg'
         />
         <img
-          className={`leftcloud ${
-            this.state.mountAnimation ? 'visibleleftcloud' : 'hiddencloud'
-          }`}
+          className={`leftcloud`}
           src='/static/assets/menu/menu-leftcloud.svg'
         />
         <img
@@ -263,33 +246,22 @@ class ScorePage extends PureComponent {
             width: 60%;
             right: 0%;
             z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translate(30%, -30%);
           }
+
           .leftcloud {
             position: absolute;
             bottom: 0%;
             width: 110%;
             left: 2%;
             z-index: -1;
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translate(-30%, 30%);
           }
           .thirdcloud {
             position: absolute;
             bottom: -1%;
             width: 50%;
             left: 70%;
-          }
-
-          .hiddencloud {
-            transform: translate(0%, 0%);
-          }
-
-          .visiblerightcloud {
-            transform: translate(30%, -30%);
-          }
-
-          .visibleleftcloud {
-            transform: translate(-30%, 30%);
           }
 
           .fourthcloud {
