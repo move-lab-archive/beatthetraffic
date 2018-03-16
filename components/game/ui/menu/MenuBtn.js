@@ -24,7 +24,7 @@ class MenuBtn extends Component {
             <g
               id='Layout'
               transform='translate(-3332.000000, -2077.000000)'
-              stroke={`${this.props.introAnimPlayed ? '#FFFE4A' : '#000000'}`}
+              stroke={`${this.props.introAnimPlayed ? '#FFFE4A' : '#262626'}`}
               strokeWidth='4'
             >
               <path d='M3332,2079 L3362,2079' id='Path-15-Copy-2' />
@@ -63,7 +63,7 @@ class MenuBtn extends Component {
             transition: 0.1s;
           }
           .menu-button svg:hover g {
-            stroke: #ff3bff;
+            /*stroke: #ff3bff;*/
           }
 
           @keyframes fadeInHeadline {

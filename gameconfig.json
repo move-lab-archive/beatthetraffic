@@ -41,16 +41,16 @@
     "tokyo": {
       "location": [139.691706, 35.689488],
       "label": "Tokyo"
+    },
+    "london": {
+      "location": [-0.127758, 51.507351],
+      "label": "London"
     }
   },
   "futureCitiesToCopyToAvailableCities": {
     "addisabeba": {
       "location": [38.757761, 8.980603],
       "label": "Addis Abeba"
-    },
-    "london": {
-      "location": [-0.127758, 51.507351],
-      "label": "London"
     }
   },
   "availableVideos": [
@@ -556,6 +556,57 @@
           "https://player.vimeo.com/external/259018146.sd.mp4?s=f053bddc8bc9d8ce99471b7ab6daca4e61237730&profile_id=164",
         "hls":
           "https://player.vimeo.com/external/259018146.m3u8?s=b706b1f8c558f40b21d3509298ce35b879e96b72"
+      }
+    },
+    {
+      "name": "london-level1",
+      "busastruck": true,
+      "city": "london",
+      "level": 1,
+      "levelName": "Acton",
+      "playbackRate": 1.5,
+      "videoPortraitOffset": 130,
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259332787.hd.mp4?s=80c90b464bd0413e3188fdf542b25963273cf055&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259332787.sd.mp4?s=27041ae786e84124d05b3694a79ff54f77e092dc&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259332787.m3u8?s=cef65a94e991e8345ea0d3cad3997be8f96e95bc"
+      }
+    },
+    {
+      "name": "london-level2",
+      "busastruck": true,
+      "city": "london",
+      "level": 2,
+      "levelName": "Vauxhall",
+      "playbackRate": 1.4,
+      "videoPortraitOffset": 300,
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259332811.hd.mp4?s=44f009b677c74c0414d27e3400311eb63df46ca2&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259332811.sd.mp4?s=0e4a79a59886e34cc63dae7c517710ada3f55c75&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259332811.m3u8?s=81bc8a52b7d6b364c56a3e6ee7a076282dbacc8d"
+      }
+    },
+    {
+      "name": "london-level3",
+      "busastruck": true,
+      "city": "london",
+      "level": 3,
+      "levelName": "Wembley",
+      "playbackRate": 1.6,
+      "videoPortraitOffset": 250,
+      "sources": {
+        "hd":
+          "https://player.vimeo.com/external/259332834.hd.mp4?s=c011d4f2205cc5ad9110ac09a1a6c395b3622c86&profile_id=174",
+        "sd":
+          "https://player.vimeo.com/external/259332834.sd.mp4?s=398795d59fd60ca3237f23c33bb96a367e17955a&profile_id=164",
+        "hls":
+          "https://player.vimeo.com/external/259332834.m3u8?s=3eb4e58f41119b3e7629a5fc2e17a76b5998ce05"
       }
     }
   ]
