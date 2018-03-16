@@ -111,13 +111,16 @@ class ChangeCityButtonLanding extends Component {
           }
 
           .unicorn {
-            width: 5.5rem;
+            width: 5rem;
+            bottom: 3.2rem;
+            left: 2.6rem;
+            position: fixed;
           }
 
           .bubble-hint {
             position: absolute;
-            bottom: 2rem;
-            left: 5.5rem;
+            bottom: 1.5rem;
+            left: 5.1rem;
             cursor: pointer;
 
             margin: 0 auto;
@@ -133,8 +136,8 @@ class ChangeCityButtonLanding extends Component {
             padding-right: 1.5rem;
             padding-left: 1.5rem;
             font-size: 2rem;
-            min-height: 6.5rem;
-            min-width: 15.5rem; // To fit LOS ANGELES LONGEST TEXT
+            min-height: 8.5rem;
+            min-width: 17.5rem; // To fit LOS ANGELES LONGEST TEXT
 
             display: flex;
             justify-content: center;
@@ -145,6 +148,8 @@ class ChangeCityButtonLanding extends Component {
           .bubble-text {
             font-family: 'Geo', sans-serif;
             font-weight: 400;
+            margin-left: 2rem;
+            margin-top: 0.2rem;
           }
 
           .bubble-city {

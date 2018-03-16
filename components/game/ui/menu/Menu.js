@@ -298,7 +298,7 @@ class Menu extends PureComponent {
           }
 
           .hiddencloud {
-            transform: translateX(50%);
+            transform: translateX(0%);
           }
 
           .visiblecloud {

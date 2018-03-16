@@ -86,7 +86,7 @@ class Landing extends Component {
             <RightCloud />
             <div className='about'>
               <h4>
-                <a href='https://www.google.de/' target='_blank'>
+                <a href='https://opendatacam.moovellab.com/' target='_blank'>
                   OPEN DATA CAM
                 </a>
               </h4>
@@ -117,11 +117,12 @@ class Landing extends Component {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: -50px;
+            margin-top: -70px;
+            z-index: 1000;
           }
 
           .landing-headline {
-            width: 80%;
+            width: 100%;
             animation: fadeInHeadline 1.3s;
             color: #262626;
             text-align: center;
@@ -199,9 +200,14 @@ class Landing extends Component {
             }
           }
 
+          @media (max-width: 560px) {
+            .landing-headline {
+              width: 90%;
+            }
+          }
           @media (max-height: 560px) {
             .landing-content {
-              margin-top: -100px;
+              margin-top: -110px;
             }
           }
 
@@ -217,7 +223,7 @@ class Landing extends Component {
 
           @media (max-height: 460px) {
             .landing-content {
-              margin-top: -140px;
+              margin-top: -110px;
             }
 
             .landing-headline {
