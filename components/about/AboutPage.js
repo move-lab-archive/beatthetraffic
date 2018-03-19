@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
 import Button from '../shared/Button'
+import Footer from './Footer'
 
 class AboutPage extends Component {
   render () {
@@ -60,30 +61,68 @@ class AboutPage extends Component {
                 <div className='task'>
                   <p>Concept & Idea</p>
                   <h3>
-                    Benedikt Groß<br />Markus Kreutzer<br />Thibault Durand
+                    <a
+                      target='_blank'
+                      href='http://lab.moovel.com/people/benedikt-gross'
+                    >
+                      Benedikt Groß
+                    </a>
+                    <br />
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      Markus Kreutzer
+                    </a>
+                    <br />
+                    <a target='_blank' href='http://thibault-durand.fr/'>
+                      Thibault Durand
+                    </a>
                   </h3>
                 </div>
                 <div className='task'>
                   <p>Direction</p>
-                  <h3>Benedikt Groß</h3>
+                  <h3>
+                    <a
+                      target='_blank'
+                      href='http://lab.moovel.com/people/benedikt-gross'
+                    >
+                      Benedikt Groß
+                    </a>
+                  </h3>
                 </div>
                 <div className='task'>
                   <p>Visual Design</p>
-                  <h3>Markus Kreutzer</h3>
+                  <h3>
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      Markus Kreutzer
+                    </a>
+                  </h3>
                 </div>
                 <div className='task'>
                   <p>Interaction Design</p>
-                  <h3>Markus Kreutzer</h3>
+                  <h3>
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      Markus Kreutzer
+                    </a>
+                  </h3>
                 </div>
                 <div className='task'>
                   <p>Website Frontend Engineering</p>
                   <h3>
-                    Thibault Durand<br />Markus Kreutzer
+                    <a target='_blank' href='http://thibault-durand.fr/'>
+                      Thibault Durand
+                    </a>
+                    <br />
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      Markus Kreutzer
+                    </a>
                   </h3>
                 </div>
                 <div className='task'>
                   <p>Backend Engineering</p>
-                  <h3>Thibault Durand</h3>
+                  <h3>
+                    <a target='_blank' href='http://thibault-durand.fr/'>
+                      Thibault Durand
+                    </a>
+                  </h3>
                 </div>
                 <div className='task'>
                   <p>Extended Team</p>
@@ -116,13 +155,45 @@ class AboutPage extends Component {
                 <div className='task'>
                   <p>Made with</p>
                   <h3>
-                    yolo<br />node-yolo<br />Open Data Cam
+                    <a
+                      href='https://pjreddie.com/darknet/yolo/'
+                      target='_blank'
+                    >
+                      yolo
+                    </a>
+                    <br />
+                    <a
+                      href='https://github.com/moovel/node-yolo'
+                      target='_blank'
+                    >
+                      node-yolo
+                    </a>
+                    <br />
+                    <a
+                      href='https://pjreddie.com/darknet/yolo/'
+                      target='_blank'
+                    >
+                      opendatacam.moovellab.com
+                    </a>
+                    <br />
+                    <a
+                      href='https://github.com/tdurand/node-moving-things-tracker'
+                      target='_blank'
+                    >
+                      node-moving-things-tracker
+                    </a>
                   </h3>
                 </div>
                 <div className='task'>
                   <p>Tooling and Scripting</p>
                   <h3>
-                    Florian Porada<br />Benedikt Groß
+                    Florian Porada<br />
+                    <a
+                      target='_blank'
+                      href='http://lab.moovel.com/people/benedikt-gross'
+                    >
+                      Benedikt Groß
+                    </a>
                   </h3>
                 </div>
                 <div className='task'>
@@ -145,7 +216,10 @@ class AboutPage extends Component {
                     <a target='_blank' href='http://markuskreutzer.com'>
                       &nbsp;Markus Kreutzer
                     </a>
-                    <br />Buenos Aires, Mariana Greif
+                    <br />Buenos Aires,{' '}
+                    <a target='_blank' href='http://www.mge.uy/'>
+                      Mariana Greif
+                    </a>
                     <br />London,
                     <a
                       target='_blank'
@@ -181,10 +255,11 @@ class AboutPage extends Component {
                   </h3>
                 </div>
               </div>
-              footer
             </div>
           </div>
+          <Footer />
         </div>
+
         <style jsx>{`
           .about-page {
             position: fixed;
@@ -201,18 +276,14 @@ class AboutPage extends Component {
             cursor: default;
           }
           .about-container {
-            max-width: 700px;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0%;
-            left: 50%;
-            transform: translateX(-50%);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
           }
           .about-inner {
-            top: 0rem;
-            position: absolute;
-            padding-bottom: 20rem;
+            max-width: 700px;
           }
           .headline {
             margin-top: 1.9rem;
@@ -259,7 +330,7 @@ class AboutPage extends Component {
           }
 
           .text-container {
-            margin-top: 25vh;
+            margin-top: 4rem;
             margin-left: 2.2rem;
             margin-right: 2.2rem;
           }
