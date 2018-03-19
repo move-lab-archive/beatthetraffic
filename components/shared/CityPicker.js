@@ -104,7 +104,7 @@ class CityPicker extends PureComponent {
           }
 
           .city-picker-container.visible.nolabel {
-            bottom: 2rem;
+            bottom: 2.75rem;
           }
 
           .city-picker-overlay {
