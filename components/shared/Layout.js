@@ -136,7 +136,7 @@ class Layout extends Component {
             font-family: 'Quantico', sans-serif;
             font-weight: 700;
             font-size: 2rem;
-            line-height: 2.9rem;
+            line-height: 2.7rem;
           }
           :global(a) {
             text-decoration: none;

@@ -146,13 +146,17 @@ class ChangeCityButtonLanding extends Component {
           }
 
           .bubble-text {
-            font-family: 'Geo', sans-serif;
-            font-weight: 400;
+            font-family: 'Quantico', sans-serif;
             margin-left: 2rem;
-            margin-top: 0.2rem;
+            margin-top: 0.7rem;
+            font-weight: 700;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 2rem;
           }
 
           .bubble-city {
+            margin-top: 0rem;
             color: #ff3bff;
             display: flex;
             align-items: center;

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
 
+import Button from '../shared/Button'
+
 class AboutPage extends Component {
   render () {
     return (
       <div className={`about-page`}>
         <ButtonClose onClick={this.props.onClose} />
-
+        <h2 className='headline'>ABOUT</h2>
         <img
           className='rightcloud'
           src='/static/assets/menu/menu-rightcloud.svg'
@@ -27,31 +29,159 @@ class AboutPage extends Component {
 
         <div className={`about-container`}>
           <div className={`about-inner`}>
-            <h2 className='headline'>ABOUT</h2>
-
-            <div className='title-wrapper'>
-              <div className='title-container'>
-                <img
-                  className='tree'
-                  src='/static/assets/landing/asset-tree.png'
-                />
-                <h1>
-                  Beat the traffic<br />
-                  <span>X</span>
-                </h1>
-              </div>
-            </div>
-
             <div className='text-container'>
+              <h1>
+                <span>Beat the traffic</span> is a game VR by LCD and their fans
+              </h1>
               <img src='/static/assets/about-highscores/leftover.jpg' />
-              <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet.
+              <p className='maintext'>
+                With Beat The Traffic X moovel Lab is aiming to create an online
+                mini game where players can interact with the mass of cars that
+                roll through our cities everyday. The road traffic is based on
+                pre-recorded videos filmed in 11 global cities from Tokyo to LA.
+                The mission of the player is to transform masses of traffic into
+                “nicer” things like unicorns, rainbows, trees, while adding up a
+                high score. At the end of the game the highscore is unveiled and
+                compared to public transit. The player has furthermore the
+                chance to save the highscore and to sign up for a newsletter.
+                <br /> <br />
+                http://lab.moovel.com/blog/about-what-the-street
+                <br />
+                Download the Press Kit
               </p>
-              <h1>WANT TO SEE YOUR CITY IN THE GAME?</h1>
+              <div className='linktoopendata'>
+                <div className='linktoopendatainner'>
+                  <h2>Beat the traffic is powered by the open data cam</h2>
+                  <Button large title={`Open data cam`} />
+                </div>
+              </div>
+              <h1 className='headlinetopspace'>Credits</h1>
+              <div className='credits'>
+                <div className='task'>
+                  <p>Concept & Idea</p>
+                  <h3>
+                    Benedikt Groß<br />Markus Kreutzer<br />Thibault Durand
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>Direction</p>
+                  <h3>Benedikt Groß</h3>
+                </div>
+                <div className='task'>
+                  <p>Visual Design</p>
+                  <h3>Markus Kreutzer</h3>
+                </div>
+                <div className='task'>
+                  <p>Interaction Design</p>
+                  <h3>Markus Kreutzer</h3>
+                </div>
+                <div className='task'>
+                  <p>Website Frontend Engineering</p>
+                  <h3>
+                    Thibault Durand<br />Markus Kreutzer
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>Backend Engineering</p>
+                  <h3>Thibault Durand</h3>
+                </div>
+                <div className='task'>
+                  <p>Extended Team</p>
+                  <h3>
+                    Raphael Reimann<br />Florian Porada<br />Daniel Schmid
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>Soundtrack and Sounds</p>
+                  <a target='_blank' href='https://myspace.com/bobbykudlicz'>
+                    <h3>Patric Schmidt aka Bobby Kudlicz</h3>
+                  </a>
+                </div>
+                <div className='task'>
+                  <p>Text</p>
+                  <h3>Raphael Reimann</h3>
+                </div>
+                <div className='task'>
+                  <p>3D Modeling</p>
+                  <a target='_blank' href='https://www.scherabon.com/'>
+                    <h3>Herwig Scherabon</h3>
+                  </a>
+                </div>
+                <div className='task'>
+                  <p>Dev Ops</p>
+                  <h3>
+                    Florian Porada<br />Thomas Derleth
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>Made with</p>
+                  <h3>
+                    yolo<br />node-yolo<br />Open Data Cam
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>Tooling and Scripting</p>
+                  <h3>
+                    Florian Porada<br />Benedikt Groß
+                  </h3>
+                </div>
+                <div className='task'>
+                  <p>License Plate Censoring</p>
+                  <a
+                    target='_blank'
+                    href='http://uhurumkate.blogspot.de/2017/12/automatic-license-plate-recognition.html'
+                  >
+                    <h3>Dror Gluska</h3>
+                  </a>
+                </div>
+                <div className='task cities'>
+                  <p>City Road Traffic Footage</p>
+                  <h3>
+                    Barcelona,
+                    <a target='_blank' href='http://moritzphleps.com'>
+                      &nbsp;Moritz Phleps
+                    </a>
+                    <br />Berlin,
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      &nbsp;Markus Kreutzer
+                    </a>
+                    <br />Buenos Aires, Mariana Greif
+                    <br />London,
+                    <a
+                      target='_blank'
+                      href='http://www.kristinacranfeld.co.uk/'
+                    >
+                      &nbsp;Kristina Cranfeld
+                    </a>
+                    <br />Los Angeles,
+                    <a target='_blank' href='http://davidleonard.tv/'>
+                      &nbsp;David Leonard
+                    </a>
+                    <br />Moscow, Piotr Erdman
+                    <br />New Delhi,
+                    <a target='_blank' href='https://superflyindia.com/'>
+                      &nbsp;Superfly Productions
+                    </a>
+                    <br />New York,
+                    <a target='_blank' href='http://jk-lee.com/'>
+                      &nbsp;Joey Lee
+                    </a>
+                    <br />Portland,
+                    <a target='_blank' href='http://vividframemedia.com/'>
+                      &nbsp;Vivid Frame Media
+                    </a>
+                    <br />Stuttgart,
+                    <a target='_blank' href='http://markuskreutzer.com'>
+                      &nbsp;Markus Kreutzer
+                    </a>
+                    <br />Tokyo,
+                    <a target='_blank' href='http://hirokiyokoyama.com'>
+                      &nbsp;Hiroki Yokoyama
+                    </a>
+                  </h3>
+                </div>
+              </div>
+              footer
             </div>
           </div>
         </div>
@@ -84,9 +214,9 @@ class AboutPage extends Component {
             position: absolute;
             padding-bottom: 20rem;
           }
-          .about-inner .headline {
-            margin-top: 2.3rem;
-            margin-left: 2.9rem;
+          .headline {
+            margin-top: 1.9rem;
+            margin-left: 2.3rem;
             text-align: left;
           }
 
@@ -128,36 +258,60 @@ class AboutPage extends Component {
             z-index: -10;
           }
 
-          .title-container {
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            text-align: center;
-          }
-          .title-wrapper {
-            width: 100%;
-            height: 100%;
-            left: 0%;
-            top: 0%;
-            position: fixed;
+          .text-container {
+            margin-top: 25vh;
+            margin-left: 2.2rem;
+            margin-right: 2.2rem;
           }
 
-          .title-container span {
+          .text-container span {
             color: #ff3bff;
           }
-          .title-container img {
-            width: 7rem;
-          }
 
-          .text-container {
-            margin-top: 90vh;
-            margin-left: 2.9rem;
-            margin-right: 2.9rem;
+          .linktoopendata {
+            background-color: #fffe4a;
+            padding-top: 3rem;
+            padding-bottom: 5rem;
+            padding-left: 5rem;
+            padding-right: 5rem;
+            margin-top: 6rem;
           }
 
           .text-container img {
+            width: 130%;
+            margin-left: -15%;
+            margin-top: 5rem;
+          }
+
+          .credits {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .task {
+            width: 50%;
+          }
+          .task h3 {
+            margin-top: -1rem;
+            color: #ff3bff;
+          }
+          .task a {
+            color: #ff3bff;
+          }
+
+          .cities {
             width: 100%;
+          }
+          .task a:hover,
+          .task a h3:hover {
+            color: #4effff;
+          }
+
+          .maintext {
+            margin-top: 6rem;
+          }
+
+          .headlinetopspace {
+            margin-top: 7rem;
           }
 
           @media (min-width: 550px) {
@@ -178,18 +332,27 @@ class AboutPage extends Component {
               bottom: -25%;
             }
             .text-container {
-              margin-top: 90vh;
-            }
-            .about-inner .headline {
-              margin-top: 2.3rem;
-              text-align: center;
-              margin-left: 0;
+              margin-top: 30vh;
             }
           }
 
           @media (max-height: 400px) {
             .fourthcloud {
               width: 43%;
+            }
+          }
+
+          @media (max-width: 500px) {
+            .task {
+              width: 100%;
+            }
+          }
+
+          @media (max-width: 1000px) {
+            .text-container img {
+              width: 100%;
+              margin-left: 0%;
+              margin-top: 5rem;
             }
           }
 

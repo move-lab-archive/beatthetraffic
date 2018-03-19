@@ -6,7 +6,6 @@ import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 import { showCityPicker } from '../../statemanagement/app/AppStateManagement'
 
 class ScorePage extends PureComponent {
-
   componentDidMount () {
     this.props.dispatch(fetchHighscores())
   }
@@ -34,7 +33,7 @@ class ScorePage extends PureComponent {
     return (
       <div className={`highscore-page`}>
         <ButtonClose onClick={this.props.onClose} />
-
+        <h2 className='headline'>HIGH SCORES</h2>
         <img
           className={`rightcloud`}
           src='/static/assets/menu/menu-rightcloud.svg'
@@ -55,7 +54,6 @@ class ScorePage extends PureComponent {
 
         <div className={`highscore-container`}>
           <div className={`highscore-inner`}>
-            <h2 className='headline'>HIGH SCORES</h2>
             {/* {this.props.highscores.size === 0 &&
               this.props.isFetchingHighscores && <div>Loading ...</div>}
             {this.props.highscores.size === 0 &&
@@ -103,7 +101,7 @@ class ScorePage extends PureComponent {
                     .filter((value, index) => index > 1)
                     .map((highscore, index) => (
                       <div
-                        className={`list-item 
+                        className={`list-item
                         ${
                       index + 2 === parseInt(this.props.rank, 10)
                         ? 'selected'
@@ -234,9 +232,9 @@ class ScorePage extends PureComponent {
             padding-bottom: 20rem;
             width: 100%;
           }
-          .highscore-inner .headline {
-            margin-top: 2.3rem;
-            margin-left: 2.9rem;
+          .headline {
+            margin-top: 1.9rem;
+            margin-left: 2.3rem;
             text-align: left;
           }
 
@@ -456,11 +454,6 @@ class ScorePage extends PureComponent {
             .list-container {
               margin-top: 90vh;
             }
-            .highscore-inner .headline {
-              margin-top: 2.3rem;
-              text-align: center;
-              margin-left: 0;
-            }
           }
 
           @media (max-height: 400px) {
@@ -510,14 +503,17 @@ class ScorePage extends PureComponent {
             bottom: 0;
             left: 0;
             right: 0;
-            height: 9rem;
-            background-color: #4effff;
+            height: 6rem;
+            background-color: #262626;
+            color: white;
             font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.25);
             cursor: pointer;
+          }
+          .play-fixed-cta:hover {
+            background-color: #ff3bff;
           }
 
           .name.clickable {

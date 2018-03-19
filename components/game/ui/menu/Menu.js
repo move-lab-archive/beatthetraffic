@@ -225,7 +225,7 @@ class Menu extends PureComponent {
             width: 100%;
             height: 100%;
             position: fixed;
-            overflow-y: auto;
+            overflow-y: scroll;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
           }
@@ -248,7 +248,7 @@ class Menu extends PureComponent {
 
           .city-selector-items {
             margin-top: 10rem;
-            margin-bottom: 5rem;
+            padding-bottom: 5rem;
           }
 
           .hidden {

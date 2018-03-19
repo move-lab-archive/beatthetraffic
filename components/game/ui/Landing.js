@@ -6,7 +6,7 @@ import RightCloud from './landing/RightCloud'
 import LeftCloud from './landing/LeftCloud'
 import Unicorn from './landing/Unicorn'
 
-// import Gameover from './instructions/Gameover'
+/* import Win from './instructions/Win' */
 /* import Loading from '../../shared/Loading' */
 /* NOTE just for style reasons on landing */
 
