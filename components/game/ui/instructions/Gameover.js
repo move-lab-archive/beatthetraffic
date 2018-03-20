@@ -19,10 +19,22 @@ class Gameover extends Component {
     SoundsManager.playSound('youloseloop')
 
     this.props.dispatch(blockCanvasScrolling())
+
+    // Redirect back to landing page after 20s
+    this.timeoutRedirectToLanding = setTimeout(() => {
+      // Do not redirect if we opened up the menu
+      if (!this.props.showMenu) {
+        window.location.href = `/${this.props.city}/level/1`
+      }
+    }, 20000)
   }
 
   componentWillUnmount () {
     this.props.dispatch(restoreCanvasScrolling())
+
+    if (this.timeoutRedirectToLanding) {
+      clearTimeout(this.timeoutRedirectToLanding)
+    }
   }
 
   render () {
@@ -127,6 +139,8 @@ export default connect(state => {
   return {
     score: state.game.get('score'),
     currentLevel: state.game.get('currentLevel'),
-    nbCarsConverted: state.game.get('nbCarsConverted')
+    nbCarsConverted: state.game.get('nbCarsConverted'),
+    city: state.app.get('selectedCity'),
+    showMenu: state.app.get('showMenu')
   }
 })(Gameover)

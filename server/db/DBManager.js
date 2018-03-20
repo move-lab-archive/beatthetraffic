@@ -12,7 +12,7 @@ if (process.env.NOW_DEPLOY) {
     'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic'
 }
 
-if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY ) {
+if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY) {
   mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE
 }
 
@@ -29,6 +29,11 @@ class DBManager {
         } else {
           let db = client.db('beatthetraffic')
           this.db = db
+
+          console.log('drop database')
+          db.dropDatabase(function (err, result) {
+            console.log('db cleared')
+          })
 
           // Get the highscore collection
           const collection = db.collection('highscores')

@@ -93,6 +93,18 @@ class Win extends Component {
         shallow: true
       }
     )
+
+    // Redirect back to landing page after 20s
+    this.timeoutRedirectToLanding = setTimeout(() => {
+      // Do not redirect if we opened up the menu / add score / highscores
+      if (
+        !this.props.showMenu &&
+        !this.state.showAddScorePopup &&
+        !this.state.showScore
+      ) {
+        window.location.href = `/${this.props.city}/level/1`
+      }
+    }, 20000)
   }
 
   componentWillUnmount () {
@@ -101,6 +113,10 @@ class Win extends Component {
     Router.replace('/', `${this.urlWhenEnteringWinToRestore}`, {
       shallow: true
     })
+
+    if (this.timeoutRedirectToLanding) {
+      clearTimeout(this.timeoutRedirectToLanding)
+    }
   }
 
   startAnimatingScoreBox () {
@@ -158,7 +174,11 @@ class Win extends Component {
       <div className='instructions-win'>
         <div className='title'>YOU WON</div>
         <div className='content'>
-          <ScoreBox color='pink' score={this.props.score} nbCarsConverted={this.props.nbCarsConverted} />
+          <ScoreBox
+            color='pink'
+            score={this.props.score}
+            nbCarsConverted={this.props.nbCarsConverted}
+          />
         </div>
         <Button
           large
@@ -269,6 +289,8 @@ export default connect(state => {
     score: state.game.get('score'),
     currentLevel: state.game.get('currentLevel'),
     currentCity: state.app.get('selectedCity'),
-    nbCarsConverted: state.game.get('nbCarsConverted')
+    nbCarsConverted: state.game.get('nbCarsConverted'),
+    city: state.app.get('selectedCity'),
+    showMenu: state.app.get('showMenu')
   }
 })(Win)
