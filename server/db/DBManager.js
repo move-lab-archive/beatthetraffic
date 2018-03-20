@@ -32,7 +32,7 @@ class DBManager {
 
           console.log('drop database')
           db.dropDatabase(function (err, result) {
-            console.log('db cleared')
+            // console.log('db cleared')
           })
 
           // Get the highscore collection
