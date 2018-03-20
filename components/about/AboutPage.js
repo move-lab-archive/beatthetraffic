@@ -31,33 +31,59 @@ class AboutPage extends Component {
         <div className={`about-container`}>
           <div className={`about-inner`}>
             <div className='text-container'>
-              <h1>
-                <span>Beat the traffic</span> is a game VR by LCD and their fans
-              </h1>
+              <h2>
+                <span>Beat The Traffic X</span> is a magical way of using
+                traffic data to face current challenges of urban mobility.
+              </h2>
               <img src='/static/assets/about-highscores/leftover.jpg' />
               <p className='maintext'>
-                With Beat The Traffic X moovel Lab is aiming to create an online
-                mini game where players can interact with the mass of cars that
-                roll through our cities everyday. The road traffic is based on
-                pre-recorded videos filmed in 11 global cities from Tokyo to LA.
-                The mission of the player is to transform masses of traffic into
-                “nicer” things like unicorns, rainbows, trees, while adding up a
-                high score. At the end of the game the highscore is unveiled and
-                compared to public transit. The player has furthermore the
-                chance to save the highscore and to sign up for a newsletter.
+                Making traffic disappear can be as easy as detecting it.
+                Automated object detection using machine learning allows to
+                identify and interact with mobility data. We analyzed traffic
+                videos from around the world with our "Open Data Cam"
+                technology. This shows us exactly what objects are identified,
+                where they move and ultimately let's them disappear with a
+                single click.
                 <br /> <br />
-                http://lab.moovel.com/blog/about-what-the-street
+                Submit your highscore if you manage to rescue your city from the
+                avalanche of cars rolling through cities every day. The mobility
+                wonderland you've created by transforming cars into unicorns,
+                rainbows and trees isn't only magical. The cars you've
+                transformed are finally converted into the amount of public
+                transit needed to transport everybody sitting in these cars. For
+                cities with less cars and more quality of life.
                 <br />
-                Download the Press Kit
+                <br />
+                <a
+                  href='http://lab.moovel.com/projects/beat-the-traffic-x'
+                  target='_blank'
+                >
+                  http://lab.moovel.com/projects/beat-the-traffic-x
+                </a>
+                <br />
+                <a href='#' target='_blank'>
+                  Download the Press Kit (missing)
+                </a>
               </p>
-              <div className='linktoopendata'>
+              <div className='headlinetopspace linktoopendata'>
                 <div className='linktoopendatainner'>
-                  <h2>Beat the traffic is powered by the open data cam</h2>
-                  <Button large title={`Open data cam`} />
+                  <h2>‘Open Data Cam’ is a DIY data creation tool.</h2>
+                  <a href='https://opendatacam.moovellab.com' target='_blank'>
+                    <Button large title={`Open data cam`} />
+                  </a>
+                  <p>
+                    <br />
+                    Equipped with computer vision ‘Open Data Cam’ understands
+                    and quantifies moving objects. The free and simple DIY guide
+                    enables everybody to become an urban data miner. ‘Open Data
+                    Cam’ consists of a video camera attached to a mini computer
+                    running an interface which allows for counting detections
+                    within the video stream. For us the obvious use case for
+                    ‘Open Data Cam’ was to count vehicles at any given location.
+                  </p>
                 </div>
               </div>
-              <h1 className='headlinetopspace'>Credits</h1>
-              <div className='credits'>
+              <div className='headlinetopspace credits'>
                 <div className='task'>
                   <p>Concept & Idea</p>
                   <h3>
@@ -169,11 +195,8 @@ class AboutPage extends Component {
                       node-yolo
                     </a>
                     <br />
-                    <a
-                      href='https://pjreddie.com/darknet/yolo/'
-                      target='_blank'
-                    >
-                      opendatacam.moovellab.com
+                    <a href='https://opendatacam.moovellab.com' target='_blank'>
+                      Open Data Cam
                     </a>
                     <br />
                     <a
@@ -365,15 +388,16 @@ class AboutPage extends Component {
             margin-top: -1rem;
             color: #ff3bff;
           }
-          .task a {
+
+          a {
             color: #ff3bff;
           }
 
           .cities {
             width: 100%;
           }
-          .task a:hover,
-          .task a h3:hover {
+          a:hover,
+          a h3:hover {
             color: #4effff;
           }
 
@@ -403,7 +427,7 @@ class AboutPage extends Component {
               bottom: -25%;
             }
             .text-container {
-              margin-top: 30vh;
+              margin-top: 15vh; /*please do not change distance to top ;)*/
             }
           }
 

@@ -88,9 +88,10 @@ class Footer extends React.PureComponent {
       </div>
       <style jsx>{`
         .Footer {
-          background-color: #00b7bf;
-          color: #fff;
+          background-color: #4effff;
+          color: #262626;
           width: 100%;
+          margin-top: 7rem;
         }
 
         .sctn-txt {
@@ -99,7 +100,7 @@ class Footer extends React.PureComponent {
 
         .sctn-txt a {
           text-decoration: none;
-          color: #fff;
+          color: #262626;
           cursor: pointer;
         }
 
@@ -148,7 +149,7 @@ class Footer extends React.PureComponent {
         }
 
         .container {
-          width: 1100px;
+          width: 900px;
           margin: auto;
         }
 
@@ -163,13 +164,19 @@ class Footer extends React.PureComponent {
           line-height: 1.3em;
         }
 
-        @media (max-width: 1000px) {
+        .reversed {
+        }
+
+        @media (max-width: 900px) {
           .row {
             flex-direction: column;
           }
 
           .sctn-txt {
-            padding: 45px 30px;
+            padding: 3rem 2.2rem;
+          }
+          .container {
+            width: 100%;
           }
         }
       `}</style>
