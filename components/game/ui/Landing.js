@@ -230,6 +230,11 @@ class Landing extends Component {
               margin-bottom: 2rem;
             }
           }
+          @media (max-width: 700px) {
+            .landing-headline {
+              margin-bottom: 1.5rem;
+            }
+          }
         `}</style>
       </div>
     )

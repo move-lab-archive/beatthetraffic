@@ -178,6 +178,12 @@ class ChangeCityButtonLanding extends Component {
             border-top: 6px solid black;
           }
 
+          @media (max-width: 700px) {
+            .bubble-hint {
+              bottom: 0.7rem;
+            }
+          }
+
           @keyframes fadeIn {
             0% {
               opacity: 0;
