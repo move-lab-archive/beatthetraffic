@@ -16,7 +16,8 @@ class SocialShareButtons extends React.Component {
   twitterUrl () {
     let text = ''
 
-    text += 'Great game 👌 ! Are you ready to beat the traffic 🚕 ?'
+    text +=
+      "I've beaten the traffic! Try to beat my highscore and create your own mobility wonderland with 'Beat The Traffic X' #BeatTheTrafficX via @moovellab"
 
     return `https://twitter.com/intent/tweet?text=${encodeURI(
       text

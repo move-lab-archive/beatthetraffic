@@ -29,7 +29,7 @@ class Layout extends Component {
           />
           <meta
             name='description'
-            content={`Magically create the mobility wonderland! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
+            content={`Magically create the mobility wonderland in you city! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
           />
           <link
             rel='apple-touch-icon'
@@ -54,7 +54,7 @@ class Layout extends Component {
           />
           <meta
             property='og:description'
-            content={`Magically create the mobility wonderland! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
+            content={`Magically create the mobility wonderland in you city! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
           />
           <meta property='og:type' content='website' />
           <meta property='og:site_name' content='moovel lab' />
@@ -66,7 +66,7 @@ class Layout extends Component {
           />
           <meta
             name='twitter:description'
-            content={`Magically create the mobility wonderland! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
+            content={`Magically create the mobility wonderland in you city! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
           />
           <meta
             name='twitter:image'
