@@ -1,7 +1,5 @@
 # Beat the traffic 🚚 🚗 🏍
 
-> TODO write intro
-
 ## 🏛 General architecture
 
 Beat the traffic runs with:
