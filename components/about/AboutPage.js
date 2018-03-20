@@ -62,7 +62,7 @@ class AboutPage extends Component {
                 </a>
                 <br />
                 <a href='#' target='_blank'>
-                  Download the Press Kit (missing)
+                  Download the Press Kit (soon)
                 </a>
               </p>
               <div className='headlinetopspace linktoopendata'>
