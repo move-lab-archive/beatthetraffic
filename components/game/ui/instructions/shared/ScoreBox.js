@@ -24,11 +24,7 @@ class ScoreBox extends Component {
     })
     scoreBox.push({
       icon: 'bus',
-      value: Math.round(props.nbCarsConverted / 10)
-    })
-    scoreBox.push({
-      icon: 'train',
-      value: Math.round(props.nbCarsConverted / 20)
+      value: Math.round(props.nbCarsConverted / 63)
     })
 
     this.state = {
@@ -72,13 +68,11 @@ class ScoreBox extends Component {
 
   getTextLabel (leftIcon) {
     if (leftIcon === 'star') {
-      return `You converted ${this.props.nbCarsConverted} cars`
+      return `You've converted ${this.props.nbCarsConverted} cars`
     } else if (leftIcon === 'car') {
-      return `Which could be replaced by ${Math.round(this.props.nbCarsConverted / 10)} bus`
-    } else if (leftIcon === 'bus') {
-      return `And only ${Math.round(this.props.nbCarsConverted / 20)} train`
-    } else if (leftIcon === 'train') {
-      return ``
+      return `Which could be replaced by ${Math.round(
+        this.props.nbCarsConverted / 63
+      )} bus`
     }
   }
 
