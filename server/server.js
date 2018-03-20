@@ -29,21 +29,19 @@ app.use(redirectToHTTPS([/localhost:(\d{4})/]))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-// TODO WE COULD CONFIGURE THE BUILD PROCESS TO PRE-COMPRESS
-// OUT/ directory to avoid doing it on the fly and use CPU
 app.use(compression())
 
 // Credentials allowed
-let usersCredentials = {}
-usersCredentials['moovellab'] = 'beatthetraffic'
+// let usersCredentials = {}
+// usersCredentials['moovellab'] = 'beatthetraffic'
 
-app.use(
-  basicAuth({
-    users: usersCredentials,
-    challenge: true,
-    realm: 'beatthetraffic'
-  })
-)
+// app.use(
+//   basicAuth({
+//     users: usersCredentials,
+//     challenge: true,
+//     realm: 'beatthetraffic'
+//   })
+// )
 
 app.get('/', (req, res) => {
   // Default city
