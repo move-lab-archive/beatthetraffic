@@ -30,11 +30,6 @@ class DBManager {
           let db = client.db('beatthetraffic')
           this.db = db
 
-          console.log('drop database')
-          db.dropDatabase(function (err, result) {
-            // console.log('db cleared')
-          })
-
           // Get the highscore collection
           const collection = db.collection('highscores')
           // Create the index
