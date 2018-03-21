@@ -24,9 +24,9 @@ class Button extends Component {
   render () {
     return (
       <a
-        className={`btn 
+        className={`btn
           ${this.props.large ? 'large' : ''} 
-          ${this.props.medium ? 'medium' : ''} 
+          ${this.props.medium ? 'medium' : ''}
           ${this.props.bgBlack ? 'bg-black' : ''}
           ${this.props.disabled ? 'disabled' : ''}
         `}

@@ -52,24 +52,12 @@ class AboutPage extends Component {
                 transformed are finally converted into the amount of public
                 transit needed to transport everybody sitting in these cars. For
                 cities with less cars and more quality of life.
-                <br />
-                <br />
-                <a
-                  href='http://lab.moovel.com/projects/beat-the-traffic-x'
-                  target='_blank'
-                >
-                  http://lab.moovel.com/projects/beat-the-traffic-x
-                </a>
-                <br />
-                <a href='#' target='_blank'>
-                  Download the Press Kit (soon)
-                </a>
               </p>
               <div className='headlinetopspace linktoopendata'>
                 <div className='linktoopendatainner'>
                   <h2>‘Open Data Cam’ is a DIY data creation tool.</h2>
                   <a href='https://opendatacam.moovellab.com' target='_blank'>
-                    <Button large title={`Open data cam`} />
+                    <p>opendatacam.moovellab.com</p>
                   </a>
                   <p>
                     <br />
@@ -83,6 +71,33 @@ class AboutPage extends Component {
                   </p>
                 </div>
               </div>
+
+              <div className='buttons'>
+                <div className='buttoncontainer'>
+                  <div className='btn headlinetopspace'>
+                    <a href='#' target='_blank'>
+                      <div className='inner' />
+                      <div className='outer'>
+                        <h4>Press kit</h4>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div className='buttoncontainer'>
+                  <div className='btn headlinetopspace'>
+                    <a
+                      href='http://lab.moovel.com/projects/beat-the-traffic-x'
+                      target='_blank'
+                    >
+                      <div className='inner' />
+                      <div className='outer'>
+                        <h4>blog post</h4>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <div className='headlinetopspace credits'>
                 <div className='task'>
                   <p>Concept & Idea</p>
@@ -231,47 +246,47 @@ class AboutPage extends Component {
                 <div className='task cities'>
                   <p>City Road Traffic Footage</p>
                   <h3>
-                    Barcelona,
+                    Barcelona –
                     <a target='_blank' href='http://moritzphleps.com'>
                       &nbsp;Moritz Phleps
                     </a>
-                    <br />Berlin,
+                    <br />Berlin –
                     <a target='_blank' href='http://markuskreutzer.com'>
                       &nbsp;Markus Kreutzer
                     </a>
-                    <br />Buenos Aires,{' '}
+                    <br />Buenos Aires –{' '}
                     <a target='_blank' href='http://www.mge.uy/'>
                       Mariana Greif
                     </a>
-                    <br />London,
+                    <br />London –
                     <a
                       target='_blank'
                       href='http://www.kristinacranfeld.co.uk/'
                     >
                       &nbsp;Kristina Cranfeld
                     </a>
-                    <br />Los Angeles,
+                    <br />Los Angeles –
                     <a target='_blank' href='http://davidleonard.tv/'>
                       &nbsp;David Leonard
                     </a>
-                    <br />Moscow, Piotr Erdman
-                    <br />New Delhi,
+                    <br />Moscow – Piotr Erdman
+                    <br />New Delhi –
                     <a target='_blank' href='https://superflyindia.com/'>
                       &nbsp;Superfly Productions
                     </a>
-                    <br />New York,
+                    <br />New York –
                     <a target='_blank' href='http://jk-lee.com/'>
                       &nbsp;Joey Lee
                     </a>
-                    <br />Portland,
+                    <br />Portland –
                     <a target='_blank' href='http://vividframemedia.com/'>
                       &nbsp;Vivid Frame Media
                     </a>
-                    <br />Stuttgart,
+                    <br />Stuttgart –
                     <a target='_blank' href='http://markuskreutzer.com'>
                       &nbsp;Markus Kreutzer
                     </a>
-                    <br />Tokyo,
+                    <br />Tokyo –
                     <a target='_blank' href='http://hirokiyokoyama.com'>
                       &nbsp;Hiroki Yokoyama
                     </a>
@@ -387,6 +402,57 @@ class AboutPage extends Component {
           .task h3 {
             margin-top: -1rem;
             color: #ff3bff;
+          }
+
+          .buttons {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .buttoncontainer {
+            width: 50%;
+          }
+          .btn {
+            width: 20rem;
+            height: 6rem;
+            will-change: transform;
+            position: relative;
+          }
+          .btn h4 {
+            margin: 0;
+            font-family: 'Quantico', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 3.4rem;
+            text-transform: uppercase;
+            color: #262626;
+          }
+          .btn .inner {
+            width: 100%;
+            height: 100%;
+            left: 5px;
+            top: 5px;
+            background-color: #262626;
+            position: absolute;
+          }
+          .btn .outer {
+            width: 100%;
+            height: 100%;
+            background-color: #4effff;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: 0 0;
+          }
+          .btn .outer:hover {
+            background-color: #ff3bff;
+            cursor: pointer;
+          }
+
+          .btn .outer:active {
+            background-color: #ff3bff;
+            left: 2px;
+            top: 2px;
           }
 
           a {

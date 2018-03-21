@@ -159,7 +159,7 @@
       "busastruck": true,
       "city": "berlin",
       "level": 1,
-      "levelName": "Halensee",
+      "levelName": "Yorckstraße",
       "playbackRate": 1.2,
       "videoPortraitOffset": 249,
       "sources": {
@@ -176,7 +176,7 @@
       "busastruck": true,
       "city": "berlin",
       "level": 2,
-      "levelName": "Yorckstraße",
+      "levelName": "Halensee",
       "playbackRate": 1.3,
       "videoPortraitOffset": 230,
       "sources": {
