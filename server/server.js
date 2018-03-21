@@ -32,16 +32,16 @@ app.use(bodyParser.json())
 app.use(compression())
 
 // Credentials allowed
-// let usersCredentials = {}
-// usersCredentials['moovellab'] = 'beatthetraffic'
+let usersCredentials = {}
+usersCredentials['moovellab'] = 'beatthetraffic'
 
-// app.use(
-//   basicAuth({
-//     users: usersCredentials,
-//     challenge: true,
-//     realm: 'beatthetraffic'
-//   })
-// )
+app.use(
+  basicAuth({
+    users: usersCredentials,
+    challenge: true,
+    realm: 'beatthetraffic'
+  })
+)
 
 app.get('/', (req, res) => {
   // Default city
