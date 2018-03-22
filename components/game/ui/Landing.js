@@ -205,27 +205,14 @@ class Landing extends Component {
               width: 90%;
             }
           }
-          @media (max-height: 560px) {
-            .landing-content {
-              margin-top: -110px;
-            }
-          }
 
           @media (max-height: 500px) {
             .tree {
               display: none;
             }
-
-            .landing-content {
-              margin-top: -110px;
-            }
           }
 
           @media (max-height: 460px) {
-            .landing-content {
-              margin-top: -110px;
-            }
-
             .landing-headline {
               margin-bottom: 2rem;
             }
@@ -233,6 +220,14 @@ class Landing extends Component {
           @media (max-width: 700px) {
             .landing-headline {
               margin-bottom: 1.5rem;
+            }
+            .landing-content {
+              margin-top: -110px;
+            }
+          }
+          @media (max-height: 400px) {
+            .landing-content {
+              margin-top: -60px;
             }
           }
         `}</style>

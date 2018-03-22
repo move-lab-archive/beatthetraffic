@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="175px" height="124px" viewBox="0 0 175 124" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="155px" height="95px" viewBox="0 0 155 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Path 25</title>
+    <title>Path 24</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-3214.000000, -873.000000)">
-        <polygon id="Path-25" stroke="#000000" stroke-width="3.7" fill="#FFFFFF" transform="translate(3306.696775, 934.125688) rotate(15.000000) translate(-3306.696775, -934.125688) " points="3231.5828 996.494532 3242.0125 930.422809 3278.86183 880.564528 3336.05419 871.756844 3379.53682 898.665208 3381.81075 951.242192 3347.09556 985.520026 3298.7077 993.204793 3266.19202 974.144131"></polygon>
+    <g id="Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-3215.000000, -884.000000)">
+        <polygon id="Path-24" stroke="#262626" stroke-width="2" fill="#FFFFFF" points="3240.51623 954.931301 3219 930.114277 3240.51623 898.933757 3286.11687 885 3333.31069 889.513384 3368.23437 914.533845 3368.23437 944.382207 3345.62323 961.819831 3303.70049 970.660512 3259.3096 961.819831 3219 976.457704"></polygon>
     </g>
 </svg>

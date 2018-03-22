@@ -84,7 +84,7 @@ class AboutPage extends Component {
                   </div>
                 </div>
                 <div className='buttoncontainer'>
-                  <div className='btn headlinetopspace'>
+                  <div className='btn headlinetopspace secondbtn'>
                     <a
                       href='http://lab.moovel.com/projects/beat-the-traffic-x'
                       target='_blank'
@@ -514,6 +514,15 @@ class AboutPage extends Component {
               width: 100%;
               margin-left: 0%;
               margin-top: 5rem;
+            }
+          }
+
+          @media (max-width: 500px) {
+            .buttons {
+              display: block;
+            }
+            .secondbtn {
+              margin-top: 4rem;
             }
           }
 
