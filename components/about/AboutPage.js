@@ -293,6 +293,13 @@ class AboutPage extends Component {
                     </a>
                   </h3>
                 </div>
+                <div className='task cities'>
+                  <p>Tools & Libraries</p>
+                  <h3>
+                    React.js, next.js, canvas, yolo, node-yolo,
+                    node-track-moving-things
+                  </h3>
+                </div>
               </div>
             </div>
           </div>
