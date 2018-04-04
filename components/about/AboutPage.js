@@ -72,10 +72,10 @@ class AboutPage extends Component {
                 </div>
               </div>
 
-              {/* <div className='buttons'>
+              <div className='buttons'>
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace'>
-                    <a href='#' target='_blank'>
+                    <a href='static/assets/presskit.zip' target='_blank'>
                       <div className='inner' />
                       <div className='outer'>
                         <h4>Press kit</h4>
@@ -83,6 +83,7 @@ class AboutPage extends Component {
                     </a>
                   </div>
                 </div>
+                {/*
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace secondbtn'>
                     <a
