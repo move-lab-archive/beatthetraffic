@@ -75,7 +75,7 @@ class AboutPage extends Component {
               <div className='buttons'>
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace'>
-                    <a href='static/assets/presskit.zip' target='_blank'>
+                    <a href='/static/assets/presskit.zip' target='_blank'>
                       <div className='inner' />
                       <div className='outer'>
                         <h4>Press kit</h4>
@@ -96,8 +96,8 @@ class AboutPage extends Component {
                       </div>
                     </a>
                   </div>
-                </div>
-              </div> */}
+                </div> */}
+              </div>
 
               <div className='headlinetopspace credits'>
                 <div className='task'>
