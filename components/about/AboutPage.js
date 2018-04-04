@@ -72,7 +72,7 @@ class AboutPage extends Component {
                 </div>
               </div>
 
-              <div className='buttons'>
+              {/* <div className='buttons'>
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace'>
                     <a href='#' target='_blank'>
@@ -96,7 +96,7 @@ class AboutPage extends Component {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className='headlinetopspace credits'>
                 <div className='task'>
