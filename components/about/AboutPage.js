@@ -330,6 +330,9 @@ class AboutPage extends Component {
           }
           .about-inner {
             max-width: 700px;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
           }
           .headline {
             margin-top: 1.9rem;
