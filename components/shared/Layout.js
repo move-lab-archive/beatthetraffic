@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Head from 'next/head'
-import ReactGA from 'react-ga'
 import Router from 'next/router'
 
 class Layout extends Component {
@@ -18,21 +17,21 @@ class Layout extends Component {
     script.async = true
 
     document.body.appendChild(script)
-
     window.dataLayer = window.dataLayer || []
+
     function gtag () {
       dataLayer.push(arguments)
     }
     gtag('js', new Date())
 
     gtag('config', 'AW-856792702')
+    gtag('config', 'UA-79250234-6', {
+      page_title: Router.pathname,
+      page_path: Router.pathname
+    })
   }
 
   componentDidMount () {
-    ReactGA.initialize('UA-79250234-6')
-    ReactGA.set({ page: Router.pathname })
-    ReactGA.pageview(Router.pathname)
-
     /* Load gtags script */
     this.initGtags()
   }
