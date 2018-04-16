@@ -41,14 +41,39 @@ class Landing extends Component {
     }
 
     switch (this.props.selectedCity) {
-      case 'Berlin':
-        trackID = 'AW-856792702/epPlCMj1xIABEP68xpgD'
+      case 'Barcelona':
+        trackID = ''
         break
-
+      case 'Berlin':
+        trackID = 'AW-856791193/Jw_GCOqxuYABEJmxxpgD'
+        break
+      case 'Buenosaires':
+        trackID = ''
+        break
+      case 'Delhi':
+        trackID = ''
+        break
+      case 'London':
+        trackID = ''
+        break
+      case 'LosAngeles':
+        trackID = ''
+        break
+      case 'Moscow':
+        trackID = ''
+        break
+      case 'NewYork':
+        trackID = ''
+        break
+      case 'Portland':
+        trackID = ''
+        break
+      case 'Stuttgart':
+        trackID = ''
+        break
       case 'Tokyo':
         trackID = 'AW-856791193/Jw_GCOqxuYABEJmxxpgD'
         break
-
       default:
         break
     }
