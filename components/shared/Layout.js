@@ -11,12 +11,7 @@ class Layout extends Component {
     }
   }
 
-  componentDidMount () {
-    ReactGA.initialize('UA-79250234-6')
-    ReactGA.set({ page: Router.pathname })
-    ReactGA.pageview(Router.pathname)
-
-    /* Load gtags script */
+  initGtags () {
     const script = document.createElement('script')
 
     script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-856792702'
@@ -31,6 +26,15 @@ class Layout extends Component {
     gtag('js', new Date())
 
     gtag('config', 'AW-856792702')
+  }
+
+  componentDidMount () {
+    ReactGA.initialize('UA-79250234-6')
+    ReactGA.set({ page: Router.pathname })
+    ReactGA.pageview(Router.pathname)
+
+    /* Load gtags script */
+    this.initGtags()
   }
 
   render () {
