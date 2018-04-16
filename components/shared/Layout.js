@@ -15,6 +15,22 @@ class Layout extends Component {
     ReactGA.initialize('UA-79250234-6')
     ReactGA.set({ page: Router.pathname })
     ReactGA.pageview(Router.pathname)
+
+    /* Load gtags script */
+    const script = document.createElement('script')
+
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-856792702'
+    script.async = true
+
+    document.body.appendChild(script)
+
+    window.dataLayer = window.dataLayer || []
+    function gtag () {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+
+    gtag('config', 'AW-856792702')
   }
 
   render () {

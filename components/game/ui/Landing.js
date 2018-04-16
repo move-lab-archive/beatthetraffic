@@ -27,6 +27,25 @@ class Landing extends Component {
     }
   }
 
+  gtagReportConversion (url) {
+    const callback = function () {
+      if (typeof url !== 'undefined') {
+        window.location = url
+      }
+    }
+
+    function gtag () {
+      dataLayer.push(arguments)
+    }
+
+    gtag('event', 'conversion', {
+      send_to: 'AW-856792702/epPlCMj1xIABEP68xpgD',
+      event_callback: callback
+    })
+
+    return false
+  }
+
   handleStartGame () {
     this.props.dispatch(restoreCanvasScrolling())
     // TweenLite.to('.game-landing', 0.3, {
@@ -49,6 +68,8 @@ class Landing extends Component {
     //   delay: 0.5,
     //   onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     // })
+
+    this.gtagReportConversion()
 
     this.props.handleStart()
 
