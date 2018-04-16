@@ -34,12 +34,27 @@ class Landing extends Component {
       }
     }
 
+    let trackID = ''
+
     function gtag () {
       dataLayer.push(arguments)
     }
 
+    switch (this.props.selectedCity) {
+      case 'Berlin':
+        trackID = 'AW-856792702/epPlCMj1xIABEP68xpgD'
+        break
+
+      case 'Tokyo':
+        trackID = 'AW-856791193/Jw_GCOqxuYABEJmxxpgD'
+        break
+
+      default:
+        break
+    }
+
     gtag('event', 'conversion', {
-      send_to: 'AW-856792702/epPlCMj1xIABEP68xpgD',
+      send_to: trackID,
       event_callback: callback
     })
 
