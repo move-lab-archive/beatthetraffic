@@ -36,6 +36,7 @@ class Landing extends Component {
 
     let trackID = ''
 
+    window.dataLayer = window.dataLayer || []
     function gtag () {
       dataLayer.push(arguments)
     }
@@ -47,22 +48,22 @@ class Landing extends Component {
       case 'Berlin':
         trackID = 'AW-856791193/Jw_GCOqxuYABEJmxxpgD'
         break
-      case 'Buenosaires':
+      case 'Buenos Aires':
         trackID = ''
         break
-      case 'Delhi':
+      case 'New Delhi':
         trackID = ''
         break
       case 'London':
         trackID = ''
         break
-      case 'LosAngeles':
+      case 'Los Angeles':
         trackID = ''
         break
       case 'Moscow':
         trackID = ''
         break
-      case 'NewYork':
+      case 'New York':
         trackID = ''
         break
       case 'Portland':
