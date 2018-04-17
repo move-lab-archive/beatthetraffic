@@ -27,6 +27,66 @@ class Landing extends Component {
     }
   }
 
+  gtagReportConversion (url) {
+    const callback = function () {
+      if (typeof url !== 'undefined') {
+        window.location = url
+      }
+    }
+
+    let trackID = ''
+
+    window.dataLayer = window.dataLayer || []
+    function gtag () {
+      dataLayer.push(arguments)
+    }
+
+    switch (this.props.selectedCity) {
+      case 'Barcelona':
+        trackID = ''
+        break
+      case 'Berlin':
+        trackID = 'AW-856792702/epPlCMj1xIABEP68xpgD'
+        break
+      case 'Buenos Aires':
+        trackID = ''
+        break
+      case 'New Delhi':
+        trackID = ''
+        break
+      case 'London':
+        trackID = ''
+        break
+      case 'Los Angeles':
+        trackID = ''
+        break
+      case 'Moscow':
+        trackID = ''
+        break
+      case 'New York':
+        trackID = ''
+        break
+      case 'Portland':
+        trackID = ''
+        break
+      case 'Stuttgart':
+        trackID = ''
+        break
+      case 'Tokyo':
+        trackID = 'AW-856791193/Jw_GCOqxuYABEJmxxpgD'
+        break
+      default:
+        break
+    }
+
+    gtag('event', 'conversion', {
+      send_to: trackID,
+      event_callback: callback
+    })
+
+    return false
+  }
+
   handleStartGame () {
     this.props.dispatch(restoreCanvasScrolling())
     // TweenLite.to('.game-landing', 0.3, {
@@ -49,6 +109,8 @@ class Landing extends Component {
     //   delay: 0.5,
     //   onStart: () => this.props.handleStart(backgroundOpacityAnimationDuration)
     // })
+
+    this.gtagReportConversion()
 
     this.props.handleStart()
 
