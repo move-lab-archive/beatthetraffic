@@ -16,7 +16,7 @@ class Layout extends Component {
     script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-856792702'
     script.async = true
 
-    document.body.appendChild(script)
+    document.head.appendChild(script)
     window.dataLayer = window.dataLayer || []
 
     function gtag () {
