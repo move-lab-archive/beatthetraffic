@@ -15,6 +15,7 @@ import {
   restoreCanvasScrolling
 } from '../../../statemanagement/app/ViewportStateManagement'
 import ChangeCityButtonLanding from '../../shared/ChangeCityButtonLanding'
+import { gtag, callback } from '../../../utils/analytics'
 
 class Landing extends Component {
   constructor (props) {
@@ -27,19 +28,8 @@ class Landing extends Component {
     }
   }
 
-  gtagReportConversion (url) {
-    const callback = function () {
-      if (typeof url !== 'undefined') {
-        window.location = url
-      }
-    }
-
+  gtagReportConversion () {
     let trackID = ''
-
-    window.dataLayer = window.dataLayer || []
-    function gtag () {
-      dataLayer.push(arguments)
-    }
 
     switch (this.props.selectedCity) {
       case 'Barcelona':

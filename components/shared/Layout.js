@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Head from 'next/head'
 import Router from 'next/router'
 
+import { initAnalytics, gtag } from '../../utils/analytics'
+
 class Layout extends Component {
   recordFirstPaint () {
     return {
@@ -11,19 +13,8 @@ class Layout extends Component {
   }
 
   initGtags () {
-    const script = document.createElement('script')
-
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-856792702'
-    script.async = true
-
-    document.head.appendChild(script)
-    window.dataLayer = window.dataLayer || []
-
-    function gtag () {
-      dataLayer.push(arguments)
-    }
+    initAnalytics('AW-856792702')
     gtag('js', new Date())
-
     gtag('config', 'AW-856792702')
     gtag('config', 'UA-79250234-6', {
       page_title: Router.pathname,
