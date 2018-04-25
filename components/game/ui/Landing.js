@@ -71,6 +71,8 @@ class Landing extends Component {
 
     gtag('event', 'conversion', {
       send_to: trackID,
+      name: 'Location',
+      value: this.props.selectedCity,
       event_callback: callback
     })
 
