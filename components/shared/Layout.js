@@ -17,8 +17,8 @@ class Layout extends Component {
     gtag('js', new Date())
     gtag('config', 'AW-856792702')
     gtag('config', 'UA-79250234-6', {
-      page_title: Router.pathname,
-      page_path: Router.pathname
+      page_title: window.location.pathname,
+      page_path: window.location.pathname
     })
   }
 
