@@ -5,4 +5,4 @@ RUN npm install --only=production
 COPY . /app
 RUN npm run now-build
 EXPOSE 4000
-CMD [ "npm", "run", "start-aws" ]
+CMD [ "npm", "run", "now-aws" ]

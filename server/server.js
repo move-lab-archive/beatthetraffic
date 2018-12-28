@@ -14,6 +14,7 @@ const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const app = express()
 const nextInstance = nextApp()
 const handle = nextInstance.getRequestHandler()
+const port = parseInt(process.env.PORT, 10) || 3000
 
 // Init connection to db
 DBManager.init().then(
@@ -25,7 +26,7 @@ DBManager.init().then(
   }
 )
 
-app.use(redirectToHTTPS([/localhost:(\d{4})/]))
+// app.use(redirectToHTTPS([/localhost:(\d{4})/]))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -129,4 +130,4 @@ app.get('/api/highscores', (req, res) => {
 
 app.use(express.static('out'))
 
-app.listen(4000, () => console.log('App listening on port 4000!'))
+app.listen(port, () => console.log(`> Ready on http://localhost:${port}`))

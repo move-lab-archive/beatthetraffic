@@ -12,8 +12,10 @@ if (process.env.NOW_DEPLOY) {
     'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic'
 }
 
-if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY) {
+if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY && process.env.MONGO_INSTANCE) {
   mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE
+} else {
+  var mongoURL = 'mongodb://localhost:27017'
 }
 
 class DBManager {

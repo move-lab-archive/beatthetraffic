@@ -68,6 +68,18 @@ docker-compose build
 docker-compose up
 ```
 
+**Using improved docker config**
+The new dockerfile has the ability to start a local mongo instance when the MONGO_INSTANCE var is not set.
+It also creates a volume under `/var/lib/mongodb` in order to save the state of the db when the container is deleted on an persistant storage.
+
+```bash
+# Create the docker image
+docker build . -t theimage/name
+# Run the image on port 80
+docker run -p 80:80 (-e MONGO_INSTANCE=url-to-the-instance:port -v /path/to/persistant/storage:/var/lib/mongodb) theimage/name
+```
+
+
 ## 🏙 How to add / edit you own level / city
 
 ### 1. Fill the gameconfig.json file
