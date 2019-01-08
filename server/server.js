@@ -23,6 +23,7 @@ DBManager.init().then(
   },
   err => {
     console.error(err)
+    process.exit()
   }
 )
 
