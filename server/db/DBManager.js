@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
 
-var mongoURL = 'mongodb://localhost:27017'
+var mongoURL = 'mongodb://127.0.0.1:27017'
 
 // Where "mongo" is the name of the service in the docker-compose.yml file
 if (process.env.DOCKER_DEPLOY) {
@@ -15,7 +15,7 @@ if (process.env.NOW_DEPLOY) {
 if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY && process.env.MONGO_INSTANCE) {
   mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE
 } else {
-  var mongoURL = 'mongodb://localhost:27017'
+  var mongoURL = 'mongodb://127.0.0.1:27017'
 }
 
 class DBManager {
