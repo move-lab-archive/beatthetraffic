@@ -9,7 +9,7 @@
     },
     {
         "ParameterKey": "DockerImage",
-        "ParameterValue": "741592215129.dkr.ecr.eu-west-1.amazonaws.com/moovel/lab/lab-beatthetraffic-repo:43bbf51cdc00beb5dff9ba3016ec37b57c1087b2"
+        "ParameterValue": "741592215129.dkr.ecr.eu-west-1.amazonaws.com/moovel/lab/lab-beatthetraffic-repo:c6fcd1dfc648abb7573a9b4e7807678dd7267446"
     },
     {
         "ParameterKey": "Host",
@@ -33,6 +33,6 @@
     },
     {
         "ParameterKey": "MongoInstance",
-        "ParameterValue": "10.103.28.100"
+        "ParameterValue": "10.103.156.198"
     }
 ]

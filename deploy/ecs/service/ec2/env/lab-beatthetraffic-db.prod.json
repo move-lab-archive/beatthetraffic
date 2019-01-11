@@ -8,20 +8,12 @@
     "ParameterValue": "lab-ec2-ecs-cluster"
   },
   {
-    "ParameterKey": "LoadBalancerStackName",
-    "ParameterValue": "lab-public-alb"
-  },
-  {
     "ParameterKey": "ParentZoneStack",
     "ParameterValue": "primary-phz"
   },
   {
     "ParameterKey": "DesiredCount",
     "ParameterValue": "1"
-  },
-  {
-    "ParameterKey": "ListenerRulePriority",
-    "ParameterValue": "100"
   },
   {
     "ParameterKey": "DockerImage",
