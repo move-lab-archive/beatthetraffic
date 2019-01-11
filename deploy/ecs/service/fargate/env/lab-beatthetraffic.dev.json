@@ -4,6 +4,10 @@
         "ParameterValue": "primary-phz"
     },
     {
+        "ParameterKey": "ParentVpcStack",
+        "ParameterValue": "base-vpc"
+    },
+    {
         "ParameterKey": "ClusterStackName",
         "ParameterValue": "lab-ecs-cluster"
     },

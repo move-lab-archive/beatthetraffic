@@ -4,12 +4,16 @@
         "ParameterValue": "default-pub-hz"
     },
     {
+        "ParameterKey": "ParentVpcStack",
+        "ParameterValue": "base-vpc"
+    },
+    {
         "ParameterKey": "ClusterStackName",
-        "ParameterValue": "lab-ecs-cluster"
+        "ParameterValue": "lab-ec2-ecs-cluster"
     },
     {
         "ParameterKey": "DockerImage",
-        "ParameterValue": "741592215129.dkr.ecr.eu-west-1.amazonaws.com/moovel/lab/lab-beatthetraffic-repo:43bbf51cdc00beb5dff9ba3016ec37b57c1087b2"
+        "ParameterValue": "741592215129.dkr.ecr.eu-west-1.amazonaws.com/moovel/lab/lab-beatthetraffic-repo:c6fcd1dfc648abb7573a9b4e7807678dd7267447"
     },
     {
         "ParameterKey": "Host",
@@ -30,9 +34,5 @@
     {
         "ParameterKey": "ListenerMode",
         "ParameterValue": "TLS"
-    },
-    {
-        "ParameterKey": "MongoInstance",
-        "ParameterValue": "10.103.28.100"
     }
 ]
