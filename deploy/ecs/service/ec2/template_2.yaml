@@ -1,0 +1,293 @@
+---
+Description: >
+  Simple ECS service using a public Docker image
+
+Parameters:
+  ClusterStackName:
+    Description: Please provide the Stack of the ECS Cluster that this service should run on
+    Type: String
+
+  ContainerPort:
+    Default: 80
+    Description: The exposed port of you docker container
+    Type: Number
+
+  DesiredCount:
+    Description: How many instances of this task should we run across our cluster?
+    Type: Number
+    Default: 2
+
+  ServiceName:
+    Description: The servicename
+    Type: String
+
+  DockerImage:
+    Description: The docker image, including tag, with version to run in the service, e.g. moovel/places:latest
+    Type: String
+
+  ListenerRulePriority:
+    Description: The service's listener rule prio on the ALB
+    Type: Number
+    Default: 100
+
+  DeploymentTimestamp:
+    Description: A timestamp hint
+    Type: String
+    Default: -1
+
+  LoadBalancerStackName:
+    Description: The Stack of the ALB we want to associate the service with
+    Type: String
+
+  ParentVpcStack:
+    Description: CloudFormation stack name providing network resource IDs
+    Type: String
+
+  ParentZoneStack:
+    Description: CloudFormation stack name providing DNS resource IDs
+    Type: String
+
+Mappings:
+  ParamsByAccount:
+    "330561757506":
+      Environment: legacy
+    "586093893509":
+      Environment: dev
+      JumpCloudSystemGroup: 5acc8ced45886d4a61941698
+    "021902642706":
+      Environment: stage
+      JumpCloudSystemGroup: 5acc760a232e110820c861b6
+    "488864420121":
+      Environment: prod
+      JumpCloudSystemGroup: 5acc8ce4232e110820c8cfd8
+    "741592215129":
+      Environment: shared-services
+
+Conditions:
+  HasHost: !Not [!Equals [!Ref Host, ""]]
+  HasPathName: !Not [!Equals [!Ref PathName, ""]]
+
+Resources:
+  ServiceDNSRecord:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId:
+        Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneId
+      Comment: Service DNS Entry
+      RecordSets:
+        - Name: !Sub
+            - ${ServiceName}.${HostedZoneName}
+            - HostedZoneName:
+                Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneName
+          Type: A
+          AliasTarget:
+            HostedZoneId:
+              Fn::ImportValue: !Sub ${LoadBalancerStackName}-CanonicalHostedZoneID
+            DNSName:
+              Fn::ImportValue: !Sub ${LoadBalancerStackName}-DNSName
+
+  Service:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster:
+        Fn::ImportValue: !Sub ${ClusterStackName}-ECSClusterArn
+      Role: !Ref ServiceRole
+      DesiredCount: !Ref DesiredCount
+      TaskDefinition: !Ref TaskDefinition
+      LoadBalancers:
+        - ContainerName: !Ref ServiceName
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+      HealthCheckGracePeriodSeconds: 120
+      NetworkConfiguration:
+      AwsvpcConfiguration:
+        AssignPublicIp: DISABLED
+        SecurityGroups:
+          - Fn::ImportValue: shared-sgs-EcsCommonSg
+          - Fn::ImportValue: domain-general-sgs-EcsDomainSg
+        Subnets: !Split
+          - ","
+          - Fn::ImportValue: !Sub ${ParentVpcStack}-SubnetsPrivate
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      TaskRoleArn: !Ref TaskRole
+      NetworkMode: awsvpc
+      ExecutionRoleArn: !ImportValue managed-roles-ecs-task-execution-role-Arn
+      Volumes: 
+        - Name: efs
+          Host: 
+            SourcePath: !Sub /mnt/efs/${AWS::StackName}_mongodb
+      ContainerDefinitions:
+      - Name: !Ref ServiceName
+        Essential: true
+        Image: !Ref DockerImage
+        Memory: 256
+        Environment:
+        - Name: SPRING_PROFILES_ACTIVE
+          Value: !FindInMap [ParamsByAccount, !Ref "AWS::AccountId", Account]
+        - Name: DEPLOYMENT_TIMESTAMP
+          Value: !Ref DeploymentTimestamp
+        PortMappings:
+        - ContainerPort: !Ref ContainerPort
+        MountPoints: 
+          - SourceVolume: efs
+            ContainerPath: /var/lib/mongodb
+            ReadOnly: false
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group: /lab
+            awslogs-region: !Ref AWS::Region
+            awslogs-stream-prefix: !Ref AWS::StackName
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId:
+        Fn::ImportValue: !Sub ${ParentVpcStack}-VpcId
+      Port: !Ref ContainerPort
+      Protocol: HTTP
+      Matcher:
+        HttpCode: 200-399
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: "10"
+      TargetType: ip
+      Tags:
+        - Key: CostCenter
+          Value: !Ref CostCenterTag
+        - Key: Squad
+          Value: !Ref SquadTag
+        - Key: Account
+          Value: !FindInMap [ParamsByAccount, !Ref "AWS::AccountId", Account]
+
+  ListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Condition: HasHost
+    Properties:
+      ListenerArn:
+        Fn::ImportValue: !Sub ${LoadBalancerStackName}-Listener${ListenerMode}
+      Priority: !Ref ListenerRulePriority
+      Conditions:
+        - Field: host-header
+          Values:
+            - Fn::Sub:
+                - ${ServiceName}.${HostedZoneName}
+                - HostedZoneName:
+                    Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneName
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+  ListenerRuleHost:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Condition: HasHost
+    Properties:
+      ListenerArn:
+        Fn::ImportValue: !Sub ${LoadBalancerStackName}-Listener${ListenerMode}
+      Priority: !Ref ListenerRuleHostPriority
+      Conditions:
+        - Field: host-header
+          Values:
+            - !Ref Host
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+  ListenerRulePath:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Condition: HasPathName
+    Properties:
+      ListenerArn:
+        Fn::ImportValue: !Sub ${LoadBalancerStackName}-Listener${ListenerMode}
+      Priority: !Ref ListenerRulePathPriority
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - !Sub ${PathName}*
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+  # This IAM Role grants the service access to register/unregister with the
+  # Application Load Balancer (ALB). It is based on the default documented here:
+  # http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service_IAM_role.html
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ecs-service-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ecs.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: !Sub ecs-service-${AWS::StackName}
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:AuthorizeSecurityGroupIngress
+                  - ec2:Describe*
+                  - elasticloadbalancing:DeregisterInstancesFromLoadBalancer
+                  - elasticloadbalancing:Describe*
+                  - elasticloadbalancing:RegisterInstancesWithLoadBalancer
+                  - elasticloadbalancing:DeregisterTargets
+                  - elasticloadbalancing:DescribeTargetGroups
+                  - elasticloadbalancing:DescribeTargetHealth
+                  - elasticloadbalancing:RegisterTargets
+                Resource: "*"
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ecs-task-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ecs-tasks.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+Outputs:
+  DnsName:
+    Description: Dns Record Name
+    Condition: HasHost
+    Value: !Sub
+      - ${ServiceName}.${HostedZoneName}
+      - HostedZoneName:
+          Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneName
+
+  DnsPathName:
+    Description: Path to the project
+    Condition: HasPathName
+    Value:
+      Fn::Sub:
+        - ${DnsEntryPoint}.${HostedZoneName}${PathName}
+        - DnsEntryPoint:
+            Fn::ImportValue: !Sub ${LoadBalancerStackName}-DNSSubDomainName
+          HostedZoneName:
+            Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneName
+
+
+  ServiceArn:
+    Description: Arn of corresponding service
+    Value: !Ref Service
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceArn
+
+  StackName:
+    Description: Stack name
+    Value: !Sub ${AWS::StackName}

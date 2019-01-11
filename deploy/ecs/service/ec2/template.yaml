@@ -1,0 +1,166 @@
+---
+Description: >
+  Simple ECS service using a public Docker image
+
+Parameters:
+
+  ClusterStackName:
+    Description: Please provide the Stack of the ECS Cluster that this service should run on
+    Type: String
+
+  ContainerPort:
+    Default: 80
+    Description: The exposed port of you docker container
+    Type: Number
+  
+  CostCenterTag:
+    Default: "7000"
+    Description: The cost center for created resources
+    Type: String
+
+  DesiredCount:
+    Description: How many instances of this task should we run across our cluster?
+    Type: Number
+    Default: 1
+
+  ServiceName:
+    Description: The servicename
+    Type: String
+
+  DockerImage:
+    Description: The docker image, including tag, with version to run in the service, e.g. moovel/places:latest
+    Type: String
+
+  ListenerRulePriority:
+    Description: The service's listener rule prio on the ALB
+    Type: Number
+    Default: 100
+
+  DeploymentTimestamp:
+    Description: A timestamp hint
+    Type: String
+    Default: -1
+
+  LoadBalancerStackName:
+    Description: The Stack of the ALB we want to associate the service with
+    Type: String
+
+  ParentVpcStack:
+    Description: CloudFormation stack name providing network resource IDs
+    Type: String
+
+  ParentZoneStack:
+    Description: CloudFormation stack name providing DNS resource IDs
+    Type: String
+
+  SquadTag:
+    Default: "Lab"
+    Description: The name of the squad owning the resources
+    Type: String
+
+Mappings:
+  ParamsByAccount:
+    "330561757506":
+      Account: legacy
+    "586093893509":
+      Account: dev
+      JumpCloudSystemGroup: 5acc8ced45886d4a61941698
+    "021902642706":
+      Account: stage
+      JumpCloudSystemGroup: 5acc760a232e110820c861b6
+    "488864420121":
+      Account: prod
+      JumpCloudSystemGroup: 5acc8ce4232e110820c8cfd8
+    "741592215129":
+      Account: shared-services
+    "805389432169":
+      Account: jump
+
+Resources:
+  Service:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster:
+        Fn::ImportValue: !Sub ${ClusterStackName}-ECSClusterArn
+      DesiredCount: !Ref DesiredCount
+      TaskDefinition: !Ref TaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups: 
+            - Fn::ImportValue: lab-security-groups-MongoDbSg
+            - Fn::ImportValue: shared-sgs-EcsCommonSg
+            - Fn::ImportValue: domain-general-sgs-EcsDomainSg
+          Subnets: !Split
+            - ","
+            - Fn::ImportValue: !Sub ${ParentVpcStack}-SubnetsPrivate
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      TaskRoleArn: !Ref TaskRole
+      NetworkMode: awsvpc
+      ExecutionRoleArn: !ImportValue managed-roles-ecs-task-execution-role-Arn
+      Volumes: 
+        - Name: efs
+          Host: 
+            SourcePath: !Sub /mnt/efs/${AWS::StackName}_mongodb
+      ContainerDefinitions:
+      - Name: !Ref ServiceName
+        Essential: true
+        Image: !Ref DockerImage
+        Memory: 256
+        Environment:
+        - Name: SPRING_PROFILES_ACTIVE
+          Value: !FindInMap [ParamsByAccount, !Ref "AWS::AccountId", Account]
+        - Name: DEPLOYMENT_TIMESTAMP
+          Value: !Ref DeploymentTimestamp
+        PortMappings:
+        - ContainerPort: !Ref ContainerPort
+        MountPoints: 
+          - SourceVolume: efs
+            ContainerPath: /data/db
+            ReadOnly: false
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group: /lab
+            awslogs-region: !Ref AWS::Region
+            awslogs-stream-prefix: !Ref AWS::StackName
+
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ecs-task-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ecs-tasks.amazonaws.com
+          Action:
+          - sts:AssumeRole
+
+Outputs:
+  DnsName:
+    Description: Dns Record Name
+    Value: !Sub
+      - ${ServiceName}.${HostedZoneName}
+      - HostedZoneName:
+          Fn::ImportValue: !Sub ${ParentZoneStack}-HostedZoneName
+
+  ServiceArn:
+    Description: Arn of corresponding service
+    Value: !Ref Service
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceArn
+
+  StackName:
+    Description: Stack name
+    Value: !Sub ${AWS::StackName}
+
+  # PrivateIp:
+  #   Description: Private Ip of EC2 Cluster
+  #   Value: !GetAtt Service.PrivateIp
+  #   Export:
+  #     Name: !Sub ${AWS::StackName}-PrivateIp

@@ -1,0 +1,34 @@
+[
+    {
+        "ParameterKey": "ParentZoneStack",
+        "ParameterValue": "primary-phz"
+    },
+    {
+        "ParameterKey": "ClusterStackName",
+        "ParameterValue": "lab-ecs-cluster"
+    },
+    {
+        "ParameterKey": "DockerImage",
+        "ParameterValue": "741592215129.dkr.ecr.eu-west-1.amazonaws.com/moovel/lab/lab-beatthetraffic-repo:dd80c9c9d3d0a07c0fc65ab6b18e5d66008d7ea4"
+    },
+    {
+        "ParameterKey": "Host",
+        "ParameterValue": "lab-beatthetraffic.lab.moovel.com"
+    },
+    {
+        "ParameterKey": "LoadBalancerStackName",
+        "ParameterValue": "lab-private-alb"
+    },
+    {
+        "ParameterKey": "ServiceName",
+        "ParameterValue": "lab-beatthetraffic"
+    },
+    {
+        "ParameterKey": "PathName",
+        "ParameterValue": ""
+    },
+    {
+        "ParameterKey": "MongoInstance",
+        "ParameterValue": "10.100.132.233"
+    }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "ParameterKey": "ParentVpcStack",
+    "ParameterValue": "base-vpc"
+  },
+  {
+    "ParameterKey": "ClusterStackName",
+    "ParameterValue": "lab-ec2-ecs-cluster"
+  },
+  {
+    "ParameterKey": "LoadBalancerStackName",
+    "ParameterValue": "lab-private-alb"
+  },
+  {
+    "ParameterKey": "ParentZoneStack",
+    "ParameterValue": "primary-phz"
+  },
+  {
+    "ParameterKey": "DesiredCount",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "ListenerRulePriority",
+    "ParameterValue": "100"
+  },
+  {
+    "ParameterKey": "DockerImage",
+    "ParameterValue": "mongo:latest"
+  },
+  {
+    "ParameterKey": "ContainerPort",
+    "ParameterValue": "27017"
+  },
+  {
+    "ParameterKey": "ServiceName",
+    "ParameterValue": "lab-beatthetraffic-db"
+  }
+]
