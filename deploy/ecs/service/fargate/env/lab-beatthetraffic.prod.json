@@ -37,6 +37,6 @@
     },
     {
         "ParameterKey": "MongoInstance",
-        "ParameterValue": "10.103.156.198"
+        "ParameterValue": "10.103.155.54"
     }
 ]
