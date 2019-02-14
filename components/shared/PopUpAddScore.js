@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import Button from './Button'
 import ButtonClose from './ButtonClose'
+import { prefixURL } from '../../utils/url';
 
 class PopUpAddScore extends Component {
   static propTypes = {
@@ -53,7 +54,7 @@ class PopUpAddScore extends Component {
     }
 
     axios
-      .post('/api/highscores', highscore)
+      .post(prefixURL('/api/highscores'), highscore)
       .then(
         response => {
           this.props.onSuccess(response.data, highscore)
