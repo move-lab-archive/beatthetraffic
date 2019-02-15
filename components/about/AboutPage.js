@@ -8,7 +8,7 @@ class AboutPage extends Component {
   render() {
     return (
       <div className={`about-page`}>
-        <ButtonClose onClick={this.props.onClose} /> */}
+        <ButtonClose onClick={this.props.onClose} />
         <h2 className='headline'>ABOUT</h2>
         <img
           className='rightcloud'
