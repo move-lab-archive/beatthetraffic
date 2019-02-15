@@ -1,6 +1,6 @@
 ---
 Description: >
-  Simple ECS service using a Docker image
+  Simple ECS service using a public Docker image
 
 Parameters:
   ClusterStackName:
@@ -12,23 +12,34 @@ Parameters:
     Description: The exposed port of you docker container
     Type: Number
 
+  CostCenterTag:
+    Default: '7000'
+    Description: The cost center for created resources
+    Type: String
+
   DesiredCount:
     Description: How many instances of this task should we run across our cluster?
     Type: Number
     Default: 2
 
-  ServiceName:
-    Description: The servicename
+  DeploymentTimestamp:
+    Description: A timestamp hint
     Type: String
+    Default: -1
 
   DockerImage:
     Description: The docker image, including tag, with version to run in the service, e.g. moovel/places:latest
     Type: String
 
-  DeploymentTimestamp:
-    Description: A timestamp hint
+  LogGroup:
+    Default: '/lab'
+    Description: The log group for the container logs
     Type: String
-    Default: -1
+
+  EfsMount:
+    Description: Volume that will be mounted with the EFS datastorage
+    Type: String
+    Default: ''
 
   ParentVpcStack:
     Description: CloudFormation stack name providing network resource IDs
@@ -38,31 +49,43 @@ Parameters:
     Description: CloudFormation stack name providing DNS resource IDs
     Type: String
 
-  SquadTag:
-    Default: "Lab"
-    Description: The name of the squad owning the resources
+  PathName:
+    Description: Path to which the listener should redirect
     Type: String
 
-  CostCenterTag:
-    Default: "7000"
-    Description: The cost center for created resources
+  Host:
+    Description: If you need to create a second ListenerRule for upper Domain URL
+    Type: String
+
+  ServiceName:
+    Description: The servicename
+    Type: String
+
+  SquadTag:
+    Default: 'Lab'
+    Description: The name of the squad owning the resources
     Type: String
 
 Mappings:
   ParamsByAccount:
-    "330561757506":
+    '330561757506':
       Account: legacy
-    "586093893509":
+    '586093893509':
       Account: dev
       JumpCloudSystemGroup: 5acc8ced45886d4a61941698
-    "021902642706":
+    '021902642706':
       Account: stage
       JumpCloudSystemGroup: 5acc760a232e110820c861b6
-    "488864420121":
+    '488864420121':
       Account: prod
       JumpCloudSystemGroup: 5acc8ce4232e110820c8cfd8
-    "741592215129":
+    '741592215129':
       Account: shared-services
+
+Conditions:
+  HasHost: !Not [!Equals [!Ref Host, '']]
+  HasPathName: !Not [!Equals [!Ref PathName, '']]
+  HasEfsMount: !Not [!Equals [!Ref EfsMount, '']]
 
 Resources:
   Service:
@@ -80,7 +103,7 @@ Resources:
             - Fn::ImportValue: shared-sgs-EcsCommonSg
             - Fn::ImportValue: domain-general-sgs-EcsDomainSg
           Subnets: !Split
-            - ","
+            - ','
             - Fn::ImportValue: !Sub ${ParentVpcStack}-SubnetsPrivate
 
   TaskDefinition:
@@ -89,34 +112,35 @@ Resources:
       TaskRoleArn: !Ref TaskRole
       NetworkMode: awsvpc
       ExecutionRoleArn: !ImportValue managed-roles-ecs-task-execution-role-Arn
-      Volumes: 
+      Volumes:
         - Name: efs
-          Host: 
+          Host:
             SourcePath: !Sub /mnt/efs/${AWS::StackName}_mongodb
       ContainerDefinitions:
-      - Name: !Ref ServiceName
-        Essential: true
-        Image: !Ref DockerImage
-        Memory: 256
-        Environment:
-        - Name: SPRING_PROFILES_ACTIVE
-          Value: !FindInMap [ParamsByAccount, !Ref "AWS::AccountId", Account]
-        - Name: DEPLOYMENT_TIMESTAMP
-          Value: !Ref DeploymentTimestamp
-        - Name: ENV
-          Value: production
-        PortMappings:
-        - ContainerPort: !Ref ContainerPort
-        MountPoints: 
-          - SourceVolume: efs
-            ContainerPath: /data/db
-            ReadOnly: false
-        LogConfiguration:
-          LogDriver: awslogs
-          Options:
-            awslogs-group: /lab
-            awslogs-region: !Ref AWS::Region
-            awslogs-stream-prefix: !Ref AWS::StackName
+        - Name: !Ref ServiceName
+          Essential: true
+          Image: !Ref DockerImage
+          Memory: 256
+          Environment:
+          - Name: SPRING_PROFILES_ACTIVE
+            Value:
+              !FindInMap [ParamsByAccount, !Ref 'AWS::AccountId', Account]
+          - Name: DEPLOYMENT_TIMESTAMP
+            Value: !Ref DeploymentTimestamp
+          - Name: ENV
+            Value: production
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          MountPoints:
+            - SourceVolume: efs
+              ContainerPath: !Ref EfsMount
+              ReadOnly: false
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref LogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: !Ref AWS::StackName
 
   TaskRole:
     Type: AWS::IAM::Role

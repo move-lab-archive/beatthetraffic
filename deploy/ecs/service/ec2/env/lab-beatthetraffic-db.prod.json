@@ -17,7 +17,7 @@
   },
   {
     "ParameterKey": "DockerImage",
-    "ParameterValue": "mongo:latest"
+    "ParameterValue": "mongo:3.6"
   },
   {
     "ParameterKey": "ContainerPort",
@@ -26,5 +26,17 @@
   {
     "ParameterKey": "ServiceName",
     "ParameterValue": "lab-beatthetraffic-db"
+  },
+  {
+    "ParameterKey": "EfsMount",
+    "ParameterValue": "/data/db"
+  },  
+  {
+    "ParameterKey": "PathName",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "Host",
+    "ParameterValue": ""
   }
 ]
