@@ -45,6 +45,9 @@ app.use(compression())
 //   })
 // )
 
+
+const URL_PREFIX = process.env.URL_PREFIX;
+
 app.get(`/`, (req, res) => {
   // Default city
   let cityToRedirectTo = defaultCity
