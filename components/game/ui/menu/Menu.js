@@ -157,7 +157,7 @@ class Menu extends PureComponent {
                 <h2
                   onClick={() => {
                     // TODO IMPROVE WITHOUT HARD RELOAD
-                    window.location.href = prefixURL(`/${cityId}/level/1`)
+                    window.location.href = prefixURL(`${cityId}/level/1/`)
                   }}
                   key={cityId}
                   className={`link ${

@@ -45,7 +45,7 @@ app.use(compression())
 //   })
 // )
 
-app.get(`${URL_PREFIX}/`, (req, res) => {
+app.get(`/`, (req, res) => {
   // Default city
   let cityToRedirectTo = defaultCity
 
@@ -73,7 +73,7 @@ app.get(`${URL_PREFIX}/`, (req, res) => {
   res.redirect(`${URL_PREFIX}/${cityToRedirectTo}/level/1/`)
 })
 
-app.get(`${URL_PREFIX}/:city`, (req, res, next) => {
+app.get(`/:city`, (req, res, next) => {
   if (Object.keys(availableCities).indexOf(req.params.city) > -1) {
     res.redirect(`${URL_PREFIX}/${req.params.city}/level/1/`)
   } else if (req.params.city === 'about') {
@@ -87,8 +87,15 @@ app.get(`${URL_PREFIX}/:city`, (req, res, next) => {
   }
 })
 
-app.get(`${URL_PREFIX}/:city/level/:level`, (req, res, next) => {
-  if (req.params.level > 1) {
+app.get(`/:city/level`, (req, res, next) => {
+  res.redirect(`${URL_PREFIX}/${req.params.city}/level/1/`)
+})
+
+app.get(`/:city/level/:level`, (req, res, next) => {
+  // Make sure we have a extra / at the end of the request in order to redirect to static pages
+  if (req.originalUrl.charAt(req.originalUrl.length - 1) !== "/") {
+    res.redirect(`${URL_PREFIX}${req.originalUrl}/`)
+  } else if (req.params.level > 1) {
     // Avoid loading level directly
     res.redirect(`${URL_PREFIX}/${req.params.city}/level/1/`)
   } else {
@@ -102,7 +109,7 @@ var saveHighscoreLimiter = new RateLimit({
   message: 'Too many highscore are being recorded from that IP address'
 })
 
-app.post(`${URL_PREFIX}/api/highscores`, saveHighscoreLimiter, (req, res) => {
+app.post(`/api/highscores`, saveHighscoreLimiter, (req, res) => {
   let highscore = {
     date: new Date(),
     name: req.body.name,
@@ -123,12 +130,12 @@ app.post(`${URL_PREFIX}/api/highscores`, saveHighscoreLimiter, (req, res) => {
   })
 })
 
-app.get(`${URL_PREFIX}/api/highscores`, (req, res) => {
+app.get(`/api/highscores`, (req, res) => {
   DBManager.getHighscores(50).then(highscores => {
     res.json(highscores)
   })
 })
 
-app.use(`${URL_PREFIX}/`, express.static('out'))
+app.use("/", express.static('out'))
 
 app.listen(port, () => console.log(`> Ready on http://localhost:${port}`))

@@ -4,5 +4,9 @@ const { publicRuntimeConfig } = getConfig()
 const { URL_PREFIX } = publicRuntimeConfig
 
 export function prefixURL(url) {
-    return `${URL_PREFIX}${url}`;
+    if (url.charAt(0) === '/') {
+        return `${URL_PREFIX}${url}`;
+    } else {
+        return `${URL_PREFIX}/${url}`;
+    }
 }
