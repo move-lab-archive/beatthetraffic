@@ -8,6 +8,7 @@ import { selectVideoForLevel, selectCity } from './AppStateManagement'
 import SoundsManager from './SoundsManager'
 import GameEngineStateManager from './GameEngineStateManager'
 import { COLLECTABLE_TYPES } from '../../components/game/core/engines/CollectableItemsEngine'
+import { prefixURL } from '../../utils/url';
 
 // Initial state
 const initialState = fromJS({
@@ -45,20 +46,20 @@ const FETCH_HIGHSCORES_START = 'Game/FETCH_HIGHSCORES_START'
 const FETCH_HIGHSCORES_SUCCESS = 'Game/FETCH_HIGHSCORES_SUCCESS'
 const FETCH_HIGHSCORES_ERROR = 'Game/FETCH_HIGHSCORES_ERROR'
 
-export function incrementScore (increment = 1) {
+export function incrementScore(increment = 1) {
   return {
     type: INCREMENT_SCORE,
     payload: increment
   }
 }
 
-export function resetScore () {
+export function resetScore() {
   return {
     type: RESET_SCORE
   }
 }
 
-export function addMissedItem () {
+export function addMissedItem() {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_MISSED_ITEM
@@ -75,13 +76,13 @@ export function addMissedItem () {
   }
 }
 
-export function removeMissedItem () {
+export function removeMissedItem() {
   return {
     type: REMOVE_MISSED_ITEM
   }
 }
 
-export function collectItem (itemToCollect) {
+export function collectItem(itemToCollect) {
   return (dispatch, getState) => {
     itemToCollect.collect()
     if (
@@ -89,11 +90,11 @@ export function collectItem (itemToCollect) {
       itemToCollect.type === COLLECTABLE_TYPES.CARROT ||
       itemToCollect.type === COLLECTABLE_TYPES.CHERRY
     ) {
-      if(itemToCollect.type === COLLECTABLE_TYPES.BANANA) {
+      if (itemToCollect.type === COLLECTABLE_TYPES.BANANA) {
         dispatch(incrementScore(1))
-      } else if(itemToCollect.type === COLLECTABLE_TYPES.CARROT) {
+      } else if (itemToCollect.type === COLLECTABLE_TYPES.CARROT) {
         dispatch(incrementScore(2))
-      } else if(itemToCollect.type === COLLECTABLE_TYPES.CHERRY) {
+      } else if (itemToCollect.type === COLLECTABLE_TYPES.CHERRY) {
         dispatch(incrementScore(3))
       }
       SoundsManager.playSound('win-point-withitem')
@@ -104,7 +105,7 @@ export function collectItem (itemToCollect) {
   }
 }
 
-export function addKilledItem (id, objectToOutput) {
+export function addKilledItem(id, objectToOutput) {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_KILLED_ITEM,
@@ -119,7 +120,7 @@ export function addKilledItem (id, objectToOutput) {
   }
 }
 
-export function startLevel () {
+export function startLevel() {
   return (dispatch, getState) => {
     GameEngineStateManager.reset()
 
@@ -157,7 +158,7 @@ export function startLevel () {
   }
 }
 
-export function failedLevel () {
+export function failedLevel() {
   return (dispatch, getState) => {
     // Notify UI we are starting the level
     dispatch({
@@ -169,7 +170,7 @@ export function failedLevel () {
   }
 }
 
-export function retry () {
+export function retry() {
   return (dispatch, getState) => {
     if (getState().game.get('currentLevel') === 1) {
       // Reset the video
@@ -185,20 +186,20 @@ export function retry () {
   }
 }
 
-export function levelFinished () {
+export function levelFinished() {
   return {
     type: FINISHED_LEVEL
   }
 }
 
-export function setCurrentLevel (level) {
+export function setCurrentLevel(level) {
   return {
     type: SET_CURRENT_LEVEL,
     payload: level
   }
 }
 
-export function loadCity (city, level = 1) {
+export function loadCity(city, level = 1) {
   return (dispatch, getState) => {
     if (
       city === getState().app.get('selectedCity') &&
@@ -214,12 +215,12 @@ export function loadCity (city, level = 1) {
     // Update url
     // TODO maybe refactor later and have a URL manager file
     if (!getState().settings.get('isServerRendering')) {
-      Router.replace(`/`, `/${city}/level/${level}`, { shallow: true })
+      Router.replace(`/`, prefixURL(`/${city}/level/${level}`), { shallow: true })
     }
   }
 }
 
-export function loadLevel (level) {
+export function loadLevel(level) {
   return (dispatch, getState) => {
     // Select video for that level
     dispatch(selectVideoForLevel(level))
@@ -230,56 +231,56 @@ export function loadLevel (level) {
     if (!getState().settings.get('isServerRendering')) {
       Router.push(
         '/',
-        `/${getState().app.get('selectedCity')}/level/${level}`,
+        prefixURL(`/${getState().app.get('selectedCity')}/level/${level}`),
         { shallow: true }
       )
     }
   }
 }
 
-export function updateUrlToMatchLevelAndCity () {
+export function updateUrlToMatchLevelAndCity() {
   return (dispatch, getState) => {
     Router.push(
       '/',
-      `/${getState().app.get('selectedCity')}/level/${getState().game.get(
+      prefixURL(`/${getState().app.get('selectedCity')}/level/${getState().game.get(
         'currentLevel'
-      )}`,
+      )}`),
       { shallow: true }
     )
   }
 }
 
 // Helper, get smoke level
-export function getSmokeLevel (nbMissed, maxMissed) {
+export function getSmokeLevel(nbMissed, maxMissed) {
   return nbMissed * 100 / maxMissed
 }
 
-export function fetchHighscoresStart () {
+export function fetchHighscoresStart() {
   return {
     type: FETCH_HIGHSCORES_START
   }
 }
 
-export function fetchHighscoresError (error) {
+export function fetchHighscoresError(error) {
   return {
     type: FETCH_HIGHSCORES_ERROR,
     payload: new Error(error)
   }
 }
 
-export function fetchHighscoresSuccess (highscores) {
+export function fetchHighscoresSuccess(highscores) {
   return {
     type: FETCH_HIGHSCORES_SUCCESS,
     payload: highscores
   }
 }
 
-export function fetchHighscores () {
+export function fetchHighscores() {
   return (dispatch, getState) => {
     return new Promise((resolve, reject) => {
       dispatch(fetchHighscoresStart())
 
-      axios.get('/api/highscores').then(
+      axios.get(prefixURL('/api/highscores')).then(
         results => {
           dispatch(fetchHighscoresSuccess(results.data))
           resolve(results.data)
@@ -294,7 +295,7 @@ export function fetchHighscores () {
 }
 
 // Reducer
-export default function GameReducer (state = initialState, action = {}) {
+export default function GameReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT_SCORE:
       return state.set('score', state.get('score') + action.payload)

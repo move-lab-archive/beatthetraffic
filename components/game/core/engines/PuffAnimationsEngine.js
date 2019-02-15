@@ -1,18 +1,20 @@
+import { prefixURL } from "../../../../utils/url";
+
 /* global Image */
 const PERCENTAGE_SIZE_BBOX = 130 / 100
 const MAX_PERCENTAGE_SIZE_CANVAS = 20 / 100
 const MIN_PERCENTAGE_SIZE_CANVAS = 10 / 100
 
 class PuffAnimationsEngine {
-  constructor () {
+  constructor() {
     this.offscreenCanvas = null
     this.sprite = {
-      src: '/static/assets/puff/v1.png',
+      src: prefixURL('/static/assets/puff/v1.png'),
       nbFrames: 4
     }
   }
 
-  init (canvasResolution) {
+  init(canvasResolution) {
     // Create image element and load sprite data
     let img = new Image()
     img.src = this.sprite.src
@@ -46,12 +48,12 @@ class PuffAnimationsEngine {
     }
   }
 
-  getNbFrames () {
+  getNbFrames() {
     return this.sprite.nbFrames
   }
 
   /* frame needs to start at 0 */
-  getFrameData (frameNb) {
+  getFrameData(frameNb) {
     return {
       x: frameNb * this.sprite.frameWidth,
       y: 0,
@@ -60,7 +62,7 @@ class PuffAnimationsEngine {
     }
   }
 
-  getItemSize (bbox) {
+  getItemSize(bbox) {
     let size = PERCENTAGE_SIZE_BBOX * Math.max(bbox.h, bbox.w)
     size = Math.max(Math.min(size, this.maxItemSize), this.minItemSize)
 
@@ -70,7 +72,7 @@ class PuffAnimationsEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, puffAnimation) {
+  drawFrameOnCanvas(contextToDrawOn, puffAnimation) {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(puffAnimation.currentFrame)
     contextToDrawOn.drawImage(

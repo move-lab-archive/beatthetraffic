@@ -12,7 +12,7 @@ class PopUpAddScore extends Component {
     city: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -27,7 +27,7 @@ class PopUpAddScore extends Component {
     }
   }
 
-  saveScore () {
+  saveScore() {
     // Validate fields
 
     this.setState({
@@ -35,6 +35,7 @@ class PopUpAddScore extends Component {
       error: false
     })
 
+    // TODO REFACTOR URL
     // GET http://lab.moovel.com/newsletter?email=YOUREMAIL
     if (this.state.formData.newsletter) {
       axios.get(
@@ -68,7 +69,7 @@ class PopUpAddScore extends Component {
       )
   }
 
-  render () {
+  render() {
     const canSubmit = this.state.formData.name !== '' && !this.state.isSaving
 
     return (
@@ -157,7 +158,7 @@ class PopUpAddScore extends Component {
                   disabled={!canSubmit}
                   title={`${
                     this.state.isSaving ? 'Saving score...' : 'Save score'
-                  }`}
+                    }`}
                   onClick={() => this.saveScore()}
                 />
               </div>

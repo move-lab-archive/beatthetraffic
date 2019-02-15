@@ -18,9 +18,10 @@ import {
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
 import ScoreBox from './shared/ScoreBox'
+import { prefixURL } from '../../../../utils/url';
 
 class Win extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -35,7 +36,7 @@ class Win extends Component {
     this.hideScore = this.hideScore.bind(this)
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (
       this.props.url.query.show === 'win' &&
       newProps.url.query.page === 'score'
@@ -76,7 +77,7 @@ class Win extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     SoundsManager.playSound('youwin')
     SoundsManager.playSound('youwinloop')
 
@@ -102,15 +103,15 @@ class Win extends Component {
         !this.state.showAddScorePopup &&
         !this.state.showScore
       ) {
-        window.location.href = `/${this.props.city}/level/1`
+        window.location.href = prefixURL(`/${this.props.city}/level/1`)
       }
     }, 20000)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.dispatch(restoreCanvasScrolling())
     // Restore url
-    Router.replace('/', `${this.urlWhenEnteringWinToRestore}`, {
+    Router.replace('/', prefixURL(`/${this.urlWhenEnteringWinToRestore}`), {
       shallow: true
     })
 
@@ -119,7 +120,7 @@ class Win extends Component {
     }
   }
 
-  startAnimatingScoreBox () {
+  startAnimatingScoreBox() {
     this.scoreBoxAnimation = setInterval(() => {
       let nextIndex = this.state.scoreBoxIndex + 1
       if (nextIndex > this.state.scoreBox.length - 1) {
@@ -132,7 +133,7 @@ class Win extends Component {
     }, 2000)
   }
 
-  getNextScoreBoxData (index) {
+  getNextScoreBoxData(index) {
     if (index + 1 > this.state.scoreBox.length - 1) {
       return this.state.scoreBox[0]
     } else {
@@ -140,12 +141,12 @@ class Win extends Component {
     }
   }
 
-  closePopupAddScore () {
+  closePopupAddScore() {
     // console.log('back')
     window.history.back()
   }
 
-  showPopupAddScore () {
+  showPopupAddScore() {
     Router.push(
       '/?show=win&page=popup',
       `${this.urlWhenEnteringWinToRestore}?show=savescore`,
@@ -155,21 +156,21 @@ class Win extends Component {
     )
   }
 
-  showScore (rank, highscore) {
+  showScore(rank, highscore) {
     this.setState({
       scoreData: highscore
     })
 
-    Router.replace(`/?show=win&page=score&rank=${rank}`, `/highscores`, {
+    Router.replace(`/?show=win&page=score&rank=${rank}`, `highscores`, {
       shallow: true
     })
   }
 
-  hideScore () {
+  hideScore() {
     this.props.dispatch(retry())
   }
 
-  render () {
+  render() {
     return (
       <div className='instructions-win'>
         <div className='title'>YOU WON</div>

@@ -1,6 +1,6 @@
 const cities = Object.keys(require('./gameconfig.json').availableCities)
 
-function getCityRoutes (cityName) {
+function getCityRoutes(cityName) {
   const cityRoutes = new Map()
 
   const nbLevels = 3
@@ -19,6 +19,14 @@ function getCityRoutes (cityName) {
 }
 
 module.exports = {
+
+  // "/test"
+  assetPrefix: process.env.URL_PREFIX,
+
+  publicRuntimeConfig: {
+    URL_PREFIX: process.env.URL_PREFIX
+  },
+
   exportPathMap: function () {
     let routes = new Map()
 

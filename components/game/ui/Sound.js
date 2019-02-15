@@ -5,9 +5,10 @@ import {
   turnSoundOn,
   turnSoundOff
 } from '../../../statemanagement/app/SettingsStateManagement'
+import { prefixURL } from '../../../utils/url';
 
 class Sound extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.toggleSound = this.toggleSound.bind(this)
@@ -20,7 +21,7 @@ class Sound extends Component {
     }
   }
 
-  toggleSound () {
+  toggleSound() {
     if (this.props.soundEnabled) {
       this.props.dispatch(turnSoundOff())
     } else {
@@ -28,15 +29,15 @@ class Sound extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Prefetch sound on / off image depending on enabled / disabled
     const soundPrefetch = new Image()
-    soundPrefetch.src = `/static/assets/icons/icon-sound-${
+    soundPrefetch.src = prefixURL(`/static/assets/icons/icon-sound-${
       this.props.soundEnabled ? 'off' : 'on'
-    }.svg`
+      }.svg`)
   }
 
-  render () {
+  render() {
     return (
       <div
         className={`audio-button ${this.props.soundEnabled ? 'on' : 'off'}`}
@@ -58,11 +59,11 @@ class Sound extends Component {
           }
 
           .audio-button.on {
-            background-image: url(/static/assets/icons/icon-sound-on.svg);
+          background-image: url(${prefixURL("/static/assets/icons/icon-sound-on.svg")});
           }
 
           .audio-button.off {
-            background-image: url(/static/assets/icons/icon-sound-off.svg);
+            background-image: url(${prefixURL("/static/assets/icons/icon-sound-off.svg")});
           }
         `}</style>
       </div>

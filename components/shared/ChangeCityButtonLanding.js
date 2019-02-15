@@ -5,6 +5,7 @@ import {
   hideCityPicker,
   showCityPicker
 } from '../../statemanagement/app/AppStateManagement'
+import { prefixURL } from '../../utils/url';
 
 class ChangeCityButtonLanding extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ class ChangeCityButtonLanding extends Component {
     noAnim: PropTypes.bool
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleChangeCityClick = this.handleChangeCityClick.bind(this)
@@ -25,7 +26,7 @@ class ChangeCityButtonLanding extends Component {
     }
   }
 
-  handleChangeCityClick () {
+  handleChangeCityClick() {
     if (this.props.cityPickerVisible) {
       this.props.dispatch(hideCityPicker())
     } else {
@@ -33,7 +34,7 @@ class ChangeCityButtonLanding extends Component {
     }
   }
 
-  setRandomCity () {
+  setRandomCity() {
     const city = this.props.availableCities
       .sortBy(Math.random)
       .filter((cityLabel, cityKey) => {
@@ -52,7 +53,7 @@ class ChangeCityButtonLanding extends Component {
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setRandomCity()
 
     this.intervalChangeSuggestedCity = setInterval(
@@ -66,16 +67,16 @@ class ChangeCityButtonLanding extends Component {
         bubbleImageLoaded: true
       })
     }
-    bubbleImage.src = '/static/assets/landing/bubble.svg'
+    bubbleImage.src = prefixURL('/static/assets/landing/bubble.svg')
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.intervalChangeSuggestedCity) {
       clearInterval(this.intervalChangeSuggestedCity)
     }
   }
 
-  render () {
+  render() {
     return (
       <div
         onClick={this.handleChangeCityClick}
@@ -87,7 +88,7 @@ class ChangeCityButtonLanding extends Component {
       >
         <img
           className='unicorn'
-          src='/static/assets/landing/asset-unicorn.png'
+          src={prefixURL('/static/assets/landing/asset-unicorn.png')}
         />
         {this.state.bubbleImageLoaded && (
           <div className='bubble-hint'>
@@ -127,7 +128,7 @@ class ChangeCityButtonLanding extends Component {
             text-align: center;
             box-sizing: content-box;
 
-            background: url('/static/assets/landing/bubble.svg');
+            background: url(${prefixURL("/static/assets/landing/bubble.svg")});
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100% 100%;

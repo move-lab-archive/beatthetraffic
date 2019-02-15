@@ -23,8 +23,8 @@ fs.readFile(`./gameconfig.json`, function (err, f) {
     }
 
     exec(
-      `node-moving-things-tracker --mode=beatthetraffic ${busastruck} ${personasmotorbike} --input ./static/levels/${
-        video.name
+      `node-moving-things-tracker --mode=beatthetraffic ${busastruck} ${personasmotorbike} --input /static/levels/${
+      video.name
       }/rawdetections.txt`,
       (error, stdout) => {
         if (error) {

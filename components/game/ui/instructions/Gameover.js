@@ -12,9 +12,10 @@ import {
 } from '../../../../statemanagement/app/ViewportStateManagement'
 import ChangeCityButton from '../../../shared/ChangeCityButton'
 import ScoreBox from './shared/ScoreBox'
+import { prefixURL } from '../../../../utils/url';
 
 class Gameover extends Component {
-  componentDidMount () {
+  componentDidMount() {
     SoundsManager.playSound('youlose')
     SoundsManager.playSound('youloseloop')
 
@@ -24,12 +25,12 @@ class Gameover extends Component {
     this.timeoutRedirectToLanding = setTimeout(() => {
       // Do not redirect if we opened up the menu
       if (!this.props.showMenu) {
-        window.location.href = `/${this.props.city}/level/1`
+        window.location.href = prefixURL(`/${this.props.city}/level/1`)
       }
     }, 20000)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.dispatch(restoreCanvasScrolling())
 
     if (this.timeoutRedirectToLanding) {
@@ -37,7 +38,7 @@ class Gameover extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <div className='instructions-gameover'>
         <div className='title'>GAME OVER</div>

@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import ButtonClose from '../shared/ButtonClose'
+import { prefixURL } from '../../utils/url';
 
-import Button from '../shared/Button'
 import Footer from './Footer'
 
 class AboutPage extends Component {
-  render () {
+  render() {
     return (
       <div className={`about-page`}>
-        <ButtonClose onClick={this.props.onClose} />
+        <ButtonClose onClick={this.props.onClose} /> */}
         <h2 className='headline'>ABOUT</h2>
         <img
           className='rightcloud'
-          src='/static/assets/menu/menu-rightcloud.svg'
+          src={prefixURL("/static/assets/menu/menu-rightcloud.svg")}
         />
         <img
           className='leftcloud'
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <img
           className={`thirdcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <img
           className={`fourthcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <div className={`background-white`} />
 
@@ -35,7 +35,7 @@ class AboutPage extends Component {
                 <span>Beat The Traffic X</span> is a magical way of using
                 traffic data to face current challenges of urban mobility.
               </h2>
-              <img src='/static/assets/about-highscores/leftover.jpg' />
+              <img src={prefixURL('/static/assets/about-highscores/leftover.jpg')} />
               <p className='maintext'>
                 Making traffic disappear can be as easy as detecting it.
                 Automated object detection using machine learning allows to
@@ -75,7 +75,7 @@ class AboutPage extends Component {
               <div className='buttons'>
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace'>
-                    <a href='/static/assets/presskit.zip' target='_blank'>
+                    <a href={prefixURL('/static/assets/presskit.zip')} target='_blank'>
                       <div className='inner' />
                       <div className='outer'>
                         <h4>Press kit</h4>

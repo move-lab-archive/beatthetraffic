@@ -11,6 +11,7 @@ import {
 import { turnSoundOn, turnSoundOff } from './SettingsStateManagement'
 
 import GameConfig from '../../gameconfig.json'
+import { prefixURL } from '../../utils/url';
 
 // Initial state
 const initialState = fromJS({
@@ -60,44 +61,44 @@ const UNMUTE_ON_HIDE_MENU = 'App/UNMUTE_ON_HIDE_MENU'
 const KEEP_MUTED_ON_HIDE_MENU = 'App/KEEP_MUTED_ON_HIDE_MENU'
 const SET_INTROANIM_PLAYED = 'App/SET_INTROANIM_PLAYED'
 
-let pathStatic = '/static/levels'
+let pathStatic = prefixURL('/static/levels')
 
-export function getRawDetectionPath (videoName) {
+export function getRawDetectionPath(videoName) {
   return `${pathStatic}/${videoName}/rawdetections.txt`
 }
 
-export function getTrackerDataPath (videoName) {
+export function getTrackerDataPath(videoName) {
   return `${pathStatic}/${videoName}/tracker.json`
 }
 
-export function getAverageImgPath (videoName) {
+export function getAverageImgPath(videoName) {
   return `${pathStatic}/${videoName}/average-1280.jpg`
 }
 
-export function getFirstFrameImgPath (videoName) {
+export function getFirstFrameImgPath(videoName) {
   return `${pathStatic}/${videoName}/firstframe.jpg`
 }
 
-export function setIntroAnimPlayed () {
+export function setIntroAnimPlayed() {
   return {
     type: SET_INTROANIM_PLAYED
   }
 }
 
-export function showCityPicker (label) {
+export function showCityPicker(label) {
   return {
     type: SHOW_CITY_PICKER,
     payload: label
   }
 }
 
-export function hideCityPicker () {
+export function hideCityPicker() {
   return {
     type: HIDE_CITY_PICKER
   }
 }
 
-export function showMenu () {
+export function showMenu() {
   return (dispatch, getState) => {
     if (getState().video.get('isPlaying')) {
       // Pause video / game
@@ -127,7 +128,7 @@ export function showMenu () {
   }
 }
 
-export function hideMenu () {
+export function hideMenu() {
   return (dispatch, getState) => {
     if (getState().app.get('playOnHideMenu')) {
       //  Unpause video / game
@@ -144,7 +145,7 @@ export function hideMenu () {
   }
 }
 
-export function selectCity (name) {
+export function selectCity(name) {
   return (dispatch, getState) => {
     dispatch({
       type: SELECT_CITY,
@@ -156,7 +157,7 @@ export function selectCity (name) {
   }
 }
 
-export function selectVideoForLevel (level = 1) {
+export function selectVideoForLevel(level = 1) {
   return (dispatch, getState) => {
     const city = getState().app.get('selectedCity')
 
@@ -171,7 +172,7 @@ export function selectVideoForLevel (level = 1) {
   }
 }
 
-export function selectVideo (name) {
+export function selectVideo(name) {
   return (dispatch, getState) => {
     return new Promise((resolve, reject) => {
       dispatch({
@@ -216,7 +217,7 @@ export function selectVideo (name) {
 
 // This action is only executed on first load when we render the javascript on the client
 // It fetchs things that aren't included in the pre-ssr-render
-export function fetchRemainingData () {
+export function fetchRemainingData() {
   return (dispatch, getState) => {
     const videoSelectedName = getState().app.get('selectedVideo')
     dispatch(prefetchImgFirstFrame(videoSelectedName))
@@ -245,7 +246,7 @@ export function fetchRemainingData () {
 }
 
 // Reducer
-export default function AppReducer (state = initialState, action = {}) {
+export default function AppReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SELECT_VIDEO:
       return state.set('selectedVideo', action.payload)

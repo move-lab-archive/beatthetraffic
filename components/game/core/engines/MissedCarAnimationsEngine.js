@@ -1,17 +1,19 @@
+import { prefixURL } from "../../../../utils/url";
+
 /* global Image */
 
 class MissedCarAnimationsEngine {
-  constructor () {
+  constructor() {
     this.offscreenCanvas = null
     this.sprite = {
       width: 800,
       height: 200,
-      src: '/static/assets/sprites/missedcar.png',
+      src: prefixURL('/static/assets/sprites/missedcar.png'),
       nbFrames: 4
     }
   }
 
-  init () {
+  init() {
     // Create image element and load sprite data
     let img = new Image()
     img.src = this.sprite.src
@@ -33,12 +35,12 @@ class MissedCarAnimationsEngine {
     }
   }
 
-  getNbFrames () {
+  getNbFrames() {
     return this.sprite.nbFrames
   }
 
   /* frame needs to start at 0 */
-  getFrameData (frameNb) {
+  getFrameData(frameNb) {
     return {
       x: frameNb * this.sprite.frameWidth,
       y: 0,
@@ -47,7 +49,7 @@ class MissedCarAnimationsEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, missedCarAnimation) {
+  drawFrameOnCanvas(contextToDrawOn, missedCarAnimation) {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(missedCarAnimation.currentFrame)
     contextToDrawOn.drawImage(

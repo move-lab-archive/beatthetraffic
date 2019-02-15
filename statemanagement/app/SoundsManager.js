@@ -1,102 +1,104 @@
 /* global Howler */
 import { Howl } from 'howler'
+import { prefixURL } from '../../utils/url';
 
 class SoundsManager {
-  constructor () {
+  constructor() {
     this.sounds = {}
     this.currentAmbientSound = null
 
     // console.log('Instantiate SoundsManager')
     // console.log('preload game sound')
     // Load Intro sound first
-    this.addSound('ambient', 'intro', '/static/assets/sounds/intro-small.mp3')
+    this.addSound('ambient', 'intro', prefixURL('/static/assets/sounds/intro-small.mp3'))
   }
 
-  preloadEssentialSounds (level = 1) {
+  preloadEssentialSounds(level = 1) {
     this.preloadLevelSpecific(1)
 
-    this.addSound('punctual', 'carhit', '/static/assets/sounds/carhit.mp3')
+    this.addSound('punctual', 'carhit', prefixURL('/static/assets/sounds/carhit.mp3'))
     this.addSound(
       'punctual',
       'carhitandpopitem',
-      '/static/assets/sounds/carhitandpopitem.mp3'
+      prefixURL('/static/assets/sounds/carhitandpopitem.mp3')
     )
     this.addSound(
       'punctual',
       'carmissed',
-      '/static/assets/sounds/carmissed.mp3'
+      prefixURL('/static/assets/sounds/carmissed.mp3')
     )
     this.addSound(
       'punctual',
       'win-point-withitem',
-      '/static/assets/sounds/win-point-withitem.mp3'
+      prefixURL('/static/assets/sounds/win-point-withitem.mp3')
     )
   }
 
-  preloadOtherSounds (level = 1) {
+  preloadOtherSounds(level = 1) {
     this.addSound(
       'punctual',
       'nextlevel',
-      '/static/assets/sounds/nextlevel.mp3'
+      prefixURL('/static/assets/sounds/nextlevel.mp3')
     )
 
     this.addSound(
       'punctual',
       'healthrecovery',
-      '/static/assets/sounds/healthrecovery.mp3'
+      prefixURL('/static/assets/sounds/healthrecovery.mp3')
     )
 
-    this.addSound('punctual', 'youlose', '/static/assets/sounds/youlose.mp3')
+    this.addSound('punctual', 'youlose', prefixURL('/static/assets/sounds/youlose.mp3'))
     this.addSound(
       'punctual',
       'transition-alert-normal',
-      '/static/assets/sounds/transition-alert-normal.mp3'
+      prefixURL('/static/assets/sounds/transition-alert-normal.mp3')
     )
     this.addSound(
       'punctual',
       'transition-normal-alert',
-      '/static/assets/sounds/transition-normal-alert.mp3'
+      prefixURL('/static/assets/sounds/transition-normal-alert.mp3')
     )
 
     this.addSound(
       'ambient',
       'youloseloop',
-      '/static/assets/sounds/youloseloop.mp3',
+      prefixURL('/static/assets/sounds/youloseloop.mp3'),
       {
         loop: true
       }
     )
 
-    this.addSound('ambient', 'alert', '/static/assets/sounds/alert.mp3', {
+    this.addSound('ambient', 'alert', prefixURL('/static/assets/sounds/alert.mp3'), {
       loop: true
     })
   }
 
-  preloadLevelSpecific (level = 1) {
+  preloadLevelSpecific(level = 1) {
     // Level main sound
     this.addSound(
       'ambient',
       `main_level${level}`,
-      `/static/assets/sounds/main_level${level}.mp3`,
+      prefixURL(`/static/assets/sounds/main_level${level}.mp3`),
       {
         loop: true
       }
     )
 
     if (level === 3) {
-      this.addSound('punctual', 'youwin', '/static/assets/sounds/youwin.mp3')
+      this.addSound('punctual', 'youwin', prefixURL('/static/assets/sounds/youwin.mp3'))
       this.addSound(
         'ambient',
         'youwinloop',
-        '/static/assets/sounds/youwinloop.mp3',
+        prefixURL('/static/assets/sounds/youwinloop.mp3'),
         {
+
           loop: true
         }
       )
     }
   }
 
-  addSound (soundType, soundName, soundSrc, options) {
+  addSound(soundType, soundName, soundSrc, options) {
     this.sounds[soundName] = {
       sound: new Howl({
         src: [soundSrc],
@@ -106,7 +108,7 @@ class SoundsManager {
     }
   }
 
-  playSound (soundName, playbackRate = 1) {
+  playSound(soundName, playbackRate = 1) {
     const soundToPlay = this.sounds[soundName]
     if (this.sounds[soundName]) {
       if (soundToPlay.type === 'ambient') {
@@ -134,7 +136,7 @@ class SoundsManager {
     }
   }
 
-  pauseSound (soundName) {
+  pauseSound(soundName) {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.pause()
     } else {
@@ -142,7 +144,7 @@ class SoundsManager {
     }
   }
 
-  stopSound (soundName) {
+  stopSound(soundName) {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.stop()
     } else {
@@ -150,7 +152,7 @@ class SoundsManager {
     }
   }
 
-  changePlaybackRate (soundName, newRate) {
+  changePlaybackRate(soundName, newRate) {
     if (this.sounds[soundName]) {
       this.sounds[soundName].sound.rate(newRate)
     } else {
@@ -158,11 +160,11 @@ class SoundsManager {
     }
   }
 
-  muteAll () {
+  muteAll() {
     Howler.mute(true)
   }
 
-  unMuteAll () {
+  unMuteAll() {
     Howler.mute(false)
   }
 }
