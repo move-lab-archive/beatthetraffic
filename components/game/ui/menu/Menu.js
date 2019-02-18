@@ -13,12 +13,13 @@ import {
   blockCanvasScrolling,
   restoreCanvasScrolling
 } from '../../../../statemanagement/app/ViewportStateManagement'
+import { prefixURL } from '../../../../utils/url';
 
 class Menu extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
-    this.urlWhenEnteringMenuToRestore = '/'
+    this.urlWhenEnteringMenuToRestore = 'test'
 
     this.state = {
       showAbout: false,
@@ -26,7 +27,7 @@ class Menu extends PureComponent {
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.showMenu !== this.props.showMenu) {
       if (newProps.showMenu) {
         // Push
@@ -100,27 +101,27 @@ class Menu extends PureComponent {
     }
   }
 
-  showAbout () {
-    Router.push('/?show=menu&page=about', `/about`, {
+  showAbout() {
+    Router.push('/?show=menu&page=about', prefixURL(`/about`), {
       shallow: true
     })
   }
 
-  showScore () {
-    Router.push('/?show=menu&page=score', `/highscores`, {
+  showScore() {
+    Router.push('/?show=menu&page=score', prefixURL(`/highscores`), {
       shallow: true
     })
   }
 
-  hideAbout () {
+  hideAbout() {
     window.history.back()
   }
 
-  hideScore () {
+  hideScore() {
     window.history.back()
   }
 
-  render () {
+  render() {
     let availableCities = this.props.availableCities
       .sort((a, b) => a.get('label').localeCompare(b.get('label')))
       .toJS()
@@ -156,12 +157,12 @@ class Menu extends PureComponent {
                 <h2
                   onClick={() => {
                     // TODO IMPROVE WITHOUT HARD RELOAD
-                    window.location.href = `/${cityId}/level/1`
+                    window.location.href = prefixURL(`${cityId}/level/1/`)
                   }}
                   key={cityId}
                   className={`link ${
                     cityId === this.props.selectedCity ? 'selected' : ''
-                  }`}
+                    }`}
                 >
                   {availableCities[cityId].label}
                 </h2>
@@ -185,15 +186,15 @@ class Menu extends PureComponent {
         <img
           className={`menu-rightcloud ${
             this.props.showMenu ? 'visiblecloud' : 'hiddencloud'
-          }`}
-          src='/static/assets/menu/menu-rightcloud.svg'
+            }`}
+          src={prefixURL('/static/assets/menu/menu-rightcloud.svg')}
         />
 
         <img
           className={`menu-leftcloud ${
             this.props.showMenu ? 'visiblecloud' : 'hiddencloud'
-          }`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+            }`}
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
 
         <style jsx>{`

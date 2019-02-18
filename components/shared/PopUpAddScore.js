@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import Button from './Button'
 import ButtonClose from './ButtonClose'
+import { prefixURL } from '../../utils/url';
 
 class PopUpAddScore extends Component {
   static propTypes = {
@@ -12,7 +13,7 @@ class PopUpAddScore extends Component {
     city: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -27,7 +28,7 @@ class PopUpAddScore extends Component {
     }
   }
 
-  saveScore () {
+  saveScore() {
     // Validate fields
 
     this.setState({
@@ -35,6 +36,7 @@ class PopUpAddScore extends Component {
       error: false
     })
 
+    // TODO REFACTOR URL
     // GET http://lab.moovel.com/newsletter?email=YOUREMAIL
     if (this.state.formData.newsletter) {
       axios.get(
@@ -52,7 +54,7 @@ class PopUpAddScore extends Component {
     }
 
     axios
-      .post('/api/highscores', highscore)
+      .post(prefixURL('/api/highscores'), highscore)
       .then(
         response => {
           this.props.onSuccess(response.data, highscore)
@@ -68,7 +70,7 @@ class PopUpAddScore extends Component {
       )
   }
 
-  render () {
+  render() {
     const canSubmit = this.state.formData.name !== '' && !this.state.isSaving
 
     return (
@@ -157,7 +159,7 @@ class PopUpAddScore extends Component {
                   disabled={!canSubmit}
                   title={`${
                     this.state.isSaving ? 'Saving score...' : 'Save score'
-                  }`}
+                    }`}
                   onClick={() => this.saveScore()}
                 />
               </div>

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 
 import { TimelineLite } from 'gsap'
 import SoundsManager from '../../../statemanagement/app/SoundsManager'
+import { prefixURL } from '../../../utils/url';
 
 class Intro extends Component {
-  componentDidMount () {
+  componentDidMount() {
     SoundsManager.playSound('intro')
 
     const timeline = new TimelineLite({
@@ -34,7 +35,7 @@ class Intro extends Component {
     timeline.play()
   }
 
-  render () {
+  render() {
     return (
       <div className='game-landing'>
         <div className='title location'>{this.props.selectedCity}</div>
@@ -54,7 +55,7 @@ class Intro extends Component {
           </div>
         </div>
         <div className='title logo'>
-          <img src='/static/assets/logo/logo-moovel-shiny-patrol.svg' />
+          <img src={prefixURL('/static/assets/logo/logo-moovel-shiny-patrol.svg')} />
         </div>
         <div className='title level'>LEVEL {this.props.currentLevel}</div>
 

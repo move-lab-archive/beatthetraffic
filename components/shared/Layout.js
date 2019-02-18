@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Head from 'next/head'
 import Router from 'next/router'
+import { prefixURL } from '../../utils/url';
 
 import { initAnalytics, gtag } from '../../utils/analytics'
 
 class Layout extends Component {
-  recordFirstPaint () {
+  recordFirstPaint() {
     return {
       __html: '<script>window.firstPaint = new Date().getTime()</script>'
     }
   }
 
-  initGtags () {
+  initGtags() {
     initAnalytics('AW-856792702')
     gtag('js', new Date())
     gtag('config', 'AW-856792702')
@@ -22,12 +23,12 @@ class Layout extends Component {
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     /* Load gtags script */
     this.initGtags()
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Head>
@@ -43,12 +44,12 @@ class Layout extends Component {
           />
           <link
             rel='apple-touch-icon'
-            href='/static/assets/favicon/apple-touch-icon.png'
+            href={prefixURL('/static/assets/favicon/apple-touch-icon.png')}
           />
           <link
             rel='icon'
             type='image/png'
-            href='/static/assets/favicon/favicon.png'
+            href={prefixURL('/static/assets/favicon/favicon.png')}
           />
           <meta
             property='og:title'
@@ -104,10 +105,10 @@ class Layout extends Component {
             font-weight: 700;
             background-color: white;
             // Max size of the cursor is 128px x 128px
-            cursor: url(/static/assets/cursor/magic-wand.png) 10 10, auto;
+            cursor: url(${prefixURL('/static/assets/cursor/magic-wand.png')}) 10 10, auto;
             cursor: -webkit-image-set(
-                  url(/static/assets/cursor/magic-wand.png) 1x,
-                  url(/static/assets/cursor/magic-wand2x.png) 2x
+                  url(${prefixURL('/static/assets/cursor/magic-wand.png')}) 1x,
+                  url(${prefixURL('/static/assets/cursor/magic-wand2x.png')}) 2x
                 )
                 10 10,
               pointer;

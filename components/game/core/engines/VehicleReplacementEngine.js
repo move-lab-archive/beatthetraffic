@@ -1,6 +1,7 @@
 /* global Image */
 import { scaleDetection } from '../../../../utils/resolution'
 import GameEngineStateManager from '../../../../statemanagement/app/GameEngineStateManager'
+import { prefixURL } from '../../../../utils/url';
 
 export const VEHICLE_REPLACEMENT_TYPES = {
   TREE: 'tree',
@@ -13,7 +14,7 @@ const MAX_PERCENTAGE_SIZE_CANVAS = 16 / 100
 const MIN_PERCENTAGE_SIZE_CANVAS = 6 / 100
 
 class VehicleReplacementEngine {
-  constructor () {
+  constructor() {
     this.offscreenCanvas = {}
     this.sprites = {}
     this.canvasResolution = {}
@@ -23,7 +24,7 @@ class VehicleReplacementEngine {
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.TREE] = {
       ratioWidthHeight: 1,
-      src: '/static/assets/sprites/tree.png',
+      src: prefixURL('/static/assets/sprites/tree.png'),
       nbFramePerRow: 6,
       nbRow: 6,
       nbTotalFrame: 36,
@@ -34,7 +35,7 @@ class VehicleReplacementEngine {
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.UNICORN] = {
       ratioWidthHeight: 1,
-      src: '/static/assets/sprites/unicorn.png',
+      src: prefixURL('/static/assets/sprites/unicorn.png'),
       nbFramePerRow: 6,
       nbRow: 6,
       nbTotalFrame: 36,
@@ -45,7 +46,7 @@ class VehicleReplacementEngine {
 
     this.sprites[VEHICLE_REPLACEMENT_TYPES.RAINBOW] = {
       ratioWidthHeight: 1,
-      src: '/static/assets/sprites/rainbow.png',
+      src: prefixURL('/static/assets/sprites/rainbow.png'),
       nbFramePerRow: 6,
       nbRow: 6,
       nbTotalFrame: 36,
@@ -55,7 +56,7 @@ class VehicleReplacementEngine {
     }
   }
 
-  init (canvasResolution) {
+  init(canvasResolution) {
     // From canvasResolution compute the sprite size needed
     this.canvasResolution = canvasResolution
     this.minItemSize = MIN_PERCENTAGE_SIZE_CANVAS * this.canvasResolution.h
@@ -100,7 +101,7 @@ class VehicleReplacementEngine {
     })
   }
 
-  getNbFrames (vehicleReplacementType) {
+  getNbFrames(vehicleReplacementType) {
     return this.sprites[vehicleReplacementType].nbTotalFrame - 1
   }
 
@@ -133,7 +134,7 @@ class VehicleReplacementEngine {
                        +
 
 */
-  getFrameData (bearing, vehicleReplacementType) {
+  getFrameData(bearing, vehicleReplacementType) {
     let sprite = this.sprites[vehicleReplacementType]
     let bearingSprite = 0
     // translate bearing of tracker to bearing of sprite
@@ -153,7 +154,7 @@ class VehicleReplacementEngine {
     }
   }
 
-  getVehicleReplacementSize (object) {
+  getVehicleReplacementSize(object) {
     let sprite = this.sprites[object.type]
     let vehicleReplacement = {}
 
@@ -175,11 +176,11 @@ class VehicleReplacementEngine {
     return vehicleReplacement
   }
 
-  getRandomInt (min, max) {
+  getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  getVehicleReplacementType (objectId) {
+  getVehicleReplacementType(objectId) {
     let vehicleReplacementType = this.mapVehicleTypes[objectId]
     if (vehicleReplacementType) {
       return vehicleReplacementType
@@ -197,7 +198,7 @@ class VehicleReplacementEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, item) {
+  drawFrameOnCanvas(contextToDrawOn, item) {
     // Compute offscreenCanvas position of frame
     const sourceData = this.getFrameData(item.bearing, item.type)
     contextToDrawOn.drawImage(
@@ -213,7 +214,7 @@ class VehicleReplacementEngine {
     )
   }
 
-  drawVehiclesReplacementFromTrackerData (
+  drawVehiclesReplacementFromTrackerData(
     context,
     objectTrackerDataForThisFrame,
     canvasResolution,

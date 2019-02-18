@@ -5,6 +5,7 @@ import { loadCity, retry } from '../../statemanagement/app/GameStateManagement'
 import { hideCityPicker } from '../../statemanagement/app/AppStateManagement'
 import ButtonClose from './ButtonClose'
 import ChangeCityButton from './ChangeCityButton'
+import { prefixURL } from '../../utils/url';
 
 class CityPicker extends PureComponent {
   static propTypes = {
@@ -13,7 +14,7 @@ class CityPicker extends PureComponent {
     availableCities: PropTypes.object
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (
       this.props.isVisible !== newProps.isVisible &&
       newProps.isVisible &&
@@ -23,7 +24,7 @@ class CityPicker extends PureComponent {
     }
   }
 
-  handleClose () {
+  handleClose() {
     this.props.dispatch(hideCityPicker())
   }
 
@@ -32,7 +33,7 @@ class CityPicker extends PureComponent {
   //   this.handleClose()
   // }
 
-  render () {
+  render() {
     let availableCities = this.props.availableCities
       .sort((a, b) => a.get('label').localeCompare(b.get('label')))
       .toJS()
@@ -45,7 +46,7 @@ class CityPicker extends PureComponent {
           }}
           className={`city-picker-container ${
             this.props.isVisible ? 'visible' : 'hidden'
-          } ${this.props.label ? '' : 'nolabel'}`}
+            } ${this.props.label ? '' : 'nolabel'}`}
         >
           <div className={`cities`}>
             {Object.keys(availableCities).map(cityId => (
@@ -57,7 +58,7 @@ class CityPicker extends PureComponent {
                     // Do nothing
                   } else {
                     // Hard reload, this makes sure javascript is cleaned up
-                    window.location.href = `/${cityId}/level/1`
+                    window.location.href = prefixURL(`/${cityId}/level/1`)
                   }
                 }}
                 key={cityId}
@@ -79,7 +80,7 @@ class CityPicker extends PureComponent {
           onClick={() => this.handleClose()}
           className={`city-picker-overlay ${
             this.props.isVisible ? 'visible' : 'hidden'
-          }`}
+            }`}
         >
           <ChangeCityButton label={this.props.label} />
         </div>

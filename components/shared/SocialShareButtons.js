@@ -1,10 +1,11 @@
 import React from 'react'
+import { prefixURL } from '../../utils/url';
 
-const FacebookIcon = '/static/assets/icons/icon-facebook.svg'
-const TwitterIcon = '/static/assets/icons/icon-twitter.svg'
+const FacebookIcon = prefixURL('/static/assets/icons/icon-facebook.svg')
+const TwitterIcon = prefixURL('/static/assets/icons/icon-twitter.svg')
 
 class SocialShareButtons extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.websiteUrl = 'https://beatthetraffic.moovellab.com'
 
@@ -13,7 +14,7 @@ class SocialShareButtons extends React.Component {
     }
   }
 
-  twitterUrl () {
+  twitterUrl() {
     let text = ''
 
     text +=
@@ -24,17 +25,17 @@ class SocialShareButtons extends React.Component {
     )}&url=${encodeURI(this.websiteUrl)}`
   }
 
-  facebookUrl () {
+  facebookUrl() {
     return `https://www.facebook.com/sharer.php?u=${encodeURI(this.websiteUrl)}`
   }
 
-  toggleIcons () {
+  toggleIcons() {
     this.setState({
       showIcons: !this.state.showIcons
     })
   }
 
-  render () {
+  render() {
     return (
       <div className='List'>
         <h1 onClick={() => this.toggleIcons()}>SHARE</h1>

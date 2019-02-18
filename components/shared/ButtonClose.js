@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { prefixURL } from '../../utils/url';
 
 class ButtonClose extends Component {
   static propTypes = {
@@ -7,17 +8,17 @@ class ButtonClose extends Component {
     smallPadding: PropTypes.bool
   }
 
-  render () {
+  render() {
     return (
       <div
         className={`btn-close ${
           this.props.smallPadding ? 'small-padding' : ''
-        }`}
+          }`}
         onClick={this.props.onClick}
       >
         <div className='inner' />
         <div className='outer'>
-          <img src='/static/assets/icons/icon-close.svg' />
+          <img src={prefixURL('/static/assets/icons/icon-close.svg')} />
         </div>
 
         <style jsx>{`

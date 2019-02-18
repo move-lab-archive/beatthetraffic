@@ -1,21 +1,22 @@
 import React, { Component } from 'react'
+import { prefixURL } from '../../../../utils/url';
 
 class LeftCloud extends Component {
-  render () {
+  render() {
     return (
       <div className="leftcloud">
         {/* Optimized with https://jakearchibald.github.io/svgomg/ */}
         <img
           className={`leftcloud-1 ${this.props.animateOut ? 'animate-out' : ''}`}
-          src='/static/assets/landing/leftcloud-1.svg'
+          src={prefixURL('/static/assets/landing/leftcloud-1.svg')}
         />
         <img
           className={`leftcloud-2 ${this.props.animateOut ? 'animate-out' : ''}`}
-          src='/static/assets/landing/leftcloud-2.svg'
+          src={prefixURL('/static/assets/landing/leftcloud-2.svg')}
         />
         <img
           className={`leftcloud-3 ${this.props.animateOut ? 'animate-out' : ''}`}
-          src='/static/assets/landing/leftcloud-3.svg'
+          src={prefixURL('/static/assets/landing/leftcloud-3.svg')}
         />
         <style jsx>{`
           .leftcloud-1 {

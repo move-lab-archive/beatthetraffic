@@ -16,9 +16,10 @@ import {
 } from '../../../statemanagement/app/ViewportStateManagement'
 import ChangeCityButtonLanding from '../../shared/ChangeCityButtonLanding'
 import { gtag, callback } from '../../../utils/analytics'
+import { prefixURL } from '../../../utils/url';
 
 class Landing extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleStartGame = this.handleStartGame.bind(this)
@@ -28,7 +29,7 @@ class Landing extends Component {
     }
   }
 
-  gtagReportConversion () {
+  gtagReportConversion() {
     let trackID = ''
 
     switch (this.props.selectedCity) {
@@ -79,7 +80,7 @@ class Landing extends Component {
     return false
   }
 
-  handleStartGame () {
+  handleStartGame() {
     this.props.dispatch(restoreCanvasScrolling())
     // TweenLite.to('.game-landing', 0.3, {
     //   opacity: 0,
@@ -112,18 +113,18 @@ class Landing extends Component {
     }) */
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       javascriptLoaded: true
     })
     this.props.dispatch(blockCanvasScrolling())
   }
 
-  render () {
+  render() {
     return (
       <div className='game-landing'>
         <div className='landing-content'>
-          <img className='tree' src='/static/assets/landing/asset-tree.png' />
+          <img className='tree' src={prefixURL('/static/assets/landing/asset-tree.png')} />
           <h1 className='landing-headline'>
             BEAT THE TRAFFIC
             <span className='city-var city'>{this.props.selectedCity}</span>

@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
+import { prefixURL } from '../../../../utils/url';
 
 class RightCloud extends Component {
-  render () {
+  render() {
     return (
       <div className="rightcloud">
         {/* Optimized with https://jakearchibald.github.io/svgomg/ */}
         <img
           className={`rightcloud-1 ${this.props.animateOut ? 'animate-out' : ''}`}
-          src='/static/assets/landing/rightcloud-1.svg'
+          src={prefixURL('/static/assets/landing/rightcloud-1.svg')}
         />
         <img
           className={`rightcloud-2 ${this.props.animateOut ? 'animate-out' : ''}`}
-          src='/static/assets/landing/rightcloud-2.svg'
+          src={prefixURL('/static/assets/landing/rightcloud-2.svg')}
         />
         {/* NOTE We can't animate in at first load, browser
             is busy doing loading & parsing of javascript and it is slow on svg

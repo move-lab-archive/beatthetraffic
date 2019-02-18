@@ -18,15 +18,15 @@ class HighScore extends React.Component {
   //   }
   // }
 
-  componentDidMount () {
+  componentDidMount() {
     Router.prefetch('/')
   }
 
-  navigateToGame () {
+  navigateToGame() {
     Router.push('/')
   }
 
-  render () {
+  render() {
     return (
       <Layout>
         <ScorePage onClose={() => this.navigateToGame()} />

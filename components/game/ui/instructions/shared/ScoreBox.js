@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TweenLite, TimelineLite } from 'gsap'
+import { prefixURL } from '../../../../../utils/url';
 
 class ScoreBox extends Component {
   static propTypes = {
@@ -9,7 +10,7 @@ class ScoreBox extends Component {
     color: PropTypes.oneOf(['pink'])
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     // Compute scorebox data
@@ -38,13 +39,13 @@ class ScoreBox extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.scoreBoxAnimation = setTimeout(() => {
       this.animateScoreBox()
     }, 2000)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.scoreBoxAnimation) {
       clearInterval(this.scoreBoxAnimation)
     }
@@ -58,15 +59,15 @@ class ScoreBox extends Component {
     }
   }
 
-  getIconSrc (name, color) {
+  getIconSrc(name, color) {
     if (color) {
-      return `/static/assets/icons/icon-${name}-${color}.svg`
+      return prefixURL(`/static/assets/icons/icon-${name}-${color}.svg`)
     } else {
-      return `/static/assets/icons/icon-${name}.svg`
+      return prefixURL(`/static/assets/icons/icon-${name}.svg`)
     }
   }
 
-  getTextLabel (leftIcon) {
+  getTextLabel(leftIcon) {
     if (leftIcon === 'star') {
       return `You've converted ${this.props.nbCarsConverted} cars`
     } else if (leftIcon === 'car') {
@@ -76,7 +77,7 @@ class ScoreBox extends Component {
     }
   }
 
-  animateScoreBox (index = 0) {
+  animateScoreBox(index = 0) {
     this.countingAnimation = TweenLite.to(this.scoreToDisplay, 2, {
       left: 0,
       right: this.getNextScoreBoxData(index).value,
@@ -115,7 +116,7 @@ class ScoreBox extends Component {
     })
   }
 
-  getNextScoreBoxData (index) {
+  getNextScoreBoxData(index) {
     if (index + 1 > this.state.scoreBox.length - 1) {
       return this.state.scoreBox[0]
     } else {
@@ -123,7 +124,7 @@ class ScoreBox extends Component {
     }
   }
 
-  render () {
+  render() {
     // let leftValue = this.state.scoreBox[this.state.scoreBoxIndex].value
     // let rightValue = this.getNextScoreBoxData(this.state.scoreBoxIndex).value
     let leftIcon = this.state.scoreBox[this.state.scoreBoxIndex].icon
@@ -135,7 +136,7 @@ class ScoreBox extends Component {
         <div
           className={`score-box ${this.props.color} ${
             this.props.score >= 100 ? 'threedigits' : ''
-          }`}
+            }`}
         >
           <div className='score-component left'>
             <h1 ref={el => (this.refScoreLeft = el)}>

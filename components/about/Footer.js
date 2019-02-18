@@ -1,4 +1,5 @@
 import React from 'react'
+import { prefixURL } from '../../utils/url';
 
 class Footer extends React.PureComponent {
   render = () => (
@@ -9,7 +10,7 @@ class Footer extends React.PureComponent {
             <div className='col-sm-6'>
               <a href='http://lab.moovel.com' target='_blank'>
                 <img
-                  src='/static/assets/icons/moovellab-logo.png'
+                  src={prefixURL('/static/assets/icons/moovellab-logo.png')}
                   alt='moovel-lab'
                   className='logo'
                 />
@@ -68,7 +69,7 @@ class Footer extends React.PureComponent {
                 >
                   <span className='icn-grp-icn'>
                     <img
-                      src='/static/assets/icons/twitter-logo.png'
+                      src={prefixURL('/static/assets/icons/twitter-logo.png')}
                       alt='twitter'
                       className='icn icn-twttr-logo'
                     />

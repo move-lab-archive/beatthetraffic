@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TweenLite } from 'gsap'
+import { prefixURL } from '../../../../utils/url';
 
 class Score extends Component {
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     if (this.iconStar) {
       TweenLite.to(this.iconStar, 0.3, { scale: 1.4 })
       TweenLite.to(this.iconStar, 0.3, { scale: 1, delay: 0.3 })
     }
   }
 
-  render () {
+  render() {
     return (
       <div className='score-container'>
         <span className='score'>{this.props.score}</span>
         <img
           ref={el => (this.iconStar = el)}
           className='icon-star'
-          src='/static/assets/icons/icon-star.svg'
+          src={prefixURL('/static/assets/icons/icon-star.svg')}
         />
         <style jsx>{`
           .score-container {

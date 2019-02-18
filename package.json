@@ -4,17 +4,14 @@
   "scripts": {
     "build": "next build",
     "cfn:lint": "cfn-lint validate cloudformation.yaml",
-    "cfn:update":
-      "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait",
     "deploy-prod": "now",
     "deploy": "now -n traffic-cam out",
     "dev": "node server/server-static-generation.js",
     "export": "next build && NODE_ENV=production next export",
-    "now-build": "next build && NODE_ENV=production next export",
-    "now-start": "NODE_ENV=production NOW_DEPLOY=true node server/server.js",
+    "now-build": "URL_PREFIX=/project/beatthetraffic next build && NODE_ENV=production URL_PREFIX=/project/beatthetraffic next export",
+    "now-start": "NODE_ENV=production URL_PREFIX=/project/beatthetraffic NOW_DEPLOY=true node server/server.js",
     "precommit": "npm run cfn:lint",
-    "aws-start":
-      "NODE_ENV=production PORT=80 node server/server.js",
+    "aws-start": "NODE_ENV=production URL_PREFIX=/project/beatthetraffic PORT=80 node server/server.js",
     "start": "NODE_ENV=production node server/server-static-generation.js",
     "static": "serve out"
   },
@@ -36,9 +33,9 @@
     "immutable": "^3.8.2",
     "lodash.minby": "^4.6.0",
     "mongodb": "^3.0.2",
-    "next": "^4.2.3",
+    "next": "^5.1.0",
     "next-redux-wrapper": "^1.3.5",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.7.2",
     "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

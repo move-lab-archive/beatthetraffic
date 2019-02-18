@@ -1,17 +1,19 @@
+import { prefixURL } from "../../../../utils/url";
+
 /* global Image */
 
 class StarsAnimationsEngine {
-  constructor () {
+  constructor() {
     this.offscreenCanvas = null
     this.sprite = {
       width: 900,
       height: 50,
-      src: '/static/assets/sprites/stars.png',
+      src: prefixURL('/static/assets/sprites/stars.png'),
       nbFrames: 18
     }
   }
 
-  init () {
+  init() {
     // Create image element and load sprite data
     let img = new Image()
     img.src = this.sprite.src
@@ -33,12 +35,12 @@ class StarsAnimationsEngine {
     }
   }
 
-  getNbFrames () {
+  getNbFrames() {
     return this.sprite.nbFrames - 1
   }
 
   /* frame needs to start at 0 */
-  getFrameData (frameNb) {
+  getFrameData(frameNb) {
     return {
       x: frameNb * this.sprite.frameWidth,
       y: 0,
@@ -47,7 +49,7 @@ class StarsAnimationsEngine {
     }
   }
 
-  drawFrameOnCanvas (contextToDrawOn, starsAnimation) {
+  drawFrameOnCanvas(contextToDrawOn, starsAnimation) {
     // Compute offscreenCanvas position of frame
     starsAnimation.dots.map(dot => {
       let sourceData = this.getFrameData(dot.currentFrame)

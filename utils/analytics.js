@@ -1,4 +1,4 @@
-export function initAnalytics (id = '') {
+export function initAnalytics(id = '') {
   window.dataLayer = window.dataLayer || []
 
   const script = document.createElement('script')
@@ -9,10 +9,10 @@ export function initAnalytics (id = '') {
   document.head.appendChild(script)
 }
 
-export function gtag () {
+export function gtag() {
   window.dataLayer.push(arguments)
 }
 
-export function callback (data) {
+export function callback(data) {
   console.info('callback triggered for: ', data)
 }

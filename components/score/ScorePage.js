@@ -4,13 +4,14 @@ import ButtonClose from '../shared/ButtonClose'
 
 import { fetchHighscores } from '../../statemanagement/app/GameStateManagement'
 import { showCityPicker } from '../../statemanagement/app/AppStateManagement'
+import { prefixURL } from '../../utils/url';
 
 class ScorePage extends PureComponent {
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(fetchHighscores())
   }
 
-  getCityLabel (city) {
+  getCityLabel(city) {
     const cityData = this.props.availableCities[city]
     if (cityData) {
       return cityData.label
@@ -19,7 +20,7 @@ class ScorePage extends PureComponent {
     }
   }
 
-  followLink (link) {
+  followLink(link) {
     if (link) {
       if (link.indexOf('https://') > -1 || link.indexOf('http://') > -1) {
         window.open(link, '_blank')
@@ -29,26 +30,26 @@ class ScorePage extends PureComponent {
     }
   }
 
-  render () {
+  render() {
     return (
       <div className={`highscore-page`}>
         <ButtonClose onClick={this.props.onClose} />
         <h2 className='headline'>HIGH SCORES</h2>
         <img
           className={`rightcloud`}
-          src='/static/assets/menu/menu-rightcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-rightcloud.svg')}
         />
         <img
           className={`leftcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <img
           className={`thirdcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <img
           className={`fourthcloud`}
-          src='/static/assets/menu/menu-leftcloud.svg'
+          src={prefixURL('/static/assets/menu/menu-leftcloud.svg')}
         />
         <div className={`background-white`} />
 
@@ -64,7 +65,7 @@ class ScorePage extends PureComponent {
                   <div className='first-place-container'>
                     <img
                       className='cup'
-                      src='/static/assets/about-highscores/cup.gif' // maybe better with sprints? need to add transparent backrgound
+                      src={prefixURL('/static/assets/about-highscores/cup.gif')} // maybe better with sprints? need to add transparent backrgound
                     />
 
                     <div className='first-place'>
@@ -73,7 +74,7 @@ class ScorePage extends PureComponent {
                           this.props.highscores.first().get('link')
                             ? 'clickable'
                             : ''
-                        }`}
+                          }`}
                         onClick={this.followLink.bind(
                           this,
                           this.props.highscores.first().get('link')
@@ -83,7 +84,7 @@ class ScorePage extends PureComponent {
                       </div>
                       <div className='score'>
                         <h2>{this.props.highscores.first().get('score')}</h2>
-                        <img src='/static/assets/icons/icon-star.svg' />
+                        <img src={prefixURL('/static/assets/icons/icon-star.svg')} />
                       </div>
                       <div className='city'>
                         <p>
@@ -103,10 +104,10 @@ class ScorePage extends PureComponent {
                       <div
                         className={`list-item
                         ${
-                      index + 2 === parseInt(this.props.rank, 10)
-                        ? 'selected'
-                        : ''
-                      }`}
+                          index + 2 === parseInt(this.props.rank, 10)
+                            ? 'selected'
+                            : ''
+                          }`}
                         key={`${index}-${highscore.get('name')}`}
                         ref={el => {
                           if (index + 2 === parseInt(this.props.rank, 10)) {
@@ -122,7 +123,7 @@ class ScorePage extends PureComponent {
                         <h2
                           className={`name ${
                             highscore.get('link') ? 'clickable' : ''
-                          }`}
+                            }`}
                           onClick={this.followLink.bind(
                             this,
                             highscore.get('link')
@@ -133,7 +134,7 @@ class ScorePage extends PureComponent {
                         <h1 className='score'>{highscore.get('score')}</h1>
                         <img
                           className='star'
-                          src='/static/assets/icons/icon-star.svg'
+                          src={prefixURL('/static/assets/icons/icon-star.svg')}
                         />
                         <p className='city'>
                           {this.getCityLabel([highscore.get('city')])}
@@ -161,7 +162,7 @@ class ScorePage extends PureComponent {
                           <h2
                             className={`name ${
                               this.props.scoreData.link ? 'clickable' : ''
-                            }`}
+                              }`}
                             onClick={this.followLink.bind(
                               this,
                               this.props.scoreData.link
@@ -174,7 +175,7 @@ class ScorePage extends PureComponent {
                           </h1>
                           <img
                             className='star'
-                            src='/static/assets/icons/icon-star.svg'
+                            src={prefixURL('/static/assets/icons/icon-star.svg')}
                           />
                           <p className='city'>
                             {this.getCityLabel(this.props.scoreData.city)}
@@ -195,7 +196,7 @@ class ScorePage extends PureComponent {
             if (this.props.scoreData) {
               this.props.dispatch(showCityPicker())
             } else {
-              window.location.href = '/'
+              window.location.href = prefixUrl('');
             }
           }}
         >
