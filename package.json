@@ -8,10 +8,10 @@
     "deploy": "now -n traffic-cam out",
     "dev": "node server/server-static-generation.js",
     "export": "next build && NODE_ENV=production next export",
-    "now-build": "URL_PREFIX=/project/beatthetraffic next build && NODE_ENV=production URL_PREFIX=/project/beatthetraffic next export",
-    "now-start": "NODE_ENV=production URL_PREFIX=/project/beatthetraffic NOW_DEPLOY=true node server/server.js",
+    "now-build": "next build && NODE_ENV=production next export",
+    "now-start": "NODE_ENV=production  NOW_DEPLOY=true node server/server.js",
     "precommit": "npm run cfn:lint",
-    "aws-start": "NODE_ENV=production URL_PREFIX=/project/beatthetraffic PORT=80 node server/server.js",
+    "aws-start": "NODE_ENV=production PORT=80 node server/server.js",
     "start": "NODE_ENV=production node server/server-static-generation.js",
     "static": "serve out"
   },

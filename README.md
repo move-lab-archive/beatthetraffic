@@ -80,6 +80,9 @@ docker run -p 80:80 (-e MONGO_INSTANCE=url-to-the-instance:port -v /path/to/pers
 ```
 
 
+__NOTE:__ THE CDCI Pipeline will add the `URL_PREFIX=/project/beatthetraffic` environment var to make it usable in the new URL project.
+
+
 ## 🏙 How to add / edit you own level / city
 
 ### 1. Fill the gameconfig.json file

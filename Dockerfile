@@ -14,6 +14,9 @@ RUN npm install --only=production
 
 COPY . .
 
+ARG URL_PREFIX=""
+ENV URL_PREFIX $URL_PREFIX
+
 RUN npm run now-build
 
 # Production phase
@@ -42,6 +45,9 @@ COPY --from=builder /usr/src/app/docker-entrypoint.sh /usr/src/app/
 VOLUME [ "/var/lib/mongodb" ]
 
 EXPOSE 80
+
+ARG URL_PREFIX=""
+ENV URL_PREFIX $URL_PREFIX
 
 ENTRYPOINT ["/usr/src/app/docker-entrypoint.sh"]
 
