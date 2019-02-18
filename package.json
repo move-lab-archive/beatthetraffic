@@ -4,7 +4,6 @@
   "scripts": {
     "build": "next build",
     "cfn:lint": "cfn-lint validate cloudformation.yaml",
-    "cfn:update": "cfn-create-or-update --stack-name beatthetraffice-moovellab-com --template-body file://cloudformation.yaml --tags Key=Squad,Value=Lab Key=CostCenter,Value=7000 --region eu-west-1 --capabilities CAPABILITY_NAMED_IAM --wait",
     "deploy-prod": "now",
     "deploy": "now -n traffic-cam out",
     "dev": "node server/server-static-generation.js",
