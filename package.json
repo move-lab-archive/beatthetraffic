@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "next build",
-    "cfn:lint": "cfn-lint validate cloudformation.yaml",
+    "cfn:lint": "cfn-lint validate ./deploy/**/*.yaml",
     "deploy-prod": "now",
     "deploy": "now -n traffic-cam out",
     "dev": "node server/server-static-generation.js",
