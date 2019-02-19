@@ -1,5 +1,9 @@
 # Beat the traffic 🚚 🚗 🏍
 
+| PROD                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![](<https://teamcity.tools.moovel.com/app/rest/builds/buildType:(id:Lab_WebsiteBeatthetraffic_Prod)/statusIcon>)](https://teamcity.tools.moovel.com/viewType.html?buildTypeId=Lab_WebsiteBeatthetraffic_Prod) |
+
 ## 🏛 General architecture
 
 Beat the traffic runs with:
