@@ -24,7 +24,8 @@ module.exports = {
   assetPrefix: process.env.URL_PREFIX,
 
   publicRuntimeConfig: {
-    URL_PREFIX: process.env.URL_PREFIX
+    URL_PREFIX: process.env.URL_PREFIX,
+    ROOT_URL: process.env.ROOT_URL
   },
 
   exportPathMap: function () {

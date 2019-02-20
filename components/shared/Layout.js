@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Head from 'next/head'
 import Router from 'next/router'
-import { prefixURL } from '../../utils/url';
+import { prefixURL, COMPLETE_ROOT_URL, prefixURLRoot } from '../../utils/url';
 
 import { initAnalytics, gtag } from '../../utils/analytics'
 
@@ -57,11 +57,11 @@ class Layout extends Component {
           />
           <meta
             property='og:url'
-            content='https://beatthetraffic.moovellab.com'
+            content={COMPLETE_ROOT_URL}
           />
           <meta
             property='og:image'
-            content='https://beatthetraffic.moovellab.com/static/assets/social/preview-global-1.jpg'
+            content={prefixURLRoot('static/assets/social/preview-global-1.jpg')}
           />
           <meta
             property='og:description'
@@ -81,7 +81,7 @@ class Layout extends Component {
           />
           <meta
             name='twitter:image'
-            content='https://beatthetraffic.moovellab.com/static/assets/social/preview-global-1.jpg'
+            content={prefixURLRoot('static/assets/social/preview-global-1.jpg')}
           />
           <link
             href='https://fonts.googleapis.com/css?family=Geo|Quantico:400,700'

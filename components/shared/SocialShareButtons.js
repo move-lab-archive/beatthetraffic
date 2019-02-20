@@ -1,5 +1,5 @@
 import React from 'react'
-import { prefixURL } from '../../utils/url';
+import { prefixURL, COMPLETE_ROOT_URL } from '../../utils/url';
 
 const FacebookIcon = prefixURL('/static/assets/icons/icon-facebook.svg')
 const TwitterIcon = prefixURL('/static/assets/icons/icon-twitter.svg')
@@ -7,7 +7,7 @@ const TwitterIcon = prefixURL('/static/assets/icons/icon-twitter.svg')
 class SocialShareButtons extends React.Component {
   constructor(props) {
     super(props)
-    this.websiteUrl = 'https://beatthetraffic.moovellab.com'
+    this.websiteUrl = COMPLETE_ROOT_URL;
 
     this.state = {
       showIcons: false

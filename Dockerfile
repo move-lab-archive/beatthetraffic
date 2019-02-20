@@ -14,8 +14,12 @@ RUN npm install --only=production
 
 COPY . .
 
-ARG URL_PREFIX=""
+#Example: URL_PREFIX=/project/beatthetraffic
+ARG URL_PREFIX="" 
 ENV URL_PREFIX $URL_PREFIX
+#Example: ROOT_URL=beatthetraffic.moovellab.com
+ARG ROOT_URL=""
+ENV ROOT_URL $ROOT_URL
 
 RUN npm run now-build
 
@@ -46,8 +50,13 @@ VOLUME [ "/var/lib/mongodb" ]
 
 EXPOSE 80
 
-ARG URL_PREFIX=""
+# For beat the traffic , need to specify env var at both build and runtime
+#Example: /project/beatthetraffic
+ARG URL_PREFIX="" 
 ENV URL_PREFIX $URL_PREFIX
+#Example: beatthetraffic.moovellab.com
+ARG ROOT_URL=""
+ENV ROOT_URL $ROOT_URL
 
 ENTRYPOINT ["/usr/src/app/docker-entrypoint.sh"]
 
