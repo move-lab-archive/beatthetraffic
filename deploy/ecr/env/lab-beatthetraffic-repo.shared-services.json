@@ -4,11 +4,11 @@
         "ParameterValue": "7000"
     },
     {
-        "ParameterKey": "SquadTag",
-        "ParameterValue": "Lab"
-    },
-    {
         "ParameterKey": "ServiceName",
         "ParameterValue": "lab-beatthetraffic-repo"
+    },
+    {
+        "ParameterKey": "SquadTag",
+        "ParameterValue": "Lab"
     }
 ]
