@@ -39,7 +39,7 @@ EXPOSE 80
 
 # For beat the traffic , need to specify env var at both build and runtime
 #Example: /project/beatthetraffic
-ARG URL_PREFIX="" 
+ARG URL_PREFIX=""
 ENV URL_PREFIX $URL_PREFIX
 #Example: beatthetraffic.moovellab.com
 ARG ROOT_URL=""
