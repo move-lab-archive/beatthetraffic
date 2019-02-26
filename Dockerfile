@@ -2,7 +2,7 @@
 FROM node:9 as builder
 
 LABEL description="Landingpage for 'beat the traffic'"
-LABEL project="lab-flightstorome"
+LABEL project="lab-beatthetraffic"
 LABEL maintainer="florian.porada@moovel.com"
 
 WORKDIR /usr/src/app
@@ -34,7 +34,6 @@ COPY --from=builder /usr/src/app/server /usr/src/app/server
 COPY --from=builder /usr/src/app/out /usr/src/app/out
 COPY --from=builder /usr/src/app/package.json /usr/src/app/
 COPY --from=builder /usr/src/app/gameconfig.json /usr/src/app/
-COPY --from=builder /usr/src/app/docker-entrypoint.sh /usr/src/app/
 
 EXPOSE 80
 
@@ -45,7 +44,5 @@ ENV URL_PREFIX $URL_PREFIX
 #Example: beatthetraffic.moovellab.com
 ARG ROOT_URL=""
 ENV ROOT_URL $ROOT_URL
-
-ENTRYPOINT ["/usr/src/app/docker-entrypoint.sh"]
 
 CMD [ "npm", "run", "aws-start" ]
