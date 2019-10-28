@@ -27,7 +27,7 @@ class DBManager {
     return new Promise((resolve, reject) => {
       MongoClient.connect(mongoURL, (err, client) => {
         if (err) {
-          console.log(`MongoDB connection unsuccessful, retry after 5 seconds. Tries: ${counter}`);
+          console.log(`MongoDB connection unsuccessful, retry after 5 seconds. Tries: ${this.counter}`);
 
           this.counter += 1;
           if (this.counter === 5) {
