@@ -1,109 +1,118 @@
-var MongoClient = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient;
 
-var mongoURL = 'mongodb://127.0.0.1:27017'
+var mongoURL = 'mongodb://127.0.0.1:27017';
 
 // Where "mongo" is the name of the service in the docker-compose.yml file
 if (process.env.DOCKER_DEPLOY) {
-  mongoURL = 'mongodb://mongo:27017'
+  mongoURL = 'mongodb://mongo:27017';
 }
 
 if (process.env.NOW_DEPLOY) {
-  mongoURL =
-    'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic'
+  mongoURL = 'mongodb://beatthetraffic:beatthetraffic@ds243418.mlab.com:43418/beatthetraffic';
 }
 
 if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY && process.env.MONGO_INSTANCE) {
-  mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE
+  mongoURL = 'mongodb://' + process.env.MONGO_INSTANCE;
 } else {
-  var mongoURL = 'mongodb://127.0.0.1:27017'
+  var mongoURL = 'mongodb://127.0.0.1:27017';
 }
 
 class DBManager {
-  contructor () {
-    this.db = null
+  contructor() {
+    this.db = null;
+    this.counter = 0;
   }
 
-  init () {
+  init() {
     return new Promise((resolve, reject) => {
       MongoClient.connect(mongoURL, (err, client) => {
         if (err) {
-          reject(err)
+          console.log(`MongoDB connection unsuccessful, retry after 5 seconds. Tries: ${counter}`);
+
+          this.counter += 1;
+          if (this.counter === 5) {
+            console.log('Failed to connect.');
+
+            this.counter = 0;
+            reject(err);
+          }
+
+          setTimeout(() => {
+            this.init();
+          }, 5000);
         } else {
-          let db = client.db('beatthetraffic')
-          this.db = db
+          let db = client.db('beatthetraffic');
+          this.db = db;
 
           // Get the highscore collection
-          const collection = db.collection('highscores')
+          const collection = db.collection('highscores');
           // Create the index
-          collection.createIndex({ score: -1 })
+          collection.createIndex({ score: -1 });
 
-          resolve(db)
+          resolve(db);
         }
-      })
-    })
+      });
+    });
   }
 
-  getDB () {
+  getDB() {
     return new Promise((resolve, reject) => {
       if (this.db) {
-        resolve(this.db)
+        resolve(this.db);
       } else {
-        return this.init()
+        return this.init();
       }
-    })
+    });
   }
 
-  insertHighscore (highscore) {
+  insertHighscore(highscore) {
     return new Promise((resolve, reject) => {
       this.getDB().then(db => {
         db.collection('highscores').insertOne(highscore, (err, r) => {
           if (err) {
-            reject(err)
+            reject(err);
           } else {
-            resolve(r)
+            resolve(r);
           }
-        })
-      })
-    })
+        });
+      });
+    });
   }
 
-  getHighscores (limit) {
+  getHighscores(limit) {
     return new Promise((resolve, reject) => {
       this.getDB().then(db => {
-        db
-          .collection('highscores')
+        db.collection('highscores')
           .find({})
           .project({ name: 1, score: 1, link: 1, city: 1 })
           .sort({ score: -1 })
           .limit(limit)
-          .toArray(function (err, docs) {
+          .toArray(function(err, docs) {
             if (err) {
-              reject(err)
+              reject(err);
             } else {
-              resolve(docs)
+              resolve(docs);
             }
-          })
-      })
-    })
+          });
+      });
+    });
   }
 
-  getRankOfHighscore (score) {
+  getRankOfHighscore(score) {
     return new Promise((resolve, reject) => {
       this.getDB().then(db => {
-        db
-          .collection('highscores')
-          .count({ score: { $gte: score } }, (err, result) => {
-            if (err) {
-              reject(err)
-            } else {
-              resolve(result - 1)
-            }
-          })
-      })
-    })
+        db.collection('highscores').count({ score: { $gte: score } }, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result - 1);
+          }
+        });
+      });
+    });
   }
 }
 
-var DBManagerInstance = new DBManager()
+var DBManagerInstance = new DBManager();
 
-module.exports = DBManagerInstance
+module.exports = DBManagerInstance;
