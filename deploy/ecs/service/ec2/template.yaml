@@ -161,8 +161,7 @@ Resources:
           Memory: 256
           Environment:
             - Name: SPRING_PROFILES_ACTIVE
-              Value:
-                !FindInMap [ParamsByAccount, !Ref 'AWS::AccountId', Account]
+              Value: !FindInMap [ParamsByAccount, !Ref 'AWS::AccountId', Account]
             - Name: DEPLOYMENT_TIMESTAMP
               Value: !Ref DeploymentTimestamp
             - Name: ENV
@@ -182,11 +181,10 @@ Resources:
         - Name: !Sub ${ServiceName}-db
           Essential: true
           Image: mongo:3.6
-          Memory: 256
+          Memory: 1024
           Environment:
             - Name: SPRING_PROFILES_ACTIVE
-              Value:
-                !FindInMap [ParamsByAccount, !Ref 'AWS::AccountId', Account]
+              Value: !FindInMap [ParamsByAccount, !Ref 'AWS::AccountId', Account]
             - Name: DEPLOYMENT_TIMESTAMP
               Value: !Ref DeploymentTimestamp
             - Name: ENV
