@@ -14,9 +14,9 @@ class Layout extends Component {
   }
 
   initGtags() {
-    initAnalytics('AW-856792702')
+    initAnalytics('UA-144727685-2')
     gtag('js', new Date())
-    gtag('config', 'AW-856792702')
+    gtag('config', 'UA-144727685-2')
     gtag('config', 'UA-79250234-6', {
       page_title: window.location.pathname,
       page_path: window.location.pathname
