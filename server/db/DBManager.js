@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
-
 var mongoURL = 'mongodb://127.0.0.1:27017';
+var counter = 0;
 
 // Where "mongo" is the name of the service in the docker-compose.yml file
 if (process.env.DOCKER_DEPLOY) {
@@ -20,26 +20,25 @@ if (process.env.NODE_ENV === 'production' && !process.env.NOW_DEPLOY && process.
 class DBManager {
   contructor() {
     this.db = null;
-    this.counter = 0;
   }
 
   init() {
     return new Promise((resolve, reject) => {
       MongoClient.connect(mongoURL, (err, client) => {
         if (err) {
-          console.log(`MongoDB connection unsuccessful, retry after 5 seconds. Tries: ${this.counter}`);
+          console.log(`MongoDB connection unsuccessful, retry after 15 seconds. Tries: ${counter}/15`);
 
-          this.counter += 1;
-          if (this.counter === 5) {
+          counter += 1;
+          if (this.counter === 15) {
             console.log('Failed to connect.');
 
-            this.counter = 0;
+            counter = 0;
             reject(err);
           }
 
           setTimeout(() => {
             this.init();
-          }, 5000);
+          }, 15000);
         } else {
           let db = client.db('beatthetraffic');
           this.db = db;

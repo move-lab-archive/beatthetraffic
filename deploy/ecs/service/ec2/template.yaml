@@ -156,7 +156,7 @@ Resources:
             SourcePath: !Sub /mnt/efs/${AWS::StackName}
       ContainerDefinitions:
         - Name: !Ref ServiceName
-          Essential: false
+          Essential: true
           Image: !Ref DockerImage
           Memory: 256
           Environment:
