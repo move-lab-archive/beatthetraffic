@@ -40,6 +40,8 @@ class DBManager {
             this.init();
           }, 15000);
         } else {
+          console.log(`Connected to: ${mongoURL}`);
+
           let db = client.db('beatthetraffic');
           this.db = db;
 
