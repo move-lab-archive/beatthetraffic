@@ -2,9 +2,8 @@
 node_modules/
 out/
 .next/
-static/videos
 cloudformation.yaml
 .eslintrc
 .vscode
 yarn-error.log
-
+.vercel

@@ -10,6 +10,13 @@ npm run export
 deploy out/ directory
 ```
 
+.env file config
+
+```
+ROOT_URL=https://beatthetraffic.app
+URL_PREFIX=
+```
+
 ## 🏛 General architecture
 
 Beat the traffic runs with:
