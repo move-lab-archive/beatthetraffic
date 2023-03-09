@@ -13,7 +13,7 @@ deploy out/ directory
 .env file config
 
 ```
-ROOT_URL=https://beatthetraffic.app
+ROOT_URL=beatthetraffic.app
 URL_PREFIX=
 ```
 
