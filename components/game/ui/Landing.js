@@ -15,7 +15,6 @@ import {
   restoreCanvasScrolling
 } from '../../../statemanagement/app/ViewportStateManagement'
 import ChangeCityButtonLanding from '../../shared/ChangeCityButtonLanding'
-import { gtag, callback } from '../../../utils/analytics'
 import { prefixURL } from '../../../utils/url';
 
 class Landing extends Component {
@@ -70,12 +69,13 @@ class Landing extends Component {
         break
     }
 
+    /*
     gtag('event', 'conversion', {
       send_to: trackID,
       name: 'Location',
       value: this.props.selectedCity,
       event_callback: callback
-    })
+    }) */
 
     return false
   }
@@ -141,14 +141,14 @@ class Landing extends Component {
             <RightCloud />
             <div className='about'>
               <h4>
-                <a href='https://opendatacam.moovellab.com/' target='_blank'>
+                <a href='https://opendata.cam' target='_blank'>
                   OPEN DATA CAM
                 </a>
               </h4>
             </div>
           </div>
         )}
-        <style jsx>{`
+        <style>{`
           .game-landing {
             position: fixed;
             top: 0;

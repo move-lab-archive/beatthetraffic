@@ -264,13 +264,6 @@ class Video extends Component {
               playsInline
               autoPlay
             >
-              {this.props.srcHLS &&
-                (this.state.isMobileSafari || this.state.isDesktopSafari) && (
-                  <source
-                    src={`${this.props.srcHLS}`}
-                    type='application/x-mpegURL'
-                  />
-                )}
               <source src={`${this.props.src}`} type='video/mp4' />
               Your browser does not support the video tag.
             </video>

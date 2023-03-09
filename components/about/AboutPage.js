@@ -56,8 +56,8 @@ class AboutPage extends Component {
               <div className='headlinetopspace linktoopendata'>
                 <div className='linktoopendatainner'>
                   <h2>‘Open Data Cam’ is a DIY data creation tool.</h2>
-                  <a href='https://opendatacam.moovellab.com' target='_blank'>
-                    <p>opendatacam.moovellab.com</p>
+                  <a href='https://opendata.cam' target='_blank'>
+                    <p>https://opendata.cam</p>
                   </a>
                   <p>
                     <br />
@@ -73,6 +73,7 @@ class AboutPage extends Component {
               </div>
 
               <div className='buttons'>
+                {/*
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace'>
                     <a href={prefixURL('/static/assets/presskit.zip')} target='_blank'>
@@ -83,7 +84,7 @@ class AboutPage extends Component {
                     </a>
                   </div>
                 </div>
-                {/*
+                
                 <div className='buttoncontainer'>
                   <div className='btn headlinetopspace secondbtn'>
                     <a
@@ -105,7 +106,7 @@ class AboutPage extends Component {
                   <h3>
                     <a
                       target='_blank'
-                      href='http://lab.moovel.com/people/benedikt-gross'
+                      href='https://benedikt-gross.de/'
                     >
                       Benedikt Groß
                     </a>
@@ -124,7 +125,7 @@ class AboutPage extends Component {
                   <h3>
                     <a
                       target='_blank'
-                      href='http://lab.moovel.com/people/benedikt-gross'
+                      href='https://benedikt-gross.de/'
                     >
                       Benedikt Groß
                     </a>
@@ -204,14 +205,8 @@ class AboutPage extends Component {
                       yolo
                     </a>
                     <br />
-                    <a
-                      href='https://github.com/moovel/node-yolo'
-                      target='_blank'
-                    >
-                      node-yolo
-                    </a>
                     <br />
-                    <a href='https://opendatacam.moovellab.com' target='_blank'>
+                    <a href='https://opendata.cam' target='_blank'>
                       Open Data Cam
                     </a>
                     <br />
@@ -229,7 +224,7 @@ class AboutPage extends Component {
                     Florian Porada<br />
                     <a
                       target='_blank'
-                      href='http://lab.moovel.com/people/benedikt-gross'
+                      href='https://benedikt-gross.de/'
                     >
                       Benedikt Groß
                     </a>
@@ -303,7 +298,6 @@ class AboutPage extends Component {
               </div>
             </div>
           </div>
-          <Footer />
         </div>
 
         <style jsx>{`

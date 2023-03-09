@@ -54,9 +54,6 @@ class Intro extends Component {
             cars
           </div>
         </div>
-        <div className='title logo'>
-          <img src={prefixURL('/static/assets/logo/logo-moovel-shiny-patrol.svg')} />
-        </div>
         <div className='title level'>LEVEL {this.props.currentLevel}</div>
 
         <style jsx>{`

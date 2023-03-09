@@ -181,11 +181,12 @@ class Win extends Component {
             nbCarsConverted={this.props.nbCarsConverted}
           />
         </div>
+        {/*
         <Button
           large
           title={`Save your score`}
           onClick={() => this.showPopupAddScore()}
-        />
+        /> */}
         {!this.state.showScore && (
           <ChangeCityButton label='PLAY ANOTHER CITY' noAnim />
         )}

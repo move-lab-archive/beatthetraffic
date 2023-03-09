@@ -1,8 +1,14 @@
 # Beat the traffic 🚚 🚗 🏍
 
-| PROD                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![](<https://teamcity.tools.moovel.com/app/rest/builds/buildType:(id:Lab_WebsiteBeatthetraffic_Prod)/statusIcon>)](https://teamcity.tools.moovel.com/viewType.html?buildTypeId=Lab_WebsiteBeatthetraffic_Prod) |
+## Deployment (reviving 2022)
+
+Only work as static app
+
+```
+npm i
+npm run export
+deploy out/ directory
+```
 
 ## 🏛 General architecture
 
@@ -96,7 +102,7 @@ file.
 
 To add a city, you should add the city id in the array `availableCities`, this
 city id will also be the URL to access it:
-`https://beatthetraffic.moovellab.com/{cityId}`
+`https://beatthetraffic.app/{cityId}`
 
 You should also specify the default selected city in case the geolocation
 doesn't work.
@@ -184,7 +190,7 @@ $ make install # by default installed to /usr/local
 #### 2.b Install and run the darknet-CLI to generate the detections
 
 ```
-$ git clone https://github.com/moovel/lab-beat-the-traffic.git
+$ git clone https://github.com/move-lab-archive/lab-beat-the-traffic.git
 $ cd tools/darknet-CLI
 $ npm install
 ```

@@ -205,10 +205,7 @@ export function selectVideo(name) {
           quality = 'sd'
         }
         dispatch(
-          setVideoSrc(
-            videoSelected.getIn(['sources', quality]),
-            videoSelected.getIn(['sources', 'hls'])
-          )
+          setVideoSrc(videoSelected.get('name'))
         )
       }
     })
@@ -232,10 +229,7 @@ export function fetchRemainingData() {
       quality = 'sd'
     }
     dispatch(
-      setVideoSrc(
-        videoSelected.getIn(['sources', quality]),
-        videoSelected.getIn(['sources', 'hls'])
-      )
+      setVideoSrc(videoSelected.get('name'))
     )
     // Do not load raw detections in prod
     if (process.env.NODE_ENV !== 'production') {

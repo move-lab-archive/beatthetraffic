@@ -67,12 +67,6 @@ class CityPicker extends PureComponent {
                 {availableCities[cityId].label}
               </h3>
             ))}
-            <h4 className='more-cities'>
-              Want to play a new city? <br />Ping us
-              <a href='https://twitter.com/moovellab' target='_blank'>
-                &nbsp;@moovellab
-              </a>
-            </h4>
           </div>
           <ButtonClose onClick={() => this.handleClose()} smallPadding />
         </div>

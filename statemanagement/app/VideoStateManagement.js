@@ -30,12 +30,11 @@ const PAUSE_VIDEO = 'Video/PAUSE_VIDEO'
 const RESET_VIDEO = 'Video/RESET_VIDEO'
 const UPDATE_CURRENTTIME = 'Video/UPDATE_CURRENTTIME'
 
-export function setVideoSrc (src, srcHLS) {
+export function setVideoSrc (name) {
   return {
     type: SET_VIDEO_SRC,
     payload: {
-      src: src,
-      srcHLS: srcHLS
+      src: "https://pub-77444c3a3f3d48a5bf389b76347b0d89.r2.dev/" + name + ".mp4",
     }
   }
 }

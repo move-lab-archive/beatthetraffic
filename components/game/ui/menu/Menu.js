@@ -143,12 +143,6 @@ class Menu extends PureComponent {
               <div className='link' onClick={() => this.showAbout()}>
                 <h1>ABOUT</h1>
               </div>
-              <div className='link' onClick={() => this.showScore()}>
-                <h1>HIGH SCORES</h1>
-              </div>
-              <div className='link'>
-                <SocialShareButtons />
-              </div>
             </div>
 
             <div className='city-selector-items'>
@@ -167,14 +161,6 @@ class Menu extends PureComponent {
                   {availableCities[cityId].label}
                 </h2>
               ))}
-              <br />
-              <h4>Want to play a new city?</h4>
-              <h4>
-                Ping us{' '}
-                <a href='https://twitter.com/moovellab' target='_blank'>
-                  @moovellab
-                </a>
-              </h4>
               <br />
             </div>
           </div>

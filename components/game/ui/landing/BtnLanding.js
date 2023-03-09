@@ -61,20 +61,55 @@ class BtnLanding extends Component {
         <div className='outer'>
           <h3>let's play</h3>
         </div>
-        <style jsx>{`
-          .btn-landing {
-            position: relative;
-            width: 180px;
-            height: 60px;
-            //GPU accelerate
-            will-change: transform;
-            animation: 1.3s fadeIn;
-            z-index: 4;
-            color: #262626;
-          }
+        <style>{`
+        .btn-landing {
+          position: relative;
+          width: 180px;
+          height: 60px;
+          //GPU accelerate
+          will-change: transform;
+          animation: 1.3s fadeIn;
+          z-index: 4;
+          color: #262626;
+        }
+        
+        .btn-landing .inner {
+          width: 100%;
+          height: 100%;
+          left: 5px;
+          top: 5px;
+          background-color: #262626;
+          position: absolute;
+        }
+        .btn-landing .outer {
+          width: 100%;
+          height: 100%;
+          background-color: #4effff;
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transform-origin: 0 0;
+        }
 
+        .btn-landing .outer h3 {
+          transition: opacity 0.5s;
+          margin-top: 2.8rem;
+        }
+
+        .btn-landing .outer:hover {
+          background-color: #ff3bff;
+          cursor: pointer;
+        }
+
+        .btn-landing .outer:active {
+          background-color: #ff3bff;
+          left: 2px;
+          top: 2px;
+        }
+        
           .loading .outer {
-            animation: progressBarAnimation ${this.animationDuration}s linear;
+            animation: progressBarAnimation 8s linear;
           }
 
           .loading .outer h3 {
@@ -83,41 +118,6 @@ class BtnLanding extends Component {
 
           .keep-loading .outer {
             animation-iteration-count: infinite;
-          }
-
-          .btn-landing .inner {
-            width: 100%;
-            height: 100%;
-            left: 5px;
-            top: 5px;
-            background-color: #262626;
-            position: absolute;
-          }
-          .btn-landing .outer {
-            width: 100%;
-            height: 100%;
-            background-color: #4effff;
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-origin: 0 0;
-          }
-
-          .btn-landing .outer h3 {
-            transition: opacity 0.5s;
-            margin-top: 2.8rem;
-          }
-
-          .btn-landing .outer:hover {
-            background-color: #ff3bff;
-            cursor: pointer;
-          }
-
-          .btn-landing .outer:active {
-            background-color: #ff3bff;
-            left: 2px;
-            top: 2px;
           }
 
           @media (min-width: 600px) {

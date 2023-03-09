@@ -4,8 +4,6 @@ import Head from 'next/head'
 import Router from 'next/router'
 import { prefixURL, COMPLETE_ROOT_URL, prefixURLRoot } from '../../utils/url';
 
-import { initAnalytics, gtag } from '../../utils/analytics'
-
 class Layout extends Component {
   recordFirstPaint() {
     return {
@@ -14,13 +12,15 @@ class Layout extends Component {
   }
 
   initGtags() {
+    /*
     initAnalytics('UA-144727685-2')
+
     gtag('js', new Date())
     gtag('config', 'UA-144727685-2')
     gtag('config', 'UA-79250234-6', {
       page_title: window.location.pathname,
       page_path: window.location.pathname
-    })
+    }) */
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class Layout extends Component {
     return (
       <div>
         <Head>
-          <title>Beat The Traffic X - moovel lab</title>
+          <title>Beat The Traffic X</title>
           <meta charSet='utf-8' />
           <meta
             name='viewport'
@@ -53,7 +53,7 @@ class Layout extends Component {
           />
           <meta
             property='og:title'
-            content={`Beat The Traffic X - moovel lab`}
+            content={`Beat The Traffic X`}
           />
           <meta
             property='og:url'
@@ -68,12 +68,12 @@ class Layout extends Component {
             content={`Magically create the mobility wonderland in you city! "Beat The Traffic X" lets you play with the mobility challenges of cities around the world.`}
           />
           <meta property='og:type' content='website' />
-          <meta property='og:site_name' content='moovel lab' />
+          <meta property='og:site_name' content='Beat The Traffic X' />
           <meta name='twitter:card' content='summary' />
-          <meta name='twitter:site' content='@moovelLab' />
+          <meta name='twitter:site' content='@move__lab' />
           <meta
             name='twitter:title'
-            content={`Beat The Traffic X - moovel lab`}
+            content={`Beat The Traffic X`}
           />
           <meta
             name='twitter:description'
