@@ -6,7 +6,7 @@ function getCityRoutes(cityName) {
   const nbLevels = 3
 
   for (let currentLevel = 1; currentLevel <= nbLevels; currentLevel++) {
-    cityRoutes.set(`/${cityName}/level/${currentLevel}`, {
+    cityRoutes.set(`/${cityName}/level/${currentLevel}/index.html`, {
       page: '/',
       query: {
         city: cityName,
@@ -14,6 +14,14 @@ function getCityRoutes(cityName) {
       }
     })
   }
+
+  cityRoutes.set(`/${cityName}/index.html`, {
+    page: '/',
+    query: {
+      city: cityName,
+      level: 1
+    }
+  })
 
   return cityRoutes
 }
@@ -48,6 +56,8 @@ module.exports = {
       (obj, [key, value]) => Object.assign(obj, { [key]: value }),
       {}
     )
+
+    console.log(routesObjLiteral)
 
     return routesObjLiteral
   }
