@@ -7,7 +7,7 @@ Only work as static app
 ```
 npm i
 npm run export
-deploy out/ directory
+deploy out/ directory   
 ```
 
 .env file config
@@ -16,6 +16,8 @@ deploy out/ directory
 ROOT_URL=https://beatthetraffic.app
 URL_PREFIX=
 ```
+
+To deploy `/out` directory on vercel, use `vercel --prod` command 
 
 ## 🏛 General architecture
 
