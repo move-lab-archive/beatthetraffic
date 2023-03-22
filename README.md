@@ -1,6 +1,6 @@
 # Beat the traffic 🚚 🚗 🏍
 
-## Deployment (reviving 2022)
+## Deployment (reviving 2023)
 
 Only work as static app
 
